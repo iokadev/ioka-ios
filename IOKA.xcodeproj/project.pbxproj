@@ -1,0 +1,835 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6D27E60C27DA8D360035FB2B /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60B27DA8D360035FB2B /* EndPointType.swift */; };
+		6D27E60E27DA8DC00035FB2B /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60D27DA8DC00035FB2B /* HTTPMethod.swift */; };
+		6D27E61027DA8E0A0035FB2B /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60F27DA8E0A0035FB2B /* HTTPTask.swift */; };
+		6D27E61227DA8F120035FB2B /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61127DA8F120035FB2B /* ParameterEncoding.swift */; };
+		6D27E61427DA90E30035FB2B /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61327DA90E30035FB2B /* URLParameterEncoder.swift */; };
+		6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61527DA92E50035FB2B /* JSONParameterEncoder.swift */; };
+		6D27E61827DA93E20035FB2B /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61727DA93E20035FB2B /* NetworkRouter.swift */; };
+		6D27E61A27DA955E0035FB2B /* EndPointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61927DA955E0035FB2B /* EndPointRouter.swift */; };
+		6D27E61C27DA9E9C0035FB2B /* IokaApiEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61B27DA9E9C0035FB2B /* IokaApiEndPoint.swift */; };
+		6D27E61E27DAA4D70035FB2B /* IokaApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E61D27DAA4D70035FB2B /* IokaApi.swift */; };
+		6D2F04C827CAEC9C0095286F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04C727CAEC9C0095286F /* AppDelegate.swift */; };
+		6D2F04CA27CAEC9C0095286F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04C927CAEC9C0095286F /* SceneDelegate.swift */; };
+		6D2F04CF27CAEC9C0095286F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D2F04CD27CAEC9C0095286F /* Main.storyboard */; };
+		6D2F04D127CAEC9E0095286F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6D2F04D027CAEC9E0095286F /* Assets.xcassets */; };
+		6D2F04D427CAEC9E0095286F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D2F04D227CAEC9E0095286F /* LaunchScreen.storyboard */; };
+		6D2F04DC27CAED4A0095286F /* CardPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */; };
+		6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04DD27CAED960095286F /* CardPaymentView.swift */; };
+		6D2F04E027CAEF960095286F /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04DF27CAEF960095286F /* CustomTextField.swift */; };
+		6D2F04E227CAF2D10095286F /* TextFieldPlaceHolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04E127CAF2D10095286F /* TextFieldPlaceHolders.swift */; };
+		6D2F04E427CAF5300095286F /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2F04E327CAF5300095286F /* CustomButton.swift */; };
+		6D3E5AF427DBF0320029D9C0 /* GetCardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AF327DBF0320029D9C0 /* GetCardResponse.swift */; };
+		6D3E5AF727DC18E80029D9C0 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AF627DC18E80029D9C0 /* MainTabBarController.swift */; };
+		6D3E5AF927DC1BD50029D9C0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AF827DC1BD50029D9C0 /* ProfileViewController.swift */; };
+		6D3E5AFB27DC1EF10029D9C0 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */; };
+		6D3E5AFD27DC22780029D9C0 /* OrderConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */; };
+		6D3E5AFF27DC29390029D9C0 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5AFE27DC29390029D9C0 /* CustomView.swift */; };
+		6D3E5B0227DE32B00029D9C0 /* PaymentWithCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0127DE32B00029D9C0 /* PaymentWithCardViewModel.swift */; };
+		6D3E5B0427DE67CB0029D9C0 /* PaymentTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */; };
+		6D3E5B0627DE67E30029D9C0 /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */; };
+		6D3E5B0827DE6A990029D9C0 /* DemoAppEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0727DE6A990029D9C0 /* DemoAppEndPoint.swift */; };
+		6D3E5B0A27DE6C070029D9C0 /* DemoAppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0927DE6C070029D9C0 /* DemoAppApi.swift */; };
+		6D3E5B0C27DE92A40029D9C0 /* RouterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0B27DE92A30029D9C0 /* RouterCoordinator.swift */; };
+		6D3E5B0E27DE93320029D9C0 /* RouterNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0D27DE93320029D9C0 /* RouterNavigation.swift */; };
+		6D3E5B1027DE94C70029D9C0 /* IOKAMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B0F27DE94C70029D9C0 /* IOKAMainCoordinator.swift */; };
+		6D3E5B1227DE94E60029D9C0 /* CardPaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1127DE94E60029D9C0 /* CardPaymentCoordinator.swift */; };
+		6D3E5B1427DE95520029D9C0 /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1327DE95520029D9C0 /* Coordinatable.swift */; };
+		6D3E5B1627DE9CE80029D9C0 /* PaymentResultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1527DE9CE80029D9C0 /* PaymentResultCoordinator.swift */; };
+		6D3E5B1927DED1A20029D9C0 /* CustomCardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1827DED1A20029D9C0 /* CustomCardNumberTextField.swift */; };
+		6D3E5B1D27DEEE820029D9C0 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */; };
+		6D3E5B1F27DEF05C0029D9C0 /* GetCardsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1E27DEF05C0029D9C0 /* GetCardsResponse.swift */; };
+		6D3E5B2127DEF1220029D9C0 /* GetPaymentByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2027DEF1220029D9C0 /* GetPaymentByIDResponse.swift */; };
+		6D3E5B2327DFFD800029D9C0 /* ThreeDSecureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2227DFFD800029D9C0 /* ThreeDSecureCoordinator.swift */; };
+		6D3E5B2727E183AD0029D9C0 /* CustomBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */; };
+		6D3E5B2927E1851C0029D9C0 /* CustomBrowserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */; };
+		6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */; };
+		6D3E5B2D27E19C920029D9C0 /* SaveCardProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */; };
+		6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */; };
+		6D3E5B3227E1A1A70029D9C0 /* ThemeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */; };
+		6D3E5B3527E1A51B0029D9C0 /* SavedCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */; };
+		6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E7CDE27D7F44C00C292A9 /* Factory.swift */; };
+		6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */; };
+		6D9F17F727CC373A00053DE8 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F627CC373A00053DE8 /* CustomLabel.swift */; };
+		6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F827CC37E000053DE8 /* Typography.swift */; };
+		6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5040E27CED8A200015BD4 /* IOKA.swift */; };
+		6DC5041327CF724300015BD4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5041227CF724300015BD4 /* Card.swift */; };
+		6DD0E17727D8894700C29D1E /* BinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17627D8894700C29D1E /* BinViewController.swift */; };
+		6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17927D896DD00C29D1E /* ProductCell.swift */; };
+		6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17B27D89D4400C29D1E /* OrderModel.swift */; };
+		6DD0E18027D934DF00C29D1E /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17F27D934DF00C29D1E /* CustomColors.swift */; };
+		6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */; };
+		6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */; };
+		6DF7531527CF96660047CFB9 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531427CF96660047CFB9 /* CustomImageView.swift */; };
+		6DF7531727CF98010047CFB9 /* CustomStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531627CF98010047CFB9 /* CustomStackView.swift */; };
+		6DF7531927CFD4E50047CFB9 /* CardPaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531827CFD4E50047CFB9 /* CardPaymentResponse.swift */; };
+		6DF7531B27CFD7E90047CFB9 /* Payer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531A27CFD7E90047CFB9 /* Payer.swift */; };
+		6DF7531D27CFD8A40047CFB9 /* PaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531C27CFD8A40047CFB9 /* PaymentSystem.swift */; };
+		6DF7531F27CFDB460047CFB9 /* PaymentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531E27CFDB460047CFB9 /* PaymentStatus.swift */; };
+		6DF7532327D023650047CFB9 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7532227D023650047CFB9 /* HttpResponse.swift */; };
+		6DF7532527D0361B0047CFB9 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7532427D0361B0047CFB9 /* Error.swift */; };
+		6DF7532727D045060047CFB9 /* GetBrandResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7532627D045060047CFB9 /* GetBrandResponse.swift */; };
+		6DF7532927D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7532827D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift */; };
+		6DF7532C27D047710047CFB9 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7532B27D047710047CFB9 /* CodableExtensions.swift */; };
+		716F08368A56E0B4F18D9682 /* Pods_iOKA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 169C9DC202FD13A254EB4E81 /* Pods_iOKA.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		169C9DC202FD13A254EB4E81 /* Pods_iOKA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOKA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C1BC1DA731E1FF011A9D843 /* Pods-iOKA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOKA.release.xcconfig"; path = "Target Support Files/Pods-iOKA/Pods-iOKA.release.xcconfig"; sourceTree = "<group>"; };
+		610626DE94BDE4DBA9E631A5 /* Pods-iOKA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOKA.debug.xcconfig"; path = "Target Support Files/Pods-iOKA/Pods-iOKA.debug.xcconfig"; sourceTree = "<group>"; };
+		6D27E60B27DA8D360035FB2B /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		6D27E60D27DA8DC00035FB2B /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		6D27E60F27DA8E0A0035FB2B /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		6D27E61127DA8F120035FB2B /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		6D27E61327DA90E30035FB2B /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		6D27E61527DA92E50035FB2B /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		6D27E61727DA93E20035FB2B /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		6D27E61927DA955E0035FB2B /* EndPointRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointRouter.swift; sourceTree = "<group>"; };
+		6D27E61B27DA9E9C0035FB2B /* IokaApiEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaApiEndPoint.swift; sourceTree = "<group>"; };
+		6D27E61D27DAA4D70035FB2B /* IokaApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaApi.swift; sourceTree = "<group>"; };
+		6D2F04C427CAEC9C0095286F /* IOKA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOKA.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D2F04C727CAEC9C0095286F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6D2F04C927CAEC9C0095286F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6D2F04CE27CAEC9C0095286F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6D2F04D027CAEC9E0095286F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6D2F04D327CAEC9E0095286F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6D2F04D527CAEC9E0095286F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentViewController.swift; sourceTree = "<group>"; };
+		6D2F04DD27CAED960095286F /* CardPaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentView.swift; sourceTree = "<group>"; };
+		6D2F04DF27CAEF960095286F /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
+		6D2F04E127CAF2D10095286F /* TextFieldPlaceHolders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPlaceHolders.swift; sourceTree = "<group>"; };
+		6D2F04E327CAF5300095286F /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		6D3E5AF327DBF0320029D9C0 /* GetCardResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardResponse.swift; sourceTree = "<group>"; };
+		6D3E5AF627DC18E80029D9C0 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		6D3E5AF827DC1BD50029D9C0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
+		6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderConfirmationView.swift; sourceTree = "<group>"; };
+		6D3E5AFE27DC29390029D9C0 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		6D3E5B0127DE32B00029D9C0 /* PaymentWithCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWithCardViewModel.swift; sourceTree = "<group>"; };
+		6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewController.swift; sourceTree = "<group>"; };
+		6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeView.swift; sourceTree = "<group>"; };
+		6D3E5B0727DE6A990029D9C0 /* DemoAppEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppEndPoint.swift; sourceTree = "<group>"; };
+		6D3E5B0927DE6C070029D9C0 /* DemoAppApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppApi.swift; sourceTree = "<group>"; };
+		6D3E5B0B27DE92A30029D9C0 /* RouterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterCoordinator.swift; sourceTree = "<group>"; };
+		6D3E5B0D27DE93320029D9C0 /* RouterNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterNavigation.swift; sourceTree = "<group>"; };
+		6D3E5B0F27DE94C70029D9C0 /* IOKAMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOKAMainCoordinator.swift; sourceTree = "<group>"; };
+		6D3E5B1127DE94E60029D9C0 /* CardPaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentCoordinator.swift; sourceTree = "<group>"; };
+		6D3E5B1327DE95520029D9C0 /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
+		6D3E5B1527DE9CE80029D9C0 /* PaymentResultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultCoordinator.swift; sourceTree = "<group>"; };
+		6D3E5B1827DED1A20029D9C0 /* CustomCardNumberTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCardNumberTextField.swift; sourceTree = "<group>"; };
+		6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
+		6D3E5B1E27DEF05C0029D9C0 /* GetCardsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardsResponse.swift; sourceTree = "<group>"; };
+		6D3E5B2027DEF1220029D9C0 /* GetPaymentByIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPaymentByIDResponse.swift; sourceTree = "<group>"; };
+		6D3E5B2227DFFD800029D9C0 /* ThreeDSecureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureCoordinator.swift; sourceTree = "<group>"; };
+		6D3E5B2427E02F7E0029D9C0 /* IOKA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IOKA.entitlements; sourceTree = "<group>"; };
+		6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBrowserViewController.swift; sourceTree = "<group>"; };
+		6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBrowserState.swift; sourceTree = "<group>"; };
+		6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCardProfileView.swift; sourceTree = "<group>"; };
+		6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageProfileView.swift; sourceTree = "<group>"; };
+		6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProfileView.swift; sourceTree = "<group>"; };
+		6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardsViewController.swift; sourceTree = "<group>"; };
+		6D3E7CDE27D7F44C00C292A9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		6D9F17F627CC373A00053DE8 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
+		6D9F17F827CC37E000053DE8 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		6DC5040E27CED8A200015BD4 /* IOKA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
+		6DC5041227CF724300015BD4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		6DD0E17627D8894700C29D1E /* BinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinViewController.swift; sourceTree = "<group>"; };
+		6DD0E17927D896DD00C29D1E /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		6DD0E17B27D89D4400C29D1E /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
+		6DD0E17F27D934DF00C29D1E /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
+		6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
+		6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusView.swift; sourceTree = "<group>"; };
+		6DF7531427CF96660047CFB9 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		6DF7531627CF98010047CFB9 /* CustomStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomStackView.swift; sourceTree = "<group>"; };
+		6DF7531827CFD4E50047CFB9 /* CardPaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentResponse.swift; sourceTree = "<group>"; };
+		6DF7531A27CFD7E90047CFB9 /* Payer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payer.swift; sourceTree = "<group>"; };
+		6DF7531C27CFD8A40047CFB9 /* PaymentSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSystem.swift; sourceTree = "<group>"; };
+		6DF7531E27CFDB460047CFB9 /* PaymentStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatus.swift; sourceTree = "<group>"; };
+		6DF7532227D023650047CFB9 /* HttpResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
+		6DF7532427D0361B0047CFB9 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		6DF7532627D045060047CFB9 /* GetBrandResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBrandResponse.swift; sourceTree = "<group>"; };
+		6DF7532827D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEmitterByBinCodeResponse.swift; sourceTree = "<group>"; };
+		6DF7532B27D047710047CFB9 /* CodableExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6D2F04C127CAEC9C0095286F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				716F08368A56E0B4F18D9682 /* Pods_iOKA.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		616DEAB33D306E8944F5AFE3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				169C9DC202FD13A254EB4E81 /* Pods_iOKA.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D27E60627DA8CAD0035FB2B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AF527DC06F10029D9C0 /* HTTPResponse */,
+				6D27E60A27DA8CDB0035FB2B /* Encoding */,
+				6D27E60927DA8CD30035FB2B /* Service */,
+				6D27E60827DA8CCC0035FB2B /* Manager */,
+				6D27E60727DA8CC40035FB2B /* EndPoint */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		6D27E60727DA8CC40035FB2B /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				6D27E60B27DA8D360035FB2B /* EndPointType.swift */,
+				6D27E61B27DA9E9C0035FB2B /* IokaApiEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		6D27E60827DA8CCC0035FB2B /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				6D27E61D27DAA4D70035FB2B /* IokaApi.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		6D27E60927DA8CD30035FB2B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6D27E60D27DA8DC00035FB2B /* HTTPMethod.swift */,
+				6D27E60F27DA8E0A0035FB2B /* HTTPTask.swift */,
+				6D27E61727DA93E20035FB2B /* NetworkRouter.swift */,
+				6D27E61927DA955E0035FB2B /* EndPointRouter.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6D27E60A27DA8CDB0035FB2B /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				6D27E61127DA8F120035FB2B /* ParameterEncoding.swift */,
+				6D27E61327DA90E30035FB2B /* URLParameterEncoder.swift */,
+				6D27E61527DA92E50035FB2B /* JSONParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		6D2F04BB27CAEC9C0095286F = {
+			isa = PBXGroup;
+			children = (
+				6D2F04C627CAEC9C0095286F /* IOKA */,
+				6D2F04C527CAEC9C0095286F /* Products */,
+				B9E9CAD2C060A9BF5F4CB10E /* Pods */,
+				616DEAB33D306E8944F5AFE3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6D2F04C527CAEC9C0095286F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6D2F04C427CAEC9C0095286F /* IOKA.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6D2F04C627CAEC9C0095286F /* IOKA */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B2427E02F7E0029D9C0 /* IOKA.entitlements */,
+				6D2F04C727CAEC9C0095286F /* AppDelegate.swift */,
+				6D2F04C927CAEC9C0095286F /* SceneDelegate.swift */,
+				6D3E5B0727DE6A990029D9C0 /* DemoAppEndPoint.swift */,
+				6D3E5B0927DE6C070029D9C0 /* DemoAppApi.swift */,
+				6D3E5AF627DC18E80029D9C0 /* MainTabBarController.swift */,
+				6DD0E17627D8894700C29D1E /* BinViewController.swift */,
+				6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */,
+				6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */,
+				6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */,
+				6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */,
+				6D3E5B2E27E1A0530029D9C0 /* Profile */,
+				6DD0E17927D896DD00C29D1E /* ProductCell.swift */,
+				6D3E5B3327E1A4E40029D9C0 /* SavedCards */,
+				6DD0E17B27D89D4400C29D1E /* OrderModel.swift */,
+				6DD0E17827D8894D00C29D1E /* IOKASDK */,
+				6D2F04CD27CAEC9C0095286F /* Main.storyboard */,
+				6D2F04D027CAEC9E0095286F /* Assets.xcassets */,
+				6D2F04D227CAEC9E0095286F /* LaunchScreen.storyboard */,
+				6D2F04D527CAEC9E0095286F /* Info.plist */,
+			);
+			path = IOKA;
+			sourceTree = "<group>";
+		};
+		6D3E5AF527DC06F10029D9C0 /* HTTPResponse */ = {
+			isa = PBXGroup;
+			children = (
+				6DF7532227D023650047CFB9 /* HttpResponse.swift */,
+			);
+			path = HTTPResponse;
+			sourceTree = "<group>";
+		};
+		6D3E5B0027DE2FE40029D9C0 /* PaymentWithCard */ = {
+			isa = PBXGroup;
+			children = (
+				6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */,
+				6D2F04DD27CAED960095286F /* CardPaymentView.swift */,
+				6D3E5B0127DE32B00029D9C0 /* PaymentWithCardViewModel.swift */,
+			);
+			path = PaymentWithCard;
+			sourceTree = "<group>";
+		};
+		6D3E5B1727DEA8D40029D9C0 /* PaymentResult */ = {
+			isa = PBXGroup;
+			children = (
+				6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */,
+				6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */,
+			);
+			path = PaymentResult;
+			sourceTree = "<group>";
+		};
+		6D3E5B2527E1838F0029D9C0 /* CustomBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */,
+				6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */,
+			);
+			path = CustomBrowser;
+			sourceTree = "<group>";
+		};
+		6D3E5B2E27E1A0530029D9C0 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AF827DC1BD50029D9C0 /* ProfileViewController.swift */,
+				6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */,
+				6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */,
+				6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */,
+				6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		6D3E5B3327E1A4E40029D9C0 /* SavedCards */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */,
+			);
+			path = SavedCards;
+			sourceTree = "<group>";
+		};
+		6D3E7CD527D7F29600C292A9 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0B27DE92A30029D9C0 /* RouterCoordinator.swift */,
+				6D3E5B0D27DE93320029D9C0 /* RouterNavigation.swift */,
+				6D3E5B0F27DE94C70029D9C0 /* IOKAMainCoordinator.swift */,
+				6D3E5B1127DE94E60029D9C0 /* CardPaymentCoordinator.swift */,
+				6D3E5B1527DE9CE80029D9C0 /* PaymentResultCoordinator.swift */,
+				6D3E5B2227DFFD800029D9C0 /* ThreeDSecureCoordinator.swift */,
+				6D3E5B1327DE95520029D9C0 /* Coordinatable.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		6DD0E17827D8894D00C29D1E /* IOKASDK */ = {
+			isa = PBXGroup;
+			children = (
+				6DC5040E27CED8A200015BD4 /* IOKA.swift */,
+				6D3E7CDE27D7F44C00C292A9 /* Factory.swift */,
+				6D3E5B2527E1838F0029D9C0 /* CustomBrowser */,
+				6D3E5B0027DE2FE40029D9C0 /* PaymentWithCard */,
+				6D3E5B1727DEA8D40029D9C0 /* PaymentResult */,
+				6D27E60627DA8CAD0035FB2B /* Networking */,
+				6D3E7CD527D7F29600C292A9 /* Coordinators */,
+				6DFAF88B27CD66FE0051AAB3 /* CustomViews */,
+				6DF7532A27D0474C0047CFB9 /* Extensions */,
+				6DF7532D27D047E00047CFB9 /* Models */,
+			);
+			path = IOKASDK;
+			sourceTree = "<group>";
+		};
+		6DF7532A27D0474C0047CFB9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6DD0E17F27D934DF00C29D1E /* CustomColors.swift */,
+				6D2F04E127CAF2D10095286F /* TextFieldPlaceHolders.swift */,
+				6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */,
+				6DF7532B27D047710047CFB9 /* CodableExtensions.swift */,
+				6D9F17F827CC37E000053DE8 /* Typography.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6DF7532D27D047E00047CFB9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6DF7531827CFD4E50047CFB9 /* CardPaymentResponse.swift */,
+				6DF7532627D045060047CFB9 /* GetBrandResponse.swift */,
+				6DF7532827D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift */,
+				6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */,
+				6D3E5B1E27DEF05C0029D9C0 /* GetCardsResponse.swift */,
+				6D3E5AF327DBF0320029D9C0 /* GetCardResponse.swift */,
+				6D3E5B2027DEF1220029D9C0 /* GetPaymentByIDResponse.swift */,
+				6DF7532427D0361B0047CFB9 /* Error.swift */,
+				6DF7531E27CFDB460047CFB9 /* PaymentStatus.swift */,
+				6DF7531C27CFD8A40047CFB9 /* PaymentSystem.swift */,
+				6DC5041227CF724300015BD4 /* Card.swift */,
+				6DF7531A27CFD7E90047CFB9 /* Payer.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6DFAF88B27CD66FE0051AAB3 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				6D9F17F627CC373A00053DE8 /* CustomLabel.swift */,
+				6DF7531427CF96660047CFB9 /* CustomImageView.swift */,
+				6D2F04E327CAF5300095286F /* CustomButton.swift */,
+				6D3E5B1827DED1A20029D9C0 /* CustomCardNumberTextField.swift */,
+				6D2F04DF27CAEF960095286F /* CustomTextField.swift */,
+				6DF7531627CF98010047CFB9 /* CustomStackView.swift */,
+				6D3E5AFE27DC29390029D9C0 /* CustomView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		B9E9CAD2C060A9BF5F4CB10E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				610626DE94BDE4DBA9E631A5 /* Pods-iOKA.debug.xcconfig */,
+				1C1BC1DA731E1FF011A9D843 /* Pods-iOKA.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6D2F04C327CAEC9C0095286F /* IOKA */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D2F04D827CAEC9E0095286F /* Build configuration list for PBXNativeTarget "IOKA" */;
+			buildPhases = (
+				495F63D3900AF3CB9EABECE6 /* [CP] Check Pods Manifest.lock */,
+				6D2F04C027CAEC9C0095286F /* Sources */,
+				6D2F04C127CAEC9C0095286F /* Frameworks */,
+				6D2F04C227CAEC9C0095286F /* Resources */,
+				A8B28D0A010EAAB3D1A65B40 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IOKA;
+			productName = iOKA;
+			productReference = 6D2F04C427CAEC9C0095286F /* IOKA.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6D2F04BC27CAEC9C0095286F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					6D2F04C327CAEC9C0095286F = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = 6D2F04BF27CAEC9C0095286F /* Build configuration list for PBXProject "iOKA" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6D2F04BB27CAEC9C0095286F;
+			productRefGroup = 6D2F04C527CAEC9C0095286F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6D2F04C327CAEC9C0095286F /* IOKA */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6D2F04C227CAEC9C0095286F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D2F04D427CAEC9E0095286F /* LaunchScreen.storyboard in Resources */,
+				6D2F04D127CAEC9E0095286F /* Assets.xcassets in Resources */,
+				6D2F04CF27CAEC9C0095286F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		495F63D3900AF3CB9EABECE6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-iOKA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A8B28D0A010EAAB3D1A65B40 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOKA/Pods-iOKA-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-iOKA/Pods-iOKA-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-iOKA/Pods-iOKA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6D2F04C027CAEC9C0095286F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */,
+				6DF7531F27CFDB460047CFB9 /* PaymentStatus.swift in Sources */,
+				6D3E5B2127DEF1220029D9C0 /* GetPaymentByIDResponse.swift in Sources */,
+				6D3E5AFD27DC22780029D9C0 /* OrderConfirmationView.swift in Sources */,
+				6D3E5B1027DE94C70029D9C0 /* IOKAMainCoordinator.swift in Sources */,
+				6DF7531927CFD4E50047CFB9 /* CardPaymentResponse.swift in Sources */,
+				6D27E61A27DA955E0035FB2B /* EndPointRouter.swift in Sources */,
+				6D27E61E27DAA4D70035FB2B /* IokaApi.swift in Sources */,
+				6D3E5AF927DC1BD50029D9C0 /* ProfileViewController.swift in Sources */,
+				6DF7531727CF98010047CFB9 /* CustomStackView.swift in Sources */,
+				6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */,
+				6D9F17F727CC373A00053DE8 /* CustomLabel.swift in Sources */,
+				6D3E5B3227E1A1A70029D9C0 /* ThemeProfileView.swift in Sources */,
+				6D2F04C827CAEC9C0095286F /* AppDelegate.swift in Sources */,
+				6DF7531B27CFD7E90047CFB9 /* Payer.swift in Sources */,
+				6D3E5B2727E183AD0029D9C0 /* CustomBrowserViewController.swift in Sources */,
+				6DF7532527D0361B0047CFB9 /* Error.swift in Sources */,
+				6D2F04CA27CAEC9C0095286F /* SceneDelegate.swift in Sources */,
+				6D3E5B1427DE95520029D9C0 /* Coordinatable.swift in Sources */,
+				6D3E5B0E27DE93320029D9C0 /* RouterNavigation.swift in Sources */,
+				6D3E5B0627DE67E30029D9C0 /* PaymentTypeView.swift in Sources */,
+				6DD0E17727D8894700C29D1E /* BinViewController.swift in Sources */,
+				6D3E5B0427DE67CB0029D9C0 /* PaymentTypeViewController.swift in Sources */,
+				6D3E5AF727DC18E80029D9C0 /* MainTabBarController.swift in Sources */,
+				6D3E5B2D27E19C920029D9C0 /* SaveCardProfileView.swift in Sources */,
+				6DD0E18027D934DF00C29D1E /* CustomColors.swift in Sources */,
+				6D2F04DC27CAED4A0095286F /* CardPaymentViewController.swift in Sources */,
+				6D3E5B2927E1851C0029D9C0 /* CustomBrowserState.swift in Sources */,
+				6D3E5AFB27DC1EF10029D9C0 /* OrderConfirmationViewController.swift in Sources */,
+				6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */,
+				6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */,
+				6DF7532927D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift in Sources */,
+				6D3E5B2327DFFD800029D9C0 /* ThreeDSecureCoordinator.swift in Sources */,
+				6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */,
+				6D3E5B1927DED1A20029D9C0 /* CustomCardNumberTextField.swift in Sources */,
+				6D2F04E227CAF2D10095286F /* TextFieldPlaceHolders.swift in Sources */,
+				6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */,
+				6D2F04E427CAF5300095286F /* CustomButton.swift in Sources */,
+				6D27E60C27DA8D360035FB2B /* EndPointType.swift in Sources */,
+				6D3E5B0827DE6A990029D9C0 /* DemoAppEndPoint.swift in Sources */,
+				6D27E61C27DA9E9C0035FB2B /* IokaApiEndPoint.swift in Sources */,
+				6D27E60E27DA8DC00035FB2B /* HTTPMethod.swift in Sources */,
+				6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */,
+				6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */,
+				6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */,
+				6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */,
+				6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */,
+				6D3E5B0227DE32B00029D9C0 /* PaymentWithCardViewModel.swift in Sources */,
+				6D3E5B0C27DE92A40029D9C0 /* RouterCoordinator.swift in Sources */,
+				6D27E61227DA8F120035FB2B /* ParameterEncoding.swift in Sources */,
+				6D2F04E027CAEF960095286F /* CustomTextField.swift in Sources */,
+				6DF7531527CF96660047CFB9 /* CustomImageView.swift in Sources */,
+				6DF7531D27CFD8A40047CFB9 /* PaymentSystem.swift in Sources */,
+				6D3E5B0A27DE6C070029D9C0 /* DemoAppApi.swift in Sources */,
+				6D27E61427DA90E30035FB2B /* URLParameterEncoder.swift in Sources */,
+				6DF7532727D045060047CFB9 /* GetBrandResponse.swift in Sources */,
+				6D3E5B3527E1A51B0029D9C0 /* SavedCardsViewController.swift in Sources */,
+				6D3E5B1627DE9CE80029D9C0 /* PaymentResultCoordinator.swift in Sources */,
+				6D3E5B1227DE94E60029D9C0 /* CardPaymentCoordinator.swift in Sources */,
+				6D3E5B1D27DEEE820029D9C0 /* DeleteCardByIDResponse.swift in Sources */,
+				6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */,
+				6D3E5AF427DBF0320029D9C0 /* GetCardResponse.swift in Sources */,
+				6D27E61027DA8E0A0035FB2B /* HTTPTask.swift in Sources */,
+				6D3E5AFF27DC29390029D9C0 /* CustomView.swift in Sources */,
+				6DF7532C27D047710047CFB9 /* CodableExtensions.swift in Sources */,
+				6D27E61827DA93E20035FB2B /* NetworkRouter.swift in Sources */,
+				6DF7532327D023650047CFB9 /* HttpResponse.swift in Sources */,
+				6DC5041327CF724300015BD4 /* Card.swift in Sources */,
+				6D3E5B1F27DEF05C0029D9C0 /* GetCardsResponse.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6D2F04CD27CAEC9C0095286F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D2F04CE27CAEC9C0095286F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6D2F04D227CAEC9E0095286F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D2F04D327CAEC9E0095286F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6D2F04D627CAEC9E0095286F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6D2F04D727CAEC9E0095286F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6D2F04D927CAEC9E0095286F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 610626DE94BDE4DBA9E631A5 /* Pods-iOKA.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IOKA/IOKA.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AC9DQSH5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOKA/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IOKA;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abi-abi.iOKA";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6D2F04DA27CAEC9E0095286F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C1BC1DA731E1FF011A9D843 /* Pods-iOKA.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = IOKA/IOKA.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9AC9DQSH5M;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = iOKA/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = IOKA;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.abi-abi.iOKA";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6D2F04BF27CAEC9C0095286F /* Build configuration list for PBXProject "iOKA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2F04D627CAEC9E0095286F /* Debug */,
+				6D2F04D727CAEC9E0095286F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6D2F04D827CAEC9E0095286F /* Build configuration list for PBXNativeTarget "IOKA" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6D2F04D927CAEC9E0095286F /* Debug */,
+				6D2F04DA27CAEC9E0095286F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6D2F04BC27CAEC9C0095286F /* Project object */;
+}
