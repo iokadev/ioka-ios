@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class BinViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CartViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let models = OrderModel.models
     
