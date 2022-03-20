@@ -30,6 +30,9 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: ProfileViewDelegate {
     func showSavedCard(_ profileView: ProfileView) {
+        
+        IOKA.shared.getCards(customerId: <#T##String#>, completion: <#T##((GetCardsResponse?, CustomError?) -> Void)##((GetCardsResponse?, CustomError?) -> Void)##(GetCardsResponse?, CustomError?) -> Void#>)
+        
         self.navigationController?.pushViewController(SavedCardsViewController(), animated: true)
     }
 }

@@ -56,13 +56,15 @@
 		6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */; };
 		6D3E5B3227E1A1A70029D9C0 /* ThemeProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */; };
 		6D3E5B3527E1A51B0029D9C0 /* SavedCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */; };
+		6D3E5B3727E1A9250029D9C0 /* GetCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */; };
+		6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */; };
 		6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E7CDE27D7F44C00C292A9 /* Factory.swift */; };
 		6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */; };
 		6D9F17F727CC373A00053DE8 /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F627CC373A00053DE8 /* CustomLabel.swift */; };
 		6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F827CC37E000053DE8 /* Typography.swift */; };
 		6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5040E27CED8A200015BD4 /* IOKA.swift */; };
 		6DC5041327CF724300015BD4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5041227CF724300015BD4 /* Card.swift */; };
-		6DD0E17727D8894700C29D1E /* BinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17627D8894700C29D1E /* BinViewController.swift */; };
+		6DD0E17727D8894700C29D1E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17627D8894700C29D1E /* CartViewController.swift */; };
 		6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17927D896DD00C29D1E /* ProductCell.swift */; };
 		6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17B27D89D4400C29D1E /* OrderModel.swift */; };
 		6DD0E18027D934DF00C29D1E /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17F27D934DF00C29D1E /* CustomColors.swift */; };
@@ -138,13 +140,15 @@
 		6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageProfileView.swift; sourceTree = "<group>"; };
 		6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeProfileView.swift; sourceTree = "<group>"; };
 		6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardsViewController.swift; sourceTree = "<group>"; };
+		6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardTableViewCell.swift; sourceTree = "<group>"; };
+		6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E7CDE27D7F44C00C292A9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		6D9F17F627CC373A00053DE8 /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		6D9F17F827CC37E000053DE8 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		6DC5040E27CED8A200015BD4 /* IOKA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
 		6DC5041227CF724300015BD4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
-		6DD0E17627D8894700C29D1E /* BinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinViewController.swift; sourceTree = "<group>"; };
+		6DD0E17627D8894700C29D1E /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		6DD0E17927D896DD00C29D1E /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		6DD0E17B27D89D4400C29D1E /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
 		6DD0E17F27D934DF00C29D1E /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
@@ -257,18 +261,13 @@
 				6D3E5B2427E02F7E0029D9C0 /* IOKA.entitlements */,
 				6D2F04C727CAEC9C0095286F /* AppDelegate.swift */,
 				6D2F04C927CAEC9C0095286F /* SceneDelegate.swift */,
-				6D3E5B0727DE6A990029D9C0 /* DemoAppEndPoint.swift */,
-				6D3E5B0927DE6C070029D9C0 /* DemoAppApi.swift */,
-				6D3E5AF627DC18E80029D9C0 /* MainTabBarController.swift */,
-				6DD0E17627D8894700C29D1E /* BinViewController.swift */,
-				6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */,
-				6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */,
-				6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */,
-				6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */,
+				6D3E5B3E27E21C090029D9C0 /* TabBar */,
+				6D3E5B3B27E21AEB0029D9C0 /* Cart */,
+				6D3E5B3C27E21AF90029D9C0 /* OrderConfirmation */,
+				6D3E5B3D27E21BD10029D9C0 /* PaymentType */,
 				6D3E5B2E27E1A0530029D9C0 /* Profile */,
-				6DD0E17927D896DD00C29D1E /* ProductCell.swift */,
 				6D3E5B3327E1A4E40029D9C0 /* SavedCards */,
-				6DD0E17B27D89D4400C29D1E /* OrderModel.swift */,
+				6D3E5B3A27E21A8D0029D9C0 /* DemoAppNetworking */,
 				6DD0E17827D8894D00C29D1E /* IOKASDK */,
 				6D2F04CD27CAEC9C0095286F /* Main.storyboard */,
 				6D2F04D027CAEC9E0095286F /* Assets.xcassets */,
@@ -289,9 +288,9 @@
 		6D3E5B0027DE2FE40029D9C0 /* PaymentWithCard */ = {
 			isa = PBXGroup;
 			children = (
-				6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */,
-				6D2F04DD27CAED960095286F /* CardPaymentView.swift */,
-				6D3E5B0127DE32B00029D9C0 /* PaymentWithCardViewModel.swift */,
+				6D3E5B3F27E21C550029D9C0 /* ViewController */,
+				6D3E5B4027E21C630029D9C0 /* View */,
+				6D3E5B4127E21C6C0029D9C0 /* ViewModel */,
 			);
 			path = PaymentWithCard;
 			sourceTree = "<group>";
@@ -299,8 +298,8 @@
 		6D3E5B1727DEA8D40029D9C0 /* PaymentResult */ = {
 			isa = PBXGroup;
 			children = (
-				6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */,
-				6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */,
+				6D3E5B4227E21C7C0029D9C0 /* ViewController */,
+				6D3E5B4327E21C880029D9C0 /* View */,
 			);
 			path = PaymentResult;
 			sourceTree = "<group>";
@@ -330,8 +329,95 @@
 			isa = PBXGroup;
 			children = (
 				6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */,
+				6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */,
+				6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */,
 			);
 			path = SavedCards;
+			sourceTree = "<group>";
+		};
+		6D3E5B3A27E21A8D0029D9C0 /* DemoAppNetworking */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0927DE6C070029D9C0 /* DemoAppApi.swift */,
+				6D3E5B0727DE6A990029D9C0 /* DemoAppEndPoint.swift */,
+			);
+			path = DemoAppNetworking;
+			sourceTree = "<group>";
+		};
+		6D3E5B3B27E21AEB0029D9C0 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				6DD0E17B27D89D4400C29D1E /* OrderModel.swift */,
+				6DD0E17927D896DD00C29D1E /* ProductCell.swift */,
+				6DD0E17627D8894700C29D1E /* CartViewController.swift */,
+			);
+			path = Cart;
+			sourceTree = "<group>";
+		};
+		6D3E5B3C27E21AF90029D9C0 /* OrderConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */,
+				6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */,
+			);
+			path = OrderConfirmation;
+			sourceTree = "<group>";
+		};
+		6D3E5B3D27E21BD10029D9C0 /* PaymentType */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */,
+				6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */,
+			);
+			path = PaymentType;
+			sourceTree = "<group>";
+		};
+		6D3E5B3E27E21C090029D9C0 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AF627DC18E80029D9C0 /* MainTabBarController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		6D3E5B3F27E21C550029D9C0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D3E5B4027E21C630029D9C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D2F04DD27CAED960095286F /* CardPaymentView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D3E5B4127E21C6C0029D9C0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0127DE32B00029D9C0 /* PaymentWithCardViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D3E5B4227E21C7C0029D9C0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D3E5B4327E21C880029D9C0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6D3E7CD527D7F29600C292A9 /* Coordinators */ = {
@@ -555,7 +641,7 @@
 				6D3E5B1427DE95520029D9C0 /* Coordinatable.swift in Sources */,
 				6D3E5B0E27DE93320029D9C0 /* RouterNavigation.swift in Sources */,
 				6D3E5B0627DE67E30029D9C0 /* PaymentTypeView.swift in Sources */,
-				6DD0E17727D8894700C29D1E /* BinViewController.swift in Sources */,
+				6DD0E17727D8894700C29D1E /* CartViewController.swift in Sources */,
 				6D3E5B0427DE67CB0029D9C0 /* PaymentTypeViewController.swift in Sources */,
 				6D3E5AF727DC18E80029D9C0 /* MainTabBarController.swift in Sources */,
 				6D3E5B2D27E19C920029D9C0 /* SaveCardProfileView.swift in Sources */,
@@ -598,6 +684,8 @@
 				6D3E5AF427DBF0320029D9C0 /* GetCardResponse.swift in Sources */,
 				6D27E61027DA8E0A0035FB2B /* HTTPTask.swift in Sources */,
 				6D3E5AFF27DC29390029D9C0 /* CustomView.swift in Sources */,
+				6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */,
+				6D3E5B3727E1A9250029D9C0 /* GetCardTableViewCell.swift in Sources */,
 				6DF7532C27D047710047CFB9 /* CodableExtensions.swift in Sources */,
 				6D27E61827DA93E20035FB2B /* NetworkRouter.swift in Sources */,
 				6DF7532327D023650047CFB9 /* HttpResponse.swift in Sources */,
