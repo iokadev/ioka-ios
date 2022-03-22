@@ -16,8 +16,8 @@ protocol CardPaymentViewDelegate: NSObject {
     func createCardPayment(_ view: UIView, cardNumber: String, cvc: String, exp: String)
     func checkPayButtonState(_ view: CardPaymentView)
     func modifyPaymentTextFields(_ view: CardPaymentView, text : String, textField: UITextField) -> String
-    func getEmitterByBinCode(_ view: CardPaymentView, bin_code : String)
 }
+
 
 class CardPaymentView: UIView {
 
@@ -84,10 +84,14 @@ class CardPaymentView: UIView {
     @objc private func handleKeyboardAppear(notification: Notification) {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
+        self.layoutIfNeeded()
         payButton.snp.updateConstraints { make in
             make.bottom.equalToSuperview().inset(keyboardEndFrame.height + 20)
         }
+        
         UIView.animate(withDuration: animationDuration) { [weak self] in
+            self?.payButton.anchor(left: self?.leftAnchor, bottom: self?.bottomAnchor, right: self?.rightAnchor, paddingLeft: 16, paddingBottom: keyboardEndFrame.height + 20, paddingRight: 16, height: 56)
+            self?.payButton.setNeedsUpdateConstraints()
             self?.layoutIfNeeded()
         }
     }
@@ -95,11 +99,14 @@ class CardPaymentView: UIView {
     @objc private func handleKeyboardDissapear(notification: Notification) {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
+        self.layoutIfNeeded()
         payButton.snp.updateConstraints { make in
             make.bottom.equalToSuperview().inset(114)
         }
+        
         UIView.animate(withDuration: animationDuration) { [weak self] in
-            self?.layoutIfNeeded()
+            guard let self = self else { return }
+            self.layoutIfNeeded()
         }
     }
     
@@ -111,51 +118,21 @@ class CardPaymentView: UIView {
         self.backgroundColor = CustomColors.fill1
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, stackViewForCardSaving, payButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(60)
-        }
+        titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
         
-        closeButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(60)
-            make.width.height.equalTo(24)
-        }
+        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
         
-        cardNumberTextField.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(titleLabel.snp.bottom).offset(32)
-            make.height.equalTo(56)
-        }
+        cardNumberTextField.anchor(top: titleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 56)
         
-        stackViewForCardInfo.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(cardNumberTextField.snp.bottom).offset(8)
-            make.height.equalTo(56)
-        }
+        stackViewForCardInfo.anchor(top: cardNumberTextField.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
         
-        stackViewForCardSaving.snp.makeConstraints { make in
-            make.height.equalTo(40)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(stackViewForCardInfo.snp.bottom).offset(8)
-        }
+        stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
         
-        payButton.snp.makeConstraints { make in
-            make.height.equalTo(56)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(114)
-        }
+        payButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16, height: 56)
         
-        transactionLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.bottom.equalToSuperview().inset(60)
-        }
+        transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
         
-        transactionImageView.snp.makeConstraints { make in
-            make.centerY.equalTo(transactionLabel.snp.centerY)
-            make.trailing.equalTo(transactionLabel.snp.leading).inset(-8)
-            make.width.height.equalTo(24)
-        }
+        transactionImageView.centerY(in: transactionLabel, right: transactionLabel.leftAnchor, paddingRight: 8, width: 24, height: 24)
     }
 }
 

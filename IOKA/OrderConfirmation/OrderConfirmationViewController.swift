@@ -14,8 +14,12 @@ class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDe
             orderConfirmationView.order = order
         }
     }
-    
     let orderConfirmationView = OrderConfirmationView()
+    var paymentTypeState: PaymentTypeState? {
+        didSet {
+            handlePaymenTypeStateChange(paymentTypeState)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,18 +40,57 @@ class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDe
     }
     
     func confirmButtonWasPressed(_ orderView: UIView) {
-        guard let order = order else { return }
-
-        DemoAppApi.shared.createOrder(price: order.orderPrice) { createOrderResponse in
-            if let createOrderResponse = createOrderResponse {
-                DispatchQueue.main.async {
-                    IOKA.shared.setUP(customerAccessToken: createOrderResponse.customer_access_token, orderAccessToken: createOrderResponse.order_access_token, navigationVC: self.navigationController ?? UINavigationController())
-                    let coordinator = IOKAMainCoordinator(navigationViewController: self.navigationController ?? UINavigationController())
-                    coordinator.startPaymentCoordinator()
-                    coordinator.topViewController = self
+        if let paymentTypeState = paymentTypeState {
+            guard let order = order else { return }
+            DemoAppApi.shared.createOrder(price: order.orderPrice) { createOrderResponse in
+                if let createOrderResponse = createOrderResponse {
+                    DispatchQueue.main.async {
+                        IOKA.shared.startCheckoutFlow(viewController: self, orderAccessToken: createOrderResponse.order_access_token)
+                    }
+                    
                 }
-              
+            }
+        } else {
+            let vc = PaymentTypeViewController()
+            DemoAppApi.shared.getProfile { result, error in
+                if let result = result {
+                    IOKA.shared.getCards(customerAccessToken: result.customer_access_token) { result, error in
+                        if let result = result {
+                            DispatchQueue.main.async {
+                                vc.models = result
+                                vc.delegate = self
+                                self.navigationController?.pushViewController(vc, animated: true)
+                            }
+                            
+                        }
+                        if let error = error {
+                            print("Cookareku epta \(error)")
+                        }
+                    }
+                }
             }
         }
+    }
+    
+    func handlePaymenTypeStateChange(_ state: PaymentTypeState?) {
+        guard let state = state else { return }
+
+        switch state {
+        case .applePay:
+            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить Apple Pay"
+        case .savedCard:
+            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить saved card"
+        case .creditCard:
+            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить банковской картой"
+        case .payWithCash:
+            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить cash"
+        }
+    }
+}
+
+
+extension OrderConfirmationViewController: PaymentTypeViewControllerDelegate {
+    func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState) {
+        self.paymentTypeState = state
     }
 }

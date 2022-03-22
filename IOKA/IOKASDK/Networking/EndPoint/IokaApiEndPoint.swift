@@ -78,7 +78,6 @@ extension IokaApiEndPoint: EndPointType {
     }
     
     var task: HTTPTask {
-        guard let customerAccessToken = IOKA.shared.customerAccessToken, let orderAccessToken = IOKA.shared.orderAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
         switch self {
         case .getBrand(let partialBin):
             return .requestParameters(bodyParameters: nil, urlParameters: ["partial_bin": partialBin])
@@ -87,15 +86,23 @@ extension IokaApiEndPoint: EndPointType {
         case .createCardPayment( _, let card):
             return .requestParameters(bodyParameters: card.dictionary, urlParameters: nil)
         case .getPaymentByID( _,  _):
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: IokaApi.apiKey, AuthenticationKeys.ORDER_ACCESS_TOKEN_KEY: orderAccessToken])
+            guard let orderAccessToken = IOKA.shared.orderAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.ORDER_ACCESS_TOKEN_KEY: orderAccessToken])
         case .getCards( _):
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: IokaApi.apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
+            guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         case .createBinding( _, let card):
+            guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
             return .requestParametersAndHeaders(bodyParameters: card.dictionary, urlParameters: nil, additionalHeaders: [AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         case .getCardByID( _, _):
+            guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         case .deleteCardByID( _, _):
-            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: IokaApi.apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
+            guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         }
     }
     
