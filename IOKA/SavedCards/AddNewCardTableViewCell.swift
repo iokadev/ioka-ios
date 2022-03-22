@@ -13,9 +13,9 @@ import UIKit
 class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
-    let addCardImageView = CustomImageView(imageName: "addCard")
-    let addCardLabel = CustomLabel( title: "Добавить новую карту", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let showAddCardimageView = CustomImageView(imageName: "chevronRight")
+    let addCardImageView = IokaImageView(imageName: "addCard")
+    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let showAddCardimageView = IokaImageView(imageName: "chevronRight")
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -27,7 +27,7 @@ class AddNewCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }

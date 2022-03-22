@@ -15,13 +15,13 @@ protocol OrderStatusViewDelegate: NSObject {
 
 class OrderStatusView: UIView {
     
-    private let closeButton = CustomButton(image: UIImage(named: "Close"))
-    private let imageView = CustomImageView()
-    private let orderTitleLabel = CustomLabel(customFont: Typography.heading)
-    let orderNumberLabel = CustomLabel(customFont: Typography.subtitle, customTextColor: CustomColors.grey)
-    let orderPriceLabel = CustomLabel(customFont: Typography.heading2, customTextColor: CustomColors.fill2)
-    let errorDescriptionLabel = CustomLabel(customFont: Typography.subtitle, customTextColor: CustomColors.grey)
-    private let retryOrCloseButton = CustomButton(customButtonState: .enabled)
+    private let closeButton = IokaButton(image: UIImage(named: "Close"))
+    private let imageView = IokaImageView()
+    private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
+    let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey)
+    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IokaColors.fill2)
+    let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey)
+    private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
     weak var delegate: OrderStatusViewDelegate?
     
@@ -37,7 +37,7 @@ class OrderStatusView: UIView {
         }
     }
     
-    var error: CustomError? {
+    var error: IokaError? {
         didSet {
             setOrderViewData()
         }
@@ -126,13 +126,13 @@ class OrderStatusView: UIView {
         switch orderStatusState {
         case .paymentSucceed:
             orderTitleLabel.text = "Заказ оплачен"
-            orderTitleLabel.textColor = CustomColors.success
+            orderTitleLabel.textColor = IokaColors.success
             errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle("Понятно", for: .normal)
             imageView.image = UIImage(named: "CheckCircle")
         case .paymentFailed:
             orderTitleLabel.text = "Платеж не прошел"
-            orderTitleLabel.textColor = CustomColors.fill2
+            orderTitleLabel.textColor = IokaColors.fill2
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle("Попробовать заново", for: .normal)

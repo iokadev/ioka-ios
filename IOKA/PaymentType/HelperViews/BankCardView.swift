@@ -14,9 +14,9 @@ protocol BankCardViewDelegate: NSObject {
 
 class BankCardView: UIView {
     
-    let creditCardImageView = CustomImageView(imageName: "Credit-card")
-    let saveCardlabel = CustomLabel(title: "Банковской картой", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let checkImageView = CustomImageView(imageName: "uncheckIcon")
+    let creditCardImageView = IokaImageView(imageName: "Credit-card")
+    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: BankCardViewDelegate?
     
@@ -63,7 +63,7 @@ class BankCardView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, checkImageView].forEach{ self.addSubview($0) }
         

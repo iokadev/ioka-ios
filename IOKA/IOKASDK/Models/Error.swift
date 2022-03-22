@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct CustomError: Codable {
+struct IokaError: Codable {
     let code: ErrorCodes?
     let message: String
 }

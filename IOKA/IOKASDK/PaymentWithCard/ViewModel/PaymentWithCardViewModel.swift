@@ -12,7 +12,7 @@ import UIKit
 class PaymentWithCardViewModel {
     
     
-    func createCardPayment(order_id: String, card: Card, completion: @escaping((OrderStatus, CustomError?, CardPaymentResponse?) -> Void)) {
+    func createCardPayment(order_id: String, card: Card, completion: @escaping((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)) {
         IokaApi.shared.createCardPayment(orderId: order_id, card: card) { [weak self] result, error in
             guard let _ = self else { return }
             guard error == nil else { completion(.paymentFailed, error, nil)
@@ -56,20 +56,20 @@ class PaymentWithCardViewModel {
             disablePayButton(view)
             return }
         
-        guard cardNumberText.trimCardNumberText().checkCardNumber() == CustomTextFieldState.correctInputData else {
+        guard cardNumberText.trimCardNumberText().checkCardNumber() == IokaTextFieldState.correctInputData else {
             disablePayButton(view)
             return }
-        guard dateExpirationText.trimDateExpirationText().checkCardExpiration() == CustomTextFieldState.correctInputData else {
+        guard dateExpirationText.trimDateExpirationText().checkCardExpiration() == IokaTextFieldState.correctInputData else {
             disablePayButton(view)
             return }
-        guard cvvText.checkCVV() == CustomTextFieldState.correctInputData else {
+        guard cvvText.checkCVV() == IokaTextFieldState.correctInputData else {
             disablePayButton(view)
             return }
-        view.payButton.customButtonState = .enabled
+        view.payButton.iokaButtonState = .enabled
     }
     
     private func disablePayButton(_ view: CardPaymentView) {
-        view.payButton.customButtonState = .disabled
+        view.payButton.iokaButtonState = .disabled
     }
     
     func modifyPaymentTextFields(view: CardPaymentView, text : String, textField: UITextField) -> String {

@@ -12,10 +12,10 @@ import UIKit
 
 class LanguageProfileView: UIView {
     
-    let creditCardImageView = CustomImageView(imageName: "Language")
-    let languageLabel = CustomLabel(title: "Язык", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let currentLanguageLabel = CustomLabel(title: "Русский", customFont: Typography.body, customTextColor: CustomColors.grey)
-    let chevronRightImageView = CustomImageView(imageName: "chevronRight")
+    let creditCardImageView = IokaImageView(imageName: "Language")
+    let languageLabel = IokaLabel(title: "Язык", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let currentLanguageLabel = IokaLabel(title: "Русский", iokaFont: Typography.body, iokaTextColor: IokaColors.grey)
+    let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +27,7 @@ class LanguageProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, languageLabel, currentLanguageLabel, chevronRightImageView].forEach{ self.addSubview($0) }
         

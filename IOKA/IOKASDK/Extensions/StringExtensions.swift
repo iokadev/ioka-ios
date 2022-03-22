@@ -46,7 +46,7 @@ extension String {
         self.components(separatedBy: "/").joined()
     }
     
-    func checkCardExpiration() -> CustomTextFieldState {
+    func checkCardExpiration() -> IokaTextFieldState {
         let formatter = DateFormatter()
         formatter.dateFormat = "yy-MM-dd HH:mm:ss 'UTC'"
         
@@ -56,23 +56,23 @@ extension String {
         let month = Int(formatter.string(from: Date()))!
         
         let cardDate = Array(self)
-        guard cardDate.count == 4 else { return CustomTextFieldState.wrongInputData }
-        guard let cardMonth = Int("\(cardDate[0])\(cardDate[1])") else { return CustomTextFieldState.wrongInputData }
-        guard let cardYear = Int("\(cardDate[2])\(cardDate[3])") else { return CustomTextFieldState.wrongInputData }
+        guard cardDate.count == 4 else { return IokaTextFieldState.wrongInputData }
+        guard let cardMonth = Int("\(cardDate[0])\(cardDate[1])") else { return IokaTextFieldState.wrongInputData }
+        guard let cardYear = Int("\(cardDate[2])\(cardDate[3])") else { return IokaTextFieldState.wrongInputData }
         
         if cardMonth > 12 || year > cardYear || cardYear == year && month > cardMonth {
-            return CustomTextFieldState.wrongInputData
+            return IokaTextFieldState.wrongInputData
         } else {
-            return CustomTextFieldState.correctInputData
+            return IokaTextFieldState.correctInputData
         }
     }
     
-    func checkCardNumber() -> CustomTextFieldState {
-        self.count == 16 ? CustomTextFieldState.correctInputData : CustomTextFieldState.wrongInputData
+    func checkCardNumber() -> IokaTextFieldState {
+        self.count == 16 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
     }
     
-    func checkCVV() -> CustomTextFieldState {
-        self.count == 3 ? CustomTextFieldState.correctInputData : CustomTextFieldState.wrongInputData
+    func checkCVV() -> IokaTextFieldState {
+        self.count == 3 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
     }
     
     

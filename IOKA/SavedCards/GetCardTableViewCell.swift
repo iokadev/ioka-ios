@@ -13,10 +13,10 @@ import UIKit
 class GetCardTableViewCell: UITableViewCell {
     static let cellId = "GetCardTableViewCell"
     
-    let creditCardImageView = CustomImageView()
-    let cardNumberLabel = CustomLabel(customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let deleteImageView = CustomImageView(imageName: "deleteProduct")
-    let seperatorView: UIView = CustomView(backGroundColor: CustomColors.fill4)
+    let creditCardImageView = IokaImageView()
+    let cardNumberLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let deleteImageView = IokaImageView(imageName: "deleteProduct")
+    let seperatorView: UIView = IokaCustomView(backGroundColor: IokaColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +34,7 @@ class GetCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, cardNumberLabel, seperatorView].forEach{ self.addSubview($0) }
         

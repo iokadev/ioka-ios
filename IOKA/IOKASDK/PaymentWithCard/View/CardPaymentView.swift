@@ -21,18 +21,18 @@ protocol CardPaymentViewDelegate: NSObject {
 
 class CardPaymentView: UIView {
 
-    let titleLabel = CustomLabel(title: "К оплате 12 560", customFont: Typography.title)
-    let closeButton = CustomButton(image: UIImage(named: "Close"))
-    let cardNumberTextField = CustomCardNumberTextField(placeHolderType: .cardNumber)
-    let dateExpirationTextField = CustomTextField(placeHolderType: .dateExpiration)
-    let cvvTextField = CustomTextField(placeHolderType: .cvv)
-    let saveCardLabel = CustomLabel(title: "Сохранить карту", customFont: Typography.subtitle)
+    let titleLabel = IokaLabel(title: "К оплате 12 560", iokaFont: Typography.title)
+    let closeButton = IokaButton(image: UIImage(named: "Close"))
+    let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
+    let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
+    let cvvTextField = IokaTextField(placeHolderType: .cvv)
+    let saveCardLabel = IokaLabel(title: "Сохранить карту", iokaFont: Typography.subtitle)
     let saveCardToggle = UISwitch()
-    let payButton = CustomButton(customButtonState: .disabled, title: "Оплатить")
-    let transactionLabel = CustomLabel(title: "Все транзакции защищены", customFont: Typography.subtitle, customTextColor: CustomColors.success)
-    private var transactionImageView = CustomImageView(imageName: "transactionIcon", imageTintColor: CustomColors.success)
-    private lazy var stackViewForCardInfo = CustomStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var stackViewForCardSaving = CustomStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
+    let payButton = IokaButton(iokaButtonState: .disabled, title: "Оплатить")
+    let transactionLabel = IokaLabel(title: "Все транзакции защищены", iokaFont: Typography.subtitle, iokaTextColor: IokaColors.success)
+    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IokaColors.success)
+    private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
+    private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
     
     weak var cardPaymentViewDelegate: CardPaymentViewDelegate?
     var isCardBrendSetted: Bool = false
@@ -66,7 +66,7 @@ class CardPaymentView: UIView {
     
     @objc private func handlePayButton() {
         payButton.showLoading()
-        guard payButton.customButtonState == .enabled else { return }
+        guard payButton.iokaButtonState == .enabled else { return }
         guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
         guard let cvc = cvvTextField.text else { return }
         guard let exp = dateExpirationTextField.text else { return }
@@ -90,7 +90,6 @@ class CardPaymentView: UIView {
         }
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
-            self?.payButton.anchor(left: self?.leftAnchor, bottom: self?.bottomAnchor, right: self?.rightAnchor, paddingLeft: 16, paddingBottom: keyboardEndFrame.height + 20, paddingRight: 16, height: 56)
             self?.payButton.setNeedsUpdateConstraints()
             self?.layoutIfNeeded()
         }
@@ -115,7 +114,7 @@ class CardPaymentView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill1
+        self.backgroundColor = IokaColors.fill1
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, stackViewForCardSaving, payButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
@@ -138,22 +137,22 @@ class CardPaymentView: UIView {
 
 extension CardPaymentView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        guard let textField = textField as? CustomTextField else { return }
-        textField.customTextFieldState = .startTyping
+        guard let textField = textField as? IokaTextField else { return }
+        textField.iokaTextFieldState = .startTyping
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let textField = textField as? CustomTextField else { return }
+        guard let textField = textField as? IokaTextField else { return }
         switch textField {
         case cardNumberTextField:
             guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cardNumberTextField.customTextFieldState = trimmedText.checkCardNumber()
+            cardNumberTextField.iokaTextFieldState = trimmedText.checkCardNumber()
         case dateExpirationTextField:
             guard let trimmedText = textField.text?.trimDateExpirationText() else { return }
-            dateExpirationTextField.customTextFieldState = trimmedText.checkCardExpiration()
+            dateExpirationTextField.iokaTextFieldState = trimmedText.checkCardExpiration()
         case cvvTextField:
             guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cvvTextField.customTextFieldState = trimmedText.checkCVV()
+            cvvTextField.iokaTextFieldState = trimmedText.checkCVV()
         default:
             print("Any other implementation if you would like to add")
         }

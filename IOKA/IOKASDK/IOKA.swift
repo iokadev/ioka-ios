@@ -26,7 +26,7 @@ class IOKA {
         coordinator.topViewController = viewController
     }
     
-    func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, CustomError?) -> Void )) {
+    func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, IokaError?) -> Void )) {
         self.customerAccessToken = customerAccessToken
         IokaApi.shared.getCards(customerId: customerAccessToken.trimTokens()) { response, error in
             completion(response, error)

@@ -21,11 +21,11 @@ class ProductCell: UITableViewCell {
     
     static let cellId = "ProductCell"
     
-    let productNumber = CustomLabel(customFont: Typography.subtitleSmall, customTextColor: UIColor(red: 0.582, green: 0.582, blue: 0.65, alpha: 1))
-    let productTitle = CustomLabel(customFont: Typography.body, customTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
-    let productImageView = CustomImageView(imageName: "productImage", cornerRadius: 8)
-    let productPriceLabel = CustomLabel(customFont: Typography.bodySemibold, customTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
-    let deleteImageView = CustomImageView(imageName: "deleteProduct", imageTintColor: nil)
+    let productNumber = IokaLabel(iokaFont: Typography.subtitleSmall, iokaTextColor: UIColor(red: 0.582, green: 0.582, blue: 0.65, alpha: 1))
+    let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
+    let productImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
+    let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
+    let deleteImageView = IokaImageView(imageName: "deleteProduct", imageTintColor: nil)
     let seperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.961, alpha: 1)

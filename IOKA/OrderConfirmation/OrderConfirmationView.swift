@@ -23,19 +23,19 @@ class OrderConfirmationView: UIView {
     
     weak var delegate: OrderConfirmationViewDelegate?
     
-    private let orderTitleLabel = CustomLabel(customFont: Typography.subtitle, customTextColor: CustomColors.grey, customTextAlignemnt: .center)
-    private let orderImageView = CustomImageView(imageName: "productImage", cornerRadius: 8)
-    private let orderPriceLabel = CustomLabel(customFont: Typography.heading, customTextColor: CustomColors.fill2, customTextAlignemnt: .center)
-    private let orderInformationView = CustomView(cornerRadius: 8)
-    private let orderAdressLabel = CustomLabel(customFont: Typography.body, customTextColor: CustomColors.fill2)
-    private let orderTimeLabel = CustomLabel(customFont: Typography.body, customTextColor: CustomColors.fill2)
-    private let confirmButton = CustomButton(customButtonState: .enabled, title: "Оформить")
-    private let orderAdressImageView = CustomImageView(imageName: "orderAdress")
-    private let orderTimeImageView = CustomImageView(imageName: "orderTime")
-    private let paymentView = CustomView(cornerRadius: 8)
-    private let paymentTypeImageView = CustomImageView(imageName: "paymentType")
-    private let seperatorView = CustomView(backGroundColor: CustomColors.fill4)
-    let paymentTypeLabel = CustomLabel(title: "Выберите способ оплаты", customFont: Typography.body, customTextColor: CustomColors.grey)
+    private let orderTitleLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey, iokaTextAlignemnt: .center)
+    private let orderImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
+    private let orderPriceLabel = IokaLabel(iokaFont: Typography.heading, iokaTextColor: IokaColors.fill2, iokaTextAlignemnt: .center)
+    private let orderInformationView = IokaCustomView(cornerRadius: 8)
+    private let orderAdressLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    private let orderTimeLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    private let confirmButton = IokaButton(iokaButtonState: .enabled, title: "Оформить")
+    private let orderAdressImageView = IokaImageView(imageName: "orderAdress")
+    private let orderTimeImageView = IokaImageView(imageName: "orderTime")
+    private let paymentView = IokaCustomView(cornerRadius: 8)
+    private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
+    private let seperatorView = IokaCustomView(backGroundColor: IokaColors.fill4)
+    let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: Typography.body, iokaTextColor: IokaColors.grey)
     
     
     override init(frame: CGRect) {
@@ -68,7 +68,7 @@ class OrderConfirmationView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = CustomColors.fill5
+        self.backgroundColor = IokaColors.fill5
         [orderTitleLabel, orderImageView, orderPriceLabel, orderInformationView, paymentView, confirmButton].forEach{ self.addSubview($0) }
         
         orderTitleLabel.snp.makeConstraints { make in

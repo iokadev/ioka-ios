@@ -12,9 +12,9 @@ import UIKit
 
 class SaveCardProfileView: UIView {
     
-    let creditCardImageView = CustomImageView(imageName: "Credit-card")
-    let saveCardlabel = CustomLabel(title: "Сохраненные карты", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let chevronRightImageView = CustomImageView(imageName: "chevronRight")
+    let creditCardImageView = IokaImageView(imageName: "Credit-card")
+    let saveCardlabel = IokaLabel(title: "Сохраненные карты", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,7 +26,7 @@ class SaveCardProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, chevronRightImageView].forEach{ self.addSubview($0) }
         

@@ -7,14 +7,14 @@
 
 import Foundation
 
-typealias paymentCreationCompletion = (CardPaymentResponse?, CustomError?) -> Void
-typealias getBrandCompletion = (GetBrandResponse?, CustomError?) -> Void
-typealias getEmitterByBinCodeCompletion = (GetEmitterByBinCodeResponse?, CustomError?) -> Void
-typealias getCardsCompletion = ([GetCardResponse]?, CustomError?) -> Void
-typealias createBindingCompletion = (GetCardResponse?, CustomError?) -> Void
-typealias deleteCardByIDResponseCompletion = (DeleteCardByIDResponse?, CustomError?) -> Void
-typealias getCardByIDCompletion = (GetCardResponse?, CustomError?) -> Void
-typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, CustomError?) -> Void
+typealias paymentCreationCompletion = (CardPaymentResponse?, IokaError?) -> Void
+typealias getBrandCompletion = (GetBrandResponse?, IokaError?) -> Void
+typealias getEmitterByBinCodeCompletion = (GetEmitterByBinCodeResponse?, IokaError?) -> Void
+typealias getCardsCompletion = ([GetCardResponse]?, IokaError?) -> Void
+typealias createBindingCompletion = (GetCardResponse?, IokaError?) -> Void
+typealias deleteCardByIDResponseCompletion = (DeleteCardByIDResponse?, IokaError?) -> Void
+typealias getCardByIDCompletion = (GetCardResponse?, IokaError?) -> Void
+typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, IokaError?) -> Void
 
 
 class IokaApi {
@@ -28,14 +28,14 @@ class IokaApi {
             return response
     }
     
-    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, CustomError?) -> Void)) {
+    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
         if let error = error {
-            completion(nil, CustomError(code: .networkError, message: error.localizedDescription))
+            completion(nil, IokaError(code: .networkError, message: error.localizedDescription))
             return
         }
         
         guard let data = data else {
-            completion(nil, CustomError(code: .noData, message: "No data from call"))
+            completion(nil, IokaError(code: .noData, message: "No data from call"))
             return
         }
         
@@ -47,7 +47,7 @@ class IokaApi {
                 let responseObject = self.decodeAnyObject(data: data, model: T.self)
                 completion(responseObject, nil)
             case .failure:
-                let responseObject = self.decodeAnyObject(data: data, model: CustomError.self)
+                let responseObject = self.decodeAnyObject(data: data, model: IokaError.self)
                 completion(nil, responseObject)
             }
         }

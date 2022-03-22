@@ -20,14 +20,14 @@ class DemoAppApi {
             return response
     }
     
-    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, CustomError?) -> Void)) {
+    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
         if let error = error {
-            completion(nil, CustomError(code: .networkError, message: error.localizedDescription))
+            completion(nil, IokaError(code: .networkError, message: error.localizedDescription))
             return
         }
         
         guard let data = data else {
-            completion(nil, CustomError(code: .noData, message: "No data from call"))
+            completion(nil, IokaError(code: .noData, message: "No data from call"))
             return
         }
         
@@ -39,7 +39,7 @@ class DemoAppApi {
                 let responseObject = self.decodeAnyObject(data: data, model: T.self)
                 completion(responseObject, nil)
             case .failure:
-                let responseObject = self.decodeAnyObject(data: data, model: CustomError.self)
+                let responseObject = self.decodeAnyObject(data: data, model: IokaError.self)
                 completion(nil, responseObject)
             }
         }
@@ -59,7 +59,7 @@ class DemoAppApi {
         }
     }
     
-    func getProfile(completion: @escaping(GetProfileResponse?, CustomError?) -> Void) {
+    func getProfile(completion: @escaping(GetProfileResponse?, IokaError?) -> Void) {
         endPointRouter.request(.getProfile) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetProfileResponse.self) { result, error in
                 completion(result, error)
