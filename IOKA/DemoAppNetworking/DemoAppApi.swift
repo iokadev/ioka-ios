@@ -15,9 +15,34 @@ class DemoAppApi {
     
     private let endPointRouter = EndPointRouter<DemoAppEndPoint>()
     
-    func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
+    private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
             let response = try? JSONDecoder().decode(T.self, from: data)
             return response
+    }
+    
+    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, CustomError?) -> Void)) {
+        if let error = error {
+            completion(nil, CustomError(code: .networkError, message: error.localizedDescription))
+            return
+        }
+        
+        guard let data = data else {
+            completion(nil, CustomError(code: .noData, message: "No data from call"))
+            return
+        }
+        
+        if let response = response as? HTTPURLResponse {
+            guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
+        
+            switch result.responseType {
+            case .success:
+                let responseObject = self.decodeAnyObject(data: data, model: T.self)
+                completion(responseObject, nil)
+            case .failure:
+                let responseObject = self.decodeAnyObject(data: data, model: CustomError.self)
+                completion(nil, responseObject)
+            }
+        }
     }
     
     
@@ -30,6 +55,14 @@ class DemoAppApi {
             if let data = data {
                 let object = self.decodeAnyObject(data: data, model: CreateOrderResponse.self)
                 completion(object)
+            }
+        }
+    }
+    
+    func getProfile(completion: @escaping(GetProfileResponse?, CustomError?) -> Void) {
+        endPointRouter.request(.getProfile) { data, response, error in
+            self.handleRequest(data: data, response: response, error: error, model: GetProfileResponse.self) { result, error in
+                completion(result, error)
             }
         }
     }

@@ -18,7 +18,7 @@ struct GetCardResponse: Codable {
     
     let id: String //-Идентификатор платежа
     let customer_id: String //-Идентификатор родительского заказа
-    let status: CardStatus //-Статус платежа
+    let status: CardStatus? //-Статус платежа
     let created_at: String //-Время создания платежа
     let pan_masked: String //-Авторизованная сумма
     let expiry_date: String //-Сумма списания

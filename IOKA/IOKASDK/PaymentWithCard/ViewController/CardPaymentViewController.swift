@@ -14,7 +14,6 @@ class CardPaymentViewController: UIViewController {
     public var onButtonPressed: ((OrderStatus, CustomError?, CardPaymentResponse?) -> Void)?
     let contentView = CardPaymentView()
     let viewModel = PaymentWithCardViewModel()
-    var payButtonTaps = 0
     var order_id: String!
     var cardPaymentViewControllerDelegate: CardPaymentViewControllerDelegate?
    
@@ -33,8 +32,8 @@ class CardPaymentViewController: UIViewController {
 }
 
 extension CardPaymentViewController: CardPaymentViewDelegate {
-    func getEmitterByBinCode(_ view: CardPaymentView, bin_code: String) {
-        print("sdas")
+    func getEmitterByBinCode(_ view: UIView, with binCode: String) {
+        viewModel.getBankEmiiter(binCode: binCode)
     }
     
     func modifyPaymentTextFields(_ view: CardPaymentView, text: String, textField: UITextField) -> String {
@@ -56,12 +55,7 @@ extension CardPaymentViewController: CardPaymentViewDelegate {
         }
     }
     
-    func getEmitterByBinCode(_ view: UIView, with binCode: String) {
-        
-    }
-    
     func createCardPayment(_ view: UIView, cardNumber: String, cvc: String, exp: String) {
-        
         let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
         viewModel.createCardPayment(order_id: order_id, card: card) { status, error, result in
             DispatchQueue.main.async {

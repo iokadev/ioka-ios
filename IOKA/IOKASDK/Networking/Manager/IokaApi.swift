@@ -10,7 +10,7 @@ import Foundation
 typealias paymentCreationCompletion = (CardPaymentResponse?, CustomError?) -> Void
 typealias getBrandCompletion = (GetBrandResponse?, CustomError?) -> Void
 typealias getEmitterByBinCodeCompletion = (GetEmitterByBinCodeResponse?, CustomError?) -> Void
-typealias getCardsCompletion = (GetCardsResponse?, CustomError?) -> Void
+typealias getCardsCompletion = ([GetCardResponse]?, CustomError?) -> Void
 typealias createBindingCompletion = (GetCardResponse?, CustomError?) -> Void
 typealias deleteCardByIDResponseCompletion = (DeleteCardByIDResponse?, CustomError?) -> Void
 typealias getCardByIDCompletion = (GetCardResponse?, CustomError?) -> Void
@@ -19,7 +19,6 @@ typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, CustomError?
 
 class IokaApi {
     static let environment: NetworkEnvironment = .stage
-    static var apiKey: String = "shp_GA9Y41H1EJ_test_public_60e22bb99d75650ad1d3e54064461152cb9a954d43ea4629d6931703d5ef87f8"
     static let shared = IokaApi()
     
     private let endPointRouter = EndPointRouter<IokaApiEndPoint>()
@@ -80,7 +79,7 @@ class IokaApi {
     
     func getCards(customerId: String, completion: @escaping(getCardsCompletion)) {
         endPointRouter.request(.getCards(customerId: customerId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetCardsResponse.self) { result, error in
+            self.handleRequest(data: data, response: response, error: error, model: [GetCardResponse].self) { result, error in
                 completion(result, error)
             }
         }

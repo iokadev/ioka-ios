@@ -35,7 +35,7 @@ class OrderConfirmationView: UIView {
     private let paymentView = CustomView(cornerRadius: 8)
     private let paymentTypeImageView = CustomImageView(imageName: "paymentType")
     private let seperatorView = CustomView(backGroundColor: CustomColors.fill4)
-    private let paymentTypeLabel = CustomLabel(title: "Выберите способ оплаты", customFont: Typography.body, customTextColor: CustomColors.grey)
+    let paymentTypeLabel = CustomLabel(title: "Выберите способ оплаты", customFont: Typography.body, customTextColor: CustomColors.grey)
     
     
     override init(frame: CGRect) {
