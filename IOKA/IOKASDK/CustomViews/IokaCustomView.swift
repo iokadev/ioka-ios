@@ -1,5 +1,5 @@
 //
-//  CustomView.swift
+//  IokaCustomView.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 12.03.2022.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class CustomView: UIView {
+class IokaCustomView: UIView {
  
     override init(frame: CGRect) {
         super.init(frame: frame)

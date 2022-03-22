@@ -1,5 +1,5 @@
 //
-//  CustomCardNumberTextField.swift
+//  IokaCardNumberTextField.swift
 //  IOKA
 //
 //  Created by ablai erzhanov on 14.03.2022.
@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class CustomCardNumberTextField: CustomTextField {
+class IokaCardNumberTextField: IokaTextField {
     
     
     let iconContainerView: UIView = {
@@ -21,8 +21,8 @@ class CustomCardNumberTextField: CustomTextField {
         return view
     }()
    
-    let cardBrandImageView = CustomImageView(cornerRadius: 2)
-    let bankEmitterImageView = CustomImageView(cornerRadius: 2)
+    let cardBrandImageView = IokaImageView(cornerRadius: 2)
+    let bankEmitterImageView = IokaImageView(cornerRadius: 2)
     var isCardBrandSetted: Bool = false
     var isBankEmitterSetted: Bool = false
 

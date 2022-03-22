@@ -1,5 +1,5 @@
 //
-//  CustomColors.swift
+//  IokaColors.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 10.03.2022.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // FIX - name Theme, with custom init with all colors setted
-enum CustomColors {
+enum IokaColors {
     static var fill0 = UIColor(named: "Fill0")
     static var fill1 = UIColor(named: "Fill1")
     static var fill2 = UIColor(named: "Fill2")

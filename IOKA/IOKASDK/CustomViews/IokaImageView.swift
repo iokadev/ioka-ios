@@ -1,5 +1,5 @@
 //
-//  CustomImageView.swift
+//  IokaImageView.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 02.03.2022.
@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class CustomImageView: UIImageView {
+class IokaImageView: UIImageView {
     
     var imageName: String? {
         didSet {

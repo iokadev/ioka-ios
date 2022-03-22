@@ -1,5 +1,5 @@
 //
-//  CustomButton.swift
+//  IokaButton.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 27.02.2022.
@@ -8,16 +8,16 @@
 import Foundation
 import UIKit
 
-enum CustomButtonState {
+enum IokaButtonState {
     case disabled
     case enabled
 }
 
-class CustomButton: UIButton {
+class IokaButton: UIButton {
     
-    var customButtonState: CustomButtonState? {
+    var iokaButtonState: IokaButtonState? {
         didSet {
-            handlePayButtonState(state: customButtonState)
+            handlePayButtonState(state: iokaButtonState)
         }
     }
     var title: String?
@@ -27,9 +27,9 @@ class CustomButton: UIButton {
         super.init(frame: frame)
     }
     
-    convenience init(customButtonState: CustomButtonState? = nil, title: String? = nil, image: UIImage? = nil) {
+    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, image: UIImage? = nil) {
         self.init(frame: CGRect())
-        self.customButtonState = customButtonState
+        self.iokaButtonState = iokaButtonState
         self.title = title
         self.image = image
         setupButton()
@@ -43,17 +43,17 @@ class CustomButton: UIButton {
         self.setTitle(title, for: .normal)
         self.setImage(image, for: .normal)
         self.layer.cornerRadius = 12
-        handlePayButtonState(state: customButtonState)
+        handlePayButtonState(state: iokaButtonState)
     }
     
-    private func handlePayButtonState(state: CustomButtonState?) {
+    private func handlePayButtonState(state: IokaButtonState?) {
+        guard let state = state else { return }
+
         switch state {
         case .disabled:
-            self.backgroundColor = CustomColors.grey
+            self.backgroundColor = IokaColors.grey
         case .enabled:
-            self.backgroundColor = CustomColors.primary
-        case .none:
-            self.backgroundColor = .clear
+            self.backgroundColor = IokaColors.primary
         }
     }
 

@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol CardPaymentViewControllerDelegate: NSObject {
-    func completeCardPaymentFlow(status: OrderStatus, error: CustomError?, response: CardPaymentResponse?)
+    func completeCardPaymentFlow(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?)
 }
 
 
@@ -25,7 +25,7 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     
     
     private lazy var cardPaymentViewController: CardPaymentViewController = {
-        CustomFactory.shared.initiateCardPaymentViewController(orderAccesToken: IOKA.shared.orderAccessToken, delegate: self)
+        IokaFactory.shared.initiateCardPaymentViewController(orderAccesToken: IOKA.shared.orderAccessToken, delegate: self)
     }()
     
     init(parentCoordinator: IOKAMainCoordinator) {
@@ -46,9 +46,9 @@ class CardPaymentCoordinator: NSObject, Coordinator {
 }
 
 extension CardPaymentCoordinator: CardPaymentViewControllerDelegate {
-    func completeCardPaymentFlow(status: OrderStatus, error: CustomError?, response: CardPaymentResponse?) {
+    func completeCardPaymentFlow(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?) {
         if let response = response, let actionURL = response.action?.url {
-            parentCoordinator.startThreeDSecureCoordinator(url: "\(actionURL)?return_url=https://ioka.kz", customBrowserState: .createCardPayment(orderId: response.order_id, paymentId: response.id))
+            parentCoordinator.startThreeDSecureCoordinator(url: "\(actionURL)?return_url=https://ioka.kz", iokaBrowserState: .createCardPayment(orderId: response.order_id, paymentId: response.id))
         } else {
             parentCoordinator.startPaymentResultCoordinator(status: status, error: error, response: response)
         }

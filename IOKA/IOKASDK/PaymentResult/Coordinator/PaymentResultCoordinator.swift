@@ -20,16 +20,16 @@ class PaymentResultCoordinator: NSObject, Coordinator {
     let routerCoordinator: RouterCoordinator
     let parentCoordinator: IOKAMainCoordinator
     let orderStatus: OrderStatus
-    let error: CustomError?
+    let error: IokaError?
     let response: CardPaymentResponse?
     
     var children: [Coordinator] = []
     let navigationViewController: UINavigationController
     
     
-    private lazy var paymentResultViewController = CustomFactory.shared.initiateOrderStatusViewController(orderStatus: self.orderStatus, error: self.error, response: self.response, delegate: self)
+    private lazy var paymentResultViewController = IokaFactory.shared.initiateOrderStatusViewController(orderStatus: self.orderStatus, error: self.error, response: self.response, delegate: self)
     
-    init(parentCoordinator: IOKAMainCoordinator, orderStatus: OrderStatus, error: CustomError?, response: CardPaymentResponse?) {
+    init(parentCoordinator: IOKAMainCoordinator, orderStatus: OrderStatus, error: IokaError?, response: CardPaymentResponse?) {
         self.navigationViewController = parentCoordinator.navigationViewController
         self.routerCoordinator = RouterNavigation(navigationViewController: parentCoordinator.navigationViewController)
         self.parentCoordinator = parentCoordinator

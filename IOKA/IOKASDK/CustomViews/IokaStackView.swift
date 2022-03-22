@@ -1,5 +1,5 @@
 //
-//  CustomStackView.swift
+//  IokaStackView.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 02.03.2022.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class CustomStackView: UIStackView {
+class IokaStackView: UIStackView {
    
     var views: [UIView] = []
     var viewsDistribution: UIStackView.Distribution = .equalSpacing
