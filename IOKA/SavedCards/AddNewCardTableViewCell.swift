@@ -32,22 +32,12 @@ class AddNewCardTableViewCell: UITableViewCell {
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }
         
-        addCardImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-            make.height.equalTo(16)
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(20)
-        }
         
-        addCardLabel.snp.makeConstraints { make in
-            make.leading.equalTo(addCardImageView.snp.trailing).offset(12)
-            make.centerY.equalTo(addCardImageView.snp.centerY)
-        }
+        addCardImageView.anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, bottom: self.contentView.bottomAnchor, paddingTop: 20, paddingLeft: 16, paddingBottom: 20, width: 24, height: 16)
         
-        showAddCardimageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalTo(addCardImageView.snp.centerY)
-        }
+        addCardLabel.centerY(in: addCardImageView, left: addCardImageView.rightAnchor, paddingLeft: 12)
+        
+        showAddCardimageView.centerY(in: addCardImageView, right: self.contentView.rightAnchor, paddingRight: 16)
     }
 }
 

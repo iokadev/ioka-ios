@@ -13,6 +13,8 @@
 		6D21C15B27E80EBB00FC4C79 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21C15A27E80EBB00FC4C79 /* GetProfileResponse.swift */; };
 		6D21C15D27E8A47D00FC4C79 /* PayWithCashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21C15C27E8A47D00FC4C79 /* PayWithCashView.swift */; };
 		6D21C15F27EA037200FC4C79 /* IOKAConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21C15E27EA037200FC4C79 /* IOKAConstraints.swift */; };
+		6D21C16827EA6D8400FC4C79 /* OrderInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21C16727EA6D8400FC4C79 /* OrderInformationView.swift */; };
+		6D21C16A27EA725B00FC4C79 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D21C16927EA725B00FC4C79 /* PaymentView.swift */; };
 		6D27E60C27DA8D360035FB2B /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60B27DA8D360035FB2B /* EndPointType.swift */; };
 		6D27E60E27DA8DC00035FB2B /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60D27DA8DC00035FB2B /* HTTPMethod.swift */; };
 		6D27E61027DA8E0A0035FB2B /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D27E60F27DA8E0A0035FB2B /* HTTPTask.swift */; };
@@ -97,6 +99,8 @@
 		6D21C15A27E80EBB00FC4C79 /* GetProfileResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		6D21C15C27E8A47D00FC4C79 /* PayWithCashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayWithCashView.swift; sourceTree = "<group>"; };
 		6D21C15E27EA037200FC4C79 /* IOKAConstraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOKAConstraints.swift; sourceTree = "<group>"; };
+		6D21C16727EA6D8400FC4C79 /* OrderInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInformationView.swift; sourceTree = "<group>"; };
+		6D21C16927EA725B00FC4C79 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		6D27E60B27DA8D360035FB2B /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		6D27E60D27DA8DC00035FB2B /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		6D27E60F27DA8E0A0035FB2B /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
@@ -243,6 +247,49 @@
 				6D3E5B1527DE9CE80029D9C0 /* PaymentResultCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6D21C16427EA6CB800FC4C79 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D21C16527EA6CC600FC4C79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */,
+				6D21C16627EA6CDD00FC4C79 /* HelperViews */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D21C16627EA6CDD00FC4C79 /* HelperViews */ = {
+			isa = PBXGroup;
+			children = (
+				6D21C16727EA6D8400FC4C79 /* OrderInformationView.swift */,
+				6D21C16927EA725B00FC4C79 /* PaymentView.swift */,
+			);
+			path = HelperViews;
+			sourceTree = "<group>";
+		};
+		6D21C16B27EA812F00FC4C79 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D21C16C27EA813B00FC4C79 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */,
+				6D21C15227E7FB5C00FC4C79 /* HelperViews */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		6D27E60627DA8CAD0035FB2B /* Networking */ = {
@@ -418,8 +465,8 @@
 		6D3E5B3C27E21AF90029D9C0 /* OrderConfirmation */ = {
 			isa = PBXGroup;
 			children = (
-				6D3E5AFA27DC1EF10029D9C0 /* OrderConfirmationViewController.swift */,
-				6D3E5AFC27DC22780029D9C0 /* OrderConfirmationView.swift */,
+				6D21C16427EA6CB800FC4C79 /* ViewController */,
+				6D21C16527EA6CC600FC4C79 /* View */,
 			);
 			path = OrderConfirmation;
 			sourceTree = "<group>";
@@ -427,9 +474,8 @@
 		6D3E5B3D27E21BD10029D9C0 /* PaymentType */ = {
 			isa = PBXGroup;
 			children = (
-				6D3E5B0327DE67CB0029D9C0 /* PaymentTypeViewController.swift */,
-				6D3E5B0527DE67E30029D9C0 /* PaymentTypeView.swift */,
-				6D21C15227E7FB5C00FC4C79 /* HelperViews */,
+				6D21C16B27EA812F00FC4C79 /* ViewController */,
+				6D21C16C27EA813B00FC4C79 /* View */,
 			);
 			path = PaymentType;
 			sourceTree = "<group>";
@@ -710,6 +756,7 @@
 				6D3E5AFB27DC1EF10029D9C0 /* OrderConfirmationViewController.swift in Sources */,
 				6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */,
 				6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */,
+				6D21C16827EA6D8400FC4C79 /* OrderInformationView.swift in Sources */,
 				6DF7532927D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift in Sources */,
 				6D3E5B2327DFFD800029D9C0 /* ThreeDSecureCoordinator.swift in Sources */,
 				6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */,
@@ -725,6 +772,7 @@
 				6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */,
 				6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */,
 				6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */,
+				6D21C16A27EA725B00FC4C79 /* PaymentView.swift in Sources */,
 				6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */,
 				6D3E5B0227DE32B00029D9C0 /* PaymentWithCardViewModel.swift in Sources */,
 				6D3E5B0C27DE92A40029D9C0 /* RouterCoordinator.swift in Sources */,

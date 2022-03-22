@@ -67,22 +67,11 @@ class BankCardView: UIView {
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, checkImageView].forEach{ self.addSubview($0) }
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(24)
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().inset(18)
-        }
+        creditCardImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 18, paddingLeft: 16, width: 24, height: 24)
+        creditCardImageView.centerY(in: self)
         
-        saveCardlabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(14)
-        }
+        saveCardlabel.centerY(in: self, left: creditCardImageView.rightAnchor, paddingLeft: 14)
         
-        checkImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().inset(16)
-        }
+        checkImageView.centerY(in: self, right: self.rightAnchor, paddingRight: 16, width: 24, height: 24)
     }
 }

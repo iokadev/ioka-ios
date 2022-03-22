@@ -41,15 +41,9 @@ class SavedCardsViewController: UIViewController {
     }
     
     private func setupUI() {
-        backgroundView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(116)
-            make.height.equalTo( models.count * 56 + 57)
-        }
+        backgroundView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16, height: CGFloat(models.count * 56) + 57)
         
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        tableView.fillView(backgroundView)
     }
 }
 

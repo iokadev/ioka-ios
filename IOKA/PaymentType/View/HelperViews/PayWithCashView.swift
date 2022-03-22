@@ -68,22 +68,13 @@ class PayWithCashView: UIView {
         self.layer.cornerRadius = 8
         [payWithCashImageView, payWithCashlabel, checkImageView].forEach{ self.addSubview($0) }
         
-        payWithCashImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
-            make.leading.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
-        }
+        payWithCashImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 18, paddingLeft: 16, width: 24, height: 24)
+        payWithCashImageView.centerY(in: self)
         
-        payWithCashlabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.top.equalToSuperview().inset(18)
-            make.leading.equalTo(payWithCashImageView.snp.trailing).offset(14)
-        }
+        payWithCashlabel.centerY(in: self, left: payWithCashImageView.rightAnchor, paddingLeft: 14)
         
-        checkImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().inset(16)
-        }
+        checkImageView.centerY(in: self, right: self.rightAnchor, paddingRight: 16, width: 24, height: 24)
+        
+        
     }
 }

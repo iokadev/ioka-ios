@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDelegate {
+class OrderConfirmationViewController: UIViewController {
     
     var order: OrderModel? {
         didSet {
@@ -39,6 +39,43 @@ class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDe
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    
+    
+    func handlePaymenTypeStateChange(_ state: PaymentTypeState?) {
+        guard let state = state else { return }
+    }
+}
+
+
+extension OrderConfirmationViewController: PaymentTypeViewControllerDelegate {
+    func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState) {
+        self.orderConfirmationView.paymentView.paymentState = state
+        self.paymentTypeState = state
+    }
+}
+
+extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
+    func showPaymentTypeViewController(_ view: OrderConfirmationView) {
+        let vc = PaymentTypeViewController()
+        DemoAppApi.shared.getProfile { result, error in
+            if let result = result {
+                IOKA.shared.getCards(customerAccessToken: result.customer_access_token) { result, error in
+                    if let result = result {
+                        DispatchQueue.main.async {
+                            vc.models = result
+                            vc.delegate = self
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        }
+                    }
+                    if let error = error {
+                        print("Cookareku epta \(error)")
+                    }
+                }
+            }
+        }
+
+    }
+    
     func confirmButtonWasPressed(_ orderView: UIView) {
         if let paymentTypeState = paymentTypeState {
             guard let order = order else { return }
@@ -61,7 +98,6 @@ class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDe
                                 vc.delegate = self
                                 self.navigationController?.pushViewController(vc, animated: true)
                             }
-                            
                         }
                         if let error = error {
                             print("Cookareku epta \(error)")
@@ -70,27 +106,5 @@ class OrderConfirmationViewController: UIViewController, OrderConfirmationViewDe
                 }
             }
         }
-    }
-    
-    func handlePaymenTypeStateChange(_ state: PaymentTypeState?) {
-        guard let state = state else { return }
-
-        switch state {
-        case .applePay:
-            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить Apple Pay"
-        case .savedCard:
-            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить saved card"
-        case .creditCard:
-            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить банковской картой"
-        case .payWithCash:
-            self.orderConfirmationView.paymentTypeLabel.text = "Оплатить cash"
-        }
-    }
-}
-
-
-extension OrderConfirmationViewController: PaymentTypeViewControllerDelegate {
-    func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState) {
-        self.paymentTypeState = state
     }
 }

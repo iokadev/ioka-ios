@@ -69,8 +69,8 @@ extension PaymentTypeViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension PaymentTypeViewController: PaymentTypeViewDelegate {
-    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView) {
-        delegate?.popPaymentViewController(self, state: .creditCard)
+    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState) {
+        delegate?.popPaymentViewController(self, state: state)
         self.navigationController?.popViewController(animated: true)
     }
 }

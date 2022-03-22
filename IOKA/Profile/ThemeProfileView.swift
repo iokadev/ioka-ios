@@ -12,7 +12,7 @@ import UIKit
 
 class ThemeProfileView: UIView {
     
-    let creditCardImageView = IokaImageView(imageName: "Theme")
+    let themeImageView = IokaImageView(imageName: "Theme")
     let languageLabel = IokaLabel(title: "Темная тема", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
     let themeToggle = UISwitch()
     
@@ -28,21 +28,12 @@ class ThemeProfileView: UIView {
     private func setupUI() {
         self.backgroundColor = IokaColors.fill6
         self.layer.cornerRadius = 8
-        [creditCardImageView, languageLabel, themeToggle].forEach{ self.addSubview($0) }
+        [themeImageView, languageLabel, themeToggle].forEach{ self.addSubview($0) }
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
-            make.leading.top.equalToSuperview().inset(16)
-        }
+        themeImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 16, paddingLeft: 16, width: 24, height: 24)
         
-        languageLabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(18)
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(14)
-        }
+        languageLabel.anchor(top: self.topAnchor, left: themeImageView.rightAnchor, bottom: self.bottomAnchor, paddingTop: 18, paddingLeft: 14, paddingBottom: 18)
         
-        themeToggle.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(12)
-            make.trailing.equalToSuperview().inset(16)
-        }
+        themeToggle.anchor(top: self.topAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 12, paddingBottom: 12, paddingRight: 16)
     }
 }

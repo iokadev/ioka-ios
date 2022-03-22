@@ -57,18 +57,11 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     private func setUI() {
         self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.961, alpha: 1)
         
-        self.view.addSubview(tableView)
-
-        tableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        [tableView, goConfitmationButton].forEach { self.view.addSubview($0) }
         
-        view.addSubview(goConfitmationButton)
-        goConfitmationButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(56)
-            make.bottom.equalToSuperview().inset(106)
-        }
+        tableView.fillView(self.view)
+        
+        goConfitmationButton.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 106, paddingRight: 16, height: 56)
         
         view.bringSubviewToFront(goConfitmationButton)
     }

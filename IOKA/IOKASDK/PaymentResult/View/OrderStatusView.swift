@@ -79,44 +79,19 @@ class OrderStatusView: UIView {
         self.backgroundColor = .white
         [closeButton, imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
         
-        closeButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(60)
-            make.width.height.equalTo(24)
-        }
+        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
         
-        imageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(120)
-            make.top.equalToSuperview().offset(180)
-        }
+        imageView.centerX(in: self, top: self.topAnchor, paddingTop: 180, width: 120, height: 120)
         
-        orderTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(imageView.snp.bottom).offset(36)
-        }
+        orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 36)
         
-        orderNumberLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderTitleLabel.snp.bottom).offset(40)
-        }
+        orderNumberLabel.centerX(in: self, top: orderTitleLabel.bottomAnchor, paddingTop: 40)
         
-        orderPriceLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderNumberLabel.snp.bottom).offset(4)
-        }
+        orderPriceLabel.centerX(in: self, top: orderNumberLabel.bottomAnchor, paddingTop: 4)
         
-        errorDescriptionLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderTitleLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(24)
-        }
+        errorDescriptionLabel.anchor(top: orderTitleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        retryOrCloseButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(56)
-            make.bottom.equalToSuperview().inset(50)
-        }
+        retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 50, paddingRight: 16, height: 56)
     }
     
     private func setupOrderViewStatus() {

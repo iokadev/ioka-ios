@@ -21,16 +21,12 @@ class ProductCell: UITableViewCell {
     
     static let cellId = "ProductCell"
     
-    let productNumber = IokaLabel(iokaFont: Typography.subtitleSmall, iokaTextColor: UIColor(red: 0.582, green: 0.582, blue: 0.65, alpha: 1))
-    let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
+    let productNumber = IokaLabel(iokaFont: Typography.subtitleSmall, iokaTextColor: IokaColors.grey)
+    let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor:IokaColors.fill2)
     let productImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: UIColor(red: 26/163, green: 26/163, blue: 43/255, alpha: 1))
+    let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: IokaColors.fill2)
     let deleteImageView = IokaImageView(imageName: "deleteProduct", imageTintColor: nil)
-    let seperatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.961, alpha: 1)
-        return view
-    }()
+    let seperatorView = IokaCustomView(backGroundColor: IokaColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -49,48 +45,20 @@ class ProductCell: UITableViewCell {
     
     private func setUI() {
         self.contentView.addSubview(backView)
+        [productNumber, productTitle, productImageView, seperatorView, productPriceLabel, deleteImageView].forEach { backView.addSubview($0) }
         
-        [productNumber, productTitle, productImageView, productPriceLabel, deleteImageView, seperatorView].forEach { backView.addSubview($0) }
-        
-        productNumber.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(12)
-        }
-        
-        productTitle.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalTo(productNumber.snp.bottom).offset(4)
-        }
-        
-        productImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(12)
-            make.width.height.equalTo(88)
-        }
-        
-        seperatorView.snp.makeConstraints { make in
-            make.height.equalTo(1)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(productImageView.snp.bottom).offset(12)
-        }
-        
-        productPriceLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalTo(seperatorView.snp.bottom).offset(12)
-            make.bottom.equalToSuperview().inset(12)
-        }
-        
-        deleteImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(seperatorView.snp.bottom).offset(12)
-            make.width.height.equalTo(20)
-        }
-        
-        backView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview()
-            make.bottom.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(16)
-        }
+        productNumber.anchor(top: backView.topAnchor, left: backView.leftAnchor, paddingTop: 12, paddingLeft: 16)
+
+        productTitle.anchor(top: productNumber.bottomAnchor, left: backView.leftAnchor, paddingTop: 4, paddingLeft: 16)
+
+        productImageView.anchor(top: backView.topAnchor, right: backView.rightAnchor, paddingTop: 12, paddingRight: 16, width: 88, height: 88)
+
+        seperatorView.anchor(top: productImageView.bottomAnchor, left: backView.leftAnchor, right: backView.rightAnchor, paddingTop: 12, paddingLeft: 16, paddingRight: 16, height: 1)
+
+        productPriceLabel.anchor(top: seperatorView.bottomAnchor, left: backView.leftAnchor, bottom: backView.bottomAnchor, paddingTop: 12, paddingLeft: 16, paddingBottom: 12)
+
+        deleteImageView.anchor(top: seperatorView.bottomAnchor, right: backView.rightAnchor, paddingTop: 12, paddingRight: 16, width: 20, height: 20)
+
+        backView.anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, bottom: self.contentView.bottomAnchor, right: self.contentView.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingBottom: 0, paddingRight: 16)
     }
 }

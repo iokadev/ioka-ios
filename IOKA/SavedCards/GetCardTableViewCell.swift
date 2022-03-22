@@ -38,22 +38,10 @@ class GetCardTableViewCell: UITableViewCell {
         self.layer.cornerRadius = 8
         [creditCardImageView, cardNumberLabel, seperatorView].forEach{ self.addSubview($0) }
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-            make.height.equalTo(16)
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(20)
-        }
+        creditCardImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, paddingTop: 20, paddingLeft: 16, paddingBottom: 20, width: 24, height: 16)
         
-        cardNumberLabel.snp.makeConstraints { make in
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(12)
-            make.centerY.equalTo(creditCardImageView.snp.centerY)
-        }
+        cardNumberLabel.centerY(in: creditCardImageView, left: creditCardImageView.rightAnchor, paddingLeft: 12)
         
-        seperatorView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.height.equalToSuperview()
-            make.top.equalTo(creditCardImageView.snp.bottom).offset(20)
-        }
+        seperatorView.anchor(top: creditCardImageView.bottomAnchor, right: self.rightAnchor, paddingTop: 20, height: 1)
     }
 }

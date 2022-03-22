@@ -86,9 +86,7 @@ class IokaButton: UIButton {
     }
     
     private func centerActivityIndicatorInButton(_ activityIndicator: UIActivityIndicatorView) {
-        activityIndicator.snp.makeConstraints { make in
-            make.centerY.centerX.equalToSuperview()
-        }
+        activityIndicator.center(in: self, in: self)
     }
 
 }

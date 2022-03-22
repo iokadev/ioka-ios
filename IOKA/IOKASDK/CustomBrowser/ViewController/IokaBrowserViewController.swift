@@ -25,9 +25,7 @@ class IokaBrowserViewController:  UIViewController {
         self.view.backgroundColor = .yellow
         webView.navigationDelegate = self
         self.view.addSubview(webView)
-        webView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
-        }
+        webView.fillView(self.view)
     }
     
     override func viewDidLoad() {
