@@ -64,6 +64,8 @@
 		6D3E5B3727E1A9250029D9C0 /* GetCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */; };
 		6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */; };
 		6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E7CDE27D7F44C00C292A9 /* Factory.swift */; };
+		6D424EC527EAF4A100E7FD63 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D424EC427EAF4A100E7FD63 /* Localizable.strings */; };
+		6D424EC727EAF7B900E7FD63 /* IokaLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D424EC627EAF7B900E7FD63 /* IokaLocalizable.swift */; };
 		6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */; };
 		6D9F17F727CC373A00053DE8 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F627CC373A00053DE8 /* IokaLabel.swift */; };
 		6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F827CC37E000053DE8 /* Typography.swift */; };
@@ -153,6 +155,8 @@
 		6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E7CDE27D7F44C00C292A9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		6D424EC427EAF4A100E7FD63 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		6D424EC627EAF7B900E7FD63 /* IokaLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaLocalizable.swift; sourceTree = "<group>"; };
 		6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		6D9F17F627CC373A00053DE8 /* IokaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
 		6D9F17F827CC37E000053DE8 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -538,6 +542,15 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		6D424EC327EAF44C00E7FD63 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6D424EC627EAF7B900E7FD63 /* IokaLocalizable.swift */,
+				6D424EC427EAF4A100E7FD63 /* Localizable.strings */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6DD0E17827D8894D00C29D1E /* IOKASDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -548,8 +561,9 @@
 				6D3E5B1727DEA8D40029D9C0 /* PaymentResult */,
 				6D27E60627DA8CAD0035FB2B /* Networking */,
 				6D3E7CD527D7F29600C292A9 /* Coordinators */,
-				6DFAF88B27CD66FE0051AAB3 /* CustomViews */,
+				6DFAF88B27CD66FE0051AAB3 /* IokaViews */,
 				6DF7532A27D0474C0047CFB9 /* Extensions */,
+				6D424EC327EAF44C00E7FD63 /* Helpers */,
 				6DF7532D27D047E00047CFB9 /* Models */,
 			);
 			path = IOKASDK;
@@ -585,7 +599,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6DFAF88B27CD66FE0051AAB3 /* CustomViews */ = {
+		6DFAF88B27CD66FE0051AAB3 /* IokaViews */ = {
 			isa = PBXGroup;
 			children = (
 				6D9F17F627CC373A00053DE8 /* IokaLabel.swift */,
@@ -596,7 +610,7 @@
 				6DF7531627CF98010047CFB9 /* IokaStackView.swift */,
 				6D3E5AFE27DC29390029D9C0 /* IokaCustomView.swift */,
 			);
-			path = CustomViews;
+			path = IokaViews;
 			sourceTree = "<group>";
 		};
 		B9E9CAD2C060A9BF5F4CB10E /* Pods */ = {
@@ -669,6 +683,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D2F04D427CAEC9E0095286F /* LaunchScreen.storyboard in Resources */,
+				6D424EC527EAF4A100E7FD63 /* Localizable.strings in Resources */,
 				6D2F04D127CAEC9E0095286F /* Assets.xcassets in Resources */,
 				6D2F04CF27CAEC9C0095286F /* Main.storyboard in Resources */,
 			);
@@ -762,6 +777,7 @@
 				6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */,
 				6D3E5B1927DED1A20029D9C0 /* IokaCardNumberTextField.swift in Sources */,
 				6D2F04E227CAF2D10095286F /* TextFieldPlaceHolders.swift in Sources */,
+				6D424EC727EAF7B900E7FD63 /* IokaLocalizable.swift in Sources */,
 				6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */,
 				6D2F04E427CAF5300095286F /* IokaButton.swift in Sources */,
 				6D27E60C27DA8D360035FB2B /* EndPointType.swift in Sources */,

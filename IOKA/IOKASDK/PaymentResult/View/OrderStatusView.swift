@@ -100,17 +100,17 @@ class OrderStatusView: UIView {
         guard let orderStatusState = orderStatusState else { return }
         switch orderStatusState {
         case .paymentSucceed:
-            orderTitleLabel.text = "Заказ оплачен"
+            orderTitleLabel.text = IokaLocalizable.orderPaid
             orderTitleLabel.textColor = IokaColors.success
             errorDescriptionLabel.isHidden = true
-            retryOrCloseButton.setTitle("Понятно", for: .normal)
+            retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
             imageView.image = UIImage(named: "CheckCircle")
         case .paymentFailed:
-            orderTitleLabel.text = "Платеж не прошел"
+            orderTitleLabel.text = IokaLocalizable.paymentFailed
             orderTitleLabel.textColor = IokaColors.fill2
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
-            retryOrCloseButton.setTitle("Попробовать заново", for: .normal)
+            retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)
             imageView.image = UIImage(named: "XCircle")
             errorDescriptionLabel.numberOfLines = 0
         }

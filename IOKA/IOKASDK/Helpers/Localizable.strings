@@ -1,0 +1,18 @@
+/* 
+  Localizable.strings
+  iOKA
+
+  Created by ablai erzhanov on 23.03.2022.
+  
+*/
+
+// MARK: - PaymentWithCard -
+"saveCard" = "Сохранить карту";
+"transactionProtected" = "Все транзакции защищены";
+"pay" = "Оплатить";
+
+
+"orderPaid" = "Заказ оплачен";
+"ok" = "Понятно";
+"paymentFailed" = "Платеж не прошел";
+"retry" = "Попробовать заново";
