@@ -95,11 +95,3 @@ class IokaTextField: UITextField {
         }
     }
 }
-
-extension IokaTextField {
-    func setBrandIcon(_ image: UIImage, isCardBrendSetted: Bool) {
-        guard !isCardBrendSetted else { return }
-        
-        
-    }
-}

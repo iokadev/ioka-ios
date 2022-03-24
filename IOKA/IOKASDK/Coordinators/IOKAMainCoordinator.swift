@@ -55,4 +55,10 @@ class IOKAMainCoordinator: NSObject, Coordinator {
         self.children.append(paymentResultCoordninator)
         paymentResultCoordninator.startFlow(coordinator: self)
     }
+    
+    func startSavedCardPaymentCoordinator(card: GetCardResponse, orderAccessToken: String) {
+        let savedCardPaymentCoordinator = SavedCardPaymentCoordniator(parentCoordinator: self, card: card, orderAccessToken: orderAccessToken)
+        self.children.append(savedCardPaymentCoordinator)
+        savedCardPaymentCoordinator.startFlow(coordinator: self)
+    }
 }

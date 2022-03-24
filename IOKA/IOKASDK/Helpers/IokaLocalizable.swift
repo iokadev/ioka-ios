@@ -18,4 +18,6 @@ enum IokaLocalizable {
     static var paymentFailed = NSLocalizedString("paymentFailed", comment: "")
     static var retry = NSLocalizedString("retry", comment: "")
     
+    static var paymentConfirmation = NSLocalizedString("paymentConfirmation", comment: "")
+    static var continueButton = NSLocalizedString("continueButton", comment: "")
 }

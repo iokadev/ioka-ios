@@ -84,7 +84,9 @@ extension IokaApiEndPoint: EndPointType {
         case .getEmitterByBinCode( _):
             return .request
         case .createCardPayment( _, let card):
-            return .requestParameters(bodyParameters: card.dictionary, urlParameters: nil)
+            guard let orderAccessToken = IOKA.shared.orderAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }
+            return .requestParametersAndHeaders(bodyParameters: card.dictionary, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.ORDER_ACCESS_TOKEN_KEY: orderAccessToken, "Content-Type": "application/json; charset=utf-8"])
         case .getPaymentByID( _,  _):
             guard let orderAccessToken = IOKA.shared.orderAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
             guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }

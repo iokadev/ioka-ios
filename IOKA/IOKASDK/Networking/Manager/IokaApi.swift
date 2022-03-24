@@ -23,9 +23,9 @@ class IokaApi {
     
     private let endPointRouter = EndPointRouter<IokaApiEndPoint>()
     
-    private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T {
-            let response = try! JSONDecoder().decode(T.self, from: data)
-            return response
+    private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
+        let response = try? JSONDecoder().decode(T.self, from: data)
+        return response
     }
     
     private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
@@ -44,10 +44,10 @@ class IokaApi {
         
             switch result.responseType {
             case .success:
-                let responseObject = self.decodeAnyObject(data: data, model: T.self)
+                guard let responseObject = self.decodeAnyObject(data: data, model: T.self) else { return }
                 completion(responseObject, nil)
             case .failure:
-                let responseObject = self.decodeAnyObject(data: data, model: IokaError.self)
+                guard let responseObject = self.decodeAnyObject(data: data, model: IokaError.self) else { return }
                 completion(nil, responseObject)
             }
         }

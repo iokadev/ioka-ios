@@ -35,4 +35,14 @@ class IokaFactory {
         viewController.iokaBrowserState = iokaBrowserState
         return viewController
     }
+    
+    func initiateSavedCardPaymentViewController(orderAccessToken: String, card: GetCardResponse, delegate: SavedCardPaymentViewControlllerDelegate) -> SavedCardPaymentViewControlller {
+        let vc = SavedCardPaymentViewControlller()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.card = card
+        vc.delegate = delegate
+        vc.orderAccessToken = orderAccessToken
+        
+        return vc
+    }
 }

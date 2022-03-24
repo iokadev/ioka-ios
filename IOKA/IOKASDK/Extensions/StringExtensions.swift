@@ -91,4 +91,9 @@ extension String {
         let mySubstring = String(trimmedText.prefix(5))
         return mySubstring
     }
+    
+    func trimPanMasked() -> String {
+        let trimmedPanNumber = String(self.suffix(8))
+        return trimmedPanNumber
+    }
 }

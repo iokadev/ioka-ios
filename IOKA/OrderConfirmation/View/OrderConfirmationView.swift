@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol OrderConfirmationViewDelegate: NSObject {
-    func confirmButtonWasPressed(_ orderView: UIView)
+    func confirmButtonWasPressed(_ orderView: OrderConfirmationView)
     func showPaymentTypeViewController(_ view: OrderConfirmationView)
 }
 

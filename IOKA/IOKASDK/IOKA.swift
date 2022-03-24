@@ -26,6 +26,13 @@ class IOKA {
         coordinator.topViewController = viewController
     }
     
+    func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
+        self.orderAccessToken = orderAccessToken
+        let coordinator = IOKAMainCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
+        coordinator.startSavedCardPaymentCoordinator(card: card, orderAccessToken: orderAccessToken)
+        coordinator.topViewController = viewController
+    }
+    
     func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, IokaError?) -> Void )) {
         self.customerAccessToken = customerAccessToken
         IokaApi.shared.getCards(customerId: customerAccessToken.trimTokens()) { response, error in

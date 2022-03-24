@@ -35,7 +35,7 @@ class CardPaymentCell: UITableViewCell {
     public func configure(model: GetCardResponse, delegate: CardPaymentCellDelegate) {
         self.delegate = delegate
         self.cardResponse = model
-        self.panMaskedLabel.text = model.pan_masked
+        self.panMaskedLabel.text = model.pan_masked.trimPanMasked()
         guard let paymentSystem = model.payment_system else { return }
         self.cardBrandImageView.image = UIImage(named: paymentSystem)
     }

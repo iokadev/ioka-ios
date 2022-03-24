@@ -15,11 +15,8 @@ class OrderConfirmationViewController: UIViewController {
         }
     }
     let orderConfirmationView = OrderConfirmationView()
-    var paymentTypeState: PaymentTypeState? {
-        didSet {
-            handlePaymenTypeStateChange(paymentTypeState)
-        }
-    }
+    var paymentTypeState: PaymentTypeState = .empty
+    let viewModel = OrderConfirmationViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +26,7 @@ class OrderConfirmationViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.view.addSubview(orderConfirmationView)
-        orderConfirmationView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        orderConfirmationView.frame = self.view.frame
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,12 +34,6 @@ class OrderConfirmationViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = true
         self.title = "Оформление заказа"
         self.navigationController?.navigationBar.isHidden = false
-    }
-    
-    
-    
-    func handlePaymenTypeStateChange(_ state: PaymentTypeState?) {
-        guard let state = state else { return }
     }
 }
 
@@ -55,56 +46,45 @@ extension OrderConfirmationViewController: PaymentTypeViewControllerDelegate {
 }
 
 extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
+    
     func showPaymentTypeViewController(_ view: OrderConfirmationView) {
         let vc = PaymentTypeViewController()
-        DemoAppApi.shared.getProfile { result, error in
-            if let result = result {
-                IOKA.shared.getCards(customerAccessToken: result.customer_access_token) { result, error in
-                    if let result = result {
-                        DispatchQueue.main.async {
-                            vc.models = result
-                            vc.delegate = self
-                            self.navigationController?.pushViewController(vc, animated: true)
-                        }
-                    }
-                    if let error = error {
-                        print("Cookareku epta \(error)")
-                    }
+        vc.delegate = self
+        
+        viewModel.getProfile { [weak self] customerAccessToken in
+            guard let self = self, let customerAccessToken = customerAccessToken else { return }
+            self.viewModel.getSavedCards(customerAccessToken: customerAccessToken) { cards, error in
+                if let cards = cards {
+                    vc.models = cards
+                } else {
+                    vc.models = []
+                }
+                DispatchQueue.main.async {
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
             }
         }
-
     }
     
-    func confirmButtonWasPressed(_ orderView: UIView) {
-        if let paymentTypeState = paymentTypeState {
+    func confirmButtonWasPressed(_ orderView: OrderConfirmationView) {
+        
+        switch paymentTypeState {
+        case .applePay(let title):
+            print(title)
+        case .savedCard(let card):
             guard let order = order else { return }
-            DemoAppApi.shared.createOrder(price: order.orderPrice) { createOrderResponse in
-                if let createOrderResponse = createOrderResponse {
-                    DispatchQueue.main.async {
-                        IOKA.shared.startCheckoutFlow(viewController: self, orderAccessToken: createOrderResponse.order_access_token)
-                    }
-                    
-                }
+            viewModel.createOrder(order: order) { orderAccessToken in
+                IOKA.shared.startCheckoutWithSavedCardFlow(viewController: self, orderAccessToken: orderAccessToken, card: card)
             }
-        } else {
-            let vc = PaymentTypeViewController()
-            DemoAppApi.shared.getProfile { result, error in
-                if let result = result {
-                    IOKA.shared.getCards(customerAccessToken: result.customer_access_token) { result, error in
-                        if let result = result {
-                            DispatchQueue.main.async {
-                                vc.models = result
-                                vc.delegate = self
-                                self.navigationController?.pushViewController(vc, animated: true)
-                            }
-                        }
-                        if let error = error {
-                            print("Cookareku epta \(error)")
-                        }
-                    }
-                }
+        case .creditCard( _):
+            guard let order = order else { return }
+            viewModel.createOrder(order: order) { orderAccessToken in
+                IOKA.shared.startCheckoutFlow(viewController: self, orderAccessToken: orderAccessToken)
             }
+        case .cash(let title):
+            print(title)
+        case .empty:
+           showPaymentTypeViewController(orderView)
         }
     }
 }

@@ -16,3 +16,7 @@
 "ok" = "Понятно";
 "paymentFailed" = "Платеж не прошел";
 "retry" = "Попробовать заново";
+
+
+"paymentConfirmation" = "Подтверждение оплаты";
+"continueButton" = "Продолжить";

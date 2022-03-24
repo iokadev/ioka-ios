@@ -34,7 +34,7 @@ extension DemoAppEndPoint: EndPointType {
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .createOrder(let price):
+        case .createOrder( _):
             return .post
         case .getProfile:
             return .get

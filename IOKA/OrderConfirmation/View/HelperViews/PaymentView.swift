@@ -55,7 +55,7 @@ class PaymentView: UIView {
             paymentTypeLabel.text = "Выберите способ оплаты"
             paymentTypeLabel.textColor = IokaColors.grey
         case .savedCard(let card):
-            paymentTypeLabel.text = card.pan_masked
+            paymentTypeLabel.text = card.pan_masked.trimPanMasked()
             paymentTypeLabel.textColor = IokaColors.fill2
             guard let paymentSystem = card.payment_system else { return }
             paymentTypeImageView.image = UIImage(named: paymentSystem)

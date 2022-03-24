@@ -10,12 +10,23 @@ import Foundation
 
 
 struct Card: Codable {
-    let pan: String
-    let exp: String
-    let cvc: String
+    var pan: String?
+    var exp: String?
+    var cvc: String?
     var holder: String?
     var save: Bool?
     var email: String?
     var phone: String?
     var card_id: String?
+    
+    init(pan: String, exp: String, cvc: String) {
+        self.pan = pan
+        self.exp = exp
+        self.cvc = cvc
+    }
+    
+    init(cardId: String, cvc: String) {
+        self.card_id = cardId
+        self.cvc = cvc
+    }
 }
