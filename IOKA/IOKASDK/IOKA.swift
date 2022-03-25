@@ -39,4 +39,11 @@ class IOKA {
             completion(response, error)
         }
     }
+    
+    func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
+        self.customerAccessToken = customerAccessToken
+        let coordinator = IOKAMainCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
+        coordinator.startSaveCardCoordinator()
+        coordinator.topViewController = viewController
+    }
 }

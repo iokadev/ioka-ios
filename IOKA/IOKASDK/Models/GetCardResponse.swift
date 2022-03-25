@@ -11,6 +11,7 @@ enum CardStatus: String, Codable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case DECLINED = "DECLINED"
+    case REQUIRES_ACTION = "REQUIRES_ACTION"
 }
 
 

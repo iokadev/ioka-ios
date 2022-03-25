@@ -20,7 +20,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return tableView
     }()
     
-    let goConfitmationButton = IokaButton(iokaButtonState: .enabled, title: "Перейти к оформлению", image: nil)
+    let goConfitmationButton = IokaButton(iokaButtonState: .enabled, title: "Перейти к оформлению", imageName: nil)
     
     
     override func viewDidLoad() {

@@ -35,6 +35,7 @@ enum ErrorCodes: String, Codable {
     case invalidPaymentToken = "InvalidPaymentToken"
     case paymentTokenNotFound = "PaymentTokenNotFound"
     case customerNotFound = "CustomerNotFound"
+    case DECLINED_BY_BANK_LIMIT = "DECLINED_BY_BANK_LIMIT"
     case customerExists = "CustomerExists"
     case cardNotFound = "CardNotFound"
     case bindingStarted = "BindingStarted"

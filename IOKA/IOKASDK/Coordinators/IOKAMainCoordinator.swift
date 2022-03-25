@@ -61,4 +61,10 @@ class IOKAMainCoordinator: NSObject, Coordinator {
         self.children.append(savedCardPaymentCoordinator)
         savedCardPaymentCoordinator.startFlow(coordinator: self)
     }
+    
+    func startSaveCardCoordinator() {
+        let saveCardCoordinator = SaveCardCoordinator(parentCoordinator: self)
+        self.children.append(saveCardCoordinator)
+        saveCardCoordinator.startFlow(coordinator: self)
+    }
 }

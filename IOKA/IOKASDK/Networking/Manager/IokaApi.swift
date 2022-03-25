@@ -24,7 +24,7 @@ class IokaApi {
     private let endPointRouter = EndPointRouter<IokaApiEndPoint>()
     
     private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
-        let response = try? JSONDecoder().decode(T.self, from: data)
+        let response = try! JSONDecoder().decode(T.self, from: data)
         return response
     }
     

@@ -1,40 +1,38 @@
 //
-//  CardPaymentView.swift
-//  iOKA
+//  SaveCardView.swift
+//  IOKA
 //
-//  Created by ablai erzhanov on 27.02.2022.
+//  Created by ablai erzhanov on 24.03.2022.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
 
-protocol CardPaymentViewDelegate: NSObject {
-    func getBrand(_ view: UIView, with partialBin: String)
-    func getEmitterByBinCode(_ view: UIView, with binCode: String)
-    func createCardPayment(_ view: UIView, cardNumber: String, cvc: String, exp: String)
-    func checkPayButtonState(_ view: CardPaymentView)
-    func modifyPaymentTextFields(_ view: CardPaymentView, text : String, textField: UITextField) -> String
+protocol SaveCardViewDelegate: NSObject {
+    func getBrand(_ view: SaveCardView, with partialBin: String)
+    func getEmitterByBinCode(_ view: SaveCardView, with binCode: String)
+    func createCardPayment(_ view: SaveCardView, cardNumber: String, cvc: String, exp: String)
+    func checkPayButtonState(_ view: SaveCardView)
+    func close(_ view: SaveCardView)
+    func modifyPaymentTextFields(_ view: SaveCardView, text : String, textField: UITextField) -> String
 }
 
 
-class CardPaymentView: UIView {
+class SaveCardView: UIView {
 
     let titleLabel = IokaLabel(title: "К оплате 12 560", iokaFont: Typography.title)
     let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
     let cvvTextField = IokaTextField(placeHolderType: .cvv)
-    let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: Typography.subtitle)
-    let saveCardToggle = UISwitch()
-    let payButton = IokaButton(iokaButtonState: .disabled, title: IokaLocalizable.pay)
+    let saveButton = IokaButton(iokaButtonState: .disabled, title: IokaLocalizable.save)
     let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: IokaColors.success)
     private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IokaColors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
+    private lazy var errorView = ErrorView()
     
-    weak var cardPaymentViewDelegate: CardPaymentViewDelegate?
+    weak var saveCardViewDelegate: SaveCardViewDelegate?
     var isCardBrendSetted: Bool = false
     
     
@@ -59,38 +57,47 @@ class CardPaymentView: UIView {
     private func setActions() {
         [dateExpirationTextField, cardNumberTextField, cvvTextField].forEach{$0.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)}
         
-        payButton.addTarget(self, action: #selector(handlePayButton), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
         
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
+        
+        self.closeButton.addTarget(self, action: #selector(handleCloseButtonTap), for: .touchUpInside)
     }
     
-    @objc private func handlePayButton() {
-        payButton.showLoading()
-        guard payButton.iokaButtonState == .enabled else { return }
-        guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
-        guard let cvc = cvvTextField.text else { return }
-        guard let exp = dateExpirationTextField.text else { return }
-        cardPaymentViewDelegate?.createCardPayment(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+    @objc private func handleSaveButton() {
+        
+        switch saveButton.iokaButtonState {
+        case .savingSuccess:
+            saveCardViewDelegate?.close(self)
+        case .enabled:
+            saveButton.showLoading()
+            guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
+            guard let cvc = cvvTextField.text else { return }
+            guard let exp = dateExpirationTextField.text else { return }
+            saveCardViewDelegate?.createCardPayment(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+        default :
+            saveCardViewDelegate?.checkPayButtonState(self)
+        }
     }
     
-    @objc func didChangeText(textField: UITextField) {
-        let text = cardPaymentViewDelegate?.modifyPaymentTextFields(self, text: textField.text!, textField: textField)
+    @objc private func didChangeText(textField: UITextField) {
+        let text = saveCardViewDelegate?.modifyPaymentTextFields(self, text: textField.text!, textField: textField)
         textField.text = text
-        cardPaymentViewDelegate?.checkPayButtonState(self)
+        saveCardViewDelegate?.checkPayButtonState(self)
         guard !cardNumberTextField.isCardBrandSetted else { return }
-        cardPaymentViewDelegate?.getBrand(self, with:   cardNumberTextField.text?.trimCardNumberText() ?? "")
+        saveCardViewDelegate?.getBrand(self, with:   cardNumberTextField.text?.trimCardNumberText() ?? "")
     }
     
     @objc private func handleKeyboardAppear(notification: Notification) {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         self.layoutIfNeeded()
-        payButton.snp.updateConstraints { make in
+        saveButton.snp.updateConstraints { make in
             make.bottom.equalToSuperview().inset(keyboardEndFrame.height + 20)
         }
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
-            self?.payButton.setNeedsUpdateConstraints()
+            self?.saveButton.setNeedsUpdateConstraints()
             self?.layoutIfNeeded()
         }
     }
@@ -99,7 +106,7 @@ class CardPaymentView: UIView {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
         self.layoutIfNeeded()
-        payButton.snp.updateConstraints { make in
+        saveButton.snp.updateConstraints { make in
             make.bottom.equalToSuperview().inset(114)
         }
         
@@ -113,9 +120,13 @@ class CardPaymentView: UIView {
         self.endEditing(true)
     }
     
+    @objc private func handleCloseButtonTap() {
+        saveCardViewDelegate?.close(self)
+    }
+    
     private func setupUI() {
         self.backgroundColor = IokaColors.fill1
-        [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, stackViewForCardSaving, payButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
+        [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, saveButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
         
@@ -125,9 +136,7 @@ class CardPaymentView: UIView {
         
         stackViewForCardInfo.anchor(top: cardNumberTextField.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
         
-        stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
-        
-        payButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16, height: 56)
+        saveButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16, height: 56)
         
         transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
         
@@ -135,7 +144,7 @@ class CardPaymentView: UIView {
     }
 }
 
-extension CardPaymentView: UITextFieldDelegate {
+extension SaveCardView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let textField = textField as? IokaTextField else { return }
         textField.iokaTextFieldState = .startTyping
@@ -173,4 +182,24 @@ extension CardPaymentView: UITextFieldDelegate {
         }
          return true
     }
+}
+
+extension SaveCardView: ErrorViewDelegate {
+    
+    public func showErrorView(error: IokaError) {
+        DispatchQueue.main.async {
+            self.errorView.error = error
+            self.errorView.delegate = self
+            self.addSubview(self.errorView)
+            self.errorView.anchor(left: self.leftAnchor, bottom: self.saveButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
+        }
+    }
+    
+    func closeErrorView(_ view: ErrorView) {
+        DispatchQueue.main.async {
+            self.errorView.removeFromSuperview()
+        }
+    }
+    
+    
 }

@@ -45,4 +45,12 @@ class IokaFactory {
         
         return vc
     }
+    
+    func initiateSavedCardViewController(customerAccessToken: String?, delegate: SaveCardViewControllerDelegate) -> SaveCardViewController {
+        guard let customerAccessToken = customerAccessToken else { fatalError("Please provide order_access_token") }
+        let viewController = SaveCardViewController()
+        viewController.customerId = customerAccessToken.trimTokens()
+        viewController.saveCardViewControllerDelegate = delegate
+        return viewController
+    }
 }

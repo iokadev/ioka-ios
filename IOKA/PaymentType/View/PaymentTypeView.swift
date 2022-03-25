@@ -34,7 +34,7 @@ class PaymentTypeView: UIView {
     }()
     lazy var bankCardView = BankCardView(delegate: self)
     lazy var payWithCashView = PayWithCashView(delegate: self)
-    var closeButton = IokaButton(image: UIImage(named: "chevronLeft"))
+    var closeButton = IokaButton(imageName: "chevronLeft")
     var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: IokaColors.fill2, iokaTextAlignemnt: .center)
     var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
     var paymentTypeState: PaymentTypeState?

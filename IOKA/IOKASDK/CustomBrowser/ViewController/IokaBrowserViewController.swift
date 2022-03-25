@@ -30,6 +30,7 @@ class IokaBrowserViewController:  UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = false
     }

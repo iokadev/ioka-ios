@@ -20,4 +20,6 @@ enum IokaLocalizable {
     
     static var paymentConfirmation = NSLocalizedString("paymentConfirmation", comment: "")
     static var continueButton = NSLocalizedString("continueButton", comment: "")
+    
+    static var save = NSLocalizedString("save", comment: "")
 }

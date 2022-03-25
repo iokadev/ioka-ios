@@ -15,7 +15,7 @@ protocol OrderStatusViewDelegate: NSObject {
 
 class OrderStatusView: UIView {
     
-    private let closeButton = IokaButton(image: UIImage(named: "Close"))
+    private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()
     private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
     let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey)

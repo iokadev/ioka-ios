@@ -19,7 +19,7 @@ class SavedCardPaymentView: UIView {
     public let cvvTextField = UITextField()
     private let savedCardView = IokaCustomView(backGroundColor: IokaColors.fill1, cornerRadius: 12)
     private let titleLabel = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: Typography.title, iokaTextColor: IokaColors.fill2)
-    private let closeButton = IokaButton(image: UIImage(named: "Close"))
+    private let closeButton = IokaButton(imageName: "Close")
     private let cardInfoView = IokaCustomView(backGroundColor: IokaColors.fill4, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)

@@ -28,7 +28,7 @@ class GetCardTableViewCell: UITableViewCell {
     }
     
     public func configure(model: GetCardResponse) {
-        self.cardNumberLabel.text = model.pan_masked
+        self.cardNumberLabel.text = model.pan_masked.trimPanMasked()
         guard let paymentSystem = model.payment_system else { return }
         self.creditCardImageView.image = UIImage(named: paymentSystem)
     }

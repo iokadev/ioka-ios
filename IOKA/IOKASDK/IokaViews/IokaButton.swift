@@ -11,6 +11,8 @@ import UIKit
 enum IokaButtonState {
     case disabled
     case enabled
+    case savingSuccess
+    case savingFailure
 }
 
 class IokaButton: UIButton {
@@ -22,22 +24,52 @@ class IokaButton: UIButton {
     }
     var title: String?
     var image: UIImage?
+    let activityIndicator = UIActivityIndicatorView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, image: UIImage? = nil) {
+    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil) {
         self.init(frame: CGRect())
         self.iokaButtonState = iokaButtonState
         self.title = title
-        self.image = image
+        self.image = UIImage(named: imageName ?? "")
         setupButton()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func showSuccess() {
+        DispatchQueue.main.async {
+            self.setImage(UIImage(named: "mark"), for: .normal)
+        }
+    }
+
+    public func showLoading() {
+        DispatchQueue.main.async {
+            self.title = self.titleLabel?.text
+            self.setTitle("", for: .normal)
+            let activityIndicator = self.createActivityIndicator()
+            
+            self.showSpinning(activityIndicator)
+        }
+    }
+
+    public func hideLoading(showTitle: Bool) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            switch showTitle {
+            case true:
+                self.setTitle(self.title, for: .normal)
+            case false:
+                self.setTitle("", for: .normal)
+            }
+        }
+    }
+
     
     private func setupButton() {
         self.setTitle(title, for: .normal)
@@ -54,25 +86,17 @@ class IokaButton: UIButton {
             self.backgroundColor = IokaColors.grey
         case .enabled:
             self.backgroundColor = IokaColors.primary
+        case .savingSuccess:
+            self.backgroundColor = IokaColors.success
+            self.hideLoading(showTitle: true)
+            showSuccess()
+        case .savingFailure:
+            hideLoading(showTitle: true)
+            self.backgroundColor = IokaColors.grey
         }
     }
-
-
-    func showLoading() {
-        self.title = self.titleLabel?.text
-        self.setTitle("", for: .normal)
-        let activityIndicator = createActivityIndicator()
-        
-        showSpinning(activityIndicator)
-    }
-
-//    func hideLoading() {
-//        self.setTitle(self.title, for: .normal)
-//        activityIndicator.stopAnimating()
-//    }
-
+    
     private func createActivityIndicator() -> UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.hidesWhenStopped = true
         activityIndicator.color = .lightGray
         return activityIndicator

@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Alamofire
-
 
 class CardPaymentViewController: UIViewController {
     

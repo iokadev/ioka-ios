@@ -9,6 +9,11 @@ import Foundation
 import UIKit
 
 
+protocol AddNewCardTablewViewCellDelegate: NSObject {
+    func viewTapped(_ view: AddNewCardTableViewCell)
+}
+
+
 
 class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
@@ -17,13 +22,24 @@ class AddNewCardTableViewCell: UITableViewCell {
     let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
     let showAddCardimageView = IokaImageView(imageName: "chevronRight")
     
+    weak var delegate: AddNewCardTablewViewCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        setActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setActions() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
+    }
+    
+    @objc private func handleViewTap() {
+        delegate?.viewTapped(self)
     }
     
     private func setupUI() {

@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-
 class SavedCardsViewController: UIViewController {
     
     var models: [GetCardResponse] = []
     
     let tableView = UITableView()
     let backgroundView = IokaCustomView(backGroundColor: IokaColors.fill6, cornerRadius: 8)
+    var customerAccessToken: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +38,7 @@ class SavedCardsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(AddNewCardTableViewCell.self, forCellReuseIdentifier: AddNewCardTableViewCell.cellId)
+        tableView.register(GetCardTableViewCell.self, forCellReuseIdentifier: GetCardTableViewCell.cellId)
     }
     
     private func setupUI() {
@@ -55,11 +56,19 @@ extension SavedCardsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if models.count == indexPath.row {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: AddNewCardTableViewCell.cellId, for: indexPath) as? AddNewCardTableViewCell else { return UITableViewCell() }
+            cell.delegate = self
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GetCardTableViewCell.cellId, for: indexPath) as? GetCardTableViewCell else { return UITableViewCell() }
             cell.configure(model: self.models[indexPath.row])
             return cell
         }
+    }
+}
+
+
+extension SavedCardsViewController: AddNewCardTablewViewCellDelegate {
+    func viewTapped(_ view: AddNewCardTableViewCell) {
+        IOKA.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
     }
 }
