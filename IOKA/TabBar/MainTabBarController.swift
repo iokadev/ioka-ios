@@ -14,8 +14,8 @@ class MainTabBarController: UITabBarController {
         UITabBar.appearance().backgroundColor = .white
 
         viewControllers = [
-            createNavigationControllers(for: CartViewController(), title: "Корзина", image: UIImage(named: "Bin")),
-            createNavigationControllers(for: ProfileViewController(), title: "Профиль", image: UIImage(named: "Profile"))
+            createNavigationControllers(for: CartViewController(), title: "Корзина", image: DemoAppImages.bin),
+            createNavigationControllers(for: ProfileViewController(), title: "Профиль", image: DemoAppImages.profile)
         ]
     }
     

@@ -104,14 +104,14 @@ class OrderStatusView: UIView {
             orderTitleLabel.textColor = IOKA.shared.theme.success
             errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
-            imageView.image = UIImage(named: "CheckCircle")
+            imageView.image = IokaImages.checkCircle
         case .paymentFailed:
             orderTitleLabel.text = IokaLocalizable.paymentFailed
             orderTitleLabel.textColor = IOKA.shared.theme.fill2
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)
-            imageView.image = UIImage(named: "XCircle")
+            imageView.image = IokaImages.xCircle
             errorDescriptionLabel.numberOfLines = 0
         }
     }

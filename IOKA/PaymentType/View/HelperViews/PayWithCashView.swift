@@ -37,11 +37,11 @@ class PayWithCashView: UIView {
     }
     
     public func uncheckView() {
-        self.checkImageView.image = UIImage(named: "uncheckIcon")
+        self.checkImageView.image = DemoAppImages.uncheckIcon
     }
     
     public func checkkView() {
-        self.checkImageView.image = UIImage(named: "checkIcon")
+        self.checkImageView.image = DemoAppImages.checkIcon
     }
     
     public func changeViewSelection() {

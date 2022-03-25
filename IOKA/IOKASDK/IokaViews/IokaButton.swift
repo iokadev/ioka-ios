@@ -44,7 +44,7 @@ class IokaButton: UIButton {
     
     public func showSuccess() {
         DispatchQueue.main.async {
-            self.setImage(UIImage(named: "mark"), for: .normal)
+            self.setImage(IokaImages.mark, for: .normal)
         }
     }
 
