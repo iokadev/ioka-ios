@@ -87,7 +87,6 @@ class CardPaymentView: UIView {
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
             self?.payButtonBottomConstraint?.constant = -(keyboardEndFrame.height + 20)
-            self?.payButton.setNeedsUpdateConstraints()
             self?.layoutIfNeeded()
         }
     }

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 
 protocol SaveCardViewDelegate: NSObject {
@@ -34,6 +33,7 @@ class SaveCardView: UIView {
     
     weak var saveCardViewDelegate: SaveCardViewDelegate?
     var isCardBrendSetted: Bool = false
+    var saveButtonBottomConstraint: NSLayoutConstraint?
     
     
     override init(frame: CGRect) {
@@ -92,12 +92,9 @@ class SaveCardView: UIView {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         self.layoutIfNeeded()
-        saveButton.snp.updateConstraints { make in
-            make.bottom.equalToSuperview().inset(keyboardEndFrame.height + 20)
-        }
-        
+       
         UIView.animate(withDuration: animationDuration) { [weak self] in
-            self?.saveButton.setNeedsUpdateConstraints()
+            self?.saveButtonBottomConstraint?.constant = -(keyboardEndFrame.height + 20)
             self?.layoutIfNeeded()
         }
     }
@@ -106,12 +103,10 @@ class SaveCardView: UIView {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
         self.layoutIfNeeded()
-        saveButton.snp.updateConstraints { make in
-            make.bottom.equalToSuperview().inset(114)
-        }
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
             guard let self = self else { return }
+            self.saveButtonBottomConstraint?.constant = -114
             self.layoutIfNeeded()
         }
     }
@@ -136,7 +131,10 @@ class SaveCardView: UIView {
         
         stackViewForCardInfo.anchor(top: cardNumberTextField.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
         
-        saveButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16, height: 56)
+        saveButton.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 56)
+        saveButton.translatesAutoresizingMaskIntoConstraints = false
+        self.saveButtonBottomConstraint = saveButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -114)
+        self.saveButtonBottomConstraint?.isActive = true
         
         transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
         
