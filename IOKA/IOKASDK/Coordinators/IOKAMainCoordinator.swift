@@ -44,15 +44,27 @@ class IOKAMainCoordinator: NSObject, Coordinator {
         paymentCoordinator.startFlow(coordinator: self)
     }
     
-    func startPaymentResultCoordinator(status: OrderStatus, error: CustomError?, response: CardPaymentResponse?) {
+    func startPaymentResultCoordinator(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?) {
         let paymentResultCoordninator = PaymentResultCoordinator(parentCoordinator: self, orderStatus: status, error: error, response: response)
         self.children.append(paymentResultCoordninator)
         paymentResultCoordninator.startFlow(coordinator: self)
     }
     
-    func startThreeDSecureCoordinator(url: String, customBrowserState: CustomBrowserState) {
-        let paymentResultCoordninator = ThreeDSecureCoordinator(parentCoordinator: self, url: url, customBrowserState: customBrowserState)
+    func startThreeDSecureCoordinator(url: String, iokaBrowserState: IokaBrowserState) {
+        let paymentResultCoordninator = ThreeDSecureCoordinator(parentCoordinator: self, url: url, iokaBrowserState: iokaBrowserState)
         self.children.append(paymentResultCoordninator)
         paymentResultCoordninator.startFlow(coordinator: self)
+    }
+    
+    func startSavedCardPaymentCoordinator(card: GetCardResponse, orderAccessToken: String) {
+        let savedCardPaymentCoordinator = SavedCardPaymentCoordniator(parentCoordinator: self, card: card, orderAccessToken: orderAccessToken)
+        self.children.append(savedCardPaymentCoordinator)
+        savedCardPaymentCoordinator.startFlow(coordinator: self)
+    }
+    
+    func startSaveCardCoordinator() {
+        let saveCardCoordinator = SaveCardCoordinator(parentCoordinator: self)
+        self.children.append(saveCardCoordinator)
+        saveCardCoordinator.startFlow(coordinator: self)
     }
 }

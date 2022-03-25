@@ -11,6 +11,7 @@ enum CardStatus: String, Codable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case DECLINED = "DECLINED"
+    case REQUIRES_ACTION = "REQUIRES_ACTION"
 }
 
 
@@ -26,6 +27,6 @@ struct GetCardResponse: Codable {
     let payment_system: String? //-Комиссия процессинга
     var emitter: String?
     var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
-    var error: CustomError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
+    var error: IokaError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
 }

@@ -10,19 +10,19 @@ import UIKit
 
 
 
-class CustomCardNumberTextField: CustomTextField {
+class IokaCardNumberTextField: IokaTextField {
     
     
     let iconContainerView: UIView = {
         let view = UIView()
-        view.frame =  CGRect(x: 0, y: 0, width: 90, height: 10)
+        view.frame =  CGRect(x: 0, y: 0, width: 0, height: 56)
         view.backgroundColor = .clear
         
         return view
     }()
    
-    let cardBrandImageView = CustomImageView(cornerRadius: 2)
-    let bankEmitterImageView = CustomImageView(cornerRadius: 2)
+    let cardBrandImageView = IokaImageView(frame: CGRect(x: -52, y: 20, width: 24, height: 16))
+    let bankEmitterImageView = IokaImageView(frame: CGRect(x: -80, y: 20, width: 24, height: 16))
     var isCardBrandSetted: Bool = false
     var isBankEmitterSetted: Bool = false
 
@@ -39,14 +39,7 @@ class CustomCardNumberTextField: CustomTextField {
     private func setUI() {
         self.rightView = iconContainerView
         rightViewMode = .always
-        
-//        iconContainerView.addSubview(bankEmitterImageView)
-//        bankEmitterImageView.snp.makeConstraints { make in
-//            make.trailing.equalToSuperview().inset(52)
-//            make.height.equalTo(16)
-//            make.width.equalTo(24)
-//            make.centerY.equalToSuperview()
-//        }
+        cardBrandImageView.contentMode = .scaleAspectFit
     }
     
     func setCardBrandIcon(imageName: String) {
@@ -54,13 +47,6 @@ class CustomCardNumberTextField: CustomTextField {
         cardBrandImageView.image = image
         
         iconContainerView.addSubview(cardBrandImageView)
-        cardBrandImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(52)
-            make.height.equalTo(16)
-            make.width.equalTo(24)
-            make.centerY.equalToSuperview()
-        }
-
         self.isCardBrandSetted = true
     }
     
@@ -68,12 +54,6 @@ class CustomCardNumberTextField: CustomTextField {
         guard let image = UIImage(named: imageName) else { return }
         bankEmitterImageView.image = image
         iconContainerView.addSubview(bankEmitterImageView)
-        bankEmitterImageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(80)
-            make.height.equalTo(16)
-            make.width.equalTo(24)
-            make.centerY.equalToSuperview()
-        }
         self.isBankEmitterSetted = true
     }
 }

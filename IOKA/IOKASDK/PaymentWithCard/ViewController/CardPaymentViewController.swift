@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import Alamofire
-
 
 class CardPaymentViewController: UIViewController {
     
-    public var onButtonPressed: ((OrderStatus, CustomError?, CardPaymentResponse?) -> Void)?
+    public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
     let contentView = CardPaymentView()
     let viewModel = PaymentWithCardViewModel()
     var order_id: String!

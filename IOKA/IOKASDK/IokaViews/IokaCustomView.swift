@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class CustomView: UIView {
+class IokaCustomView: UIView {
  
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,4 +25,3 @@ class CustomView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 }
-

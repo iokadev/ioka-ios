@@ -5,7 +5,7 @@
 //  Created by ablai erzhanov on 21.03.2022.
 //
 
-import Foundation
+
 import UIKit
 
 protocol PayWithCashViewDelegate: NSObject {
@@ -15,9 +15,9 @@ protocol PayWithCashViewDelegate: NSObject {
 
 class PayWithCashView: UIView {
     
-    let payWithCashImageView = CustomImageView(imageName: "cash")
-    let payWithCashlabel = CustomLabel(title: "Наличными курьеру", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let checkImageView = CustomImageView(imageName: "uncheckIcon")
+    let payWithCashImageView = IokaImageView(imageName: "cash")
+    let payWithCashlabel = IokaLabel(title: "Наличными курьеру", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let checkImageView = IokaImageView(imageName: "uncheckIcon")
     weak var delegate: PayWithCashViewDelegate?
     var isPayWithCashSelected: Bool = false
     
@@ -37,11 +37,11 @@ class PayWithCashView: UIView {
     }
     
     public func uncheckView() {
-        self.checkImageView.image = UIImage(named: "uncheckIcon")
+        self.checkImageView.image = DemoAppImages.uncheckIcon
     }
     
     public func checkkView() {
-        self.checkImageView.image = UIImage(named: "checkIcon")
+        self.checkImageView.image = DemoAppImages.checkIcon
     }
     
     public func changeViewSelection() {
@@ -64,26 +64,17 @@ class PayWithCashView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [payWithCashImageView, payWithCashlabel, checkImageView].forEach{ self.addSubview($0) }
         
-        payWithCashImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
-            make.leading.equalToSuperview().inset(16)
-            make.centerY.equalToSuperview()
-        }
+        payWithCashImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 18, paddingLeft: 16, width: 24, height: 24)
+        payWithCashImageView.centerY(in: self)
         
-        payWithCashlabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.top.equalToSuperview().inset(18)
-            make.leading.equalTo(payWithCashImageView.snp.trailing).offset(14)
-        }
+        payWithCashlabel.centerY(in: self, left: payWithCashImageView.rightAnchor, paddingLeft: 14)
         
-        checkImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().inset(16)
-        }
+        checkImageView.centerY(in: self, right: self.rightAnchor, paddingRight: 16, width: 24, height: 24)
+        
+        
     }
 }

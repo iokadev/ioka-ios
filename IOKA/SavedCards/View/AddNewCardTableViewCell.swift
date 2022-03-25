@@ -9,45 +9,50 @@ import Foundation
 import UIKit
 
 
+protocol AddNewCardTablewViewCellDelegate: NSObject {
+    func viewTapped(_ view: AddNewCardTableViewCell)
+}
+
+
 
 class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
-    let addCardImageView = CustomImageView(imageName: "addCard")
-    let addCardLabel = CustomLabel( title: "Добавить новую карту", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let showAddCardimageView = CustomImageView(imageName: "chevronRight")
+    let addCardImageView = IokaImageView(imageName: "addCard")
+    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let showAddCardimageView = IokaImageView(imageName: "chevronRight")
+    
+    weak var delegate: AddNewCardTablewViewCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
+        setActions()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func setActions() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
+    }
+    
+    @objc private func handleViewTap() {
+        delegate?.viewTapped(self)
+    }
+    
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }
         
-        addCardImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-            make.height.equalTo(16)
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(20)
-        }
         
-        addCardLabel.snp.makeConstraints { make in
-            make.leading.equalTo(addCardImageView.snp.trailing).offset(12)
-            make.centerY.equalTo(addCardImageView.snp.centerY)
-        }
+        addCardImageView.anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, bottom: self.contentView.bottomAnchor, paddingTop: 20, paddingLeft: 16, paddingBottom: 20, width: 24, height: 16)
         
-        showAddCardimageView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(16)
-            make.centerY.equalTo(addCardImageView.snp.centerY)
-        }
+        addCardLabel.centerY(in: addCardImageView, left: addCardImageView.rightAnchor, paddingLeft: 12)
+        
+        showAddCardimageView.centerY(in: addCardImageView, right: self.contentView.rightAnchor, paddingRight: 16)
     }
 }
-

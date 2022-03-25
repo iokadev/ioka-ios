@@ -14,9 +14,9 @@ protocol BankCardViewDelegate: NSObject {
 
 class BankCardView: UIView {
     
-    let creditCardImageView = CustomImageView(imageName: "Credit-card")
-    let saveCardlabel = CustomLabel(title: "Банковской картой", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let checkImageView = CustomImageView(imageName: "uncheckIcon")
+    let creditCardImageView = IokaImageView(imageName: "Credit-card")
+    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: BankCardViewDelegate?
     
@@ -36,11 +36,11 @@ class BankCardView: UIView {
     }
     
     public func uncheckView() {
-        self.checkImageView.image = UIImage(named: "uncheckIcon")
+        self.checkImageView.image = DemoAppImages.uncheckIcon
     }
     
     public func checkkView() {
-        self.checkImageView.image = UIImage(named: "checkIcon")
+        self.checkImageView.image = DemoAppImages.checkIcon
     }
     
     public func changeViewSelection() {
@@ -63,26 +63,15 @@ class BankCardView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, checkImageView].forEach{ self.addSubview($0) }
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(24)
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().inset(18)
-        }
+        creditCardImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 18, paddingLeft: 16, width: 24, height: 24)
+        creditCardImageView.centerY(in: self)
         
-        saveCardlabel.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(14)
-        }
+        saveCardlabel.centerY(in: self, left: creditCardImageView.rightAnchor, paddingLeft: 14)
         
-        checkImageView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.trailing.equalToSuperview().inset(16)
-        }
+        checkImageView.centerY(in: self, right: self.rightAnchor, paddingRight: 16, width: 24, height: 24)
     }
 }

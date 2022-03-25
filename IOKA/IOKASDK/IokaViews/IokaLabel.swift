@@ -10,24 +10,23 @@ import UIKit
 
 
 
-class CustomLabel: UILabel {
+class IokaLabel: UILabel {
     
     var title: String?
-    var customFont: UIFont?
-    var customTextColor: UIColor?
+    var iokaFont: UIFont?
+    var iokaTextColor: UIColor?
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(title: String? = nil, customFont: UIFont? = nil, customTextColor: UIColor? = nil, customTextAlignemnt: NSTextAlignment? = nil) {
+    convenience init(title: String? = nil, iokaFont: UIFont? = nil, iokaTextColor: UIColor? = nil, iokaTextAlignemnt: NSTextAlignment? = nil) {
         self.init(frame: CGRect())
         self.title = title
-        self.customFont = customFont
-        self.customTextColor = customTextColor
-        self.textAlignment = customTextAlignemnt ?? .left
-//        self.textAlignment = textAlignment
+        self.iokaFont = iokaFont
+        self.iokaTextColor = iokaTextColor
+        self.textAlignment = iokaTextAlignemnt ?? .left
         setupLabel()
     }
     
@@ -37,8 +36,8 @@ class CustomLabel: UILabel {
     
     private func setupLabel() {
         self.text = title
-        self.textColor = customTextColor
-        self.font = customFont
+        self.textColor = iokaTextColor
+        self.font = iokaFont
         self.numberOfLines = 0
     }
 }

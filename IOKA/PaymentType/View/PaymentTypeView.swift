@@ -9,14 +9,15 @@ import Foundation
 import UIKit
 
 enum PaymentTypeState {
-    case applePay
-    case savedCard
-    case creditCard
-    case payWithCash
+    case applePay(title: String)
+    case savedCard(card: GetCardResponse)
+    case creditCard(title: String)
+    case cash(title: String)
+    case empty
 }
 
 protocol PaymentTypeViewDelegate: NSObject {
-    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView)
+    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState)
 }
 
 class PaymentTypeView: UIView {
@@ -27,16 +28,17 @@ class PaymentTypeView: UIView {
     let tableView: UITableView = {
         let tv = UITableView()
         tv.isScrollEnabled = false
-        tv.backgroundColor = CustomColors.fill6
+        tv.backgroundColor = DemoAppColors.fill6
         tv.layer.cornerRadius = 8
         return tv
     }()
     lazy var bankCardView = BankCardView(delegate: self)
     lazy var payWithCashView = PayWithCashView(delegate: self)
-    var closeButton = CustomButton(image: UIImage(named: "chevronLeft"))
-    var titleLabel = CustomLabel(title: "Способ оплаты", customFont: Typography.title, customTextColor: CustomColors.fill2, customTextAlignemnt: .center)
-    var saveButton = CustomButton(customButtonState: .enabled, title: "Сохранить")
+    var closeButton = IokaButton(imageName: "chevronLeft")
+    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: DemoAppColors.fill2, iokaTextAlignemnt: .center)
+    var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
     var paymentTypeState: PaymentTypeState?
+    var heightConstraint: NSLayoutConstraint?
     
     
     override init(frame: CGRect) {
@@ -48,65 +50,60 @@ class PaymentTypeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func reloadTableView(models: [GetCardResponse]) {
+        
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.tableView.reloadData()
+            self?.tableView.layoutIfNeeded()
+            self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
+            self?.updateConstraints()
+        }
+    }
+    
     private func setupActions() {
         self.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
     }
     
     @objc private func handleSaveButton() {
         guard let paymentTypeState = paymentTypeState else { return }
-        delegate?.saveButtonWasPressed(self)
+        delegate?.saveButtonWasPressed(self, state: paymentTypeState)
     }
     
     public func setupUI(models: [GetCardResponse]) {
-        self.backgroundColor = CustomColors.fill5
+        self.backgroundColor = DemoAppColors.fill5
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
-        tableView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(116)
-            make.height.equalTo(56 * models.count + 56)
-        }
+        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
+
+        titleLabel.center(in: self, in: closeButton)
         
-        bankCardView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(tableView.snp.bottom).offset(25)
-        }
+        tableView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(56 * models.count) + 56)
+        self.heightConstraint?.isActive = true
         
-        payWithCashView.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.top.equalTo(bankCardView.snp.bottom).offset(25)
-        }
+        bankCardView.anchor(top: tableView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 25, paddingLeft: 16, paddingRight: 16)
         
-        closeButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.width.height.equalTo(24)
-            make.top.equalToSuperview().offset(60)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalTo(closeButton.snp.centerY)
-        }
-        
-        saveButton.snp.makeConstraints { make in
-            make.height.equalTo(56)
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.bottom.equalToSuperview().inset(50)
-        }
+        payWithCashView.anchor(top: bankCardView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 25, paddingLeft: 16, paddingRight: 16)
+
+        saveButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 50, paddingRight: 16, height: 56)
     }
 }
 
 extension PaymentTypeView: PayWithCashViewDelegate, BankCardViewDelegate, ApplePayCellDelegate, CardPaymentCellDelegate {
+    
     func handleViewTap(_ view: ApplePayCell, isPayWithCashSelected: Bool) {
         guard isPayWithCashSelected else { return }
-//        tableView.cell
+        self.paymentTypeState = .applePay(title: view.applePayLabel.text!)
         bankCardView.uncheckView()
         payWithCashView.uncheckView()
         bankCardView.isViewSelected = false
         payWithCashView.isPayWithCashSelected = false
     }
     
-    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool) {
+    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: GetCardResponse) {
+        guard isPayWithCashSelected else { return }
+        self.paymentTypeState = .savedCard(card: cardResponse)
         bankCardView.uncheckView()
         payWithCashView.uncheckView()
         bankCardView.isViewSelected = false
@@ -114,15 +111,16 @@ extension PaymentTypeView: PayWithCashViewDelegate, BankCardViewDelegate, AppleP
     }
     
     func handleViewTap(_ view: PayWithCashView, isPayWithCashSelected: Bool) {
+        guard isPayWithCashSelected else { return }
+        self.paymentTypeState = .cash(title: view.payWithCashlabel.text!)
         bankCardView.uncheckView()
         bankCardView.isViewSelected = false
     }
     
     func handleViewTap(_ view: BankCardView, isPayWithCashSelected: Bool) {
-        self.paymentTypeState = .creditCard
+        guard isPayWithCashSelected else { return }
+        self.paymentTypeState = .creditCard(title: view.saveCardlabel.text!)
         payWithCashView.uncheckView()
         payWithCashView.isPayWithCashSelected = false
     }
 }
-
-

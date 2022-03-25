@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class CustomImageView: UIImageView {
+class IokaImageView: UIImageView {
     
     var imageName: String? {
         didSet {

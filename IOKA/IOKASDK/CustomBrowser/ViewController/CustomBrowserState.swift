@@ -9,7 +9,7 @@ import Foundation
 
 
 
-enum CustomBrowserState {
+enum IokaBrowserState {
     case createCardPayment(orderId: String, paymentId: String)
     case createBinding(customerId: String, cardId: String)
 }

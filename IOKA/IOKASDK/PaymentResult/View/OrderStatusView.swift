@@ -15,13 +15,13 @@ protocol OrderStatusViewDelegate: NSObject {
 
 class OrderStatusView: UIView {
     
-    private let closeButton = CustomButton(image: UIImage(named: "Close"))
-    private let imageView = CustomImageView()
-    private let orderTitleLabel = CustomLabel(customFont: Typography.heading)
-    let orderNumberLabel = CustomLabel(customFont: Typography.subtitle, customTextColor: CustomColors.grey)
-    let orderPriceLabel = CustomLabel(customFont: Typography.heading2, customTextColor: CustomColors.fill2)
-    let errorDescriptionLabel = CustomLabel(customFont: Typography.subtitle, customTextColor: CustomColors.grey)
-    private let retryOrCloseButton = CustomButton(customButtonState: .enabled)
+    private let closeButton = IokaButton(imageName: "Close")
+    private let imageView = IokaImageView()
+    private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
+    let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
+    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IOKA.shared.theme.fill2)
+    let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
+    private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
     weak var delegate: OrderStatusViewDelegate?
     
@@ -37,7 +37,7 @@ class OrderStatusView: UIView {
         }
     }
     
-    var error: CustomError? {
+    var error: IokaError? {
         didSet {
             setOrderViewData()
         }
@@ -79,44 +79,19 @@ class OrderStatusView: UIView {
         self.backgroundColor = .white
         [closeButton, imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
         
-        closeButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().inset(16)
-            make.top.equalToSuperview().offset(60)
-            make.width.height.equalTo(24)
-        }
+        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
         
-        imageView.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.width.height.equalTo(120)
-            make.top.equalToSuperview().offset(180)
-        }
+        imageView.centerX(in: self, top: self.topAnchor, paddingTop: 180, width: 120, height: 120)
         
-        orderTitleLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(imageView.snp.bottom).offset(36)
-        }
+        orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 36)
         
-        orderNumberLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderTitleLabel.snp.bottom).offset(40)
-        }
+        orderNumberLabel.centerX(in: self, top: orderTitleLabel.bottomAnchor, paddingTop: 40)
         
-        orderPriceLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderNumberLabel.snp.bottom).offset(4)
-        }
+        orderPriceLabel.centerX(in: self, top: orderNumberLabel.bottomAnchor, paddingTop: 4)
         
-        errorDescriptionLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(orderTitleLabel.snp.bottom).offset(8)
-            make.leading.trailing.equalToSuperview().inset(24)
-        }
+        errorDescriptionLabel.anchor(top: orderTitleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        retryOrCloseButton.snp.makeConstraints { make in
-            make.leading.trailing.equalToSuperview().inset(16)
-            make.height.equalTo(56)
-            make.bottom.equalToSuperview().inset(50)
-        }
+        retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 50, paddingRight: 16, height: 56)
     }
     
     private func setupOrderViewStatus() {
@@ -125,18 +100,18 @@ class OrderStatusView: UIView {
         guard let orderStatusState = orderStatusState else { return }
         switch orderStatusState {
         case .paymentSucceed:
-            orderTitleLabel.text = "Заказ оплачен"
-            orderTitleLabel.textColor = CustomColors.success
+            orderTitleLabel.text = IokaLocalizable.orderPaid
+            orderTitleLabel.textColor = IOKA.shared.theme.success
             errorDescriptionLabel.isHidden = true
-            retryOrCloseButton.setTitle("Понятно", for: .normal)
-            imageView.image = UIImage(named: "CheckCircle")
+            retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
+            imageView.image = IokaImages.checkCircle
         case .paymentFailed:
-            orderTitleLabel.text = "Платеж не прошел"
-            orderTitleLabel.textColor = CustomColors.fill2
+            orderTitleLabel.text = IokaLocalizable.paymentFailed
+            orderTitleLabel.textColor = IOKA.shared.theme.fill2
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
-            retryOrCloseButton.setTitle("Попробовать заново", for: .normal)
-            imageView.image = UIImage(named: "XCircle")
+            retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)
+            imageView.image = IokaImages.xCircle
             errorDescriptionLabel.numberOfLines = 0
         }
     }

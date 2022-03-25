@@ -5,7 +5,6 @@
 //  Created by ablai erzhanov on 16.03.2022.
 //
 
-import Foundation
 import UIKit
 
 
@@ -13,10 +12,10 @@ import UIKit
 class GetCardTableViewCell: UITableViewCell {
     static let cellId = "GetCardTableViewCell"
     
-    let creditCardImageView = CustomImageView()
-    let cardNumberLabel = CustomLabel(customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let deleteImageView = CustomImageView(imageName: "deleteProduct")
-    let seperatorView: UIView = CustomView(backGroundColor: CustomColors.fill4)
+    let creditCardImageView = IokaImageView()
+    let cardNumberLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let deleteImageView = IokaImageView(imageName: "deleteProduct")
+    let seperatorView: UIView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,32 +27,20 @@ class GetCardTableViewCell: UITableViewCell {
     }
     
     public func configure(model: GetCardResponse) {
-        self.cardNumberLabel.text = model.pan_masked
+        self.cardNumberLabel.text = model.pan_masked.trimPanMasked()
         guard let paymentSystem = model.payment_system else { return }
         self.creditCardImageView.image = UIImage(named: paymentSystem)
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, cardNumberLabel, seperatorView].forEach{ self.addSubview($0) }
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.width.equalTo(24)
-            make.height.equalTo(16)
-            make.leading.equalToSuperview().inset(16)
-            make.top.bottom.equalToSuperview().inset(20)
-        }
+        creditCardImageView.anchor(top: self.topAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, paddingTop: 20, paddingLeft: 16, paddingBottom: 20, width: 24, height: 16)
         
-        cardNumberLabel.snp.makeConstraints { make in
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(12)
-            make.centerY.equalTo(creditCardImageView.snp.centerY)
-        }
+        cardNumberLabel.centerY(in: creditCardImageView, left: creditCardImageView.rightAnchor, paddingLeft: 12)
         
-        seperatorView.snp.makeConstraints { make in
-            make.trailing.equalToSuperview()
-            make.height.equalToSuperview()
-            make.top.equalTo(creditCardImageView.snp.bottom).offset(20)
-        }
+        seperatorView.anchor(top: creditCardImageView.bottomAnchor, right: self.rightAnchor, paddingTop: 20, height: 1)
     }
 }

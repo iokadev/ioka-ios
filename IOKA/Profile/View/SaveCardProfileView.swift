@@ -5,16 +5,15 @@
 //  Created by ablai erzhanov on 16.03.2022.
 //
 
-import Foundation
 import UIKit
 
 
 
 class SaveCardProfileView: UIView {
     
-    let creditCardImageView = CustomImageView(imageName: "Credit-card")
-    let saveCardlabel = CustomLabel(title: "Сохраненные карты", customFont: Typography.body, customTextColor: CustomColors.fill2)
-    let chevronRightImageView = CustomImageView(imageName: "chevronRight")
+    let creditCardImageView = IokaImageView(imageName: "Credit-card")
+    let saveCardlabel = IokaLabel(title: "Сохраненные карты", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,25 +25,14 @@ class SaveCardProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = CustomColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, chevronRightImageView].forEach{ self.addSubview($0) }
+
+        creditCardImageView.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 16, paddingLeft: 16, width: 24, height: 24)
         
-        creditCardImageView.snp.makeConstraints { make in
-            make.height.width.equalTo(24)
-            make.leading.top.equalToSuperview().inset(16)
-        }
+        saveCardlabel.anchor(top: self.topAnchor, left: creditCardImageView.rightAnchor, bottom: self.bottomAnchor, paddingTop: 18, paddingLeft: 14, paddingBottom: 18)
         
-        saveCardlabel.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().inset(18)
-            make.leading.equalTo(creditCardImageView.snp.trailing).offset(14)
-        }
-        
-        chevronRightImageView.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
-            make.top.equalToSuperview().inset(18)
-            make.trailing.equalToSuperview().inset(16)
-        }
-        
+        chevronRightImageView.anchor(top: self.topAnchor, right: self.rightAnchor, paddingTop: 18, paddingRight: 16, width: 20, height: 20)
     }
 }

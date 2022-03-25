@@ -42,10 +42,10 @@ extension UIView {
         setDimensions(width: width, height: height)
     }
     
-    func center(in view: UIView) {
+    func center(in viewX: UIView, in viewY: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        centerXAnchor.constraint(equalTo: viewX.centerXAnchor).isActive = true
+        centerYAnchor.constraint(equalTo: viewY.centerYAnchor).isActive = true
     }
     
     func centerX(in view: UIView, top: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = nil, bottom: NSLayoutYAxisAnchor? = nil, paddingBottom: CGFloat? = nil, width: CGFloat? = nil, height: CGFloat? = nil) {
@@ -91,7 +91,7 @@ extension UIView {
     func fillView( _ view: UIView) {
         translatesAutoresizingMaskIntoConstraints = false
         
-        anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor)
+        anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
     }
     
     func deactivateConstraints() {
@@ -104,10 +104,5 @@ extension UIView {
         for constraint in self.constraints {
             self.removeConstraint(constraint)
         }
-    }
-    
-    func addBottomConstraint(constraint: NSLayoutConstraint) {
-        translatesAutoresizingMaskIntoConstraints = false
-        constraint.isActive = true
     }
 }

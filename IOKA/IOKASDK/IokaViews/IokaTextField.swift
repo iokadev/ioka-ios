@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum CustomTextFieldState {
+enum IokaTextFieldState {
     case startTyping
     case wrongInputData
     case correctInputData
@@ -17,11 +17,11 @@ enum CustomTextFieldState {
 
 
 
-class CustomTextField: UITextField {
+class IokaTextField: UITextField {
     
     private var textPadding = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: -240)
     var placeHolderType: TextFieldPlaceHolders?
-    var customTextFieldState = CustomTextFieldState.nonActive {
+    var iokaTextFieldState = IokaTextFieldState.nonActive {
         didSet {
             checkInputData()
         }
@@ -29,11 +29,11 @@ class CustomTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.textColor = CustomColors.fill2
-        self.backgroundColor = CustomColors.fill4
+        self.textColor = IOKA.shared.theme.fill2
+        self.backgroundColor = IOKA.shared.theme.fill4
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
-        self.layer.borderColor = CustomColors.fill1!.cgColor
+        self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
 
     }
     
@@ -83,23 +83,15 @@ class CustomTextField: UITextField {
     }
     
     func checkInputData() {
-        switch customTextFieldState {
+        switch iokaTextFieldState {
         case .startTyping:
-            self.layer.borderColor = CustomColors.primary?.cgColor
+            self.layer.borderColor = IOKA.shared.theme.primary.cgColor
         case .wrongInputData:
-            self.layer.borderColor = CustomColors.error?.cgColor
+            self.layer.borderColor = IOKA.shared.theme.error.cgColor
         case .nonActive:
-            self.layer.borderColor = CustomColors.fill1?.cgColor
+            self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
         case .correctInputData:
-            self.layer.borderColor = CustomColors.fill1?.cgColor
+            self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
         }
-    }
-}
-
-extension CustomTextField {
-    func setBrandIcon(_ image: UIImage, isCardBrendSetted: Bool) {
-        guard !isCardBrendSetted else { return }
-        
-        
     }
 }

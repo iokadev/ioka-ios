@@ -8,8 +8,8 @@
 import Foundation
 
 
-class CustomFactory {
-    static let shared = CustomFactory()
+class IokaFactory {
+    static let shared = IokaFactory()
     
     func initiateCardPaymentViewController(orderAccesToken: String?, delegate: CardPaymentViewControllerDelegate) -> CardPaymentViewController {
         guard let orderAccesToken = orderAccesToken else { fatalError("Please provide order_access_token") }
@@ -19,7 +19,7 @@ class CustomFactory {
         return viewController
     }
     
-    func initiateOrderStatusViewController(orderStatus: OrderStatus, error: CustomError?, response: CardPaymentResponse?, delegate: PaymentResultViewControllerDelegate) -> OrderStatusViewController {
+    func initiateOrderStatusViewController(orderStatus: OrderStatus, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultViewControllerDelegate) -> OrderStatusViewController {
         let viewController = OrderStatusViewController()
         viewController.contentView.orderStatusState = orderStatus
         viewController.contentView.error = error
@@ -28,11 +28,29 @@ class CustomFactory {
         return viewController
     }
     
-    func initiateCustomBrowserViewController(url: String, delegate: CustomBrowserViewControllerDelegate, customBrowserState: CustomBrowserState) -> CustomBrowserViewController {
-        let viewController = CustomBrowserViewController()
+    func initiateIokaBrowserViewController(url: String, delegate: IokaBrowserViewControllerDelegate, iokaBrowserState: IokaBrowserState) -> IokaBrowserViewController {
+        let viewController = IokaBrowserViewController()
         viewController.url = URL(string: url)!
         viewController.delegate = delegate
-        viewController.customBrowserState = customBrowserState
+        viewController.iokaBrowserState = iokaBrowserState
+        return viewController
+    }
+    
+    func initiateSavedCardPaymentViewController(orderAccessToken: String, card: GetCardResponse, delegate: SavedCardPaymentViewControlllerDelegate) -> SavedCardPaymentViewControlller {
+        let vc = SavedCardPaymentViewControlller()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.card = card
+        vc.delegate = delegate
+        vc.orderAccessToken = orderAccessToken
+        
+        return vc
+    }
+    
+    func initiateSavedCardViewController(customerAccessToken: String?, delegate: SaveCardViewControllerDelegate) -> SaveCardViewController {
+        guard let customerAccessToken = customerAccessToken else { fatalError("Please provide order_access_token") }
+        let viewController = SaveCardViewController()
+        viewController.customerId = customerAccessToken.trimTokens()
+        viewController.saveCardViewControllerDelegate = delegate
         return viewController
     }
 }

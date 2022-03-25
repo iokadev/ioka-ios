@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class CustomStackView: UIStackView {
+class IokaStackView: UIStackView {
    
     var views: [UIView] = []
     var viewsDistribution: UIStackView.Distribution = .equalSpacing

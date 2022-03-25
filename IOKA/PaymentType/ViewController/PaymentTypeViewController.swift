@@ -7,14 +7,18 @@
 
 import UIKit
 
+import UIKit
+
 protocol PaymentTypeViewControllerDelegate: NSObject {
     func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState)
 }
 
 class PaymentTypeViewController: UIViewController {
     
-    var models: [GetCardResponse]!
     let contentView = PaymentTypeView()
+    let viewModel = PaymentTypeViewModel()
+    var customerAccessToken: String!
+    var models = [GetCardResponse]()
     weak var delegate: PaymentTypeViewControllerDelegate?
     
     
@@ -29,12 +33,19 @@ class PaymentTypeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        contentView.setupUI(models: models)
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
+        contentView.setupUI(models: models)
+        viewModel.getCards(customerAccessToken: customerAccessToken) { result, error in
+            guard let models = result else { return }
+            self.models.append(contentsOf: models)
+            self.contentView.reloadTableView(models: models)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,8 +80,8 @@ extension PaymentTypeViewController: UITableViewDelegate, UITableViewDataSource 
 }
 
 extension PaymentTypeViewController: PaymentTypeViewDelegate {
-    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView) {
-        delegate?.popPaymentViewController(self, state: .creditCard)
+    func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState) {
+        delegate?.popPaymentViewController(self, state: state)
         self.navigationController?.popViewController(animated: true)
     }
 }
