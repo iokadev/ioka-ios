@@ -18,7 +18,7 @@ class SavedCardPaymentViewControlller: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = IokaColors.fill7
+        self.view.backgroundColor = IOKA.shared.theme.fill7
         paymentSavedCardView.delegate = self
     }
     

@@ -13,8 +13,8 @@ import UIKit
 class LanguageProfileView: UIView {
     
     let languageImageView = IokaImageView(imageName: "Language")
-    let languageLabel = IokaLabel(title: "Язык", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
-    let currentLanguageLabel = IokaLabel(title: "Русский", iokaFont: Typography.body, iokaTextColor: IokaColors.grey)
+    let languageLabel = IokaLabel(title: "Язык", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let currentLanguageLabel = IokaLabel(title: "Русский", iokaFont: Typography.body, iokaTextColor: DemoAppColors.grey)
     let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
@@ -27,7 +27,7 @@ class LanguageProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [languageImageView, languageLabel, currentLanguageLabel, chevronRightImageView].forEach{ self.addSubview($0) }
         

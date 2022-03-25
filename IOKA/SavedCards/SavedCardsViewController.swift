@@ -13,7 +13,7 @@ class SavedCardsViewController: UIViewController {
     var models: [GetCardResponse] = []
     
     let tableView = UITableView()
-    let backgroundView = IokaCustomView(backGroundColor: IokaColors.fill6, cornerRadius: 8)
+    let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.fill6, cornerRadius: 8)
     var customerAccessToken: String!
     
     override func viewDidLoad() {
@@ -23,7 +23,7 @@ class SavedCardsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.view.backgroundColor = IokaColors.fill5
+        self.view.backgroundColor = DemoAppColors.fill5
         self.view.addSubview(backgroundView)
         backgroundView.addSubview(tableView)
         tableView.backgroundColor = .clear

@@ -21,12 +21,12 @@ class ProductCell: UITableViewCell {
     
     static let cellId = "ProductCell"
     
-    let productNumber = IokaLabel(iokaFont: Typography.subtitleSmall, iokaTextColor: IokaColors.grey)
-    let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor:IokaColors.fill2)
+    let productNumber = IokaLabel(iokaFont: Typography.subtitleSmall, iokaTextColor: DemoAppColors.grey)
+    let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
     let productImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: IokaColors.fill2)
+    let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: DemoAppColors.fill2)
     let deleteImageView = IokaImageView(imageName: "deleteProduct", imageTintColor: nil)
-    let seperatorView = IokaCustomView(backGroundColor: IokaColors.fill4)
+    let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

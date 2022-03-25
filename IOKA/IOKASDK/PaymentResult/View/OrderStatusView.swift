@@ -18,9 +18,9 @@ class OrderStatusView: UIView {
     private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()
     private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
-    let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey)
-    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IokaColors.fill2)
-    let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IokaColors.grey)
+    let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
+    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IOKA.shared.theme.fill2)
+    let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
     private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
     weak var delegate: OrderStatusViewDelegate?
@@ -101,13 +101,13 @@ class OrderStatusView: UIView {
         switch orderStatusState {
         case .paymentSucceed:
             orderTitleLabel.text = IokaLocalizable.orderPaid
-            orderTitleLabel.textColor = IokaColors.success
+            orderTitleLabel.textColor = IOKA.shared.theme.success
             errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
             imageView.image = UIImage(named: "CheckCircle")
         case .paymentFailed:
             orderTitleLabel.text = IokaLocalizable.paymentFailed
-            orderTitleLabel.textColor = IokaColors.fill2
+            orderTitleLabel.textColor = IOKA.shared.theme.fill2
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)

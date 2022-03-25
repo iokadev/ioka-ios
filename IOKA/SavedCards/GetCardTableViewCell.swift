@@ -14,9 +14,9 @@ class GetCardTableViewCell: UITableViewCell {
     static let cellId = "GetCardTableViewCell"
     
     let creditCardImageView = IokaImageView()
-    let cardNumberLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let cardNumberLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
     let deleteImageView = IokaImageView(imageName: "deleteProduct")
-    let seperatorView: UIView = IokaCustomView(backGroundColor: IokaColors.fill4)
+    let seperatorView: UIView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +34,7 @@ class GetCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [creditCardImageView, cardNumberLabel, seperatorView].forEach{ self.addSubview($0) }
         

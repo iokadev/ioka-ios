@@ -9,13 +9,15 @@ import Foundation
 import UIKit
 
 
-class IOKA {
+class IOKA: IokaThemeProtocol {
     static let shared = IOKA()
     var customerAccessToken: String?
     var orderAccessToken: String?
     var publicApiKey: String?
+    var theme: IokaColors = .defaultTheme
     
-    func setUP(publicApiKey: String) {
+    func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
+        self.theme = theme.iokaColors
         self.publicApiKey = publicApiKey
     }
     

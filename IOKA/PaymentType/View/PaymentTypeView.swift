@@ -28,14 +28,14 @@ class PaymentTypeView: UIView {
     let tableView: UITableView = {
         let tv = UITableView()
         tv.isScrollEnabled = false
-        tv.backgroundColor = IokaColors.fill6
+        tv.backgroundColor = DemoAppColors.fill6
         tv.layer.cornerRadius = 8
         return tv
     }()
     lazy var bankCardView = BankCardView(delegate: self)
     lazy var payWithCashView = PayWithCashView(delegate: self)
     var closeButton = IokaButton(imageName: "chevronLeft")
-    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: IokaColors.fill2, iokaTextAlignemnt: .center)
+    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: DemoAppColors.fill2, iokaTextAlignemnt: .center)
     var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
     var paymentTypeState: PaymentTypeState?
     
@@ -59,7 +59,7 @@ class PaymentTypeView: UIView {
     }
     
     public func setupUI(models: [GetCardResponse]) {
-        self.backgroundColor = IokaColors.fill5
+        self.backgroundColor = DemoAppColors.fill5
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
         tableView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16, height: CGFloat(56 * models.count) + 56)

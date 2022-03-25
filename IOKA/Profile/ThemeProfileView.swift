@@ -13,7 +13,7 @@ import UIKit
 class ThemeProfileView: UIView {
     
     let themeImageView = IokaImageView(imageName: "Theme")
-    let languageLabel = IokaLabel(title: "Темная тема", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let languageLabel = IokaLabel(title: "Темная тема", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
     let themeToggle = UISwitch()
     
     override init(frame: CGRect) {
@@ -26,7 +26,7 @@ class ThemeProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         [themeImageView, languageLabel, themeToggle].forEach{ self.addSubview($0) }
         

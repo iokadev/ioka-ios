@@ -83,16 +83,16 @@ class IokaButton: UIButton {
 
         switch state {
         case .disabled:
-            self.backgroundColor = IokaColors.grey
+            self.backgroundColor = IOKA.shared.theme.grey
         case .enabled:
-            self.backgroundColor = IokaColors.primary
+            self.backgroundColor = IOKA.shared.theme.primary
         case .savingSuccess:
-            self.backgroundColor = IokaColors.success
+            self.backgroundColor = IOKA.shared.theme.success
             self.hideLoading(showTitle: true)
             showSuccess()
         case .savingFailure:
             hideLoading(showTitle: true)
-            self.backgroundColor = IokaColors.grey
+            self.backgroundColor = IOKA.shared.theme.grey
         }
     }
     

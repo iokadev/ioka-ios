@@ -21,7 +21,7 @@ class PaymentView: UIView {
     }
     
     public weak var delegate: PaymentViewDelegate?
-    private let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: Typography.body, iokaTextColor: IokaColors.grey)
+    private let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: Typography.body, iokaTextColor: DemoAppColors.grey)
     private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
     private let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
@@ -53,26 +53,26 @@ class PaymentView: UIView {
         switch paymentState {
         case .empty:
             paymentTypeLabel.text = "Выберите способ оплаты"
-            paymentTypeLabel.textColor = IokaColors.grey
+            paymentTypeLabel.textColor = DemoAppColors.grey
         case .savedCard(let card):
             paymentTypeLabel.text = card.pan_masked.trimPanMasked()
-            paymentTypeLabel.textColor = IokaColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.fill2
             guard let paymentSystem = card.payment_system else { return }
             paymentTypeImageView.image = UIImage(named: paymentSystem)
         case .creditCard(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = IokaColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.fill2
         case .applePay(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = IokaColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.fill2
         case .cash(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = IokaColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.fill2
         }
     }
   
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         
         [paymentTypeLabel, paymentTypeImageView, chevronRightImageView].forEach{ self.addSubview($0) }

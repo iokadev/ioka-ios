@@ -21,7 +21,7 @@ class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     
-    let navigationTitleLabel = IokaLabel(title: "Профиль", iokaFont: Typography.title, iokaTextColor: IokaColors.fill2)
+    let navigationTitleLabel = IokaLabel(title: "Профиль", iokaFont: Typography.title, iokaTextColor: DemoAppColors.fill2)
     let saveCardProfileView = SaveCardProfileView()
     let languageProfileView = LanguageProfileView()
     let themeProfileView = ThemeProfileView()
@@ -50,7 +50,7 @@ class ProfileView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = IokaColors.fill5
+        self.backgroundColor = DemoAppColors.fill5
         [navigationTitleLabel, saveCardProfileView, languageProfileView, themeProfileView].forEach{ self.addSubview($0) }
         
         navigationTitleLabel.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 18)

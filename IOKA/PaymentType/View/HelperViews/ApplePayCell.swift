@@ -15,7 +15,7 @@ class ApplePayCell: UITableViewCell {
     static let cellId = "ApplePayCell"
     
     let applePayImageView = IokaImageView(imageName: "Apple_Pay_Mark_RGB_041619")
-    let applePayLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: IokaColors.fill2)
+    let applePayLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: ApplePayCellDelegate?
@@ -62,7 +62,7 @@ class ApplePayCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill6
+        self.backgroundColor = DemoAppColors.fill6
         self.layer.cornerRadius = 8
         applePayImageView.contentMode = .scaleAspectFit
         [applePayImageView, applePayLabel, checkImageView].forEach{ self.contentView.addSubview($0) }

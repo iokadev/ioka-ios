@@ -29,8 +29,8 @@ class CardPaymentView: UIView {
     let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: Typography.subtitle)
     let saveCardToggle = UISwitch()
     let payButton = IokaButton(iokaButtonState: .disabled, title: IokaLocalizable.pay)
-    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: IokaColors.success)
-    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IokaColors.success)
+    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.success)
+    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IOKA.shared.theme.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
     
@@ -114,7 +114,7 @@ class CardPaymentView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = IokaColors.fill1
+        self.backgroundColor = IOKA.shared.theme.fill1
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, stackViewForCardSaving, payButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
