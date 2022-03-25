@@ -38,6 +38,7 @@ class PaymentTypeView: UIView {
     var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: DemoAppColors.fill2, iokaTextAlignemnt: .center)
     var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
     var paymentTypeState: PaymentTypeState?
+    var heightConstraint: NSLayoutConstraint?
     
     
     override init(frame: CGRect) {
@@ -47,6 +48,16 @@ class PaymentTypeView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func reloadTableView(models: [GetCardResponse]) {
+        
+        UIView.animate(withDuration: 0.5) { [weak self] in
+            self?.tableView.reloadData()
+            self?.tableView.layoutIfNeeded()
+            self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
+            self?.updateConstraints()
+        }
     }
     
     private func setupActions() {
@@ -62,15 +73,18 @@ class PaymentTypeView: UIView {
         self.backgroundColor = DemoAppColors.fill5
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
-        tableView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16, height: CGFloat(56 * models.count) + 56)
+        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
+
+        titleLabel.center(in: self, in: closeButton)
+        
+        tableView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(56 * models.count) + 56)
+        self.heightConstraint?.isActive = true
         
         bankCardView.anchor(top: tableView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 25, paddingLeft: 16, paddingRight: 16)
         
         payWithCashView.anchor(top: bankCardView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 25, paddingLeft: 16, paddingRight: 16)
-
-        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 60, height: 60)
-
-        titleLabel.center(in: self, in: closeButton)
 
         saveButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 50, paddingRight: 16, height: 56)
     }

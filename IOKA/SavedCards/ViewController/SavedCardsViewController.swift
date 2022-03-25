@@ -15,18 +15,25 @@ class SavedCardsViewController: UIViewController {
     let tableView = UITableView()
     let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.fill6, cornerRadius: 8)
     var customerAccessToken: String!
+    let viewModel = SavedCardsViewModel()
+    var heightConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        viewModel.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
+            guard let models = result else { return }
+            self?.models.append(contentsOf: models)
+            self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
+            self?.tableView.reloadData()
+        }
     }
     
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = DemoAppColors.fill5
-        self.view.addSubview(backgroundView)
-        backgroundView.addSubview(tableView)
-        tableView.backgroundColor = .clear
+        self.view.addSubview(tableView)
+        tableView.layer.cornerRadius = 12
     }
     
     override func viewDidLayoutSubviews() {
@@ -42,9 +49,10 @@ class SavedCardsViewController: UIViewController {
     }
     
     private func setupUI() {
-        backgroundView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16, height: CGFloat(models.count * 56) + 57)
-        
-        tableView.fillView(backgroundView)
+        tableView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(56 * models.count) + 56)
+        self.heightConstraint?.isActive = true
     }
 }
 

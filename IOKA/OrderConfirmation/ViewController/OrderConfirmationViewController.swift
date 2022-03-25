@@ -53,15 +53,9 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         
         viewModel.getProfile { [weak self] customerAccessToken in
             guard let self = self, let customerAccessToken = customerAccessToken else { return }
-            self.viewModel.getSavedCards(customerAccessToken: customerAccessToken) { cards, error in
-                if let cards = cards {
-                    vc.models = cards
-                } else {
-                    vc.models = []
-                }
-                DispatchQueue.main.async {
-                    self.navigationController?.pushViewController(vc, animated: true)
-                }
+            DispatchQueue.main.async {
+                vc.customerAccessToken = customerAccessToken
+                self.navigationController?.pushViewController(vc, animated: true)
             }
         }
     }

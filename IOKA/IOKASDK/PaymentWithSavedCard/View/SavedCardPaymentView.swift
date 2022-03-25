@@ -52,6 +52,7 @@ class SavedCardPaymentView: UIView {
     }
     
     @objc private func handleContinueButton() {
+        self.continueButton.showLoading()
         delegate?.continueFlow(self)
     }
     

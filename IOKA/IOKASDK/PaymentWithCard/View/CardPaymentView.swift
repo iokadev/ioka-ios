@@ -5,9 +5,7 @@
 //  Created by ablai erzhanov on 27.02.2022.
 //
 
-import Foundation
 import UIKit
-import SnapKit
 
 
 protocol CardPaymentViewDelegate: NSObject {
@@ -36,6 +34,7 @@ class CardPaymentView: UIView {
     
     weak var cardPaymentViewDelegate: CardPaymentViewDelegate?
     var isCardBrendSetted: Bool = false
+    var payButtonBottomConstraint: NSLayoutConstraint?
     
     
     override init(frame: CGRect) {
@@ -85,11 +84,9 @@ class CardPaymentView: UIView {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
         
         self.layoutIfNeeded()
-        payButton.snp.updateConstraints { make in
-            make.bottom.equalToSuperview().inset(keyboardEndFrame.height + 20)
-        }
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
+            self?.payButtonBottomConstraint?.constant = -(keyboardEndFrame.height + 20)
             self?.payButton.setNeedsUpdateConstraints()
             self?.layoutIfNeeded()
         }
@@ -99,12 +96,10 @@ class CardPaymentView: UIView {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
         
         self.layoutIfNeeded()
-        payButton.snp.updateConstraints { make in
-            make.bottom.equalToSuperview().inset(114)
-        }
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
             guard let self = self else { return }
+            self.payButtonBottomConstraint?.constant = -114
             self.layoutIfNeeded()
         }
     }
@@ -127,7 +122,10 @@ class CardPaymentView: UIView {
         
         stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
         
-        payButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16, height: 56)
+        payButton.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 56)
+        payButton.translatesAutoresizingMaskIntoConstraints = false
+        self.payButtonBottomConstraint = payButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -114)
+        self.payButtonBottomConstraint?.isActive = true
         
         transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
         

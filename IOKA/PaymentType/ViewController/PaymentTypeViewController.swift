@@ -13,8 +13,10 @@ protocol PaymentTypeViewControllerDelegate: NSObject {
 
 class PaymentTypeViewController: UIViewController {
     
-    var models: [GetCardResponse]!
     let contentView = PaymentTypeView()
+    let viewModel = PaymentTypeViewModel()
+    var customerAccessToken: String!
+    var models = [GetCardResponse]()
     weak var delegate: PaymentTypeViewControllerDelegate?
     
     
@@ -29,12 +31,19 @@ class PaymentTypeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        contentView.setupUI(models: models)
+        
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
+        contentView.setupUI(models: models)
+        viewModel.getCards(customerAccessToken: customerAccessToken) { result, error in
+            guard let models = result else { return }
+            self.models.append(contentsOf: models)
+            self.contentView.reloadTableView(models: models)
+        }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

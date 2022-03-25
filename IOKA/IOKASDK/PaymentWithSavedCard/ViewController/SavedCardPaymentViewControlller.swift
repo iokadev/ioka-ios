@@ -42,7 +42,8 @@ extension SavedCardPaymentViewControlller: SavedCardPaymentViewDelegate {
     func continueFlow(_ view: SavedCardPaymentView) {
         guard let text =  self.paymentSavedCardView.cvvTextField.text else { return }
         let card = Card(cardId: card.id, cvc: text)
-        viewModel.createCardPayment(orderId: orderAccessToken.trimTokens(), card: card) { status, error, result in
+        viewModel.createCardPayment(orderId: orderAccessToken.trimTokens(), card: card) { [weak self] status, error, result in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.delegate?.completeSavedCardPaymentFlow(self, status: status, error: error, response: result)
             }

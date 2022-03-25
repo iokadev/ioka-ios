@@ -79,6 +79,9 @@
 		6D46B14827ED52F90052BE2F /* IokaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B14727ED52F90052BE2F /* IokaTheme.swift */; };
 		6D46B14C27ED67670052BE2F /* IokaImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B14B27ED67670052BE2F /* IokaImages.swift */; };
 		6D46B15027ED68950052BE2F /* DemoAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B14F27ED68950052BE2F /* DemoAppImages.swift */; };
+		6D46B15527ED6BFF0052BE2F /* SavedCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B15427ED6BFF0052BE2F /* SavedCardsViewModel.swift */; };
+		6D46B15A27ED73570052BE2F /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B15927ED73570052BE2F /* ProfileViewModel.swift */; };
+		6D46B15D27ED78440052BE2F /* PaymentTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D46B15C27ED78440052BE2F /* PaymentTypeViewModel.swift */; };
 		6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */; };
 		6D9F17F727CC373A00053DE8 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F627CC373A00053DE8 /* IokaLabel.swift */; };
 		6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F827CC37E000053DE8 /* Typography.swift */; };
@@ -183,6 +186,9 @@
 		6D46B14727ED52F90052BE2F /* IokaTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaTheme.swift; sourceTree = "<group>"; };
 		6D46B14B27ED67670052BE2F /* IokaImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaImages.swift; sourceTree = "<group>"; };
 		6D46B14F27ED68950052BE2F /* DemoAppImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppImages.swift; sourceTree = "<group>"; };
+		6D46B15427ED6BFF0052BE2F /* SavedCardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardsViewModel.swift; sourceTree = "<group>"; };
+		6D46B15927ED73570052BE2F /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		6D46B15C27ED78440052BE2F /* PaymentTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewModel.swift; sourceTree = "<group>"; };
 		6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		6D9F17F627CC373A00053DE8 /* IokaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
 		6D9F17F827CC37E000053DE8 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
@@ -455,11 +461,9 @@
 		6D3E5B2E27E1A0530029D9C0 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				6D3E5AF827DC1BD50029D9C0 /* ProfileViewController.swift */,
-				6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */,
-				6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */,
-				6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */,
-				6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */,
+				6D46B15627ED6DF70052BE2F /* ViewController */,
+				6D46B15827ED73460052BE2F /* ViewModel */,
+				6D46B15727ED6E020052BE2F /* View */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -467,9 +471,9 @@
 		6D3E5B3327E1A4E40029D9C0 /* SavedCards */ = {
 			isa = PBXGroup;
 			children = (
-				6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */,
-				6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */,
-				6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */,
+				6D46B15127ED6BAD0052BE2F /* ViewController */,
+				6D46B15327ED6BDC0052BE2F /* ViewModel */,
+				6D46B15227ED6BB70052BE2F /* View */,
 			);
 			path = SavedCards;
 			sourceTree = "<group>";
@@ -507,6 +511,7 @@
 			isa = PBXGroup;
 			children = (
 				6D21C16B27EA812F00FC4C79 /* ViewController */,
+				6D46B15B27ED78310052BE2F /* ViewModel */,
 				6D21C16C27EA813B00FC4C79 /* View */,
 			);
 			path = PaymentType;
@@ -722,6 +727,66 @@
 				6D46B14F27ED68950052BE2F /* DemoAppImages.swift */,
 			);
 			path = DemoAppImages;
+			sourceTree = "<group>";
+		};
+		6D46B15127ED6BAD0052BE2F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B3427E1A51B0029D9C0 /* SavedCardsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D46B15227ED6BB70052BE2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */,
+				6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D46B15327ED6BDC0052BE2F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D46B15427ED6BFF0052BE2F /* SavedCardsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D46B15627ED6DF70052BE2F /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5AF827DC1BD50029D9C0 /* ProfileViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D46B15727ED6E020052BE2F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */,
+				6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */,
+				6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */,
+				6D3E5B3127E1A1A70029D9C0 /* ThemeProfileView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D46B15827ED73460052BE2F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D46B15927ED73570052BE2F /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D46B15B27ED78310052BE2F /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D46B15C27ED78440052BE2F /* PaymentTypeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		6DD0E17827D8894D00C29D1E /* IOKASDK */ = {
@@ -951,6 +1016,7 @@
 				6D3E5B2927E1851C0029D9C0 /* IokaBrowserState.swift in Sources */,
 				6D46B14527ED39270052BE2F /* ErrorView.swift in Sources */,
 				6D3E5AFB27DC1EF10029D9C0 /* OrderConfirmationViewController.swift in Sources */,
+				6D46B15A27ED73570052BE2F /* ProfileViewModel.swift in Sources */,
 				6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */,
 				6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */,
 				6D21C16827EA6D8400FC4C79 /* OrderInformationView.swift in Sources */,
@@ -963,6 +1029,7 @@
 				6D424EC727EAF7B900E7FD63 /* IokaLocalizable.swift in Sources */,
 				6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */,
 				6D2F04E427CAF5300095286F /* IokaButton.swift in Sources */,
+				6D46B15D27ED78440052BE2F /* PaymentTypeViewModel.swift in Sources */,
 				6D27E60C27DA8D360035FB2B /* EndPointType.swift in Sources */,
 				6D3E5B0827DE6A990029D9C0 /* DemoAppEndPoint.swift in Sources */,
 				6D27E61C27DA9E9C0035FB2B /* IokaApiEndPoint.swift in Sources */,
@@ -1003,6 +1070,7 @@
 				6DF7532327D023650047CFB9 /* HttpResponse.swift in Sources */,
 				6DC5041327CF724300015BD4 /* Card.swift in Sources */,
 				6D424ED427EB575700E7FD63 /* OrderConfirmationViewModel.swift in Sources */,
+				6D46B15527ED6BFF0052BE2F /* SavedCardsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

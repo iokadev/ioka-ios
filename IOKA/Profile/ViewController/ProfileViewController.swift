@@ -10,6 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     let profileView = ProfileView()
+    let viewModel = ProfileViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +31,11 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: ProfileViewDelegate {
     func showSavedCard(_ profileView: ProfileView) {
-        
         let vc = SavedCardsViewController()
         
-        DemoAppApi.shared.getProfile { result, error in
-            guard let customerAccessToken = result?.customer_access_token else { return }
+        viewModel.getProfile { [weak self] customerAccessToken in
             vc.customerAccessToken = customerAccessToken
-            IOKA.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] getCardsResponse, error in
-                if let getCardsResponse = getCardsResponse {
-                    DispatchQueue.main.async {
-                        vc.models = getCardsResponse
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-                if error != nil {
-                    DispatchQueue.main.async {
-                        self?.navigationController?.pushViewController(vc, animated: true)
-                    }
-                }
-            }
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
