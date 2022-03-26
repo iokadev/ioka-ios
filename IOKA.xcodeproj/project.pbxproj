@@ -50,8 +50,8 @@
 		6D3E5B1927DED1A20029D9C0 /* IokaCardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1827DED1A20029D9C0 /* IokaCardNumberTextField.swift */; };
 		6D3E5B1D27DEEE820029D9C0 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */; };
 		6D3E5B2327DFFD800029D9C0 /* ThreeDSecureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2227DFFD800029D9C0 /* ThreeDSecureCoordinator.swift */; };
-		6D3E5B2727E183AD0029D9C0 /* CustomBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */; };
-		6D3E5B2927E1851C0029D9C0 /* CustomBrowserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */; };
+		6D3E5B2727E183AD0029D9C0 /* IokaBrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2627E183AD0029D9C0 /* IokaBrowserViewController.swift */; };
+		6D3E5B2927E1851C0029D9C0 /* IokaBrowserState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2827E1851C0029D9C0 /* IokaBrowserState.swift */; };
 		6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */; };
 		6D3E5B2D27E19C920029D9C0 /* SaveCardProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */; };
 		6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */; };
@@ -157,8 +157,8 @@
 		6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
 		6D3E5B2227DFFD800029D9C0 /* ThreeDSecureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSecureCoordinator.swift; sourceTree = "<group>"; };
 		6D3E5B2427E02F7E0029D9C0 /* IOKA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IOKA.entitlements; sourceTree = "<group>"; };
-		6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBrowserViewController.swift; sourceTree = "<group>"; };
-		6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBrowserState.swift; sourceTree = "<group>"; };
+		6D3E5B2627E183AD0029D9C0 /* IokaBrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaBrowserViewController.swift; sourceTree = "<group>"; };
+		6D3E5B2827E1851C0029D9C0 /* IokaBrowserState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaBrowserState.swift; sourceTree = "<group>"; };
 		6D3E5B2A27E19C410029D9C0 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		6D3E5B2C27E19C910029D9C0 /* SaveCardProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCardProfileView.swift; sourceTree = "<group>"; };
 		6D3E5B2F27E1A0790029D9C0 /* LanguageProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageProfileView.swift; sourceTree = "<group>"; };
@@ -731,8 +731,8 @@
 		6D6F292927EDA2B900C3A576 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6D3E5B2627E183AD0029D9C0 /* CustomBrowserViewController.swift */,
-				6D3E5B2827E1851C0029D9C0 /* CustomBrowserState.swift */,
+				6D3E5B2627E183AD0029D9C0 /* IokaBrowserViewController.swift */,
+				6D3E5B2827E1851C0029D9C0 /* IokaBrowserState.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -998,7 +998,7 @@
 				6D6F28FF27ED99D900C3A576 /* ProfileViewModel.swift in Sources */,
 				6D2F04C827CAEC9C0095286F /* AppDelegate.swift in Sources */,
 				6DF7531B27CFD7E90047CFB9 /* Payer.swift in Sources */,
-				6D3E5B2727E183AD0029D9C0 /* CustomBrowserViewController.swift in Sources */,
+				6D3E5B2727E183AD0029D9C0 /* IokaBrowserViewController.swift in Sources */,
 				6D6F291727ED9D7C00C3A576 /* SavedCardPaymentViewControlller.swift in Sources */,
 				6D6F291527ED9D3D00C3A576 /* SavedCardPaymentCoordniator.swift in Sources */,
 				6DF7532527D0361B0047CFB9 /* Error.swift in Sources */,
@@ -1015,7 +1015,7 @@
 				6D3E5AF727DC18E80029D9C0 /* MainTabBarController.swift in Sources */,
 				6D3E5B2D27E19C920029D9C0 /* SaveCardProfileView.swift in Sources */,
 				6D2F04DC27CAED4A0095286F /* CardPaymentViewController.swift in Sources */,
-				6D3E5B2927E1851C0029D9C0 /* CustomBrowserState.swift in Sources */,
+				6D3E5B2927E1851C0029D9C0 /* IokaBrowserState.swift in Sources */,
 				6D3E5AFB27DC1EF10029D9C0 /* OrderConfirmationViewController.swift in Sources */,
 				6D3E5B2B27E19C410029D9C0 /* ProfileView.swift in Sources */,
 				6D6F28FA27ED98B000C3A576 /* PaymentTypeViewModel.swift in Sources */,
