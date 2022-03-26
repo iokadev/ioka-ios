@@ -2,7 +2,7 @@
 //  OrderInformationView.swift
 //  IOKA
 //
-//  Created by ablai erzhanov on 23.03.2022.
+//  Created by ablai erzhanov on 25.03.2022.
 //
 
 import UIKit
@@ -58,4 +58,3 @@ class OrderInformationView: UIView {
         seperatorView.centerY(in: self, left: self.leftAnchor, paddingLeft: 52, right: self.rightAnchor, paddingRight: 0, height: 1)
     }
 }
-

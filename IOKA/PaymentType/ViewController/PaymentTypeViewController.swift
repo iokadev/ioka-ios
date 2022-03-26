@@ -7,6 +7,8 @@
 
 import UIKit
 
+import UIKit
+
 protocol PaymentTypeViewControllerDelegate: NSObject {
     func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState)
 }

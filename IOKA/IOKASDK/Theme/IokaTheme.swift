@@ -48,4 +48,3 @@ extension IokaColors {
     static var defaultTheme = IokaColors(fill0: UIColor(named: "Fill0")!, fill1: UIColor(named: "Fill1")!, fill2: UIColor(named: "Fill2")!, fill3: UIColor(named: "Fill3")!, fill4: UIColor(named: "Fill4")!, fill5: UIColor(named: "Fill5")!, fill6: UIColor(named: "Fill6")!, fill7: UIColor(named: "Fill7")!, primary: UIColor(named: "Primary")!, secondary: UIColor(named: "Secondary")!, error: UIColor(named: "Error")!, success: UIColor(named: "Success")!, grey: UIColor(named: "Grey")!)
 }
 
-

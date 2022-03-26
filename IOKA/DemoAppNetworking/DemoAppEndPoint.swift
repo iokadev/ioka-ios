@@ -55,5 +55,3 @@ extension DemoAppEndPoint: EndPointType {
         return nil
     }
 }
-
-

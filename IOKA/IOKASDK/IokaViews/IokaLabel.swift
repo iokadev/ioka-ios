@@ -1,5 +1,5 @@
 //
-//  IokaLabel.swift
+//  CustomLabel.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 28.02.2022.

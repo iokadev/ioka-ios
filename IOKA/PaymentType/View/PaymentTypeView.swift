@@ -124,5 +124,3 @@ extension PaymentTypeView: PayWithCashViewDelegate, BankCardViewDelegate, AppleP
         payWithCashView.isPayWithCashSelected = false
     }
 }
-
-

@@ -56,4 +56,3 @@ class AddNewCardTableViewCell: UITableViewCell {
         showAddCardimageView.centerY(in: addCardImageView, right: self.contentView.rightAnchor, paddingRight: 16)
     }
 }
-

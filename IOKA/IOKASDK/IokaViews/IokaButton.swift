@@ -1,5 +1,5 @@
 //
-//  IokaButton.swift
+//  CustomButton.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 27.02.2022.

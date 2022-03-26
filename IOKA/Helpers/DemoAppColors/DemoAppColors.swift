@@ -1,8 +1,8 @@
 //
-//  IokaColors.swift
-//  iOKA
+//  DemoAppColors.swift
+//  IOKA
 //
-//  Created by ablai erzhanov on 10.03.2022.
+//  Created by ablai erzhanov on 25.03.2022.
 //
 
 import UIKit

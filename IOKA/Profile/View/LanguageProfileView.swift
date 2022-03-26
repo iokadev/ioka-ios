@@ -40,4 +40,3 @@ class LanguageProfileView: UIView {
         currentLanguageLabel.anchor(top: self.topAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingTop: 18, paddingBottom: 18, paddingRight: 48)
     }
 }
-

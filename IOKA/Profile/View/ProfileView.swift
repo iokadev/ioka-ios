@@ -5,10 +5,7 @@
 //  Created by ablai erzhanov on 16.03.2022.
 //
 
-import Foundation
 
-
-import Foundation
 import UIKit
 
 
@@ -62,4 +59,3 @@ class ProfileView: UIView {
         themeProfileView.anchor(top: languageProfileView.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
     }
 }
-

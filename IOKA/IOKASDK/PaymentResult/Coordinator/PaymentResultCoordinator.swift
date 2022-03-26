@@ -59,6 +59,4 @@ extension PaymentResultCoordinator: PaymentResultViewControllerDelegate {
         finishFlow(coordinator: self)
         parentCoordinator.startPaymentCoordinator()
     }
-
-
 }

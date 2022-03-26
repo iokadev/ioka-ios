@@ -1,9 +1,10 @@
 //
-//  CardCell.swift
+//  CardPaymentCell.swift
 //  IOKA
 //
-//  Created by ablai erzhanov on 21.03.2022.
+//  Created by ablai erzhanov on 25.03.2022.
 //
+
 
 import Foundation
 import UIKit

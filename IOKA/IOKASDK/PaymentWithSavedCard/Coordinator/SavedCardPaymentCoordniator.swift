@@ -1,11 +1,10 @@
 //
-//  PaymentWithSavedCardCoordniator.swift
+//  SavedCardPaymentCoordniator.swift
 //  IOKA
 //
-//  Created by ablai erzhanov on 23.03.2022.
+//  Created by ablai erzhanov on 25.03.2022.
 //
 
-import Foundation
 import UIKit
 
 

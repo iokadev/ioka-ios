@@ -112,5 +112,3 @@ extension IokaApiEndPoint: EndPointType {
         return nil
     }
 }
-
-
