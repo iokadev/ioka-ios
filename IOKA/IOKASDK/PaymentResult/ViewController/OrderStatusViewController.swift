@@ -12,7 +12,7 @@ enum OrderStatus {
     case paymentFailed
 }
 
-class OrderStatusViewController: UIViewController {
+class OrderStatusViewController: IokaViewController {
     
     var orderStatus: OrderStatus?
     let contentView = OrderStatusView()
@@ -21,7 +21,6 @@ class OrderStatusViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contentView.delegate = self
-        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillLayoutSubviews() {

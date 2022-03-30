@@ -20,7 +20,7 @@ protocol SaveCardViewDelegate: NSObject {
 
 class SaveCardView: UIView {
 
-    let titleLabel = IokaLabel(title: "К оплате 12 560", iokaFont: Typography.title)
+    let titleLabel = IokaLabel(title: "Новая карта", iokaFont: Typography.title)
     let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)

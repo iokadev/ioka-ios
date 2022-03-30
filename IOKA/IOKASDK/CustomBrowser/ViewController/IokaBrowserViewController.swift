@@ -13,7 +13,7 @@ protocol IokaBrowserViewControllerDelegate: NSObject {
     func closeIokaBrowserViewController(_ viewController: UIViewController, iokaBrowserState: IokaBrowserState, cardPaymentResponse: CardPaymentResponse?, getCardResponse: GetCardResponse?, error: IokaError?)
 }
 
-class IokaBrowserViewController:  UIViewController {
+class IokaBrowserViewController:  IokaViewController {
     
     var webView = WKWebView()
     var url: URL!
@@ -30,7 +30,6 @@ class IokaBrowserViewController:  UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = false
     }

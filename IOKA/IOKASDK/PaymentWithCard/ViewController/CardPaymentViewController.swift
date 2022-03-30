@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CardPaymentViewController: UIViewController {
+class CardPaymentViewController: IokaViewController {
     
     public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
     let contentView = CardPaymentView()
@@ -18,7 +18,6 @@ class CardPaymentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
         contentView.cardPaymentViewDelegate = self
     }
     
@@ -30,6 +29,10 @@ class CardPaymentViewController: UIViewController {
 }
 
 extension CardPaymentViewController: CardPaymentViewDelegate {
+    func closeCardPaymentView(_ view: CardPaymentView) {
+        cardPaymentViewControllerDelegate?.completeCardPaymentFlow()
+    }
+    
     func getEmitterByBinCode(_ view: UIView, with binCode: String) {
         viewModel.getBankEmiiter(binCode: binCode)
     }
