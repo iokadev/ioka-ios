@@ -16,7 +16,15 @@ class SavedCardsViewController: UIViewController {
     let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.fill6, cornerRadius: 8)
     var customerAccessToken: String!
     let viewModel = SavedCardsViewModel()
+    let resultView = DemoAppErrorView()
     var heightConstraint: NSLayoutConstraint?
+    
+    override func loadView() {
+        super.loadView()
+        self.view.backgroundColor = DemoAppColors.fill5
+        self.view.addSubview(tableView)
+        tableView.layer.cornerRadius = 12
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +37,19 @@ class SavedCardsViewController: UIViewController {
         }
     }
     
-    override func loadView() {
-        super.loadView()
-        self.view.backgroundColor = DemoAppColors.fill5
-        self.view.addSubview(tableView)
-        tableView.layer.cornerRadius = 12
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     private func setUpTableView() {
@@ -69,14 +80,40 @@ extension SavedCardsViewController: UITableViewDelegate, UITableViewDataSource {
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: GetCardTableViewCell.cellId, for: indexPath) as? GetCardTableViewCell else { return UITableViewCell() }
             cell.configure(model: self.models[indexPath.row])
+            cell.selectionStyle = .none
+            cell.delegate = self
             return cell
         }
     }
 }
 
 
-extension SavedCardsViewController: AddNewCardTablewViewCellDelegate {
+extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTableViewCellDelegate {
+    func deleteCard(_ view: GetCardTableViewCell, card: GetCardResponse) {
+        let vc = DeleteSavedCardViewController()
+        vc.card = card
+        vc.delegate = self
+        vc.modalPresentationStyle = .overFullScreen
+        self.navigationController?.present(vc, animated: false, completion: nil)
+    }
+    
     func viewTapped(_ view: AddNewCardTableViewCell) {
         IOKA.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
     }
+}
+
+extension SavedCardsViewController: DeleteSavedCardViewControllerDelegate, DemoAppErrorViewDelegate {
+    
+    func closeErrorView(_ view: DemoAppErrorView) {
+        resultView.removeFromSuperview()
+    }
+    
+    func closeDeleteCardViewController(_ viewController: UIViewController, card: GetCardResponse, error: IokaError?) {
+        resultView.error = error
+        resultView.delegate = self
+        self.view.addSubview(resultView)
+        resultView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 58, paddingRight: 16)
+    }
+    
+    
 }

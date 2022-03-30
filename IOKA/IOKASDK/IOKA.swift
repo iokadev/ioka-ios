@@ -48,4 +48,10 @@ class IOKA: IokaThemeProtocol {
         coordinator.startSaveCardCoordinator()
         coordinator.topViewController = viewController
     }
+    
+    func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {
+        IokaApi.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] error in
+            completion(error)
+        }
+    }
 }

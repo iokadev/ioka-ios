@@ -20,22 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window?.rootViewController = MainTabBarController()
         
-        
-        // Determine who sent the URL.
-        if let urlContext = connectionOptions.urlContexts.first {
-
-            let sendingAppID = urlContext.options.sourceApplication
-            let url = urlContext.url
-            print("source application = \(sendingAppID ?? "Unknown")")
-            print("url = \(url)")
-
-            // Process the URL similarly to the UIApplicationDelegate example.
-        }
-
-        /*
-         *
-         */
-        
     }
 
 

@@ -25,6 +25,8 @@ enum HTTPResponseStatus: Int {
     
     /// - ok:
     case ok = 200
+    
+    case noContent = 204
 
     //
     // Client Error - 4xx

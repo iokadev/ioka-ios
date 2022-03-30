@@ -48,10 +48,6 @@ class DemoAppApi {
     
     func createOrder(price: String, completion: @escaping(CreateOrderResponse?) -> Void) {
         endPointRouter.request(.createOrder(price: price)) { data, response, error in
-            if let error = error {
-                
-            }
-            
             if let data = data {
                 let object = self.decodeAnyObject(data: data, model: CreateOrderResponse.self)
                 completion(object)
