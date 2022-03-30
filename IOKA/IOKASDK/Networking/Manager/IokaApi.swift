@@ -12,7 +12,7 @@ typealias getBrandCompletion = (GetBrandResponse?, IokaError?) -> Void
 typealias getEmitterByBinCodeCompletion = (GetEmitterByBinCodeResponse?, IokaError?) -> Void
 typealias getCardsCompletion = ([GetCardResponse]?, IokaError?) -> Void
 typealias createBindingCompletion = (GetCardResponse?, IokaError?) -> Void
-typealias deleteCardByIDResponseCompletion = (DeleteCardByIDResponse?, IokaError?) -> Void
+typealias deleteCardByIDResponseCompletion = (IokaError?) -> Void
 typealias getCardByIDCompletion = (GetCardResponse?, IokaError?) -> Void
 typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, IokaError?) -> Void
 
@@ -95,9 +95,30 @@ class IokaApi {
     
     func deleteCard(customerId: String, cardId: String, completion: @escaping(deleteCardByIDResponseCompletion)) {
         endPointRouter.request(.deleteCardByID(customerId: customerId, cardId: cardId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: DeleteCardByIDResponse.self) { result, error in
-                completion(result, error)
+            
+            print("rewsponse is \(response)")
+            print("error is \(error)")
+            print("data is \(data)")
+            
+            if let response = response as? HTTPURLResponse {
+                guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
+            
+                switch result.responseType {
+                case .success:
+                    completion(nil)
+                case .failure:
+                    guard let data = data else { completion(IokaError(code: .noData, message: "No data returned from server"))
+                        return  }
+                    guard let responseObject = self.decodeAnyObject(data: data, model: IokaError.self) else { return }
+                    completion(responseObject)
+                }
             }
+            
+            if let error = error {
+                completion(IokaError(code: .networkError, message: error.localizedDescription))
+                return
+            }
+            
         }
     }
     

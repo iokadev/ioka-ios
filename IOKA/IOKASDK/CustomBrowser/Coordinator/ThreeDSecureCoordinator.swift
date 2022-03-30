@@ -55,9 +55,9 @@ extension ThreeDSecureCoordinator: IokaBrowserViewControllerDelegate {
             if let error = error {
                 parentCoordinator.startPaymentResultCoordinator(status: .paymentFailed, error: error, response: nil)
             }
-        case .createBinding(let customerId, let cardId):
-            print("Hello")
+            finishFlow(coordinator: self)
+        case .createBinding( _, _):
+            finishFlow(coordinator: self)
         }
-        finishFlow(coordinator: self)
     }
 }

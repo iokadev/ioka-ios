@@ -103,7 +103,7 @@ extension IokaApiEndPoint: EndPointType {
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         case .deleteCardByID( _, _):
             guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
-            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't apiKey") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't provide apiKey") }
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
         }
     }

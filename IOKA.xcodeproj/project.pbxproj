@@ -60,6 +60,9 @@
 		6D3E5B3727E1A9250029D9C0 /* GetCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */; };
 		6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */; };
 		6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E7CDE27D7F44C00C292A9 /* Factory.swift */; };
+		6D6BF26C27F38F4B006D0422 /* DeleteSavedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF26B27F38F4B006D0422 /* DeleteSavedCardView.swift */; };
+		6D6BF27027F3AFE0006D0422 /* DeleteSavedCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF26F27F3AFE0006D0422 /* DeleteSavedCardViewController.swift */; };
+		6D6BF27427F3C2C6006D0422 /* DemoAppErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF27327F3C2C6006D0422 /* DemoAppErrorView.swift */; };
 		6D6F28EB27ED965B00C3A576 /* ApplePayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6F28EA27ED965B00C3A576 /* ApplePayCell.swift */; };
 		6D6F28ED27ED966B00C3A576 /* CardPaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6F28EC27ED966B00C3A576 /* CardPaymentCell.swift */; };
 		6D6F28F327ED97EE00C3A576 /* OrderInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6F28F227ED97EE00C3A576 /* OrderInformationView.swift */; };
@@ -167,6 +170,9 @@
 		6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E7CDE27D7F44C00C292A9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		6D6BF26B27F38F4B006D0422 /* DeleteSavedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSavedCardView.swift; sourceTree = "<group>"; };
+		6D6BF26F27F3AFE0006D0422 /* DeleteSavedCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSavedCardViewController.swift; sourceTree = "<group>"; };
+		6D6BF27327F3C2C6006D0422 /* DemoAppErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppErrorView.swift; sourceTree = "<group>"; };
 		6D6F28EA27ED965B00C3A576 /* ApplePayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayCell.swift; sourceTree = "<group>"; };
 		6D6F28EC27ED966B00C3A576 /* CardPaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentCell.swift; sourceTree = "<group>"; };
 		6D6F28F227ED97EE00C3A576 /* OrderInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderInformationView.swift; sourceTree = "<group>"; };
@@ -332,6 +338,7 @@
 				6D3E5B3D27E21BD10029D9C0 /* PaymentType */,
 				6D3E5B2E27E1A0530029D9C0 /* Profile */,
 				6D3E5B3327E1A4E40029D9C0 /* SavedCards */,
+				6D6BF26D27F3AFBC006D0422 /* DeleteSavedCard */,
 				6D3E5B3A27E21A8D0029D9C0 /* DemoAppNetworking */,
 				6D21C15927E80EA600FC4C79 /* Models */,
 				6D6F290527ED9BA700C3A576 /* Helpers */,
@@ -499,6 +506,39 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		6D6BF26D27F3AFBC006D0422 /* DeleteSavedCard */ = {
+			isa = PBXGroup;
+			children = (
+				6D6BF27227F3AFE9006D0422 /* ViewModel */,
+				6D6BF26E27F3AFD0006D0422 /* ViewController */,
+				6D6BF27127F3AFE4006D0422 /* View */,
+			);
+			path = DeleteSavedCard;
+			sourceTree = "<group>";
+		};
+		6D6BF26E27F3AFD0006D0422 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6D6BF26F27F3AFE0006D0422 /* DeleteSavedCardViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6D6BF27127F3AFE4006D0422 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D6BF26B27F38F4B006D0422 /* DeleteSavedCardView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D6BF27227F3AFE9006D0422 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		6D6F28EE27ED976900C3A576 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +628,7 @@
 		6D6F290027ED9A7A00C3A576 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6D6BF27327F3C2C6006D0422 /* DemoAppErrorView.swift */,
 				6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */,
 				6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */,
 			);
@@ -995,6 +1036,7 @@
 				6D6F291927ED9D9B00C3A576 /* SavedCardPaymentViewModel.swift in Sources */,
 				6D6F292827EDA22900C3A576 /* IokaLocalizable.swift in Sources */,
 				6D3E5B3227E1A1A70029D9C0 /* ThemeProfileView.swift in Sources */,
+				6D6BF26C27F38F4B006D0422 /* DeleteSavedCardView.swift in Sources */,
 				6D6F28FF27ED99D900C3A576 /* ProfileViewModel.swift in Sources */,
 				6D2F04C827CAEC9C0095286F /* AppDelegate.swift in Sources */,
 				6DF7531B27CFD7E90047CFB9 /* Payer.swift in Sources */,
@@ -1037,6 +1079,7 @@
 				6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */,
 				6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */,
 				6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */,
+				6D6BF27427F3C2C6006D0422 /* DemoAppErrorView.swift in Sources */,
 				6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */,
 				6D6F293327EDA5C500C3A576 /* SaveCardCoordinator.swift in Sources */,
 				6D3E5B0227DE32B00029D9C0 /* PaymentWithCardViewModel.swift in Sources */,
@@ -1063,6 +1106,7 @@
 				6D27E61027DA8E0A0035FB2B /* HTTPTask.swift in Sources */,
 				6D6F28F327ED97EE00C3A576 /* OrderInformationView.swift in Sources */,
 				6D3E5AFF27DC29390029D9C0 /* IokaCustomView.swift in Sources */,
+				6D6BF27027F3AFE0006D0422 /* DeleteSavedCardViewController.swift in Sources */,
 				6D6F292C27EDA52B00C3A576 /* OrderConfirmationViewModel.swift in Sources */,
 				6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */,
 				6D6F290927ED9BE600C3A576 /* DemoAppImages.swift in Sources */,
