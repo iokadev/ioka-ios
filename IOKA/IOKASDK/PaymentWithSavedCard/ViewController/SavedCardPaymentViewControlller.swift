@@ -8,7 +8,7 @@
 import UIKit
 
 
-class SavedCardPaymentViewControlller: UIViewController {
+class SavedCardPaymentViewControlller: IokaViewController {
     
     let paymentSavedCardView = SavedCardPaymentView()
     var card: GetCardResponse!

@@ -60,6 +60,7 @@
 		6D3E5B3727E1A9250029D9C0 /* GetCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */; };
 		6D3E5B3927E1A97A0029D9C0 /* AddNewCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */; };
 		6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D3E7CDE27D7F44C00C292A9 /* Factory.swift */; };
+		6D6131E827F513F0002498C1 /* IokaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6131E727F513F0002498C1 /* IokaViewController.swift */; };
 		6D6BF26C27F38F4B006D0422 /* DeleteSavedCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF26B27F38F4B006D0422 /* DeleteSavedCardView.swift */; };
 		6D6BF27027F3AFE0006D0422 /* DeleteSavedCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF26F27F3AFE0006D0422 /* DeleteSavedCardViewController.swift */; };
 		6D6BF27427F3C2C6006D0422 /* DemoAppErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D6BF27327F3C2C6006D0422 /* DemoAppErrorView.swift */; };
@@ -170,6 +171,7 @@
 		6D3E5B3627E1A9250029D9C0 /* GetCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E5B3827E1A97A0029D9C0 /* AddNewCardTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewCardTableViewCell.swift; sourceTree = "<group>"; };
 		6D3E7CDE27D7F44C00C292A9 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		6D6131E727F513F0002498C1 /* IokaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaViewController.swift; sourceTree = "<group>"; };
 		6D6BF26B27F38F4B006D0422 /* DeleteSavedCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSavedCardView.swift; sourceTree = "<group>"; };
 		6D6BF26F27F3AFE0006D0422 /* DeleteSavedCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteSavedCardViewController.swift; sourceTree = "<group>"; };
 		6D6BF27327F3C2C6006D0422 /* DemoAppErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoAppErrorView.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 			children = (
 				6DC5040E27CED8A200015BD4 /* IOKA.swift */,
 				6D3E7CDE27D7F44C00C292A9 /* Factory.swift */,
+				6D6131E727F513F0002498C1 /* IokaViewController.swift */,
 				6D6F290C27ED9C9B00C3A576 /* Theme */,
 				6D6F292D27EDA58500C3A576 /* SaveCard */,
 				6D3E5B2527E1838F0029D9C0 /* CustomBrowser */,
@@ -1078,6 +1081,7 @@
 				6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */,
 				6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */,
 				6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */,
+				6D6131E827F513F0002498C1 /* IokaViewController.swift in Sources */,
 				6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */,
 				6D6BF27427F3C2C6006D0422 /* DemoAppErrorView.swift in Sources */,
 				6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */,

@@ -13,7 +13,7 @@ enum SaveCardStatus {
 }
 
 
-class SaveCardViewController: UIViewController {
+class SaveCardViewController: IokaViewController {
     
     public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
     let contentView = SaveCardView()
@@ -24,7 +24,6 @@ class SaveCardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.isHidden = true
         contentView.saveCardViewDelegate = self
     }
     

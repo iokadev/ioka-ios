@@ -13,6 +13,7 @@ protocol CardPaymentViewDelegate: NSObject {
     func getEmitterByBinCode(_ view: UIView, with binCode: String)
     func createCardPayment(_ view: UIView, cardNumber: String, cvc: String, exp: String)
     func checkPayButtonState(_ view: CardPaymentView)
+    func closeCardPaymentView(_ view: CardPaymentView)
     func modifyPaymentTextFields(_ view: CardPaymentView, text : String, textField: UITextField) -> String
 }
 
@@ -60,7 +61,13 @@ class CardPaymentView: UIView {
         
         payButton.addTarget(self, action: #selector(handlePayButton), for: .touchUpInside)
         
+        closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
+        
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
+    }
+    
+    @objc private func handleCloseButton() {
+        cardPaymentViewDelegate?.closeCardPaymentView(self)
     }
     
     @objc private func handlePayButton() {
