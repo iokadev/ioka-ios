@@ -40,7 +40,7 @@ class SavedCardPaymentCoordniator: NSObject, Coordinator {
     }
     
     func startFlow(coordinator: Coordinator) {
-        routerCoordinator.presentViewController(savedCardPaymentViewControlller, animated: true, completion: nil)
+        routerCoordinator.presentViewController(savedCardPaymentViewControlller, animated: false, completion: nil)
     }
     
     func finishFlow(coordinator: Coordinator) {
