@@ -96,10 +96,6 @@ class IokaApi {
     func deleteCard(customerId: String, cardId: String, completion: @escaping(deleteCardByIDResponseCompletion)) {
         endPointRouter.request(.deleteCardByID(customerId: customerId, cardId: cardId)) { data, response, error in
             
-            print("rewsponse is \(response)")
-            print("error is \(error)")
-            print("data is \(data)")
-            
             if let response = response as? HTTPURLResponse {
                 guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
             

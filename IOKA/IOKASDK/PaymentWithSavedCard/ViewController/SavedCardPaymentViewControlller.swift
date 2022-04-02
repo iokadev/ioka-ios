@@ -10,7 +10,7 @@ import UIKit
 
 class SavedCardPaymentViewControlller: IokaViewController {
     
-    let paymentSavedCardView = SavedCardPaymentView()
+    private lazy var paymentSavedCardView = SavedCardPaymentView()
     var card: GetCardResponse!
     var orderAccessToken: String!
     weak var delegate: SavedCardPaymentViewControlllerDelegate?
@@ -24,8 +24,7 @@ class SavedCardPaymentViewControlller: IokaViewController {
     
     override func loadView() {
         super.loadView()
-        self.view.addSubview(paymentSavedCardView)
-        paymentSavedCardView.configureView(card: card)
+        self.view = paymentSavedCardView
     }
     
     override func viewDidLayoutSubviews() {

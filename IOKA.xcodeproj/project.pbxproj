@@ -90,13 +90,14 @@
 		6D9F17F327CC2EEC00053DE8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */; };
 		6D9F17F727CC373A00053DE8 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F627CC373A00053DE8 /* IokaLabel.swift */; };
 		6D9F17F927CC37E000053DE8 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D9F17F827CC37E000053DE8 /* Typography.swift */; };
+		6DB31B7027F52378001AFFBB /* IokaBrowserNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB31B6F27F52378001AFFBB /* IokaBrowserNavigationView.swift */; };
 		6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5040E27CED8A200015BD4 /* IOKA.swift */; };
 		6DC5041327CF724300015BD4 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC5041227CF724300015BD4 /* Card.swift */; };
 		6DD0E17727D8894700C29D1E /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17627D8894700C29D1E /* CartViewController.swift */; };
 		6DD0E17A27D896DD00C29D1E /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17927D896DD00C29D1E /* ProductCell.swift */; };
 		6DD0E17C27D89D4400C29D1E /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DD0E17B27D89D4400C29D1E /* OrderModel.swift */; };
-		6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */; };
-		6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */; };
+		6DF7531127CF955A0047CFB9 /* PaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531027CF955A0047CFB9 /* PaymentResultViewController.swift */; };
+		6DF7531327CF95BC0047CFB9 /* PaymentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531227CF95BC0047CFB9 /* PaymentResultView.swift */; };
 		6DF7531527CF96660047CFB9 /* IokaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531427CF96660047CFB9 /* IokaImageView.swift */; };
 		6DF7531727CF98010047CFB9 /* IokaStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531627CF98010047CFB9 /* IokaStackView.swift */; };
 		6DF7531927CFD4E50047CFB9 /* CardPaymentResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF7531827CFD4E50047CFB9 /* CardPaymentResponse.swift */; };
@@ -201,13 +202,14 @@
 		6D9F17F227CC2EEC00053DE8 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		6D9F17F627CC373A00053DE8 /* IokaLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
 		6D9F17F827CC37E000053DE8 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		6DB31B6F27F52378001AFFBB /* IokaBrowserNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaBrowserNavigationView.swift; sourceTree = "<group>"; };
 		6DC5040E27CED8A200015BD4 /* IOKA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
 		6DC5041227CF724300015BD4 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		6DD0E17627D8894700C29D1E /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		6DD0E17927D896DD00C29D1E /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		6DD0E17B27D89D4400C29D1E /* OrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusViewController.swift; sourceTree = "<group>"; };
-		6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderStatusView.swift; sourceTree = "<group>"; };
+		6DF7531027CF955A0047CFB9 /* PaymentResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultViewController.swift; sourceTree = "<group>"; };
+		6DF7531227CF95BC0047CFB9 /* PaymentResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultView.swift; sourceTree = "<group>"; };
 		6DF7531427CF96660047CFB9 /* IokaImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaImageView.swift; sourceTree = "<group>"; };
 		6DF7531627CF98010047CFB9 /* IokaStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaStackView.swift; sourceTree = "<group>"; };
 		6DF7531827CFD4E50047CFB9 /* CardPaymentResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPaymentResponse.swift; sourceTree = "<group>"; };
@@ -387,6 +389,7 @@
 			children = (
 				6D6F292A27EDA2FD00C3A576 /* Coordinator */,
 				6D6F292927EDA2B900C3A576 /* ViewController */,
+				6DB31B6E27F52354001AFFBB /* View */,
 			);
 			path = CustomBrowser;
 			sourceTree = "<group>";
@@ -485,7 +488,7 @@
 		6D3E5B4227E21C7C0029D9C0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				6DF7531027CF955A0047CFB9 /* OrderStatusViewController.swift */,
+				6DF7531027CF955A0047CFB9 /* PaymentResultViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -493,7 +496,7 @@
 		6D3E5B4327E21C880029D9C0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6DF7531227CF95BC0047CFB9 /* OrderStatusView.swift */,
+				6DF7531227CF95BC0047CFB9 /* PaymentResultView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -832,6 +835,14 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		6DB31B6E27F52354001AFFBB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6DB31B6F27F52378001AFFBB /* IokaBrowserNavigationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		6DD0E17827D8894D00C29D1E /* IOKASDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -1023,6 +1034,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D3E7CDF27D7F44C00C292A9 /* Factory.swift in Sources */,
+				6DB31B7027F52378001AFFBB /* IokaBrowserNavigationView.swift in Sources */,
 				6DF7531F27CFDB460047CFB9 /* PaymentStatus.swift in Sources */,
 				6D3E5AFD27DC22780029D9C0 /* OrderConfirmationView.swift in Sources */,
 				6D3E5B1027DE94C70029D9C0 /* IOKAMainCoordinator.swift in Sources */,
@@ -1067,7 +1079,7 @@
 				6DC5040F27CED8A200015BD4 /* IOKA.swift in Sources */,
 				6DF7532927D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift in Sources */,
 				6D3E5B2327DFFD800029D9C0 /* ThreeDSecureCoordinator.swift in Sources */,
-				6DF7531127CF955A0047CFB9 /* OrderStatusViewController.swift in Sources */,
+				6DF7531127CF955A0047CFB9 /* PaymentResultViewController.swift in Sources */,
 				6D3E5B1927DED1A20029D9C0 /* IokaCardNumberTextField.swift in Sources */,
 				6D6F293527EDA5E600C3A576 /* SaveCardViewController.swift in Sources */,
 				6D2F04E227CAF2D10095286F /* TextFieldPlaceHolders.swift in Sources */,
@@ -1079,7 +1091,7 @@
 				6D27E61C27DA9E9C0035FB2B /* IokaApiEndPoint.swift in Sources */,
 				6D27E60E27DA8DC00035FB2B /* HTTPMethod.swift in Sources */,
 				6D3E5B3027E1A0790029D9C0 /* LanguageProfileView.swift in Sources */,
-				6DF7531327CF95BC0047CFB9 /* OrderStatusView.swift in Sources */,
+				6DF7531327CF95BC0047CFB9 /* PaymentResultView.swift in Sources */,
 				6D2F04DE27CAED960095286F /* CardPaymentView.swift in Sources */,
 				6D6131E827F513F0002498C1 /* IokaViewController.swift in Sources */,
 				6D27E61627DA92E50035FB2B /* JSONParameterEncoder.swift in Sources */,

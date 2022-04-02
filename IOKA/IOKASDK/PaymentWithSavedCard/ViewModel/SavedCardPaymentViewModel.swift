@@ -10,7 +10,7 @@ import Foundation
 
 class SavedCardPaymentViewModel {
     
-    func createCardPayment(orderId: String, card: Card, completion: @escaping(OrderStatus, IokaError?, CardPaymentResponse?) -> Void) {
+    func createCardPayment(orderId: String, card: Card, completion: @escaping(PaymentResult, IokaError?, CardPaymentResponse?) -> Void) {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {

@@ -68,11 +68,11 @@ extension String {
     }
     
     func checkCardNumber() -> IokaTextFieldState {
-        self.count == 16 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+        self.count == 19 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
     }
     
     func checkCVV() -> IokaTextFieldState {
-        self.count == 3 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+        self.count == 4 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
     }
     
     

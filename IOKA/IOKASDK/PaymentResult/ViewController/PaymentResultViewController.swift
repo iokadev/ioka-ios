@@ -7,15 +7,15 @@
 
 import UIKit
 
-enum OrderStatus {
+enum PaymentResult {
     case paymentSucceed
     case paymentFailed
 }
 
-class OrderStatusViewController: IokaViewController {
+class PaymentResultViewController: IokaViewController {
     
-    var orderStatus: OrderStatus?
-    let contentView = OrderStatusView()
+    var paymentResult: PaymentResult?
+    lazy var contentView = PaymentResultView()
     var paymentResultViewControllerDelegate: PaymentResultViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -25,12 +25,11 @@ class OrderStatusViewController: IokaViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.view.addSubview(contentView)
-        self.contentView.frame = self.view.frame
+        self.view = contentView
     }
 }
 
-extension OrderStatusViewController: OrderStatusViewDelegate {
+extension PaymentResultViewController: PaymentResultViewDelegate {
     func tryAgain() {
         self.paymentResultViewControllerDelegate?.retryPaymentProcess()
     }

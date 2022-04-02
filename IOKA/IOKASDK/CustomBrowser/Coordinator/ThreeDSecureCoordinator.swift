@@ -44,6 +44,10 @@ class ThreeDSecureCoordinator: NSObject, Coordinator {
 }
 
 extension ThreeDSecureCoordinator: IokaBrowserViewControllerDelegate {
+    func closeIokaBrowserViewController(_ viewController: UIViewController) {
+        finishFlow(coordinator: self)
+    }
+    
     func closeIokaBrowserViewController(_ viewController: UIViewController, iokaBrowserState: IokaBrowserState, cardPaymentResponse: CardPaymentResponse?, getCardResponse: GetCardResponse?, error: IokaError?) {
         switch iokaBrowserState {
         case .createCardPayment(_, _):

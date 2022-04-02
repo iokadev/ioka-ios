@@ -10,7 +10,7 @@ import UIKit
 
 
 protocol CardPaymentViewControllerDelegate: NSObject {
-    func completeCardPaymentFlow(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?)
+    func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
     func completeCardPaymentFlow()
 }
 
@@ -51,7 +51,7 @@ extension CardPaymentCoordinator: CardPaymentViewControllerDelegate {
         finishFlow(coordinator: self)
     }
     
-    func completeCardPaymentFlow(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?) {
+    func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
         if let response = response, let actionURL = response.action?.url {
             parentCoordinator.startThreeDSecureCoordinator(url: "\(actionURL)?return_url=https://ioka.kz", iokaBrowserState: .createCardPayment(orderId: response.order_id, paymentId: response.id))
         } else {
