@@ -389,6 +389,7 @@
 			children = (
 				6D6F292A27EDA2FD00C3A576 /* Coordinator */,
 				6D6F292927EDA2B900C3A576 /* ViewController */,
+				6DB31B6E27F52354001AFFBB /* View */,
 			);
 			path = CustomBrowser;
 			sourceTree = "<group>";
@@ -851,7 +852,6 @@
 				6D6F290C27ED9C9B00C3A576 /* Theme */,
 				6D6F292D27EDA58500C3A576 /* SaveCard */,
 				6D3E5B2527E1838F0029D9C0 /* CustomBrowser */,
-				6DB31B6E27F52354001AFFBB /* View */,
 				6D6F290F27ED9CF600C3A576 /* PaymentWithSavedCard */,
 				6D3E5B0027DE2FE40029D9C0 /* PaymentWithCard */,
 				6D3E5B1727DEA8D40029D9C0 /* PaymentResult */,

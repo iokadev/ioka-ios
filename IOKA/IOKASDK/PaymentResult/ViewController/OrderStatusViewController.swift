@@ -15,7 +15,7 @@ enum OrderStatus {
 class OrderStatusViewController: IokaViewController {
     
     var orderStatus: OrderStatus?
-    let contentView = OrderStatusView()
+    private lazy var contentView = OrderStatusView()
     var paymentResultViewControllerDelegate: PaymentResultViewControllerDelegate?
 
     override func viewDidLoad() {
@@ -25,8 +25,7 @@ class OrderStatusViewController: IokaViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.view.addSubview(contentView)
-        self.contentView.frame = self.view.frame
+        self.view = contentView
     }
 }
 

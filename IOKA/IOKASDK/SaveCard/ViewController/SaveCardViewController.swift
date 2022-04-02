@@ -16,7 +16,7 @@ enum SaveCardStatus {
 class SaveCardViewController: IokaViewController {
     
     public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
-    let contentView = SaveCardView()
+    private lazy var contentView = SaveCardView()
     let viewModel = SaveCardViewModel()
     var customerId: String!
     var saveCardViewControllerDelegate: SaveCardViewControllerDelegate?
@@ -29,8 +29,7 @@ class SaveCardViewController: IokaViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.view.addSubview(contentView)
-        self.contentView.frame = self.view.frame
+        self.view = contentView
     }
 }
 

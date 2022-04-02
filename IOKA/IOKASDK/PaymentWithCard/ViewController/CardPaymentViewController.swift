@@ -10,7 +10,7 @@ import UIKit
 class CardPaymentViewController: IokaViewController {
     
     public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
-    let contentView = CardPaymentView()
+    private lazy var contentView = CardPaymentView()
     let viewModel = PaymentWithCardViewModel()
     var order_id: String!
     var cardPaymentViewControllerDelegate: CardPaymentViewControllerDelegate?
@@ -23,8 +23,7 @@ class CardPaymentViewController: IokaViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.view.addSubview(contentView)
-        self.contentView.frame = self.view.frame
+        self.view = contentView
     }
 }
 
