@@ -17,12 +17,12 @@ class SavedCardPaymentView: UIView {
     weak var delegate: SavedCardPaymentViewDelegate?
     
     public let cvvTextField = UITextField()
-    private let savedCardView = IokaCustomView(backGroundColor: IOKA.shared.theme.fill1, cornerRadius: 12)
-    private let titleLabel = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.fill2)
+    private let savedCardView = IokaCustomView(backGroundColor: IOKA.shared.theme.background, cornerRadius: 12)
+    private let titleLabel = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.text)
     private let closeButton = IokaButton(imageName: "Close")
     private let cardInfoView = IokaCustomView(backGroundColor: IOKA.shared.theme.fill4, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
-    private let cardPanMaskedLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IOKA.shared.theme.fill2)
+    private let cardPanMaskedLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: IOKA.shared.theme.text)
     private let cvvImageView = IokaImageView(imageName: "cvvExplained")
     private let continueButton = IokaButton(iokaButtonState: .enabled, title: IokaLocalizable.continueButton)
     
@@ -57,7 +57,7 @@ class SavedCardPaymentView: UIView {
     }
     
     private func setUI() {
-        self.backgroundColor = IOKA.shared.theme.fill7
+        self.backgroundColor = IOKA.shared.theme.foreground
         self.addSubview(savedCardView)
         cvvTextField.placeholder = "CVV"
         cvvTextField.keyboardType = .numberPad

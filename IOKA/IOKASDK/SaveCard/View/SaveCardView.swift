@@ -120,7 +120,7 @@ class SaveCardView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = IOKA.shared.theme.fill1
+        self.backgroundColor = IOKA.shared.theme.background
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, saveButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)

@@ -16,7 +16,7 @@ class IokaBrowserNavigationView: UIView {
     
     weak var delegate: IokaBrowserNavigationViewDelegate?
     
-    private let title = IokaLabel(title: "Подтверждение оплаты", iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.fill2)
+    private let title = IokaLabel(title: "Подтверждение оплаты", iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.text)
     private let closeButton = IokaButton(imageName: "Close")
     
     

@@ -25,7 +25,7 @@ class IokaBrowserViewController:  IokaViewController {
     
     override func loadView() {
         super.loadView()
-        navView.backgroundColor = IOKA.shared.theme.fill1
+        navView.backgroundColor = IOKA.shared.theme.background
         self.view.addSubview(navView)
         self.view.addSubview(webView)
         webView.addSubview(activityIndicator)

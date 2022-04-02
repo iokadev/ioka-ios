@@ -29,14 +29,14 @@ enum IokaTheme {
 }
 
 struct IokaColors {
-    var fill0: UIColor
-    var fill1: UIColor
-    var fill2: UIColor
-    var fill3: UIColor
+    var nonadaptableText: UIColor
+    var background: UIColor
+    var text: UIColor
+    var divider: UIColor
     var fill4: UIColor
-    var fill5: UIColor
-    var fill6: UIColor
-    var fill7: UIColor
+    var secondaryBackground: UIColor
+    var tertiaryBackground: UIColor
+    var foreground: UIColor
     var primary: UIColor
     var secondary: UIColor
     var error: UIColor
@@ -45,6 +45,6 @@ struct IokaColors {
 }
 
 extension IokaColors {
-    static var defaultTheme = IokaColors(fill0: UIColor(named: "Fill0")!, fill1: UIColor(named: "Fill1")!, fill2: UIColor(named: "Fill2")!, fill3: UIColor(named: "Fill3")!, fill4: UIColor(named: "Fill4")!, fill5: UIColor(named: "Fill5")!, fill6: UIColor(named: "Fill6")!, fill7: UIColor(named: "Fill7")!, primary: UIColor(named: "Primary")!, secondary: UIColor(named: "Secondary")!, error: UIColor(named: "Error")!, success: UIColor(named: "Success")!, grey: UIColor(named: "Grey")!)
+    static var defaultTheme = IokaColors(nonadaptableText: UIColor(named: "nonadaptableText")!, background: UIColor(named: "Background")!, text: UIColor(named: "Text")!, divider: UIColor(named: "Divider")!, fill4: UIColor(named: "Fill4")!, secondaryBackground: UIColor(named: "SecondaryBackground")!, tertiaryBackground: UIColor(named: "TertiaryBackground")!, foreground: UIColor(named: "Foreground")!, primary: UIColor(named: "Primary")!, secondary: UIColor(named: "Secondary")!, error: UIColor(named: "Error")!, success: UIColor(named: "Success")!, grey: UIColor(named: "Grey")!)
 }
 

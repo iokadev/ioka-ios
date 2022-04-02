@@ -19,7 +19,7 @@ class PaymentResultView: UIView {
     private let imageView = IokaImageView()
     private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
     let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
-    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IOKA.shared.theme.fill2)
+    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: IOKA.shared.theme.text)
     let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
     private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
@@ -107,7 +107,7 @@ class PaymentResultView: UIView {
             imageView.image = IokaImages.checkCircle
         case .paymentFailed:
             orderTitleLabel.text = IokaLocalizable.paymentFailed
-            orderTitleLabel.textColor = IOKA.shared.theme.fill2
+            orderTitleLabel.textColor = IOKA.shared.theme.text
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)

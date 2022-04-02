@@ -20,7 +20,7 @@ class ErrorView: UIView {
         }
     }
     
-    private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.fill0, iokaTextAlignemnt: .left)
+    private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.nonadaptableText, iokaTextAlignemnt: .left)
     private let closeButton = IokaButton(imageName: "closeError")
     
     override init(frame: CGRect) {

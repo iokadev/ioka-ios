@@ -51,6 +51,7 @@ class IOKA: IokaThemeProtocol {
     
     func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {
         IokaApi.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] error in
+            guard let _ = self else { return }  
             completion(error)
         }
     }

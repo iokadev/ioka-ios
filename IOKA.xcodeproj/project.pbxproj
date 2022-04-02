@@ -835,6 +835,69 @@
 			path = Coordinator;
 			sourceTree = "<group>";
 		};
+		6D84522127F8F7A300D8C106 /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Facade;
+			sourceTree = "<group>";
+		};
+		6D84522227F8F7A800D8C106 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6D84522327F8F7B300D8C106 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6D84522427F8F7BA00D8C106 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		6D84522527F8F7C700D8C106 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6D84522627F8F7CB00D8C106 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6D84522727F8F7D900D8C106 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		6D84522827F8F7E200D8C106 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		6D84522927F8F7EF00D8C106 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		6DB31B6E27F52354001AFFBB /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -846,6 +909,15 @@
 		6DD0E17827D8894D00C29D1E /* IOKASDK */ = {
 			isa = PBXGroup;
 			children = (
+				6D84522127F8F7A300D8C106 /* Facade */,
+				6D84522227F8F7A800D8C106 /* Data */,
+				6D84522327F8F7B300D8C106 /* Domain */,
+				6D84522427F8F7BA00D8C106 /* Presentation */,
+				6D84522527F8F7C700D8C106 /* Views */,
+				6D84522627F8F7CB00D8C106 /* ViewControllers */,
+				6D84522727F8F7D900D8C106 /* ViewModels */,
+				6D84522827F8F7E200D8C106 /* Repositories */,
+				6D84522927F8F7EF00D8C106 /* API */,
 				6DC5040E27CED8A200015BD4 /* IOKA.swift */,
 				6D3E7CDE27D7F44C00C292A9 /* Factory.swift */,
 				6D6131E727F513F0002498C1 /* IokaViewController.swift */,
