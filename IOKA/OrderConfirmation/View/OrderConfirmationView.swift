@@ -28,7 +28,7 @@ class OrderConfirmationView: UIView {
     public lazy var paymentView = PaymentView(delegate: self)
     private let orderTitleLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: DemoAppColors.grey, iokaTextAlignemnt: .center)
     private let orderImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    private let orderPriceLabel = IokaLabel(iokaFont: Typography.heading, iokaTextColor: DemoAppColors.fill2, iokaTextAlignemnt: .center)
+    private let orderPriceLabel = IokaLabel(iokaFont: Typography.heading, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
     private let orderInformationView = OrderInformationView()
     private let confirmButton = IokaButton(iokaButtonState: .enabled, title: "Оформить")
     private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
@@ -62,7 +62,7 @@ class OrderConfirmationView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = DemoAppColors.fill5
+        self.backgroundColor = DemoAppColors.secondaryBackground
         [orderTitleLabel, orderImageView, orderPriceLabel, orderInformationView, paymentView, confirmButton].forEach{ self.addSubview($0) }
         
         

@@ -13,8 +13,7 @@ class SavedCardPaymentViewControlller: IokaViewController {
     private lazy var paymentSavedCardView = SavedCardPaymentView()
     var card: GetCardResponse!
     var orderAccessToken: String!
-    weak var delegate: SavedCardPaymentViewControlllerDelegate?
-    var viewModel = SavedCardPaymentViewModel()
+    var viewModel: SavedCardPaymentViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +34,7 @@ class SavedCardPaymentViewControlller: IokaViewController {
 
 extension SavedCardPaymentViewControlller: SavedCardPaymentViewDelegate {
     func dismissView(_ view: SavedCardPaymentView) {
-        delegate?.dismissView(self)
+        viewModel.dismiss()
     }
     
     func continueFlow(_ view: SavedCardPaymentView) {
@@ -44,7 +43,7 @@ extension SavedCardPaymentViewControlller: SavedCardPaymentViewDelegate {
         viewModel.createCardPayment(orderId: orderAccessToken.trimTokens(), card: card) { [weak self] status, error, result in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.delegate?.completeSavedCardPaymentFlow(self, status: status, error: error, response: result)
+                self.viewModel.completeSavedCardPaymentFlow(status: status, error: error, response: result)
             }
         }
     }

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol PaymentResultViewControllerDelegate: NSObject {
+protocol PaymentResultNavigationDelegate: NSObject {
     func closePaymentResultViewController()
     func retryPaymentProcess()
 }
@@ -37,6 +37,7 @@ class PaymentResultCoordinator: NSObject, Coordinator {
         self.error = error
         self.response = response
         super.init()
+        self.paymentResultViewController.viewModel.delegate  = self
     }
     
     func startFlow(coordinator: Coordinator) {
@@ -49,7 +50,7 @@ class PaymentResultCoordinator: NSObject, Coordinator {
     }
 }
 
-extension PaymentResultCoordinator: PaymentResultViewControllerDelegate {
+extension PaymentResultCoordinator: PaymentResultNavigationDelegate {
     func closePaymentResultViewController() {
         finishFlow(coordinator: self)
         parentCoordinator.finishFlow(coordinator: self)

@@ -8,9 +8,9 @@
 import UIKit
 
 
-protocol SaveCardViewControllerDelegate: NSObject {
-    func saveCardResult(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?)
-    func completeSaveCardFlow(_ viewController: SaveCardViewController)
+protocol SaveCardNavigationDelegate: NSObject {
+    func saveCard(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?)
+    func completeSaveCardFlow()
 }
 
 
@@ -31,6 +31,7 @@ class SaveCardCoordinator: NSObject, Coordinator {
         self.parentCoordinator = parentCoordinator
         self.navigationViewController = parentCoordinator.navigationViewController
         super.init()
+        self.saveCardViewController.viewModel.delegate = self
     }
     
     func startFlow(coordinator: Coordinator) {
@@ -43,12 +44,12 @@ class SaveCardCoordinator: NSObject, Coordinator {
     }
 }
 
-extension SaveCardCoordinator: SaveCardViewControllerDelegate {
-    func completeSaveCardFlow(_ viewController: SaveCardViewController) {
+extension SaveCardCoordinator: SaveCardNavigationDelegate {
+    func completeSaveCardFlow() {
         finishFlow(coordinator: self)
     }
     
-    func saveCardResult(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?) {
+    func saveCard(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?) {
         if let response = response, let actionURL = response.action?.url {
             parentCoordinator.startThreeDSecureCoordinator(url: "\(actionURL)?return_url=https://ioka.kz", iokaBrowserState: .createBinding(customerId: response.customer_id, cardId: response.id))
         }

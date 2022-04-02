@@ -19,7 +19,7 @@ class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
     let addCardImageView = IokaImageView(imageName: "addCard")
-    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
     let showAddCardimageView = IokaImageView(imageName: "chevronRight")
     
     weak var delegate: AddNewCardTablewViewCellDelegate?
@@ -43,7 +43,7 @@ class AddNewCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.fill6
+        self.backgroundColor = DemoAppColors.tertiaryBackground
         self.layer.cornerRadius = 8
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }

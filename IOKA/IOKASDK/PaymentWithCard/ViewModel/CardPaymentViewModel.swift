@@ -9,7 +9,18 @@ import Foundation
 import UIKit
 
 
-class PaymentWithCardViewModel {
+class CardPaymentViewModel {
+    
+    weak var delegate: CardPaymentNavigationDelegate?
+    
+    
+    func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
+        delegate?.completeCardPaymentFlow(status: status, error: error, response: response)
+    }
+    
+    func completeCardPaymentFlow() {
+        delegate?.completeCardPaymentFlow()
+    }
     
     
     func createCardPayment(order_id: String, card: Card, completion: @escaping((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)) {

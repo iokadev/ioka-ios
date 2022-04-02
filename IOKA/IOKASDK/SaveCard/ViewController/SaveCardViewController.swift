@@ -17,9 +17,8 @@ class SaveCardViewController: IokaViewController {
     
     public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
     private lazy var contentView = SaveCardView()
-    let viewModel = SaveCardViewModel()
+    var viewModel: SaveCardViewModel!
     var customerId: String!
-    var saveCardViewControllerDelegate: SaveCardViewControllerDelegate?
    
 
     override func viewDidLoad() {
@@ -35,7 +34,7 @@ class SaveCardViewController: IokaViewController {
 
 extension SaveCardViewController: SaveCardViewDelegate {
     func close(_ view: SaveCardView) {
-        self.saveCardViewControllerDelegate?.completeSaveCardFlow(self)
+        self.viewModel.completeSaveCardFlow()
     }
     
     
@@ -67,7 +66,7 @@ extension SaveCardViewController: SaveCardViewDelegate {
         
         viewModel.saveCard(view, customerId: customerId, card: card) { status, error, result in
             DispatchQueue.main.async {
-                self.saveCardViewControllerDelegate?.saveCardResult(status: status, error: error, response: result)
+                self.viewModel.saveCard(status: status, error: error, response: result)
             }
         }
     }

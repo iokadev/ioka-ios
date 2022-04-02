@@ -16,7 +16,7 @@ class CartViewController: UIViewController, UITableViewDataSource, UITableViewDe
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.backgroundColor = DemoAppColors.fill5
+        tableView.backgroundColor = DemoAppColors.secondaryBackground
         return tableView
     }()
     

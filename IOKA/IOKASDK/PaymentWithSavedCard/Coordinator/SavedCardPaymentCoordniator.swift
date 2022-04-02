@@ -8,9 +8,9 @@
 import UIKit
 
 
-protocol SavedCardPaymentViewControlllerDelegate: NSObject {
-    func dismissView(_ viewController: SavedCardPaymentViewControlller)
-    func completeSavedCardPaymentFlow(_ viewController: SavedCardPaymentViewControlller, status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
+protocol SavedCardPaymentNavigationDelegate: NSObject {
+    func dismissView()
+    func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
 }
 
 
@@ -37,6 +37,7 @@ class SavedCardPaymentCoordniator: NSObject, Coordinator {
         self.card = card
         self.orderAccessToken = orderAccessToken
         super.init()
+        self.savedCardPaymentViewControlller.viewModel.delegate = self
     }
     
     func startFlow(coordinator: Coordinator) {
@@ -49,12 +50,12 @@ class SavedCardPaymentCoordniator: NSObject, Coordinator {
     }
 }
 
-extension SavedCardPaymentCoordniator: SavedCardPaymentViewControlllerDelegate {
-    func dismissView(_ viewController: SavedCardPaymentViewControlller) {
+extension SavedCardPaymentCoordniator: SavedCardPaymentNavigationDelegate {
+    func dismissView() {
         self.finishFlow(coordinator: self)
     }
     
-    func completeSavedCardPaymentFlow(_ viewController: SavedCardPaymentViewControlller, status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
+    func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
         finishFlow(coordinator: self)
         if let response = response, let actionURL = response.action?.url {
             parentCoordinator.startThreeDSecureCoordinator(url: "\(actionURL)?return_url=https://ioka.kz", iokaBrowserState: .createCardPayment(orderId: response.order_id, paymentId: response.id))

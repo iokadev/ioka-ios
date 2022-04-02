@@ -10,6 +10,16 @@ import Foundation
 
 class SavedCardPaymentViewModel {
     
+    weak var delegate: SavedCardPaymentNavigationDelegate?
+    
+    func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
+        delegate?.completeSavedCardPaymentFlow(status: status, error: error, response: response)
+    }
+    
+    func dismiss() {
+        delegate?.dismissView()
+    }
+    
     func createCardPayment(orderId: String, card: Card, completion: @escaping(PaymentResult, IokaError?, CardPaymentResponse?) -> Void) {
         
         let queue = DispatchQueue.global(qos: .userInitiated)

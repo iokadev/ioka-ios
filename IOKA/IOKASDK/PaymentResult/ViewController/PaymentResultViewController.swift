@@ -16,7 +16,7 @@ class PaymentResultViewController: IokaViewController {
     
     var paymentResult: PaymentResult?
     lazy var contentView = PaymentResultView()
-    var paymentResultViewControllerDelegate: PaymentResultViewControllerDelegate?
+    var viewModel: PaymentResultViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +31,11 @@ class PaymentResultViewController: IokaViewController {
 
 extension PaymentResultViewController: PaymentResultViewDelegate {
     func tryAgain() {
-        self.paymentResultViewControllerDelegate?.retryPaymentProcess()
+        viewModel.retryPaymentProcess()
     }
     
     func closePaymentResult() {
-        self.paymentResultViewControllerDelegate?.closePaymentResultViewController()
+        viewModel.closePaymentResultViewController()
     }
     
     

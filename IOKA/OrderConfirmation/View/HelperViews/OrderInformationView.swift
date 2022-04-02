@@ -15,8 +15,8 @@ protocol OrderInformationViewDelegate: NSObject {
 
 class OrderInformationView: UIView {
     
-    private let orderAdressLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
-    private let orderTimeLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    private let orderAdressLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    private let orderTimeLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
     private let orderAdressImageView = IokaImageView(imageName: "orderAdress")
     private let orderTimeImageView = IokaImageView(imageName: "orderTime")
     private let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
@@ -39,7 +39,7 @@ class OrderInformationView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.fill6
+        self.backgroundColor = DemoAppColors.tertiaryBackground
         self.layer.cornerRadius = 8
         [orderAdressLabel, orderTimeLabel, orderAdressImageView, orderTimeImageView, seperatorView, chevronRightImageViewAdress, chevronRightImageViewTime].forEach{ self.addSubview($0) }
         

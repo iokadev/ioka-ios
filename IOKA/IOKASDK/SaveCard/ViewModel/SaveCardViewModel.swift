@@ -10,6 +10,16 @@ import UIKit
 
 
 class SaveCardViewModel {
+    weak var delegate: SaveCardNavigationDelegate?
+    
+    
+    func saveCard(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?) {
+        delegate?.saveCard(status: status, error: error, response: response)
+    }
+    
+    func completeSaveCardFlow() {
+        delegate?.completeSaveCardFlow()
+    }
     
     func saveCard(_ view: SaveCardView, customerId: String, card: Card, completion: @escaping((SaveCardStatus, IokaError?, GetCardResponse?) -> Void)) {
         IokaApi.shared.createBinding(customerId: customerId, card: card) { [weak self] result, error in

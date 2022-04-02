@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-protocol CardPaymentViewControllerDelegate: NSObject {
+protocol CardPaymentNavigationDelegate: NSObject {
     func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
     func completeCardPaymentFlow()
 }
@@ -34,6 +34,7 @@ class CardPaymentCoordinator: NSObject, Coordinator {
         self.parentCoordinator = parentCoordinator
         self.navigationViewController = parentCoordinator.navigationViewController
         super.init()
+        self.cardPaymentViewController.viewModel.delegate = self
     }
     
     func startFlow(coordinator: Coordinator) {
@@ -46,7 +47,7 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     }
 }
 
-extension CardPaymentCoordinator: CardPaymentViewControllerDelegate {
+extension CardPaymentCoordinator: CardPaymentNavigationDelegate {
     func completeCardPaymentFlow() {
         finishFlow(coordinator: self)
     }

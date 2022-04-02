@@ -11,9 +11,8 @@ class CardPaymentViewController: IokaViewController {
     
     public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
     private lazy var contentView = CardPaymentView()
-    let viewModel = PaymentWithCardViewModel()
+    var viewModel: CardPaymentViewModel!
     var order_id: String!
-    var cardPaymentViewControllerDelegate: CardPaymentViewControllerDelegate?
    
 
     override func viewDidLoad() {
@@ -21,15 +20,20 @@ class CardPaymentViewController: IokaViewController {
         contentView.cardPaymentViewDelegate = self
     }
     
+    override func loadView() {
+        super.loadView()
+        self.view = contentView
+    }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        self.view = contentView
+        
     }
 }
 
 extension CardPaymentViewController: CardPaymentViewDelegate {
     func closeCardPaymentView(_ view: CardPaymentView) {
-        cardPaymentViewControllerDelegate?.completeCardPaymentFlow()
+        viewModel.completeCardPaymentFlow()
     }
     
     func getEmitterByBinCode(_ view: UIView, with binCode: String) {
@@ -59,7 +63,7 @@ extension CardPaymentViewController: CardPaymentViewDelegate {
         let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
         viewModel.createCardPayment(order_id: order_id, card: card) { status, error, result in
             DispatchQueue.main.async {
-                self.cardPaymentViewControllerDelegate?.completeCardPaymentFlow(status: status, error: error, response: result)
+                self.viewModel.completeCardPaymentFlow(status: status, error: error, response: result)
             }
         }
     }
