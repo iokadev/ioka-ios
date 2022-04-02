@@ -15,7 +15,7 @@ enum SaveCardStatus {
 
 class SaveCardViewController: IokaViewController {
     
-    public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
+    public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
     private lazy var contentView = SaveCardView()
     let viewModel = SaveCardViewModel()
     var customerId: String!

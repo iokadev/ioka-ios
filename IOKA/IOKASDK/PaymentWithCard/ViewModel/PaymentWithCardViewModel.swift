@@ -12,7 +12,7 @@ import UIKit
 class PaymentWithCardViewModel {
     
     
-    func createCardPayment(order_id: String, card: Card, completion: @escaping((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)) {
+    func createCardPayment(order_id: String, card: Card, completion: @escaping((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)) {
         IokaApi.shared.createCardPayment(orderId: order_id, card: card) { [weak self] result, error in
             guard let _ = self else { return }
             guard error == nil else { completion(.paymentFailed, error, nil)

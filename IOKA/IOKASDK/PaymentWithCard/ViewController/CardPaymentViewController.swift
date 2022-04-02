@@ -9,7 +9,7 @@ import UIKit
 
 class CardPaymentViewController: IokaViewController {
     
-    public var onButtonPressed: ((OrderStatus, IokaError?, CardPaymentResponse?) -> Void)?
+    public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
     private lazy var contentView = CardPaymentView()
     let viewModel = PaymentWithCardViewModel()
     var order_id: String!

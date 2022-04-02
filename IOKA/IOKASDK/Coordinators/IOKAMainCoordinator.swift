@@ -44,8 +44,8 @@ class IOKAMainCoordinator: NSObject, Coordinator {
         paymentCoordinator.startFlow(coordinator: self)
     }
     
-    func startPaymentResultCoordinator(status: OrderStatus, error: IokaError?, response: CardPaymentResponse?) {
-        let paymentResultCoordninator = PaymentResultCoordinator(parentCoordinator: self, orderStatus: status, error: error, response: response)
+    func startPaymentResultCoordinator(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
+        let paymentResultCoordninator = PaymentResultCoordinator(parentCoordinator: self, paymentResult: status, error: error, response: response)
         self.children.append(paymentResultCoordninator)
         paymentResultCoordninator.startFlow(coordinator: self)
     }

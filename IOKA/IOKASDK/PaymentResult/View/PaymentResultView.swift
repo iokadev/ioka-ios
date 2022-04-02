@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol OrderStatusViewDelegate: NSObject {
+protocol PaymentResultViewDelegate: NSObject {
     func tryAgain()
     func closePaymentResult()
 }
 
-class OrderStatusView: UIView {
+class PaymentResultView: UIView {
     
     private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()
@@ -23,9 +23,9 @@ class OrderStatusView: UIView {
     let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey)
     private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
-    weak var delegate: OrderStatusViewDelegate?
+    weak var delegate: PaymentResultViewDelegate?
     
-    var orderStatusState: OrderStatus? {
+    var paymentResult: PaymentResult? {
         didSet {
             setupOrderViewStatus()
         }
@@ -63,9 +63,9 @@ class OrderStatusView: UIView {
     }
     
     @objc private func handleRetryOrCloseButton() {
-        guard let orderStatusState = orderStatusState else { return }
+        guard let paymentResult = paymentResult else { return }
 
-        switch orderStatusState {
+        switch paymentResult {
         case .paymentFailed: delegate?.tryAgain()
         case .paymentSucceed: delegate?.closePaymentResult()
         }
@@ -97,7 +97,7 @@ class OrderStatusView: UIView {
     private func setupOrderViewStatus() {
         [orderTitleLabel, orderPriceLabel, orderNumberLabel, errorDescriptionLabel].forEach{ $0.textAlignment = .center }
         
-        guard let orderStatusState = orderStatusState else { return }
+        guard let orderStatusState = paymentResult else { return }
         switch orderStatusState {
         case .paymentSucceed:
             orderTitleLabel.text = IokaLocalizable.orderPaid
