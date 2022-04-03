@@ -10,7 +10,7 @@ import Foundation
 
 class SavedCardPaymentViewModel {
     
-    weak var delegate: SavedCardPaymentNavigationDelegate?
+    var delegate: SavedCardPaymentNavigationDelegate?
     
     func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
         delegate?.completeSavedCardPaymentFlow(status: status, error: error, response: response)

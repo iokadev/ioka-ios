@@ -74,7 +74,7 @@ class CardFormView: UIView {
     private func setActions() {
         [dateExpirationTextField, cardNumberTextField, cvvTextField].forEach{$0.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)}
         
-        createButton.addTarget(self, action: #selector(handlePayButton), for: .touchUpInside)
+        createButton.addTarget(self, action: #selector(handleCreateButton), for: .touchUpInside)
         
         closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         
@@ -85,13 +85,22 @@ class CardFormView: UIView {
         delegate?.closeCardFormView(self)
     }
     
-    @objc private func handlePayButton() {
+    @objc private func handleCreateButton() {
         createButton.showLoading()
-        guard createButton.iokaButtonState == .enabled else { return }
-        guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
-        guard let cvc = cvvTextField.text else { return }
-        guard let exp = dateExpirationTextField.text else { return }
-        delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+        
+        switch createButton.iokaButtonState {
+        case .savingSuccess:
+            delegate?.closeCardFormView(self)
+        case .enabled:
+            guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
+            guard let cvc = cvvTextField.text else { return }
+            guard let exp = dateExpirationTextField.text else { return }
+            delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+        default:
+            delegate?.checkCreateButtonState(self)
+        }
+
+       
     }
     
     @objc func didChangeText(textField: UITextField) {

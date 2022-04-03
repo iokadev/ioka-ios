@@ -11,7 +11,7 @@ import UIKit
 
 class SaveCardViewModel {
     
-    weak var delegate: SaveCardNavigationDelegate?
+    var delegate: SaveCardNavigationDelegate?
     var childViewModel = CardFormViewModel()
     
     func saveCard(status: SaveCardStatus, error: IokaError?, response: GetCardResponse?) {

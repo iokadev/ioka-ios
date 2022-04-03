@@ -11,7 +11,7 @@ import UIKit
 
 class CardPaymentViewModel {
     
-    weak var delegate: CardPaymentNavigationDelegate?
+    var delegate: CardPaymentNavigationDelegate?
     var childViewModel = CardFormViewModel()
     
     func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {

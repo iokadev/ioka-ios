@@ -19,16 +19,12 @@ class SavedCardPaymentViewControlller: IokaViewController {
         super.viewDidLoad()
         self.view.backgroundColor = IOKA.shared.theme.foreground
         paymentSavedCardView.delegate = self
+        paymentSavedCardView.configureView(card: card)
     }
     
     override func loadView() {
         super.loadView()
         self.view = paymentSavedCardView
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.paymentSavedCardView.frame = self.view.frame
     }
 }
 

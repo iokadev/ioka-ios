@@ -23,16 +23,19 @@ class IOKA: IokaThemeProtocol {
     
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
         self.orderAccessToken = orderAccessToken
-        let coordinator = IOKAMainCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.startPaymentCoordinator()
+        
+        let coordinator = CardPaymentCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
         coordinator.topViewController = viewController
+        coordinator.showCardPaymentForm()
     }
     
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
         self.orderAccessToken = orderAccessToken
-        let coordinator = IOKAMainCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.startSavedCardPaymentCoordinator(card: card, orderAccessToken: orderAccessToken)
+        let coordinator = SavedCardPaymentCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
+        coordinator.card = card
+        coordinator.orderAccessToken = orderAccessToken
         coordinator.topViewController = viewController
+        coordinator.showSavedCardPaymentForm()
     }
     
     func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, IokaError?) -> Void )) {
@@ -44,9 +47,9 @@ class IOKA: IokaThemeProtocol {
     
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
         self.customerAccessToken = customerAccessToken
-        let coordinator = IOKAMainCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.startSaveCardCoordinator()
+        let coordinator = SaveCardCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
         coordinator.topViewController = viewController
+        coordinator.showCardForm()
     }
     
     func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {

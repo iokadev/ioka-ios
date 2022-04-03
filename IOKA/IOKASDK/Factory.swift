@@ -16,6 +16,7 @@ class IokaFactory {
         let viewController = CardPaymentViewController()
         viewController.order_id = orderAccesToken.trimTokens()
         viewController.viewModel = CardPaymentViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
     }
     
@@ -25,6 +26,7 @@ class IokaFactory {
         viewController.contentView.error = error
         viewController.contentView.orderResponse = response
         viewController.viewModel = PaymentResultViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
     }
     
@@ -41,6 +43,7 @@ class IokaFactory {
         vc.modalPresentationStyle = .overFullScreen
         vc.card = card
         vc.viewModel = SavedCardPaymentViewModel()
+        vc.viewModel.delegate = delegate
         vc.orderAccessToken = orderAccessToken
         
         return vc
@@ -51,6 +54,7 @@ class IokaFactory {
         let viewController = SaveCardViewController()
         viewController.customerId = customerAccessToken.trimTokens()
         viewController.viewModel = SaveCardViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
     }
 }
