@@ -9,7 +9,6 @@ import UIKit
 
 class CardPaymentViewController: IokaViewController {
     
-    public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
     private lazy var contentView = CardFormView(state: .payment)
     var viewModel: CardPaymentViewModel!
     var order_id: String!
@@ -18,16 +17,17 @@ class CardPaymentViewController: IokaViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
+        
+        viewModel.cardPaymentFailure = { [weak self] error in
+            if let error = error {
+                self?.contentView.showErrorView(error: error)
+            }
+        }
     }
     
     override func loadView() {
         super.loadView()
         self.view = contentView
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
     }
 }
 

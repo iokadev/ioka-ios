@@ -13,6 +13,7 @@ class CardPaymentViewModel {
     
     var delegate: CardPaymentNavigationDelegate?
     var childViewModel = CardFormViewModel()
+    var cardPaymentFailure: ((IokaError?) -> Void)?
     
     func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
         delegate?.completeCardPaymentFlow(status: status, error: error, response: response)
@@ -24,8 +25,9 @@ class CardPaymentViewModel {
     
     func createCardPayment(order_id: String, card: Card, completion: @escaping((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)) {
         IokaApi.shared.createCardPayment(orderId: order_id, card: card) { [weak self] result, error in
-            guard let _ = self else { return }
-            guard error == nil else { completion(.paymentFailed, error, nil)
+            guard let self = self else { return }
+            guard error == nil else {
+                self.cardPaymentFailure?(error)
                 return
             }
             guard let result = result else { return }

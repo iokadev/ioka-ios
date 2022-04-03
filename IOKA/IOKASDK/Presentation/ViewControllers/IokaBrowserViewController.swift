@@ -18,7 +18,7 @@ class IokaBrowserViewController:  IokaViewController {
     
     var webView = WKWebView()
     var navView = IokaBrowserNavigationView()
-    var activityIndicator = UIActivityIndicatorView()
+    private lazy var loadingIndicator = IokaProgressView2()
     var url: URL!
     var iokaBrowserState: IokaBrowserState!
     weak var delegate: IokaBrowserViewControllerDelegate?
@@ -26,23 +26,24 @@ class IokaBrowserViewController:  IokaViewController {
     override func loadView() {
         super.loadView()
         navView.backgroundColor = IOKA.shared.theme.background
+        self.view.backgroundColor = IOKA.shared.theme.background
         self.view.addSubview(navView)
         self.view.addSubview(webView)
-        webView.addSubview(activityIndicator)
+        self.view.addSubview(loadingIndicator)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         navView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 100)
         webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        activityIndicator.center(in: self.view, in: self.view)
+        loadingIndicator.center(in: self.view, in: self.view, width: 80, height: 80)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        activityIndicator.hidesWhenStopped = true
         self.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.isLoading), options: .new, context: nil)
-        activityIndicator.startAnimating()
+        
+        loadingIndicator.startIndicator()
         navView.delegate = self
         webView.navigationDelegate = self
         webView.load(URLRequest(url: url))
@@ -52,11 +53,10 @@ class IokaBrowserViewController:  IokaViewController {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "loading" {
             if webView.isLoading {
-                activityIndicator.startAnimating()
-                activityIndicator.isHidden = false
+                loadingIndicator.isHidden = false
+                loadingIndicator.startIndicator()
             } else {
-                activityIndicator.stopAnimating()
-                activityIndicator.isHidden = true
+                loadingIndicator.isHidden = true
             }
         }
     }
@@ -72,9 +72,12 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
     }
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+        
+        self.webView.isHidden = true
+        loadingIndicator.isHidden = false
+//        loadingIndicator.animateStroke()
     
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            
             guard let iokaBrowserState = self.iokaBrowserState else { return }
             
             switch iokaBrowserState {

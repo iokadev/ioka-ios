@@ -92,6 +92,9 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
             self.show3DSecure()
             self.dismissCardPaymentForm()
         } else {
+            self.paymentResult = status
+            self.error = error
+            self.response = response
             self.showPaymentResult()
             self.dismissCardPaymentForm()
         }
