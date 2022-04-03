@@ -22,7 +22,7 @@ class IokaLabel: UILabel {
     }
     
     convenience init(title: String? = nil, iokaFont: UIFont? = nil, iokaTextColor: UIColor? = nil, iokaTextAlignemnt: NSTextAlignment? = nil) {
-        self.init(frame: CGRect())
+        self.init()
         self.title = title
         self.iokaFont = iokaFont
         self.iokaTextColor = iokaTextColor

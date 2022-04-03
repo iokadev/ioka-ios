@@ -10,14 +10,14 @@ import UIKit
 class CardPaymentViewController: IokaViewController {
     
     public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
-    private lazy var contentView = CardPaymentView()
+    private lazy var contentView = CardFormView(state: .payment)
     var viewModel: CardPaymentViewModel!
     var order_id: String!
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.cardPaymentViewDelegate = self
+        contentView.delegate = self
     }
     
     override func loadView() {
@@ -31,25 +31,25 @@ class CardPaymentViewController: IokaViewController {
     }
 }
 
-extension CardPaymentViewController: CardPaymentViewDelegate {
-    func closeCardPaymentView(_ view: CardPaymentView) {
+extension CardPaymentViewController: CardFormViewDelegate {
+    func closeCardFormView(_ view: CardFormView) {
         viewModel.completeCardPaymentFlow()
     }
     
-    func getEmitterByBinCode(_ view: UIView, with binCode: String) {
+    func getEmitterByBinCode(_ view: CardFormView, with binCode: String) {
         viewModel.getBankEmiiter(binCode: binCode)
     }
     
-    func modifyPaymentTextFields(_ view: CardPaymentView, text: String, textField: UITextField) -> String {
+    func modifyPaymentTextFields(_ view: CardFormView, text: String, textField: UITextField) -> String {
         viewModel.modifyPaymentTextFields(view: view, text: text, textField: textField)
     }
     
     
-    func checkPayButtonState(_ view: CardPaymentView) {
+    func checkCreateButtonState(_ view: CardFormView) {
         viewModel.checkPayButtonState(view: view)
     }
     
-    func getBrand(_ view: UIView, with partialBin: String) {
+    func getBrand(_ view: CardFormView, with partialBin: String) {
         viewModel.getBrand(partialBin: partialBin) { result in
             if let result = result {
                 DispatchQueue.main.async {
@@ -59,7 +59,7 @@ extension CardPaymentViewController: CardPaymentViewDelegate {
         }
     }
     
-    func createCardPayment(_ view: UIView, cardNumber: String, cvc: String, exp: String) {
+    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
         let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
         viewModel.createCardPayment(order_id: order_id, card: card) { status, error, result in
             DispatchQueue.main.async {

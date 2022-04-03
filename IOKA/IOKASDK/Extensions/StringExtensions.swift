@@ -68,7 +68,7 @@ extension String {
     }
     
     func checkCardNumber() -> IokaTextFieldState {
-        self.count == 16 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+        self.count >= 15 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
     }
     
     func checkCVV() -> IokaTextFieldState {
