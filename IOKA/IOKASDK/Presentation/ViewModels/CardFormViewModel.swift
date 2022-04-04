@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CardFormViewModel {
+class t {
     
     
     func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {

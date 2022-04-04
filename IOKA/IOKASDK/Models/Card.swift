@@ -9,7 +9,7 @@ import Foundation
 
 
 
-struct Card: Codable {
+struct Card: Decodable {
     var pan: String?
     var exp: String?
     var cvc: String?

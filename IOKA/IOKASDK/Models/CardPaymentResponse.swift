@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct CardPaymentResponse: Codable {
+struct CardPaymentResponse: Decodable {
     
     let id: String //-Идентификатор платежа
     let order_id: String //-Идентификатор родительского заказа
@@ -19,14 +19,9 @@ struct CardPaymentResponse: Codable {
     let refunded_amount: Int //-Сумма возврата
     let processing_fee: Double //-Комиссия процессинга
     var payer: Payer? //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
-    var error: IokaError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
+    var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var acquirer: Acquirer? //-Данные банка эквайера
     var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
-}
-
-struct PaymentError: Codable {
-    var code: String
-    var message: String
 }
 
 struct Acquirer: Codable {

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct GetEmitterByBinCodeResponse: Codable {
+struct GetEmitterByBinCodeResponse: Decodable {
     /// - BIN карты.
     let code: String
     

@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum PaymentStatus: String, Codable {
+enum PaymentStatus: String, Decodable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case CAPTURED = "CAPTURED"

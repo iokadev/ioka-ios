@@ -21,6 +21,8 @@ enum NetworkEnvironment {
 }
 
 enum IokaApiEndPoint {
+    typealias EndpointError = APIError
+    
     case getBrand(partialBin: String)
     case getEmitterByBinCode(binCode: String)
     case createCardPayment(orderId: String, card: Card)
@@ -35,6 +37,7 @@ enum IokaApiEndPoint {
 extension IokaApiEndPoint: EndPointType {
     
     var environmentBaseURL: String {
+        // IokaApiEndPoint не должен обращаться к IokaApi. 
         switch IokaApi.environment {
         case .stage: return "https://stage-api.ioka.kz/v2/"
         case .production: return "https://api.ioka.kz/V2/"

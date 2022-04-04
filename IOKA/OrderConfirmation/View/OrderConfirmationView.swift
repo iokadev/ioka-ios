@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import SnapKit
 
 protocol OrderConfirmationViewDelegate: NSObject {
     func confirmButtonWasPressed(_ orderView: OrderConfirmationView)

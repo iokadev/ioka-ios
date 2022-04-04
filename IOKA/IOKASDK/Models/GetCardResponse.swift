@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CardStatus: String, Codable {
+enum CardStatus: String, Decodable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case DECLINED = "DECLINED"
@@ -15,7 +15,7 @@ enum CardStatus: String, Codable {
 }
 
 
-struct GetCardResponse: Codable {
+struct GetCardResponse: Decodable {
     
     let id: String //-Идентификатор платежа
     let customer_id: String //-Идентификатор родительского заказа
@@ -27,6 +27,6 @@ struct GetCardResponse: Codable {
     let payment_system: String? //-Комиссия процессинга
     var emitter: String?
     var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
-    var error: IokaError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
+    var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
 }
