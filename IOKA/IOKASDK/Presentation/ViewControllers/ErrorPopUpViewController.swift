@@ -16,7 +16,6 @@ class ErrorPopUpViewController: IokaViewController {
     
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
 

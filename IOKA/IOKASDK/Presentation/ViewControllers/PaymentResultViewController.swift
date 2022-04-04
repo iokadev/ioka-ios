@@ -25,7 +25,6 @@ class PaymentResultViewController: IokaViewController {
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
 

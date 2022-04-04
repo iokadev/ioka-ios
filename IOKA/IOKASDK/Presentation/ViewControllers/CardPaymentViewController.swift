@@ -27,7 +27,6 @@ class CardPaymentViewController: IokaViewController {
     }
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
 }
