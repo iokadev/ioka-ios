@@ -119,7 +119,7 @@
 		6DB0A36127FBA8A2008A8381 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2F527FBA8A1008A8381 /* CartViewController.swift */; };
 		6DB0A36227FBA8A2008A8381 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2F627FBA8A1008A8381 /* ProductCell.swift */; };
 		6DB0A36327FBA8A2008A8381 /* OrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2F727FBA8A1008A8381 /* OrderModel.swift */; };
-		6DB0A36527FBA8CE008A8381 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A36427FBA8CE008A8381 /* Assets.xcassets */; };
+		6DB0A36727FBAAC6008A8381 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A36627FBAAC6008A8381 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,7 +237,7 @@
 		6DB0A2F527FBA8A1008A8381 /* CartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		6DB0A2F627FBA8A1008A8381 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
 		6DB0A2F727FBA8A1008A8381 /* OrderModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderModel.swift; sourceTree = "<group>"; };
-		6DB0A36427FBA8CE008A8381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "../../ioka-ios1/IOKA/Assets.xcassets"; sourceTree = "<group>"; };
+		6DB0A36627FBAAC6008A8381 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,7 +284,7 @@
 				6DB0A2E627FBA8A1008A8381 /* SavedCards */,
 				6DB0A28827FBA8A1008A8381 /* IOKASDK */,
 				6DB0A14427FBA42C008A8381 /* Main.storyboard */,
-				6DB0A36427FBA8CE008A8381 /* Assets.xcassets */,
+				6DB0A36627FBAAC6008A8381 /* Assets.xcassets */,
 				6DB0A14927FBA42D008A8381 /* LaunchScreen.storyboard */,
 				6DB0A14C27FBA42D008A8381 /* Info.plist */,
 			);
@@ -832,8 +832,8 @@
 			files = (
 				6DB0A14B27FBA42D008A8381 /* LaunchScreen.storyboard in Resources */,
 				6DB0A35727FBA8A2008A8381 /* Localizable.strings in Resources */,
+				6DB0A36727FBAAC6008A8381 /* Assets.xcassets in Resources */,
 				6DB0A14627FBA42C008A8381 /* Main.storyboard in Resources */,
-				6DB0A36527FBA8CE008A8381 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
