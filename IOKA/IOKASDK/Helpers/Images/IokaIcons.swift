@@ -8,8 +8,10 @@
 import Foundation
 import UIKit
 
+
+// Fix : Function for getting images and bundle
 // - This is public enum for merchants to get bank payment system icons
-enum PaymentSystemIcons {
+public enum PaymentSystemIcons {
     static var AMERICAN_EXPRESS = UIImage(named: "AMERICAN_EXPRESS")
     static var DINER_CLUB = UIImage(named: "DINER_CLUB")
     static var MAESTRO = UIImage(named: "MAESTRO")
