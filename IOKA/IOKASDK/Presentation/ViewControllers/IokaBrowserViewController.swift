@@ -24,7 +24,6 @@ class IokaBrowserViewController:  IokaViewController {
     weak var delegate: IokaBrowserViewControllerDelegate?
     
     override func loadView() {
-        super.loadView()
         navView.backgroundColor = IOKA.shared.theme.background
         self.view.backgroundColor = IOKA.shared.theme.background
         self.view.addSubview(navView)
@@ -71,6 +70,12 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
         delegate?.closeIokaBrowserViewController(self)
     }
     
+    func closeIokaBrowserViewController(_ viewController: UIViewController, iokaBrowserState: IokaBrowserState, cardPaymentResponse: CardPaymentResponse?, getCardResponse: GetCardResponse?, error: IokaError?) {
+        DispatchQueue.main.async {
+            self.delegate?.closeIokaBrowserViewController(self, iokaBrowserState: iokaBrowserState, cardPaymentResponse: cardPaymentResponse, getCardResponse: getCardResponse, error: error)
+        }
+    }
+    
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         // здесь нужно проверять что редирект произошел на returnUrl
         self.webView.isHidden = true
@@ -82,17 +87,33 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
             switch iokaBrowserState {
                 // это должно во ViewModel делаться
             case .createCardPayment(let orderId, let paymentId):
-                IokaApi.shared.getPaymentByID(orderId: orderId, paymentId: paymentId) { [weak self] response, error in
+                IokaApi.shared.getPaymentByID(orderId: orderId, paymentId: paymentId) { [weak self] result in
                     guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.delegate?.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: response, getCardResponse: nil, error: error)
+                    
+                    switch result {
+                    case.success(let cardPaymentResponse):
+                        if let error = cardPaymentResponse.error {
+                            self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: cardPaymentResponse, getCardResponse: nil, error: error)
+                        } else {
+                            self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: cardPaymentResponse, getCardResponse: nil, error: nil)
+                        }
+                    case .failure(let error):
+                        self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: nil, getCardResponse: nil, error: error)
                     }
                 }
             case .createBinding(let customerId, let cardId):
-                IokaApi.shared.getCardByID(customerId: customerId, cardId: cardId) { [weak self] response, error in
+                IokaApi.shared.getCardByID(customerId: customerId, cardId: cardId) { [weak self] result in
                     guard let self = self else { return }
-                    DispatchQueue.main.async {
-                        self.delegate?.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: nil, getCardResponse: response, error: error)
+                    
+                    switch result {
+                    case .success(let cardResponse):
+                        if let error = cardResponse.error {
+                            self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: nil, getCardResponse: cardResponse, error: error)
+                        } else {
+                            self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: nil, getCardResponse: cardResponse, error: nil)
+                        }
+                    case .failure(let error):
+                        self.closeIokaBrowserViewController(self, iokaBrowserState: self.iokaBrowserState, cardPaymentResponse: nil, getCardResponse: nil, error: error)
                     }
                 }
             }

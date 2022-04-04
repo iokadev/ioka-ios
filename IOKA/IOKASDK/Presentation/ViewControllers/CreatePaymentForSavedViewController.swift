@@ -14,7 +14,6 @@ class CreatePaymentForSavedCardViewController: UIViewController {
     var viewModel: CreatePaymentForSavedCardViewModel!
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
     

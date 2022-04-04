@@ -34,7 +34,7 @@ class IokaApi {
             completion: completion)
     }
     
-    func getCards(customerId: String, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
+    func getCards(customerId: String, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
         endPointRouter.request(
             .getCards(customerId: customerId),
             completion: completion)
@@ -44,12 +44,19 @@ class IokaApi {
         endPointRouter.request(
             .createBinding(customerId: customerId, card: card),
             completion: completion)
+
     }
     
-    func deleteCard(customerId: String, cardId: String, completion: @escaping (Result<EmptyResponse, Error>) -> Void) {
+    func deleteCard(customerId: String, cardId: String, completion: @escaping (Error?) -> Void) {
         endPointRouter.request(
-            .deleteCardByID(customerId: customerId, cardId: cardId),
-            completion: completion)
+            .deleteCardByID(customerId: customerId, cardId: cardId)) { (result: Result<EmptyResponse, Error>) in
+                switch result {
+                case .success:
+                    completion(nil)
+                case .failure(let error):
+                    completion(error)
+                }
+            }
     }
     
     func getCardByID(customerId: String, cardId: String, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {

@@ -29,10 +29,15 @@ class OrderConfirmationViewModel {
     }
     
     func getSavedCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?, IokaError?) -> Void) {
-        IOKA.shared.getCards(customerAccessToken: customerAccessToken) { result, error in
-            if let result = result {
-                completion(result, error)
+        IOKA.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
+            guard let _ = self else { return }
+            switch result {
+            case .success(let cards):
+                completion(cards, nil)
+            case .failure(let error):
+                completion(nil, error)
             }
+            
         }
     }
 }

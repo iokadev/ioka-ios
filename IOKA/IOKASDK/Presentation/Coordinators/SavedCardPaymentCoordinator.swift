@@ -167,7 +167,7 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
         }
     }
     
-    func closePaymentResultViewController() {
+    func closePaymentResultScreen() {
         finishFlow(coordinator: self)
         self.dismissPaymentResult()
     }

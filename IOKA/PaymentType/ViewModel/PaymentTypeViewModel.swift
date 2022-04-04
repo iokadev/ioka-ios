@@ -12,11 +12,14 @@ class PaymentTypeViewModel {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
-            IOKA.shared.getCards(customerAccessToken: customerAccessToken) { result, error in
-                if let result = result {
-                    DispatchQueue.main.async {
-                        completion(result, error)
-                    }
+            IOKA.shared.getCards(customerAccessToken: customerAccessToken) {[weak self] result in
+                
+                guard let _ = self else { return }
+                switch result {
+                case .success(let cards):
+                    completion(cards, nil)
+                case .failure(let error):
+                    completion(nil, error)
                 }
             }
         }

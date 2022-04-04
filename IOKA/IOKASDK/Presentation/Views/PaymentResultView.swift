@@ -128,10 +128,12 @@ class PaymentResultView: UIView {
         }
     }
     
+    
+    //FIXME:  Order number 
     private func setOrderData(order: GetOrderResponse?) {
         guard let order = order else { return }
 
         orderPriceLabel.text = String(order.amount)
-        orderNumberLabel.text = order.id
+        orderNumberLabel.text = order.external_id
     }
 }

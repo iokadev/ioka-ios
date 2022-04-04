@@ -38,24 +38,22 @@ class IOKA: IokaThemeProtocol {
         coordinator.startFlow()
     }
     
-    func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, IokaError?) -> Void )) {
+    func getCards(customerAccessToken: String, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
         self.customerAccessToken = customerAccessToken
-        IokaApi.shared.getCards(customerId: customerAccessToken.trimTokens()) { response, error in
-            completion(response, error)
-        }
+        IokaApi.shared.getCards(customerId: customerAccessToken.trimTokens(),
+                                completion: completion)
     }
     
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
         self.customerAccessToken = customerAccessToken
         let coordinator = SaveCardCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
         coordinator.topViewController = viewController
-        coordinator.showCardForm()
+        coordinator.startFlow()
     }
     
-    func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {
-        IokaApi.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] error in
-            guard let _ = self else { return }  
-            completion(error)
-        }
+    func deleteSavedCard(customerId: String, cardId: String, completion: @escaping (Error?) -> Void) {
+        IokaApi.shared.deleteCard(customerId: customerId,
+                                  cardId: cardId,
+                                  completion: completion)
     }
 }

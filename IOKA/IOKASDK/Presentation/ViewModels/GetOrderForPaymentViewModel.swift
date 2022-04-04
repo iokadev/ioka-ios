@@ -20,14 +20,23 @@ class GetOrderForPaymentViewModel {
         self.orderId = orderId
     }
     
+    func prepareOrder(order: GetOrderResponse?, error: IokaError?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            self.delegate?.gotOrder(order: order, error: error)
+        }
+    }
+    
     func getOrder() {
         guard let orderId = orderId else { return }
-        IokaApi.shared.getOrderByID(orderId: orderId) {[weak self] result, error in
+        IokaApi.shared.getOrderByID(orderId: orderId) {[weak self] result in
             guard let self = self else { return }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                self.delegate?.gotOrder(order: result, error: error)
-            }
             
+            switch result {
+            case .success(let orderResponse):
+                self.prepareOrder(order: orderResponse, error: nil)
+            case .failure(let error):
+                self.prepareOrder(order: nil, error: error)
+            }
         }
     }
 }

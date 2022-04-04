@@ -21,6 +21,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
                 
                 let result: Result<Response, Error> = self.mapResponse(data: data, response: response, error: error)
                 
+                // из других мест нужно удалить dispatch.main.async теперь
                 DispatchQueue.main.async {
                     completion(result)
                 }
