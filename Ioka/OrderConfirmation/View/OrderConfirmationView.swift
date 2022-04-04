@@ -5,7 +5,6 @@
 //  Created by ablai erzhanov on 12.03.2022.
 //
 
-import Foundation
 import UIKit
 
 protocol OrderConfirmationViewDelegate: NSObject {
