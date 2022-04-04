@@ -56,23 +56,23 @@ class PaymentView: UIView {
             paymentTypeLabel.textColor = DemoAppColors.grey
         case .savedCard(let card):
             paymentTypeLabel.text = card.pan_masked.trimPanMasked()
-            paymentTypeLabel.textColor = DemoAppColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.text
             guard let paymentSystem = card.payment_system else { return }
             paymentTypeImageView.image = UIImage(named: paymentSystem)
         case .creditCard(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.text
         case .applePay(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.text
         case .cash(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.fill2
+            paymentTypeLabel.textColor = DemoAppColors.text
         }
     }
   
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.fill6
+        self.backgroundColor = DemoAppColors.tertiaryBackground
         self.layer.cornerRadius = 8
         
         [paymentTypeLabel, paymentTypeImageView, chevronRightImageView].forEach{ self.addSubview($0) }

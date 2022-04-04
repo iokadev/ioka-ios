@@ -18,7 +18,7 @@ class DeleteSavedCardView: UIView {
     
     private let backGroundView = UIView()
     private let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
-    private let title = IokaLabel(iokaFont: Typography.title, iokaTextColor: DemoAppColors.fill2)
+    private let title = IokaLabel(iokaFont: Typography.title, iokaTextColor: DemoAppColors.text)
     private let deleteCardButton = UIButton()
     private let cancelButton = UIButton()
     
@@ -51,12 +51,12 @@ class DeleteSavedCardView: UIView {
     }
     
     private func setUI() {
-        self.backgroundColor = DemoAppColors.fill7
+        self.backgroundColor = DemoAppColors.foreground
         self.addSubview(backGroundView)
         
         backGroundView.layer.cornerRadius = 12
         backGroundView.layer.masksToBounds = true
-        backGroundView.backgroundColor = DemoAppColors.fill1
+        backGroundView.backgroundColor = DemoAppColors.background
         backGroundView.centerY(in: self, left: self.leftAnchor, paddingLeft: 40, right: self.rightAnchor, paddingRight: 40)
         
         [deleteCardImageView, title, deleteCardButton, cancelButton].forEach{ backGroundView.addSubview($0) }

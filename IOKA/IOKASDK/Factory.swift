@@ -11,20 +11,22 @@ import Foundation
 class IokaFactory {
     static let shared = IokaFactory()
     
-    func initiateCardPaymentViewController(orderAccesToken: String?, delegate: CardPaymentViewControllerDelegate) -> CardPaymentViewController {
+    func initiateCardPaymentViewController(orderAccesToken: String?, delegate: CardPaymentNavigationDelegate) -> CardPaymentViewController {
         guard let orderAccesToken = orderAccesToken else { fatalError("Please provide order_access_token") }
         let viewController = CardPaymentViewController()
         viewController.order_id = orderAccesToken.trimTokens()
-        viewController.cardPaymentViewControllerDelegate = delegate
+        viewController.viewModel = CardPaymentViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
     }
     
-    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultViewControllerDelegate) -> PaymentResultViewController {
+    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultNavigationDelegate) -> PaymentResultViewController {
         let viewController = PaymentResultViewController()
         viewController.contentView.paymentResult = paymentResult
         viewController.contentView.error = error
         viewController.contentView.orderResponse = response
-        viewController.paymentResultViewControllerDelegate = delegate
+        viewController.viewModel = PaymentResultViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
     }
     
@@ -36,21 +38,46 @@ class IokaFactory {
         return viewController
     }
     
-    func initiateSavedCardPaymentViewController(orderAccessToken: String, card: GetCardResponse, delegate: SavedCardPaymentViewControlllerDelegate) -> SavedCardPaymentViewControlller {
+    func initiateSavedCardPaymentViewController(orderAccessToken: String, card: GetCardResponse, delegate: SavedCardPaymentNavigationDelegate) -> SavedCardPaymentViewControlller {
         let vc = SavedCardPaymentViewControlller()
         vc.modalPresentationStyle = .overFullScreen
         vc.card = card
-        vc.delegate = delegate
+        vc.viewModel = SavedCardPaymentViewModel()
+        vc.viewModel.delegate = delegate
         vc.orderAccessToken = orderAccessToken
         
         return vc
     }
     
-    func initiateSavedCardViewController(customerAccessToken: String?, delegate: SaveCardViewControllerDelegate) -> SaveCardViewController {
+    func initiateSavedCardViewController(customerAccessToken: String?, delegate: SaveCardNavigationDelegate) -> SaveCardViewController {
         guard let customerAccessToken = customerAccessToken else { fatalError("Please provide order_access_token") }
         let viewController = SaveCardViewController()
         viewController.customerId = customerAccessToken.trimTokens()
-        viewController.saveCardViewControllerDelegate = delegate
+        viewController.viewModel = SaveCardViewModel()
+        viewController.viewModel.delegate = delegate
         return viewController
+    }
+    
+    func initiateErrorPopUpViewController(delegate: ErrorPopUpNavigationDelegate, error: IokaError) -> ErrorPopUpViewController{
+        let vc = ErrorPopUpViewController()
+        vc.viewModel = ErrorPopUpViewModel()
+        vc.error = error
+        vc.viewModel.delegate = delegate
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
+    }
+    
+    func initiateCreatePaymentForSavedCardViewController(card: GetCardResponse, orderAccessToken: String, delegate: CreatePaymentForSavedCardNavigationDelegate) -> CreatePaymentForSavedCardViewController {
+        let vc = CreatePaymentForSavedCardViewController()
+        vc.viewModel = CreatePaymentForSavedCardViewModel(cardResponse: card, orderId: orderAccessToken.trimTokens(), delegate: delegate)
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
+    }
+    
+    func initiateGetOrderForPaymentViewController(delegate: GetOrderForPaymentNavigationDelegate, orderId: String) -> GetOrderForPaymentViewController {
+        let vc = GetOrderForPaymentViewController()
+        vc.viewModel = GetOrderForPaymentViewModel(delegate: delegate, orderId: orderId)
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
     }
 }

@@ -17,7 +17,7 @@ class CardPaymentCell: UITableViewCell {
     static let cellId = "CardPaymentCell"
     
     let cardBrandImageView = UIImageView()
-    let panMaskedLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: DemoAppColors.fill2)
+    let panMaskedLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: CardPaymentCellDelegate?
@@ -71,7 +71,7 @@ class CardPaymentCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.fill6
+        self.backgroundColor = DemoAppColors.tertiaryBackground
         self.layer.cornerRadius = 8
         cardBrandImageView.contentMode = .scaleAspectFit
         [cardBrandImageView, panMaskedLabel, checkImageView].forEach{ self.contentView.addSubview($0) }

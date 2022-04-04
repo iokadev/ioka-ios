@@ -23,18 +23,19 @@ class IokaButton: UIButton {
         }
     }
     var title: String?
-    var image: UIImage?
+    var imageName: String?
     let activityIndicator = UIActivityIndicatorView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
-    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil) {
+    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil, backGroundColor: UIColor? = nil) {
         self.init(frame: CGRect())
         self.iokaButtonState = iokaButtonState
         self.title = title
-        self.image = UIImage(named: imageName ?? "")
+        self.imageName = imageName
+        self.backgroundColor = backGroundColor
         setupButton()
     }
     
@@ -73,9 +74,11 @@ class IokaButton: UIButton {
     
     private func setupButton() {
         self.setTitle(title, for: .normal)
-        self.setImage(image, for: .normal)
         self.layer.cornerRadius = 12
         handlePayButtonState(state: iokaButtonState)
+        if let imageName = imageName {
+            self.setImage(UIImage(named: imageName), for: .normal)
+        }
     }
     
     private func handlePayButtonState(state: IokaButtonState?) {

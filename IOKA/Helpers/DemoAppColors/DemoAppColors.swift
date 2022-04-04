@@ -9,14 +9,14 @@ import UIKit
 
 
 enum DemoAppColors {
-    static var fill0 = UIColor(named: "Fill0")
-    static var fill1 = UIColor(named: "Fill1")
-    static var fill2 = UIColor(named: "Fill2")
-    static var fill3 = UIColor(named: "Fill3")
+    static var nonadaptableText = UIColor(named: "nonadaptableText")
+    static var background = UIColor(named: "Background")
+    static var text = UIColor(named: "Text")
+    static var divider = UIColor(named: "divider")
     static var fill4 = UIColor(named: "Fill4")
-    static var fill5 = UIColor(named: "Fill5")
-    static var fill6 = UIColor(named: "Fill6")
-    static var fill7 = UIColor(named: "Fill7")
+    static var secondaryBackground = UIColor(named: "SecondaryBackground")
+    static var tertiaryBackground = UIColor(named: "TertiaryBackground")
+    static var foreground = UIColor(named: "Foreground")
     static var primary = UIColor(named: "Primary")
     static var secondary = UIColor(named: "Secondary")
     static var error = UIColor(named: "Error")

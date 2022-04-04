@@ -42,10 +42,11 @@ extension UIView {
         setDimensions(width: width, height: height)
     }
     
-    func center(in viewX: UIView, in viewY: UIView) {
+    func center(in viewX: UIView, in viewY: UIView, width: CGFloat? = nil, height: CGFloat? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
         centerXAnchor.constraint(equalTo: viewX.centerXAnchor).isActive = true
         centerYAnchor.constraint(equalTo: viewY.centerYAnchor).isActive = true
+        setDimensions(width: width, height: height)
     }
     
     func centerX(in view: UIView, top: NSLayoutYAxisAnchor? = nil, paddingTop: CGFloat? = nil, bottom: NSLayoutYAxisAnchor? = nil, paddingBottom: CGFloat? = nil, width: CGFloat? = nil, height: CGFloat? = nil) {

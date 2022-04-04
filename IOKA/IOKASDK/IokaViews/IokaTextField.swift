@@ -29,11 +29,11 @@ class IokaTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.textColor = IOKA.shared.theme.fill2
+        self.textColor = IOKA.shared.theme.text
         self.backgroundColor = IOKA.shared.theme.fill4
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
-        self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
+        self.layer.borderColor = IOKA.shared.theme.background.cgColor
 
     }
     
@@ -73,11 +73,11 @@ class IokaTextField: UITextField {
         
         switch placeHolderType {
         case .cardNumber:
-            self.placeholder = TextFieldPlaceHolders.cardNumber.rawValue
+            self.placeholder = IokaLocalizable.enterCardNumber
         case .dateExpiration:
-            self.placeholder = TextFieldPlaceHolders.dateExpiration.rawValue
+            self.placeholder = IokaLocalizable.cardExpiration
         case .cvv:
-            self.placeholder = TextFieldPlaceHolders.cvv.rawValue
+            self.placeholder = IokaLocalizable.cvv
             self.isSecureTextEntry = true
         }
     }
@@ -89,9 +89,9 @@ class IokaTextField: UITextField {
         case .wrongInputData:
             self.layer.borderColor = IOKA.shared.theme.error.cgColor
         case .nonActive:
-            self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
+            self.layer.borderColor = IOKA.shared.theme.background.cgColor
         case .correctInputData:
-            self.layer.borderColor = IOKA.shared.theme.fill1.cgColor
+            self.layer.borderColor = IOKA.shared.theme.background.cgColor
         }
     }
 }
