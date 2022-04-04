@@ -73,11 +73,11 @@ class IokaTextField: UITextField {
         
         switch placeHolderType {
         case .cardNumber:
-            self.placeholder = TextFieldPlaceHolders.cardNumber.rawValue
+            self.placeholder = IokaLocalizable.enterCardNumber
         case .dateExpiration:
-            self.placeholder = TextFieldPlaceHolders.dateExpiration.rawValue
+            self.placeholder = IokaLocalizable.cardExpiration
         case .cvv:
-            self.placeholder = TextFieldPlaceHolders.cvv.rawValue
+            self.placeholder = IokaLocalizable.cvv
             self.isSecureTextEntry = true
         }
     }

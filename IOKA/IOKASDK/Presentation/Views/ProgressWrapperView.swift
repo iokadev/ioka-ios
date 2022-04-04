@@ -29,9 +29,9 @@ class ProgressWrapperView: UIView {
         self.init()
         switch state {
         case .payment:
-            titleLabel.text = "Проводим оплату"
+            titleLabel.text = IokaLocalizable.paymentProcessing
         case .order:
-            titleLabel.text = "Переходим к оплате"
+            titleLabel.text = IokaLocalizable.goPayment
         }
     }
     
