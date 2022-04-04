@@ -19,6 +19,7 @@ class SaveCardViewController: IokaViewController {
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
    
 
     override func viewDidLoad() {
@@ -63,9 +64,13 @@ extension SaveCardViewController: CardFormViewDelegate {
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
         let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
         
-        viewModel.saveCard(view, customerId: customerId, card: card) { status, error, result in
+        viewModel.saveCard(view, customerId: customerId, card: card) { [weak self] status, error, result in
+            guard let self = self else { return }
             DispatchQueue.main.async {
                 self.viewModel.saveCard(status: status, error: error, response: result)
+                if status == .savingSucceed {
+                    self.feedbackGenerator.impactOccurred()
+                }
             }
         }
     }

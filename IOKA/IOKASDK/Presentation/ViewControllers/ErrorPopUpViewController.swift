@@ -12,6 +12,7 @@ class ErrorPopUpViewController: IokaViewController {
     var viewModel: ErrorPopUpViewModel!
     var error: IokaError!
     private let contentView = ErrorPopUpView()
+    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     
     
     override func loadView() {
@@ -23,6 +24,7 @@ class ErrorPopUpViewController: IokaViewController {
         super.viewDidLoad()
         contentView.delegate = self
         contentView.configureView(error: error)
+        feedbackGenerator.impactOccurred()
     }
 }
 

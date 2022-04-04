@@ -36,8 +36,9 @@ class CardFormView: UIView {
     let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.success)
     private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IOKA.shared.theme.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
+    private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var errorView = ErrorToastView()
+    let feedbackGenerator = UISelectionFeedbackGenerator()
     
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
@@ -79,6 +80,8 @@ class CardFormView: UIView {
         closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
+        
+        saveCardToggle.addTarget(self, action: #selector(handleSaveCardToggle), for: .allEvents)
     }
     
     @objc private func handleCloseButton() {
@@ -136,6 +139,10 @@ class CardFormView: UIView {
     
     @objc private func handleViewTap() {
         self.endEditing(true)
+    }
+    
+    @objc private func handleSaveCardToggle() {
+        feedbackGenerator.selectionChanged()
     }
     
     private func setupUI() {
