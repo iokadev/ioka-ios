@@ -15,14 +15,18 @@ protocol CreatePaymentForSavedCardNavigationDelegate {
 class CreatePaymentForSavedCardViewModel {
     
     var delegate: CreatePaymentForSavedCardNavigationDelegate?
+    var cardResponse: GetCardResponse?
+    var orderId: String?
     
-    init(card: GetCardResponse, orderId: String, delegate: CreatePaymentForSavedCardNavigationDelegate) {
+    init(cardResponse: GetCardResponse, orderId: String, delegate: CreatePaymentForSavedCardNavigationDelegate) {
         self.delegate = delegate
-        createPayment(card: card, orderId: orderId)
+        self.cardResponse = cardResponse
+        self.orderId = orderId
     }
     
-    func createPayment(card: GetCardResponse, orderId: String) {
-        let card = Card(cardId: card.id, cvc: nil)
+    func createPayment() {
+        guard let cardResponse = cardResponse, let orderId = orderId else { return }
+        let card = Card(cardId: cardResponse.id, cvc: nil)
         IokaApi.shared.createCardPayment(orderId: orderId, card: card) { [weak self] result, error in
             guard let self = self else { return }
             

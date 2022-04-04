@@ -23,6 +23,7 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     var paymentResult: PaymentResult?
     var error: IokaError?
     var response: CardPaymentResponse?
+    var orderAccessToken: String?
     
     var topViewController: UIViewController!
     
@@ -40,6 +41,11 @@ class CardPaymentCoordinator: NSObject, Coordinator {
         return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self)
     }()
     
+    private lazy var getOrderForPaymentViewController: GetOrderForPaymentViewController = {
+        guard let orderAccessToken = orderAccessToken else { fatalError("Order Access token wasn't provided") }
+        return IokaFactory.shared.initiateGetOrderForPaymentViewController(delegate: self, orderId: orderAccessToken.trimTokens())
+    }()
+    
     init(navigationViewController: UINavigationController) {
         self.navigationViewController = navigationViewController
         self.routerCoordinator = RouterNavigation(navigationViewController: navigationViewController)
@@ -47,7 +53,7 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     }
     
     func startFlow() {
-        
+        self.showViewControllerProgressWrapper()
     }
     
     func finishFlow(coordinator: Coordinator) {
@@ -76,6 +82,14 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     
     func dismissPaymentResult() {
         self.navigationViewController.viewControllers = self.navigationViewController.viewControllers.filter { $0 != paymentResultViewController }
+    }
+    
+    func showViewControllerProgressWrapper() {
+        routerCoordinator.presentViewController(getOrderForPaymentViewController, animated: false, completion: nil)
+    }
+    
+    func dismissViewControllerProgressWrapper() {
+        routerCoordinator.dismissViewController(animated: false, completion: nil)
     }
 }
 
@@ -138,6 +152,15 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
     func retryPaymentProcess() {
         finishFlow(coordinator: self)
         self.dismissPaymentResult()
+    }
+}
+
+extension CardPaymentCoordinator: GetOrderForPaymentNavigationDelegate {
+    func gotOrder(order: GetOrderResponse?, error: IokaError?) {
+        DispatchQueue.main.async {
+            self.showCardPaymentForm()
+            self.dismissViewControllerProgressWrapper()
+        }
     }
 }
 

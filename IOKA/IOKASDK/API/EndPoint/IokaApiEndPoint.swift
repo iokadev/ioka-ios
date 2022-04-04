@@ -29,6 +29,7 @@ enum IokaApiEndPoint {
     case createBinding(customerId: String, card: Card)
     case getCardByID(customerId: String, cardId: String)
     case deleteCardByID(customerId: String, cardId: String)
+    case getOrderByID(orderId: String)
 }
 
 extension IokaApiEndPoint: EndPointType {
@@ -63,12 +64,14 @@ extension IokaApiEndPoint: EndPointType {
             return "customers/\(customerId)/cards/\(cardId)"
         case .deleteCardByID(let customerId, let cardId):
             return "customers/\(customerId)/cards/\(cardId)"
+        case .getOrderByID(let orderId):
+            return "orders/\(orderId)"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .getBrand( _), .getEmitterByBinCode( _), .getCards( _), .getCardByID( _, _), .getPaymentByID( _, _):
+        case .getBrand( _), .getEmitterByBinCode( _), .getCards( _), .getCardByID( _, _), .getPaymentByID( _, _), .getOrderByID( _):
             return .get
         case .createCardPayment( _, _), .createBinding( _, _):
             return .post
@@ -105,6 +108,11 @@ extension IokaApiEndPoint: EndPointType {
             guard let customerAccessToken = IOKA.shared.customerAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
             guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't provide apiKey") }
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken])
+            
+        case .getOrderByID( _):
+            guard let orderAccessToken = IOKA.shared.orderAccessToken else { fatalError("You didn't provided Tokens(neither Customer or order acess tokens)") }
+            guard let apiKey = IOKA.shared.publicApiKey else { fatalError("You didn't provide apiKey") }
+            return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey, AuthenticationKeys.ORDER_ACCESS_TOKEN_KEY: orderAccessToken])
         }
     }
     

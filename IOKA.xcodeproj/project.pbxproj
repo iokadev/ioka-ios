@@ -91,6 +91,9 @@
 		6D75E95227FA88F300E7EA94 /* ProgressWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95127FA88F300E7EA94 /* ProgressWrapperView.swift */; };
 		6D75E95427FA8BBD00E7EA94 /* GetOrderForPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95327FA8BBD00E7EA94 /* GetOrderForPaymentViewModel.swift */; };
 		6D75E95627FA8BFE00E7EA94 /* CreatePaymentForSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95527FA8BFE00E7EA94 /* CreatePaymentForSavedCardViewModel.swift */; };
+		6D75E95827FA969B00E7EA94 /* GetOrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95727FA969B00E7EA94 /* GetOrderResponse.swift */; };
+		6D75E95A27FAACC200E7EA94 /* CreatePaymentForSavedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95927FAACC200E7EA94 /* CreatePaymentForSavedViewController.swift */; };
+		6D75E95C27FAAF1900E7EA94 /* GetOrderForPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D75E95B27FAAF1900E7EA94 /* GetOrderForPaymentViewController.swift */; };
 		6D80B8BF27F91E930032876C /* SavedCardPaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D80B8BE27F91E930032876C /* SavedCardPaymentCoordinator.swift */; };
 		6D80B8C327F91ECE0032876C /* SaveCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D80B8C227F91ECE0032876C /* SaveCardCoordinator.swift */; };
 		6D84522C27F901D600D8C106 /* PaymentResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D84522B27F901D600D8C106 /* PaymentResultViewModel.swift */; };
@@ -211,6 +214,9 @@
 		6D75E95127FA88F300E7EA94 /* ProgressWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWrapperView.swift; sourceTree = "<group>"; };
 		6D75E95327FA8BBD00E7EA94 /* GetOrderForPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrderForPaymentViewModel.swift; sourceTree = "<group>"; };
 		6D75E95527FA8BFE00E7EA94 /* CreatePaymentForSavedCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentForSavedCardViewModel.swift; sourceTree = "<group>"; };
+		6D75E95727FA969B00E7EA94 /* GetOrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrderResponse.swift; sourceTree = "<group>"; };
+		6D75E95927FAACC200E7EA94 /* CreatePaymentForSavedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentForSavedViewController.swift; sourceTree = "<group>"; };
+		6D75E95B27FAAF1900E7EA94 /* GetOrderForPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOrderForPaymentViewController.swift; sourceTree = "<group>"; };
 		6D80B8BE27F91E930032876C /* SavedCardPaymentCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardPaymentCoordinator.swift; sourceTree = "<group>"; };
 		6D80B8C227F91ECE0032876C /* SaveCardCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveCardCoordinator.swift; sourceTree = "<group>"; };
 		6D84522B27F901D600D8C106 /* PaymentResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResultViewModel.swift; sourceTree = "<group>"; };
@@ -712,6 +718,8 @@
 				6DF7531027CF955A0047CFB9 /* PaymentResultViewController.swift */,
 				6D2F04DB27CAED4A0095286F /* CardPaymentViewController.swift */,
 				6D75E94B27FA68AC00E7EA94 /* ErrorPopUpViewController.swift */,
+				6D75E95B27FAAF1900E7EA94 /* GetOrderForPaymentViewController.swift */,
+				6D75E95927FAACC200E7EA94 /* CreatePaymentForSavedViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -789,6 +797,7 @@
 				6DF7532827D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift */,
 				6D3E5B1C27DEEE820029D9C0 /* DeleteCardByIDResponse.swift */,
 				6D3E5AF327DBF0320029D9C0 /* GetCardResponse.swift */,
+				6D75E95727FA969B00E7EA94 /* GetOrderResponse.swift */,
 				6DF7532427D0361B0047CFB9 /* Error.swift */,
 				6DF7531E27CFDB460047CFB9 /* PaymentStatus.swift */,
 				6DF7531C27CFD8A40047CFB9 /* PaymentSystem.swift */,
@@ -959,6 +968,7 @@
 				6D2F04C827CAEC9C0095286F /* AppDelegate.swift in Sources */,
 				6DF7531B27CFD7E90047CFB9 /* Payer.swift in Sources */,
 				6D3E5B2727E183AD0029D9C0 /* IokaBrowserViewController.swift in Sources */,
+				6D75E95C27FAAF1900E7EA94 /* GetOrderForPaymentViewController.swift in Sources */,
 				6D6F291727ED9D7C00C3A576 /* SavedCardPaymentViewControlller.swift in Sources */,
 				6DF7532527D0361B0047CFB9 /* Error.swift in Sources */,
 				6D2F04CA27CAEC9C0095286F /* SceneDelegate.swift in Sources */,
@@ -984,6 +994,7 @@
 				6DF7532927D045E10047CFB9 /* GetEmitterByBinCodeResponse.swift in Sources */,
 				6DF7531127CF955A0047CFB9 /* PaymentResultViewController.swift in Sources */,
 				6D3E5B1927DED1A20029D9C0 /* IokaCardNumberTextField.swift in Sources */,
+				6D75E95A27FAACC200E7EA94 /* CreatePaymentForSavedViewController.swift in Sources */,
 				6D6F293527EDA5E600C3A576 /* SaveCardViewController.swift in Sources */,
 				6D2F04E227CAF2D10095286F /* TextFieldPlaceHolders.swift in Sources */,
 				6D6F292227EDA1B700C3A576 /* IokaImages.swift in Sources */,
@@ -1018,6 +1029,7 @@
 				6D75E94C27FA68AC00E7EA94 /* ErrorPopUpViewController.swift in Sources */,
 				6D75E95227FA88F300E7EA94 /* ProgressWrapperView.swift in Sources */,
 				6D3E5B0A27DE6C070029D9C0 /* DemoAppApi.swift in Sources */,
+				6D75E95827FA969B00E7EA94 /* GetOrderResponse.swift in Sources */,
 				6D21C15D27E8A47D00FC4C79 /* PayWithCashView.swift in Sources */,
 				6D6F290427ED9B0D00C3A576 /* SavedCardsViewModel.swift in Sources */,
 				6D27E61427DA90E30035FB2B /* URLParameterEncoder.swift in Sources */,

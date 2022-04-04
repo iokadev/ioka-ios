@@ -29,7 +29,7 @@ class IokaProgressView: UIView {
     
     func startIndicator() {
         self.layer.addSublayer(shapeLayer)
-        let frame = self.frame
+        let frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         let circularPath = UIBezierPath(arcCenter: CGPoint(x: frame.size.width / 2, y: frame.size.height / 2), radius: 40, startAngle: -CGFloat.pi/2, endAngle: 2 * CGFloat.pi, clockwise: true)
         shapeLayer.path = circularPath.cgPath
         shapeLayer.strokeColor = color.cgColor

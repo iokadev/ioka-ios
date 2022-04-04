@@ -25,7 +25,7 @@ class ProductCell: UITableViewCell {
     let productTitle = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
     let productImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
     let productPriceLabel = IokaLabel(iokaFont: Typography.bodySemibold, iokaTextColor: DemoAppColors.text)
-    let deleteImageView = IokaImageView(imageName: "deleteProduct", imageTintColor: nil)
+    let deleteImageView = IokaImageView(imageName: "deleteProduct")
     let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

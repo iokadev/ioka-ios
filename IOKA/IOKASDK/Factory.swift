@@ -67,13 +67,17 @@ class IokaFactory {
         return vc
     }
     
-    func initiateCreatePaymentForSavedCardViewModel(card: GetCardResponse, orderAccessToken: String, delegate: CreatePaymentForSavedCardNavigationDelegate) -> CreatePaymentForSavedCardViewModel {
-        let viewModel = CreatePaymentForSavedCardViewModel(card: card, orderId: orderAccessToken.trimTokens(), delegate: delegate)
-        return viewModel
+    func initiateCreatePaymentForSavedCardViewController(card: GetCardResponse, orderAccessToken: String, delegate: CreatePaymentForSavedCardNavigationDelegate) -> CreatePaymentForSavedCardViewController {
+        let vc = CreatePaymentForSavedCardViewController()
+        vc.viewModel = CreatePaymentForSavedCardViewModel(cardResponse: card, orderId: orderAccessToken.trimTokens(), delegate: delegate)
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
     }
     
-    func initiateProgressWrapperView(state: ProgressWrapperViewState) -> ProgressWrapperView {
-        let view = ProgressWrapperView(state: state)
-        return view
+    func initiateGetOrderForPaymentViewController(delegate: GetOrderForPaymentNavigationDelegate, orderId: String) -> GetOrderForPaymentViewController {
+        let vc = GetOrderForPaymentViewController()
+        vc.viewModel = GetOrderForPaymentViewModel(delegate: delegate, orderId: orderId)
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
     }
 }

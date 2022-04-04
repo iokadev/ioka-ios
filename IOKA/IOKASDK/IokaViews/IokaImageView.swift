@@ -46,8 +46,5 @@ class IokaImageView: UIImageView {
         } else {
             self.image = UIImage(named: imageName)
         }
-        
-        
     }
-    
 }

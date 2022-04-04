@@ -15,6 +15,7 @@ typealias createBindingCompletion = (GetCardResponse?, IokaError?) -> Void
 typealias deleteCardByIDResponseCompletion = (IokaError?) -> Void
 typealias getCardByIDCompletion = (GetCardResponse?, IokaError?) -> Void
 typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, IokaError?) -> Void
+typealias getOrderByIDResponseCompletion = (GetOrderResponse?, IokaError?) -> Void
 
 
 class IokaApi {
@@ -129,6 +130,14 @@ class IokaApi {
     func getPaymentByID(orderId: String, paymentId: String, completion: @escaping(getPaymentByIDResponseCompletion)) {
         endPointRouter.request(.getPaymentByID(orderId: orderId, paymentId: paymentId)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: CardPaymentResponse.self) { result, error in
+                completion(result, error)
+            }
+        }
+    }
+    
+    func getOrderByID(orderId: String, completion: @escaping(getOrderByIDResponseCompletion)) {
+        endPointRouter.request(.getOrderByID(orderId: orderId)) { data, response, error in
+            self.handleRequest(data: data, response: response, error: error, model: GetOrderResponse.self) { result, error in
                 completion(result, error)
             }
         }

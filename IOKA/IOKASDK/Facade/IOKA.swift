@@ -23,10 +23,10 @@ class IOKA: IokaThemeProtocol {
     
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
         self.orderAccessToken = orderAccessToken
-        
         let coordinator = CardPaymentCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
         coordinator.topViewController = viewController
-        coordinator.showCardPaymentForm()
+        coordinator.orderAccessToken = orderAccessToken
+        coordinator.startFlow()
     }
     
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {

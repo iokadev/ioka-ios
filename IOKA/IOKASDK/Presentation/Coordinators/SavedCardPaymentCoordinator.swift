@@ -49,12 +49,10 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
         return IokaFactory.shared.initiateErrorPopUpViewController(delegate: self, error: error)
     }()
     
-    private lazy var createPaymentForSavedCardViewModel: CreatePaymentForSavedCardViewModel = {
+    private lazy var createPaymentForSavedCardViewController: CreatePaymentForSavedCardViewController = {
         guard let card = card, let orderAccessToken = orderAccessToken else { fatalError("Card information weren't provided") }
-        return IokaFactory.shared.initiateCreatePaymentForSavedCardViewModel(card: card, orderAccessToken: orderAccessToken, delegate: self)
+        return IokaFactory.shared.initiateCreatePaymentForSavedCardViewController(card: card, orderAccessToken: orderAccessToken, delegate: self)
     }()
-    
-    private lazy var progressWrapperView = IokaFactory.shared.initiateProgressWrapperView(state: .payment)
     
     init(navigationViewController: UINavigationController) {
         self.navigationViewController = navigationViewController
@@ -109,11 +107,11 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     }
     
     func showViewControllerProgressWrapper() {
-        self.topViewController.view = progressWrapperView
+        routerCoordinator.presentViewController(createPaymentForSavedCardViewController, animated: false, completion: nil)
     }
     
     func dismissViewControllerProgressWrapper() {
-        progressWrapperView.stop()
+        routerCoordinator.dismissViewController(animated: false, completion: nil)
     }
 }
 
@@ -188,17 +186,16 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
 
 extension SavedCardPaymentCoordinator: CreatePaymentForSavedCardNavigationDelegate {
     func paymentCreated(response: CardPaymentResponse?, error: IokaError?, status: PaymentResult) {
+        dismissViewControllerProgressWrapper()
         if let response = response, let actionURL = response.action?.url {
             self.url = "\(actionURL)?return_url=https://ioka.kz"
             self.iokaBrowserState = .createCardPayment(orderId: response.order_id, paymentId: response.id)
             self.show3DSecure()
-            dismissViewControllerProgressWrapper()
         } else {
             self.paymentResult = status
             self.error = error
             self.response = response
             self.showPaymentResult()
-            dismissViewControllerProgressWrapper()
         }
     }
 }
