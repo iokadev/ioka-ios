@@ -15,11 +15,18 @@ protocol CardFormViewDelegate: NSObject {
     func checkCreateButtonState(_ view: CardFormView)
     func closeCardFormView(_ view: CardFormView)
     func modifyPaymentTextFields(_ view: CardFormView, text : String, textField: UITextField) -> String
+    func checkTextFieldState(_ view: CardFormView, textField: UITextField)
 }
 
 enum CardFormState {
     case payment
     case saving
+}
+
+enum TextFieldType {
+    case cardNumber
+    case cvv
+    case dateExpiration
 }
 
 
@@ -109,6 +116,7 @@ class CardFormView: UIView {
         let text = delegate?.modifyPaymentTextFields(self, text: textField.text!, textField: textField)
         textField.text = text
         delegate?.checkCreateButtonState(self)
+        delegate?.checkTextFieldState(self, textField: textField)
         guard !cardNumberTextField.isCardBrandSetted else { return }
         delegate?.getBrand(self, with:   cardNumberTextField.text?.trimCardNumberText() ?? "")
     }
@@ -203,20 +211,7 @@ extension CardFormView: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let iokaTextField = textField as? IokaTextField else { return }
-        switch iokaTextField {
-        case cardNumberTextField:
-            guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cardNumberTextField.iokaTextFieldState = trimmedText.checkCardNumber()
-        case dateExpirationTextField:
-            guard let trimmedText = textField.text?.trimDateExpirationText() else { return }
-            dateExpirationTextField.iokaTextFieldState = trimmedText.checkCardExpiration()
-        case cvvTextField:
-            guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cvvTextField.iokaTextFieldState = trimmedText.checkCVV()
-        default:
-            print("Any other implementation if you would like to add")
-        }
+        delegate?.checkCreateButtonState(self)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

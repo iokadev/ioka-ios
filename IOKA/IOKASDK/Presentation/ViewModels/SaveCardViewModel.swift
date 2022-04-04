@@ -63,11 +63,19 @@ class SaveCardViewModel {
         
     }
     
-    func checkPayButtonState(view: CardFormView) {
-        childViewModel.checkPayButtonState(view: view)
+    func checkCreateButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String, completion: @escaping(IokaButtonState) -> Void) {
+        
+        childViewModel.checkPayButtonState(cardNumberText: cardNumberText, dateExpirationText: dateExpirationText, cvvText: cvvText) { [weak self] buttonState in
+            guard let _ = self else { return }
+            completion(buttonState)
+        }
     }
     
-    func modifyPaymentTextFields(view: CardFormView, text : String, textField: UITextField) -> String {
-        return childViewModel.modifyPaymentTextFields(view: view, text: text, textField: textField)
+    func checkTextFieldState(text: String, type: TextFieldType) -> IokaTextFieldState {
+        childViewModel.checkTextFieldState(text: text, type: type)
+    }
+    
+    func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
+        return childViewModel.modifyPaymentTextFields(text: text, textFieldType: textFieldType)
     }
 }
