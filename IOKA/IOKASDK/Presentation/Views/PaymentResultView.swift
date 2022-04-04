@@ -31,15 +31,21 @@ class PaymentResultView: UIView {
         }
     }
     
-    var orderResponse: CardPaymentResponse? {
+    var paymentResponse: CardPaymentResponse? {
         didSet {
-            setOrderViewData()
+            setPaymentData()
         }
     }
     
     var error: IokaError? {
         didSet {
-            setOrderViewData()
+            setPaymentData()
+        }
+    }
+    
+    var orderResponse: GetOrderResponse? {
+        didSet {
+            setOrderData(order: orderResponse)
         }
     }
   
@@ -51,10 +57,6 @@ class PaymentResultView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        
     }
     
     private func setupActions() {
@@ -116,15 +118,20 @@ class PaymentResultView: UIView {
         }
     }
     
-    private func setOrderViewData() {
-        if let orderResponse = orderResponse {
+    private func setPaymentData() {
+        if let orderResponse = paymentResponse {
             errorDescriptionLabel.text = orderResponse.error?.message
-            orderPriceLabel.text = String(orderResponse.captured_amount)
-            orderNumberLabel.text = orderResponse.order_id
         }
         
         if let error = error {
             errorDescriptionLabel.text = error.message
         }
+    }
+    
+    private func setOrderData(order: GetOrderResponse?) {
+        guard let order = order else { return }
+
+        orderPriceLabel.text = String(order.amount)
+        orderNumberLabel.text = order.id
     }
 }

@@ -25,7 +25,7 @@ enum CardFormState {
 
 class CardFormView: UIView {
 
-    let titleLabel = IokaLabel(title: "К оплате 12 560", iokaFont: Typography.title)
+    let titleLabel = IokaLabel(iokaFont: Typography.title)
     let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
@@ -56,11 +56,10 @@ class CardFormView: UIView {
         [cardNumberTextField, dateExpirationTextField, cvvTextField].forEach { $0.delegate = self }
     }
     
-    convenience init(state: CardFormState) {
+    convenience init(state: CardFormState, price: Int? = nil) {
         self.init()
         self.cardFormState = state
-        setupSaveCardUI()
-        setupCreateButton()
+        setupSaveCardUI(price: price)
     }
     
     required init?(coder: NSCoder) {
@@ -167,21 +166,29 @@ class CardFormView: UIView {
         transactionImageView.centerY(in: transactionLabel, right: transactionLabel.leftAnchor, paddingRight: 8, width: 24, height: 24)
     }
     
-    private func setupSaveCardUI() {
-        guard let cardFormState = cardFormState else { return }
-        
-        if cardFormState == .payment {
-            self.addSubview(stackViewForCardSaving)
-            stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
-        }
-    }
-    
-    private func setupCreateButton() {
+    private func setupSaveCardUI(price: Int?) {
         guard let cardFormState = cardFormState else { return }
         
         switch cardFormState {
         case .payment:
-            createButton.setTitle(IokaLocalizable.pay, for: .normal)
+            guard let price = price else { return }
+            self.titleLabel.text = "К оплате \(price) ₸"
+            self.addSubview(stackViewForCardSaving)
+            stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
+        case .saving:
+            self.titleLabel.text = IokaLocalizable.save
+        }
+        
+        setupCreateButton(price: price)
+    }
+    
+    private func setupCreateButton(price: Int?) {
+        guard let cardFormState = cardFormState else { return }
+        
+        switch cardFormState {
+        case .payment:
+            guard let price = price else { return }
+            createButton.setTitle("\(IokaLocalizable.pay) \(price)", for: .normal)
         case .saving:
             createButton.setTitle(IokaLocalizable.save, for: .normal)
         }

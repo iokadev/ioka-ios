@@ -9,10 +9,10 @@ import UIKit
 
 class CardPaymentViewController: IokaViewController {
     
-    private lazy var contentView = CardFormView(state: .payment)
+    private lazy var contentView = CardFormView(state: .payment, price: order.amount)
     var viewModel: CardPaymentViewModel!
     var order_id: String!
-   
+    var order: GetOrderResponse!
 
     override func viewDidLoad() {
         super.viewDidLoad()

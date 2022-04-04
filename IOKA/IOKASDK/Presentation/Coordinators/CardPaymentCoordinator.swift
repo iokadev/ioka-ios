@@ -24,11 +24,14 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     var error: IokaError?
     var response: CardPaymentResponse?
     var orderAccessToken: String?
+    var order: GetOrderResponse?
     
     var topViewController: UIViewController!
     
     private lazy var cardPaymentViewController: CardPaymentViewController = {
-        IokaFactory.shared.initiateCardPaymentViewController(orderAccesToken: IOKA.shared.orderAccessToken, delegate: self)
+        guard let order = order else { fatalError("Please provide order to construct CardPaymentViewController") }
+
+        return IokaFactory.shared.initiateCardPaymentViewController(orderAccesToken: IOKA.shared.orderAccessToken, delegate: self, order: order)
     }()
     
     private lazy var iokaBrowserViewController: IokaBrowserViewController = {
@@ -38,7 +41,8 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     
     private lazy var paymentResultViewController: PaymentResultViewController = {
         guard let paymentResult = paymentResult else { fatalError("Please provide paymentResult") }
-        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self)
+        guard let order = order else { fatalError("Please provide order to construct CardPaymentViewController") }
+        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self, order: order)
     }()
     
     private lazy var getOrderForPaymentViewController: GetOrderForPaymentViewController = {
@@ -158,6 +162,7 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
 extension CardPaymentCoordinator: GetOrderForPaymentNavigationDelegate {
     func gotOrder(order: GetOrderResponse?, error: IokaError?) {
         DispatchQueue.main.async {
+            self.order = order
             self.showCardPaymentForm()
             self.dismissViewControllerProgressWrapper()
         }
