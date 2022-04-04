@@ -46,8 +46,8 @@ class CardPaymentCoordinator: NSObject, Coordinator {
         super.init()
     }
     
-    func startFlow(coordinator: Coordinator) {
-        self.children.append(coordinator)
+    func startFlow() {
+        
     }
     
     func finishFlow(coordinator: Coordinator) {

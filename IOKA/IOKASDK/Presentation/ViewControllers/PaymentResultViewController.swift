@@ -18,16 +18,16 @@ class PaymentResultViewController: IokaViewController {
     lazy var contentView = PaymentResultView()
     var viewModel: PaymentResultViewModel!
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    
+    override func loadView() {
+        super.loadView()
+        self.view = contentView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contentView.delegate = self
         feedbackGenerator.impactOccurred()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        self.view = contentView
     }
 }
 

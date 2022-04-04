@@ -16,7 +16,6 @@ protocol SavedCardPaymentNavigationDelegate: NSObject {
 class SavedCardPaymentCoordinator: NSObject, Coordinator {
     
     let navigationViewController: UINavigationController
-    var children: [Coordinator] = []
     var childrenViewControllers: [UIViewController] = []
     var card: GetCardResponse?
     var orderAccessToken: String?
@@ -50,14 +49,27 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
         return IokaFactory.shared.initiateErrorPopUpViewController(delegate: self, error: error)
     }()
     
+    private lazy var createPaymentForSavedCardViewModel: CreatePaymentForSavedCardViewModel = {
+        guard let card = card, let orderAccessToken = orderAccessToken else { fatalError("Card information weren't provided") }
+        return IokaFactory.shared.initiateCreatePaymentForSavedCardViewModel(card: card, orderAccessToken: orderAccessToken, delegate: self)
+    }()
+    
+    private lazy var progressWrapperView = IokaFactory.shared.initiateProgressWrapperView(state: .payment)
+    
     init(navigationViewController: UINavigationController) {
         self.navigationViewController = navigationViewController
         self.routerCoordinator = RouterNavigation(navigationViewController: navigationViewController)
         super.init()
     }
     
-    func startFlow(coordinator: Coordinator) {
-        self.children.append(coordinator)
+    func startFlow() {
+        guard let card = card else { return }
+        switch card.cvc_required {
+        case true:
+            showSavedCardPaymentForm()
+        case false:
+            showSavedCardPaymentForm()
+        }
     }
     
     func finishFlow(coordinator: Coordinator) {
@@ -94,6 +106,14 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     
     func dismissErrorPopUp() {
         routerCoordinator.dismissViewController(animated: false, completion: nil)
+    }
+    
+    func showViewControllerProgressWrapper() {
+        self.topViewController.view = progressWrapperView
+    }
+    
+    func dismissViewControllerProgressWrapper() {
+        progressWrapperView.stop()
     }
 }
 
@@ -163,5 +183,23 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
         dismissErrorPopUp()
     }
     
+}
+
+
+extension SavedCardPaymentCoordinator: CreatePaymentForSavedCardNavigationDelegate {
+    func paymentCreated(response: CardPaymentResponse?, error: IokaError?, status: PaymentResult) {
+        if let response = response, let actionURL = response.action?.url {
+            self.url = "\(actionURL)?return_url=https://ioka.kz"
+            self.iokaBrowserState = .createCardPayment(orderId: response.order_id, paymentId: response.id)
+            self.show3DSecure()
+            dismissViewControllerProgressWrapper()
+        } else {
+            self.paymentResult = status
+            self.error = error
+            self.response = response
+            self.showPaymentResult()
+            dismissViewControllerProgressWrapper()
+        }
+    }
 }
 

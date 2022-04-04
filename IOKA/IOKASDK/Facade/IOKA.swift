@@ -35,7 +35,7 @@ class IOKA: IokaThemeProtocol {
         coordinator.card = card
         coordinator.orderAccessToken = orderAccessToken
         coordinator.topViewController = viewController
-        coordinator.showSavedCardPaymentForm()
+        coordinator.startFlow()
     }
     
     func getCards(customerAccessToken: String, completion: @escaping(([GetCardResponse]?, IokaError?) -> Void )) {

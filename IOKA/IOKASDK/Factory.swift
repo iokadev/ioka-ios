@@ -66,4 +66,14 @@ class IokaFactory {
         vc.modalPresentationStyle = .overFullScreen
         return vc
     }
+    
+    func initiateCreatePaymentForSavedCardViewModel(card: GetCardResponse, orderAccessToken: String, delegate: CreatePaymentForSavedCardNavigationDelegate) -> CreatePaymentForSavedCardViewModel {
+        let viewModel = CreatePaymentForSavedCardViewModel(card: card, orderId: orderAccessToken.trimTokens(), delegate: delegate)
+        return viewModel
+    }
+    
+    func initiateProgressWrapperView(state: ProgressWrapperViewState) -> ProgressWrapperView {
+        let view = ProgressWrapperView(state: state)
+        return view
+    }
 }

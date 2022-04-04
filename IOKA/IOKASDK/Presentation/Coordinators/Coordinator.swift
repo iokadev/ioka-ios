@@ -9,9 +9,8 @@ import UIKit
 
 
 protocol Coordinator: NSObject {
-    var children: [Coordinator] { get }
     var navigationViewController: UINavigationController { get }
     var childrenViewControllers: [UIViewController] { get }
-    func startFlow(coordinator: Coordinator)
+    func startFlow()
     func finishFlow(coordinator: Coordinator)
 }

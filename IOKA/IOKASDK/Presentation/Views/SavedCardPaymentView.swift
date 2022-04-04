@@ -30,6 +30,7 @@ class SavedCardPaymentView: UIView {
         super.init(frame: frame)
         setUI()
         setActions()
+        cvvTextField.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {

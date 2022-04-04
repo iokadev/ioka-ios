@@ -18,7 +18,7 @@ class IokaBrowserViewController:  IokaViewController {
     
     var webView = WKWebView()
     var navView = IokaBrowserNavigationView()
-    private lazy var loadingIndicator = IokaProgressView2()
+    private lazy var loadingIndicator = IokaProgressView()
     var url: URL!
     var iokaBrowserState: IokaBrowserState!
     weak var delegate: IokaBrowserViewControllerDelegate?
@@ -75,7 +75,6 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
         
         self.webView.isHidden = true
         loadingIndicator.isHidden = false
-//        loadingIndicator.animateStroke()
     
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             guard let iokaBrowserState = self.iokaBrowserState else { return }
