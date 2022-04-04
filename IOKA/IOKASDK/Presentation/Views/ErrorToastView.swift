@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol ErrorViewDelegate: NSObject {
-    func closeErrorView(_ view: ErrorView)
+protocol ErrorToastViewDelegate: NSObject {
+    func closeErrorView(_ view: ErrorToastView)
 }
 
-class ErrorView: UIView {
+class ErrorToastView: UIView {
     
-    public weak var delegate: ErrorViewDelegate?
+    public weak var delegate: ErrorToastViewDelegate?
     public var error: IokaError? {
         didSet {
             configureErrorView(error: error)

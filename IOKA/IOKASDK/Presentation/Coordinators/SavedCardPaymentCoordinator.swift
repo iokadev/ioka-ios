@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol Coordinator: NSObject {
-    var children: [Coordinator] { get }
-    var navigationViewController: UINavigationController { get }
-    var childrenViewControllers: [UIViewController] { get }
-    func startFlow(coordinator: Coordinator)
-    func finishFlow(coordinator: Coordinator)
-}
-
 protocol SavedCardPaymentNavigationDelegate: NSObject {
     func dismissView()
     func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
@@ -51,6 +43,11 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     private lazy var paymentResultViewController: PaymentResultViewController = {
         guard let paymentResult = paymentResult else { fatalError("Please provide paymentResult") }
         return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self)
+    }()
+    
+    private lazy var errorPopUpViewController: ErrorPopUpViewController = {
+        guard let error = error else { fatalError("Please provide IokaError to show error pop up view") }
+        return IokaFactory.shared.initiateErrorPopUpViewController(delegate: self, error: error)
     }()
     
     init(navigationViewController: UINavigationController) {
@@ -90,9 +87,17 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     func dismissPaymentResult() {
         self.navigationViewController.viewControllers = self.navigationViewController.viewControllers.filter { $0 != paymentResultViewController }
     }
+    
+    func showErrorPopUp() {
+        routerCoordinator.presentViewController(errorPopUpViewController, animated: false, completion: nil)
+    }
+    
+    func dismissErrorPopUp() {
+        routerCoordinator.dismissViewController(animated: false, completion: nil)
+    }
 }
 
-extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaBrowserViewControllerDelegate, PaymentResultNavigationDelegate {
+extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaBrowserViewControllerDelegate, PaymentResultNavigationDelegate, ErrorPopUpNavigationDelegate {
     
     func dismissView() {
         self.dismissSavedCardPaymentForm()
@@ -120,16 +125,17 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
     func closeIokaBrowserViewController(_ viewController: UIViewController, iokaBrowserState: IokaBrowserState, cardPaymentResponse: CardPaymentResponse?, getCardResponse: GetCardResponse?, error: IokaError?) {
         switch iokaBrowserState {
         case .createCardPayment(_, _):
+            
             if let cardPaymentResponse = cardPaymentResponse, cardPaymentResponse.error == nil {
                 self.paymentResult = .paymentSucceed
                 self.error = nil
                 self.response = cardPaymentResponse
                 self.showPaymentResult()
-            } else {
+            } else if let error = cardPaymentResponse?.error {
                 self.paymentResult = .paymentFailed
-                self.error = nil
+                self.error = error
                 self.response = cardPaymentResponse
-                self.showPaymentResult()
+                self.showErrorPopUp()
             }
             if let error = error {
                 self.paymentResult = .paymentFailed
@@ -152,5 +158,10 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
         finishFlow(coordinator: self)
         self.dismissPaymentResult()
     }
+    
+    func dismiss() {
+        dismissErrorPopUp()
+    }
+    
 }
 

@@ -19,7 +19,7 @@ struct CardPaymentResponse: Codable {
     let refunded_amount: Int //-Сумма возврата
     let processing_fee: Double //-Комиссия процессинга
     var payer: Payer? //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
-    var error: PaymentError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
+    var error: IokaError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var acquirer: Acquirer? //-Данные банка эквайера
     var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
 }

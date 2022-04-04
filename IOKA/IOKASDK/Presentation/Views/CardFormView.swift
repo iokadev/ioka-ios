@@ -37,7 +37,7 @@ class CardFormView: UIView {
     private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IOKA.shared.theme.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 12)
-    private lazy var errorView = ErrorView()
+    private lazy var errorView = ErrorToastView()
     
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
@@ -222,7 +222,7 @@ extension CardFormView: UITextFieldDelegate {
     }
 }
 
-extension CardFormView: ErrorViewDelegate {
+extension CardFormView: ErrorToastViewDelegate {
     
     public func showErrorView(error: IokaError) {
         DispatchQueue.main.async {
@@ -232,7 +232,7 @@ extension CardFormView: ErrorViewDelegate {
         }
     }
     
-    func closeErrorView(_ view: ErrorView) {
+    func closeErrorView(_ view: ErrorToastView) {
         DispatchQueue.main.async {
             self.errorView.removeFromSuperview()
         }

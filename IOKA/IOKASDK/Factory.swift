@@ -57,4 +57,13 @@ class IokaFactory {
         viewController.viewModel.delegate = delegate
         return viewController
     }
+    
+    func initiateErrorPopUpViewController(delegate: ErrorPopUpNavigationDelegate, error: IokaError) -> ErrorPopUpViewController{
+        let vc = ErrorPopUpViewController()
+        vc.viewModel = ErrorPopUpViewModel()
+        vc.error = error
+        vc.viewModel.delegate = delegate
+        vc.modalPresentationStyle = .overFullScreen
+        return vc
+    }
 }
