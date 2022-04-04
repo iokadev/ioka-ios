@@ -12,6 +12,11 @@ enum PaymentResult {
     case paymentFailed
 }
 
+protocol PaymentResultNavigationDelegate: NSObject {
+    func closePaymentResultScreen()
+    func retryPaymentProcess()
+}
+
 class PaymentResultViewController: IokaViewController {
     
     var paymentResult: PaymentResult?

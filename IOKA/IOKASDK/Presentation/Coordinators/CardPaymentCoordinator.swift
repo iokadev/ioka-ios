@@ -8,8 +8,8 @@
 import UIKit
 
 protocol CardPaymentNavigationDelegate: NSObject {
-    func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
-    func completeCardPaymentFlow()
+    func completeCardPaymentForm(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
+    func completeCardPaymentForm()
 }
 
 class CardPaymentCoordinator: NSObject, Coordinator {
@@ -99,11 +99,11 @@ class CardPaymentCoordinator: NSObject, Coordinator {
 
 extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserViewControllerDelegate, PaymentResultNavigationDelegate {
     
-    func completeCardPaymentFlow() {
+    func completeCardPaymentForm() {
         self.dismissCardPaymentForm()
     }
     
-    func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
+    func completeCardPaymentForm(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
         if let response = response, let actionURL = response.action?.url {
             self.url = "\(actionURL)?return_url=https://ioka.kz"
             self.iokaBrowserState = .createCardPayment(orderId: response.order_id, paymentId: response.id)
@@ -148,7 +148,7 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
         }
     }
     
-    func closePaymentResultViewController() {
+    func closePaymentResultScreen() {
         finishFlow(coordinator: self)
         self.dismissPaymentResult()
     }

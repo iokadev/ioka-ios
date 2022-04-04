@@ -43,7 +43,7 @@ class SaveCardCoordinator: NSObject, Coordinator {
     }
     
     func startFlow() {
-        
+        showCardForm()
     }
     
     func finishFlow(coordinator: Coordinator) {

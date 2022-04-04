@@ -12,17 +12,22 @@ class CardFormViewModel {
     
     
     func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {
-        IokaApi.shared.getBrand(partialBin: partialBin) { result, error in
-            guard error == nil else {
+        IokaApi.shared.getBrand(partialBin: partialBin) {[weak self] result in
+            
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let getBrandResponse):
+                completion(getBrandResponse)
+            case .failure( _):
                 completion(nil)
-                return
             }
-            if let result = result { completion(result) }
         }
     }
     
     func getBankEmiiter(binCode: String) {
-        IokaApi.shared.getEmitterByBinCode(binCode: binCode.trimEmitterBinCode()) { response, error in
+        IokaApi.shared.getEmitterByBinCode(binCode: binCode.trimEmitterBinCode()) { [weak self] response in
+            guard let _ = self else { return }
 //            print("DEBUG: Response is \(response)")
         }
     }

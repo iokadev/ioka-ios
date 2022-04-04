@@ -16,28 +16,29 @@ class CardPaymentViewModel {
     var cardPaymentFailure: ((IokaError?) -> Void)?
     
     func completeCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
-        delegate?.completeCardPaymentFlow(status: status, error: error, response: response)
+        DispatchQueue.main.async {
+            self.delegate?.completeCardPaymentForm(status: status, error: error, response: response)
+        }
     }
     
     func completeCardPaymentFlow() {
-        delegate?.completeCardPaymentFlow()
+        delegate?.completeCardPaymentForm()
     }
     
-    func createCardPayment(order_id: String, card: Card, completion: @escaping((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)) {
-        IokaApi.shared.createCardPayment(orderId: order_id, card: card) { [weak self] result, error in
+    func createCardPayment(order_id: String, card: Card) {
+        IokaApi.shared.createCardPayment(orderId: order_id, card: card) { [weak self] result in
             guard let self = self else { return }
-            guard error == nil else {
+            
+            switch result {
+            case .success(let cardPaymentResponse):
+                if let error = cardPaymentResponse.error {
+                    self.completeCardPaymentFlow(status: .paymentFailed, error: error, response: cardPaymentResponse)
+                } else {
+                    self.completeCardPaymentFlow(status: .paymentSucceed, error: nil, response: cardPaymentResponse)
+                }
+            case .failure(let error):
                 self.cardPaymentFailure?(error)
-                return
             }
-            guard let result = result else { return }
-            
-            guard result.error == nil else { completion(.paymentFailed, nil, result)
-                return
-            }
-            
-            completion(.paymentSucceed, nil, result)
-            
         }
     }
     

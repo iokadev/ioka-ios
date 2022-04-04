@@ -7,15 +7,21 @@
 
 import Foundation
 
-typealias paymentCreationCompletion = (CardPaymentResponse?, IokaError?) -> Void
-typealias getBrandCompletion = (GetBrandResponse?, IokaError?) -> Void
-typealias getEmitterByBinCodeCompletion = (GetEmitterByBinCodeResponse?, IokaError?) -> Void
-typealias getCardsCompletion = ([GetCardResponse]?, IokaError?) -> Void
-typealias createBindingCompletion = (GetCardResponse?, IokaError?) -> Void
+typealias paymentCreationCompletion = (IokaResult<CardPaymentResponse, IokaError>) -> Void
+typealias getBrandCompletion = (IokaResult<GetBrandResponse, IokaError>) -> Void
+typealias getEmitterByBinCodeCompletion = (IokaResult<GetEmitterByBinCodeResponse, IokaError>) -> Void
+typealias getCardsCompletion = (IokaResult<[GetCardResponse], IokaError>) -> Void
+typealias createBindingCompletion = (IokaResult<GetCardResponse, IokaError>) -> Void
 typealias deleteCardByIDResponseCompletion = (IokaError?) -> Void
-typealias getCardByIDCompletion = (GetCardResponse?, IokaError?) -> Void
-typealias getPaymentByIDResponseCompletion = (CardPaymentResponse?, IokaError?) -> Void
-typealias getOrderByIDResponseCompletion = (GetOrderResponse?, IokaError?) -> Void
+typealias getCardByIDCompletion = (IokaResult<GetCardResponse, IokaError>) -> Void
+typealias getPaymentByIDResponseCompletion = (IokaResult<CardPaymentResponse, IokaError>) -> Void
+typealias getOrderByIDResponseCompletion = (IokaResult<GetOrderResponse, IokaError>) -> Void
+
+
+enum IokaResult<success, failure> {
+    case success(success)
+    case failure(failure)
+}
 
 
 class IokaApi {
@@ -57,7 +63,14 @@ class IokaApi {
     func createCardPayment(orderId: String, card: Card, completion: @escaping(paymentCreationCompletion)) {
         endPointRouter.request(.createCardPayment(orderId: orderId, card: card)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: CardPaymentResponse.self) { result, error in
-                completion(result, error)
+        
+                if let error = error {
+                    completion(.failure(error))
+                }
+                
+                if let result = result {
+                    completion(.success(result))
+                }
             }
         }
     }
@@ -65,7 +78,14 @@ class IokaApi {
     func getBrand(partialBin: String, completion: @escaping(getBrandCompletion)) {
         endPointRouter.request(.getBrand(partialBin: partialBin)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetBrandResponse.self) { result, error in
-                completion(result, error)
+                
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -73,7 +93,13 @@ class IokaApi {
     func getEmitterByBinCode(binCode: String, completion: @escaping(getEmitterByBinCodeCompletion)) {
         endPointRouter.request(.getEmitterByBinCode(binCode: binCode)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetEmitterByBinCodeResponse.self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -81,7 +107,13 @@ class IokaApi {
     func getCards(customerId: String, completion: @escaping(getCardsCompletion)) {
         endPointRouter.request(.getCards(customerId: customerId)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: [GetCardResponse].self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -89,7 +121,13 @@ class IokaApi {
     func createBinding(customerId: String, card: Card, completion: @escaping(createBindingCompletion)) {
         endPointRouter.request(.createBinding(customerId: customerId, card: card)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetCardResponse.self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -122,7 +160,13 @@ class IokaApi {
     func getCardByID(customerId: String, cardId: String, completion: @escaping(getCardByIDCompletion)) {
         endPointRouter.request(.getCardByID(customerId: customerId, cardId: cardId)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetCardResponse.self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -130,7 +174,13 @@ class IokaApi {
     func getPaymentByID(orderId: String, paymentId: String, completion: @escaping(getPaymentByIDResponseCompletion)) {
         endPointRouter.request(.getPaymentByID(orderId: orderId, paymentId: paymentId)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: CardPaymentResponse.self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }
@@ -138,7 +188,13 @@ class IokaApi {
     func getOrderByID(orderId: String, completion: @escaping(getOrderByIDResponseCompletion)) {
         endPointRouter.request(.getOrderByID(orderId: orderId)) { data, response, error in
             self.handleRequest(data: data, response: response, error: error, model: GetOrderResponse.self) { result, error in
-                completion(result, error)
+                if let result = result {
+                    completion(.success(result))
+                }
+                
+                if let error = error {
+                    completion(.failure(error))
+                }
             }
         }
     }

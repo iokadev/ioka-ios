@@ -24,8 +24,3 @@ protocol RouterCoordinator: NSObject {
     
     func finishFlow(_ viewController: UIViewController)
 }
-
-protocol PaymentResultNavigationDelegate: NSObject {
-    func closePaymentResultViewController()
-    func retryPaymentProcess()
-}
