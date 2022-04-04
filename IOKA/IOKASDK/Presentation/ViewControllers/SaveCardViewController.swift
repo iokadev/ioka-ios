@@ -34,6 +34,7 @@ class SaveCardViewController: IokaViewController {
 }
 
 extension SaveCardViewController: CardFormViewDelegate {
+    
     func closeCardFormView(_ view: CardFormView) {
         self.viewModel.completeSaveCardFlow()
     }
@@ -43,12 +44,51 @@ extension SaveCardViewController: CardFormViewDelegate {
     }
     
     func modifyPaymentTextFields(_ view: CardFormView, text: String, textField: UITextField) -> String {
-        viewModel.modifyPaymentTextFields(view: view, text: text, textField: textField)
+        switch textField {
+        case view.cardNumberTextField:
+            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .cardNumber)
+        case view.dateExpirationTextField:
+            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .dateExpiration)
+        case view.cvvTextField:
+            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .cvv)
+        default:
+            return text
+        }
+    }
+    
+    func checkTextFieldState(_ view: CardFormView, textField: UITextField) {
+        guard let textField = textField as? IokaTextField else { return }
+        switch textField {
+        case view.cardNumberTextField:
+            guard let text = textField.text else { return }
+            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .cardNumber)
+        case view.dateExpirationTextField:
+            guard let text = textField.text else { return }
+            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .dateExpiration)
+        case view.cvvTextField:
+            guard let text = textField.text else { return }
+            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .cvv)
+        default:
+            textField.iokaTextFieldState = .nonActive
+        }
     }
     
     
     func checkCreateButtonState(_ view: CardFormView) {
-        viewModel.checkPayButtonState(view: view)
+        guard let cardNumberText = view.cardNumberTextField.text else { view.createButton.iokaButtonState = .disabled
+            return
+        }
+        guard let dateExpirationText = view.dateExpirationTextField.text else { view.createButton.iokaButtonState = .disabled
+            return
+        }
+        guard let cvvText = view.cvvTextField.text else { view.createButton.iokaButtonState = .disabled
+            return
+        }
+        
+        viewModel.checkCreateButtonState(cardNumberText: cardNumberText, dateExpirationText: dateExpirationText, cvvText: cvvText) { [weak self] buttonState in
+            guard let _ = self else { return }
+            view.createButton.iokaButtonState = buttonState
+        }
     }
     
     func getBrand(_ view: CardFormView, with partialBin: String) {

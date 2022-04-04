@@ -11,20 +11,22 @@ import Foundation
 class IokaFactory {
     static let shared = IokaFactory()
     
-    func initiateCardPaymentViewController(orderAccesToken: String?, delegate: CardPaymentNavigationDelegate) -> CardPaymentViewController {
+    func initiateCardPaymentViewController(orderAccesToken: String?, delegate: CardPaymentNavigationDelegate, order: GetOrderResponse) -> CardPaymentViewController {
         guard let orderAccesToken = orderAccesToken else { fatalError("Please provide order_access_token") }
         let viewController = CardPaymentViewController()
         viewController.order_id = orderAccesToken.trimTokens()
         viewController.viewModel = CardPaymentViewModel()
+        viewController.order = order
         viewController.viewModel.delegate = delegate
         return viewController
     }
     
-    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultNavigationDelegate) -> PaymentResultViewController {
+    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultNavigationDelegate, order: GetOrderResponse? = nil) -> PaymentResultViewController {
         let viewController = PaymentResultViewController()
         viewController.contentView.paymentResult = paymentResult
         viewController.contentView.error = error
-        viewController.contentView.orderResponse = response
+        viewController.contentView.orderResponse = order
+        viewController.contentView.paymentResponse = response
         viewController.viewModel = PaymentResultViewModel()
         viewController.viewModel.delegate = delegate
         return viewController

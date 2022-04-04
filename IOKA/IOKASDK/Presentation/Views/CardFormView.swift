@@ -15,6 +15,7 @@ protocol CardFormViewDelegate: NSObject {
     func checkCreateButtonState(_ view: CardFormView)
     func closeCardFormView(_ view: CardFormView)
     func modifyPaymentTextFields(_ view: CardFormView, text : String, textField: UITextField) -> String
+    func checkTextFieldState(_ view: CardFormView, textField: UITextField)
 }
 
 enum CardFormState {
@@ -22,10 +23,16 @@ enum CardFormState {
     case saving
 }
 
+enum TextFieldType {
+    case cardNumber
+    case cvv
+    case dateExpiration
+}
+
 
 class CardFormView: UIView {
 
-    let titleLabel = IokaLabel(title: "К оплате 12 560", iokaFont: Typography.title)
+    let titleLabel = IokaLabel(iokaFont: Typography.title)
     let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
@@ -56,11 +63,10 @@ class CardFormView: UIView {
         [cardNumberTextField, dateExpirationTextField, cvvTextField].forEach { $0.delegate = self }
     }
     
-    convenience init(state: CardFormState) {
+    convenience init(state: CardFormState, price: Int? = nil) {
         self.init()
         self.cardFormState = state
-        setupSaveCardUI()
-        setupCreateButton()
+        setupSaveCardUI(price: price)
     }
     
     required init?(coder: NSCoder) {
@@ -110,6 +116,7 @@ class CardFormView: UIView {
         let text = delegate?.modifyPaymentTextFields(self, text: textField.text!, textField: textField)
         textField.text = text
         delegate?.checkCreateButtonState(self)
+        delegate?.checkTextFieldState(self, textField: textField)
         guard !cardNumberTextField.isCardBrandSetted else { return }
         delegate?.getBrand(self, with:   cardNumberTextField.text?.trimCardNumberText() ?? "")
     }
@@ -167,21 +174,29 @@ class CardFormView: UIView {
         transactionImageView.centerY(in: transactionLabel, right: transactionLabel.leftAnchor, paddingRight: 8, width: 24, height: 24)
     }
     
-    private func setupSaveCardUI() {
-        guard let cardFormState = cardFormState else { return }
-        
-        if cardFormState == .payment {
-            self.addSubview(stackViewForCardSaving)
-            stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
-        }
-    }
-    
-    private func setupCreateButton() {
+    private func setupSaveCardUI(price: Int?) {
         guard let cardFormState = cardFormState else { return }
         
         switch cardFormState {
         case .payment:
-            createButton.setTitle(IokaLocalizable.pay, for: .normal)
+            guard let price = price else { return }
+            self.titleLabel.text = "К оплате \(price) ₸"
+            self.addSubview(stackViewForCardSaving)
+            stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
+        case .saving:
+            self.titleLabel.text = IokaLocalizable.save
+        }
+        
+        setupCreateButton(price: price)
+    }
+    
+    private func setupCreateButton(price: Int?) {
+        guard let cardFormState = cardFormState else { return }
+        
+        switch cardFormState {
+        case .payment:
+            guard let price = price else { return }
+            createButton.setTitle("\(IokaLocalizable.pay) \(price)", for: .normal)
         case .saving:
             createButton.setTitle(IokaLocalizable.save, for: .normal)
         }
@@ -196,20 +211,7 @@ extension CardFormView: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let iokaTextField = textField as? IokaTextField else { return }
-        switch iokaTextField {
-        case cardNumberTextField:
-            guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cardNumberTextField.iokaTextFieldState = trimmedText.checkCardNumber()
-        case dateExpirationTextField:
-            guard let trimmedText = textField.text?.trimDateExpirationText() else { return }
-            dateExpirationTextField.iokaTextFieldState = trimmedText.checkCardExpiration()
-        case cvvTextField:
-            guard let trimmedText = textField.text?.trimCardNumberText() else { return }
-            cvvTextField.iokaTextFieldState = trimmedText.checkCVV()
-        default:
-            print("Any other implementation if you would like to add")
-        }
+        delegate?.checkCreateButtonState(self)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
