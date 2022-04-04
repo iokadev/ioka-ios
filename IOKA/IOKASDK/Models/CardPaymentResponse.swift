@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+// надо переименовать в PaymentDTO
 struct CardPaymentResponse: Decodable {
     
     let id: String //-Идентификатор платежа
@@ -21,7 +21,7 @@ struct CardPaymentResponse: Decodable {
     var payer: Payer? //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
     var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var acquirer: Acquirer? //-Данные банка эквайера
-    var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
+    var action: ActionDTO?//-Данные для прохождения 3DSecure на стороне Банка
 }
 
 struct Acquirer: Codable {
@@ -29,6 +29,6 @@ struct Acquirer: Codable {
     var reference: String? //-Уникальный идентификатор платежа на стороне банка-эквайера. Присутствует при успешной авторизации
 }
 
-struct Action: Codable {
+struct ActionDTO: Codable {
     let url: String //-Ссылка для открытия формы верификации 3DSecure от Банка
 }

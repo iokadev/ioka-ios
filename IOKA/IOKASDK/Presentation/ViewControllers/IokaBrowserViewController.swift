@@ -72,7 +72,7 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
     }
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
-        
+        // здесь нужно проверять что редирект произошел на returnUrl
         self.webView.isHidden = true
         loadingIndicator.isHidden = false
     
@@ -80,6 +80,7 @@ extension IokaBrowserViewController: WKNavigationDelegate, IokaBrowserNavigation
             guard let iokaBrowserState = self.iokaBrowserState else { return }
             
             switch iokaBrowserState {
+                // это должно во ViewModel делаться
             case .createCardPayment(let orderId, let paymentId):
                 IokaApi.shared.getPaymentByID(orderId: orderId, paymentId: paymentId) { [weak self] response, error in
                     guard let self = self else { return }

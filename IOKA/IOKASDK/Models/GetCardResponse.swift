@@ -28,5 +28,5 @@ struct GetCardResponse: Decodable {
     var emitter: String?
     var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
     var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
-    var action: Action?//-Данные для прохождения 3DSecure на стороне Банка
+    var action: ActionDTO?//-Данные для прохождения 3DSecure на стороне Банка
 }

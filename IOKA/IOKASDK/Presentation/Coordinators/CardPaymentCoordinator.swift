@@ -18,6 +18,8 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     var children: [Coordinator] = []
     var childrenViewControllers: [UIViewController] = []
     let routerCoordinator: RouterCoordinator
+    
+    // лучше передавать данные через аргументы методов, а не переменные. Единственная переменная здесь будет order, потому что ему надо прожить несколько экранов.
     var url: String?
     var iokaBrowserState: IokaBrowserState?
     var paymentResult: PaymentResult?
