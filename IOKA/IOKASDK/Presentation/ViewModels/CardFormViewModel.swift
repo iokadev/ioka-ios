@@ -12,65 +12,127 @@ class CardFormViewModel {
     
     
     func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {
-        IokaApi.shared.getBrand(partialBin: partialBin) { result, error in
-            guard error == nil else {
+        IokaApi.shared.getBrand(partialBin: partialBin) {[weak self] result in
+            
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let getBrandResponse):
+                completion(getBrandResponse)
+            case .failure( _):
                 completion(nil)
-                return
             }
-            if let result = result { completion(result) }
         }
     }
     
     func getBankEmiiter(binCode: String) {
-        IokaApi.shared.getEmitterByBinCode(binCode: binCode.trimEmitterBinCode()) { response, error in
+        IokaApi.shared.getEmitterByBinCode(binCode: binCode.trimEmitterBinCode()) { [weak self] response in
+            guard let _ = self else { return }
 //            print("DEBUG: Response is \(response)")
         }
     }
     
-    func checkPayButtonState(view: CardFormView) {
-        guard let cardNumberText = view.cardNumberTextField.text else {
-            disablePayButton(view)
-            return }
-        guard let dateExpirationText = view.dateExpirationTextField.text else {
-            disablePayButton(view)
-            return }
-        guard let cvvText = view.cvvTextField.text else {
-            disablePayButton(view)
-            return }
+    func checkPayButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String, completion: @escaping(IokaButtonState) -> Void) {
         
-        guard cardNumberText.trimCardNumberText().checkCardNumber() == IokaTextFieldState.correctInputData else {
-            disablePayButton(view)
-            return }
-        guard dateExpirationText.trimDateExpirationText().checkCardExpiration() == IokaTextFieldState.correctInputData else {
-            disablePayButton(view)
-            return }
-        guard cvvText.checkCVV() == IokaTextFieldState.correctInputData else {
-            disablePayButton(view)
-            return }
-        view.createButton.iokaButtonState = .enabled
-    }
-    
-    private func disablePayButton(_ view: CardFormView) {
-        view.createButton.iokaButtonState = .disabled
-    }
-    
-    func modifyPaymentTextFields(view: CardFormView, text : String, textField: UITextField) -> String {
-        switch textField {
-        case view.cardNumberTextField:
-            if text.count == 0 {
-                view.isCardBrendSetted = false
-                view.cardNumberTextField.cardBrandImageView.image = nil
-            }
-            if text.count >= 6 {
-                self.getBankEmiiter(binCode: text)
-            }
-            return text.transformCardNumber(trimmedString: text.trimCardNumberText())
-        case view.dateExpirationTextField:
-            return text.transformExpirationDate(trimmedString: text.trimDateExpirationText())
-        case view.cvvTextField:
-            return text
-        default:
-            return text
+        guard checkCardNumber(cardNumberText.trimCardNumberText()) == IokaTextFieldState.correctInputData else
+        {
+            completion(.disabled)
+            return
         }
+        
+        guard checkCardExpiration(dateExpirationText.trimDateExpirationText()) == IokaTextFieldState.correctInputData else
+        {
+            completion(.disabled)
+            return
+        }
+        
+        guard checkCVV(cvvText) == IokaTextFieldState.correctInputData else
+        {
+            completion(.disabled)
+            return
+        }
+        
+        completion(.enabled)
+    }
+    
+    func checkTextFieldState(text: String, type: TextFieldType) -> IokaTextFieldState {
+        switch type {
+        case .cardNumber:
+            return checkCardNumber(text.trimCardNumberText())
+        case .cvv:
+            return checkCVV(text)
+        case .dateExpiration:
+            return checkCardExpiration(text.trimDateExpirationText())
+        }
+    }
+    
+    
+    func checkCardExpiration(_ dateExpiration: String) -> IokaTextFieldState {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yy-MM-dd HH:mm:ss 'UTC'"
+        
+        formatter.dateFormat = "yy"
+        let year = Int(formatter.string(from: Date()))!
+        formatter.dateFormat = "MM"
+        let month = Int(formatter.string(from: Date()))!
+        
+        let cardDate = Array(dateExpiration)
+        guard cardDate.count == 4 else { return IokaTextFieldState.wrongInputData }
+        guard let cardMonth = Int("\(cardDate[0])\(cardDate[1])") else { return IokaTextFieldState.wrongInputData }
+        guard let cardYear = Int("\(cardDate[2])\(cardDate[3])") else { return IokaTextFieldState.wrongInputData }
+        
+        if cardMonth > 12 || year > cardYear || cardYear == year && month > cardMonth {
+            return IokaTextFieldState.wrongInputData
+        } else {
+            return IokaTextFieldState.correctInputData
+        }
+    }
+    
+    func checkCardNumber(_ cardNumber: String) -> IokaTextFieldState {
+        cardNumber.count >= 15 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+    }
+    
+    func checkCVV(_ cvv: String) -> IokaTextFieldState {
+        cvv.count == 3 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+    }
+    
+    func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
+        
+        switch textFieldType {
+        case .cardNumber:
+            return transformCardNumber(trimmedString: text.trimCardNumberText())
+        case .cvv:
+            return text
+        case .dateExpiration:
+            return transformExpirationDate(trimmedString: text.trimDateExpirationText())
+        }
+    }
+    
+    private func transformCardNumber(trimmedString: String) -> String {
+        var text = ""
+        let arrOfCharacters = Array(trimmedString)
+        if(arrOfCharacters.count > 0) {
+            for i in 0...arrOfCharacters.count-1 {
+                text.append(arrOfCharacters[i])
+                if((i+1) % 4 == 0 && i+1 != arrOfCharacters.count){
+                    text.append(" ")
+                }
+            }
+        }
+        return text
+    }
+    
+    private func transformExpirationDate(trimmedString: String) -> String {
+        var text = ""
+        let arrOfCharacters = Array(trimmedString)
+        if(arrOfCharacters.count > 0) {
+            for i in 0...arrOfCharacters.count-1 {
+                text.append(arrOfCharacters[i])
+                if((i+1) == 2 && i+1 != arrOfCharacters.count){
+                    text.append("/")
+                }
+            }
+        }
+        return text
     }
 }

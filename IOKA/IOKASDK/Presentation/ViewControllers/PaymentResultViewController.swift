@@ -12,6 +12,11 @@ enum PaymentResult {
     case paymentFailed
 }
 
+protocol PaymentResultNavigationDelegate: NSObject {
+    func closePaymentResultScreen()
+    func retryPaymentProcess()
+}
+
 class PaymentResultViewController: IokaViewController {
     
     var paymentResult: PaymentResult?
@@ -20,7 +25,6 @@ class PaymentResultViewController: IokaViewController {
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
 

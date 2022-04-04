@@ -14,7 +14,7 @@ class PaymentResultViewModel {
     
     
     func closePaymentResultViewController() {
-        delegate?.closePaymentResultViewController()
+        delegate?.closePaymentResultScreen()
     }
     
     func retryPaymentProcess() {

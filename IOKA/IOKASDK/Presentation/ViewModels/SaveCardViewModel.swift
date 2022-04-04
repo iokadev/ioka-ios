@@ -23,25 +23,24 @@ class SaveCardViewModel {
     }
     
     func saveCard(_ view: CardFormView, customerId: String, card: Card, completion: @escaping((SaveCardStatus, IokaError?, GetCardResponse?) -> Void)) {
-        IokaApi.shared.createBinding(customerId: customerId, card: card) { [weak self] result, error in
+        IokaApi.shared.createBinding(customerId: customerId, card: card) { [weak self] result in
             guard let self = self else { return }
             
-            if let error = error {
+            switch result {
+            case .success(let cardResponse):
+                if let error = cardResponse.error {
+                    view.showErrorView(error: error)
+                    self.handleSaveButton(view: view, state: .savingFailure)
+                    completion(.savingFailed, error, cardResponse)
+                } else {
+                    self.handleSaveButton(view: view, state: .savingSuccess)
+                    completion(.savingSucceed, nil, cardResponse)
+                }
+                print("sad")
+            case .failure(let error):
                 view.showErrorView(error: error)
                 self.handleSaveButton(view: view, state: .savingFailure)
                 completion(.savingFailed, error, nil)
-            }
-            
-            
-            guard let result = result else { return }
-            
-            if let error = result.error {
-                view.showErrorView(error: error)
-                self.handleSaveButton(view: view, state: .savingFailure)
-                completion(.savingFailed, nil, result)
-            } else {
-                self.handleSaveButton(view: view, state: .savingSuccess)
-                completion(.savingSucceed, nil, result)
             }
         }
     }

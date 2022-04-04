@@ -15,10 +15,8 @@ class GetOrderForPaymentViewController: UIViewController {
     var viewModel: GetOrderForPaymentViewModel!
     
     override func loadView() {
-        super.loadView()
         self.view = contentView
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()

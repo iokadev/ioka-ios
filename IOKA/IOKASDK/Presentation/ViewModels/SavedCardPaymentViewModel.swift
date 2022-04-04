@@ -13,30 +13,33 @@ class SavedCardPaymentViewModel {
     var delegate: SavedCardPaymentNavigationDelegate?
     
     func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?) {
-        delegate?.completeSavedCardPaymentFlow(status: status, error: error, response: response)
+        DispatchQueue.main.async {
+            self.delegate?.completeSavedCardPaymentFlow(status: status, error: error, response: response)
+        }
     }
     
     func dismiss() {
         delegate?.dismissView()
     }
     
-    func createCardPayment(orderId: String, card: Card, completion: @escaping(PaymentResult, IokaError?, CardPaymentResponse?) -> Void) {
+    func createCardPayment(orderId: String, card: Card) {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
             DispatchQueue.main.async {
-                IokaApi.shared.createCardPayment(orderId: orderId, card: card) { [weak self] result, error in
-                    guard let _ = self else { return }
-                    guard error == nil else { completion(.paymentFailed, error, nil)
-                        return
-                    }
-                    guard let result = result else { return }
+                IokaApi.shared.createCardPayment(orderId: orderId, card: card) { [weak self] result in
+                    guard let self = self else { return }
                     
-                    guard result.error == nil else { completion(.paymentFailed, nil, result)
-                        return
+                    switch result {
+                    case .success(let cardPaymentResponse):
+                        if let error = cardPaymentResponse.error {
+                            self.completeSavedCardPaymentFlow(status: .paymentFailed, error: error, response: cardPaymentResponse)
+                        } else {
+                            self.completeSavedCardPaymentFlow(status: .paymentSucceed, error: nil, response: cardPaymentResponse)
+                        }
+                    case .failure(let error):
+                        self.completeSavedCardPaymentFlow(status: .paymentFailed, error: error, response: nil)
                     }
-                    
-                    completion(.paymentSucceed, nil, result)
                 }
             }
         }

@@ -27,21 +27,25 @@ class CreatePaymentForSavedCardViewModel {
     func createPayment() {
         guard let cardResponse = cardResponse, let orderId = orderId else { return }
         let card = Card(cardId: cardResponse.id, cvc: nil)
-        IokaApi.shared.createCardPayment(orderId: orderId, card: card) { [weak self] result, error in
+        IokaApi.shared.createCardPayment(orderId: orderId, card: card) { [weak self] result in
             guard let self = self else { return }
             
-            guard error == nil else {
-                self.delegate?.paymentCreated(response: result, error: error, status: .paymentFailed)
-                return
+            switch result {
+            case .success(let cardPaymentResponse):
+                if let error = cardPaymentResponse.error {
+                    self.handlePayment(response: cardPaymentResponse, error: error, status: .paymentFailed)
+                } else {
+                    self.handlePayment(response: cardPaymentResponse, error: nil, status: .paymentSucceed)
+                }
+            case .failure(let error):
+                self.handlePayment(response: nil, error: error, status: .paymentFailed)
             }
-            guard let result = result else { return }
-            
-            guard result.error == nil else {
-                self.delegate?.paymentCreated(response: result, error: error, status: .paymentFailed)
-                return
-            }
-            
-            self.delegate?.paymentCreated(response: result, error: error, status: .paymentSucceed)
+        }
+    }
+    
+    private func handlePayment(response: CardPaymentResponse?, error: IokaError?, status: PaymentResult) {
+        DispatchQueue.main.async {
+            self.delegate?.paymentCreated(response: response, error: error, status: status)
         }
     }
     
