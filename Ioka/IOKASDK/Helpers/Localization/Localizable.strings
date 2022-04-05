@@ -29,6 +29,7 @@
 "ok" = "Понятно";
 "paymentFailed" = "Платеж не прошел";
 "retry" = "Попробовать заново";
+"orderNumber" = "Заказ №%@";
 
 
 "paymentConfirmation" = "Подтверждение оплаты";

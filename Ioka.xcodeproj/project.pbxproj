@@ -619,8 +619,8 @@
 			children = (
 				6DB0A2BB27FBA8A1008A8381 /* SavedCardPaymentCoordinator.swift */,
 				6DB0A2BC27FBA8A1008A8381 /* CardPaymentCoordinator.swift */,
-				6DB0A2BD27FBA8A1008A8381 /* RouterCoordinator.swift */,
 				6DB0A2BE27FBA8A1008A8381 /* SaveCardCoordinator.swift */,
+				6DB0A2BD27FBA8A1008A8381 /* RouterCoordinator.swift */,
 				6DB0A2BF27FBA8A1008A8381 /* RouterNavigation.swift */,
 				6DB0A2C027FBA8A1008A8381 /* Coordinator.swift */,
 			);

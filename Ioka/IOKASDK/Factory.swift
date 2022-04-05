@@ -21,7 +21,7 @@ class IokaFactory {
         return viewController
     }
     
-    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultNavigationDelegate, order: GetOrderResponse? = nil) -> PaymentResultViewController {
+    func initiatePaymentResultViewController(paymentResult: PaymentResult, error: IokaError?, response: CardPaymentResponse?, delegate: PaymentResultNavigationDelegate, order: GetOrderResponse) -> PaymentResultViewController {
         let viewController = PaymentResultViewController()
         viewController.contentView.paymentResult = paymentResult
         viewController.contentView.error = error

@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol SavedCardPaymentNavigationDelegate: NSObject {
+    func dismissView()
+    func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
+}
+
 
 class SavedCardPaymentViewModel {
     

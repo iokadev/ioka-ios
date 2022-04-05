@@ -9,11 +9,13 @@ import Foundation
 
 protocol GetOrderForPaymentNavigationDelegate {
     func gotOrder(order: GetOrderResponse?, error: IokaError?)
+    func dismissGetOrderProgressWrapper()
 }
 
 class GetOrderForPaymentViewModel {
     var delegate: GetOrderForPaymentNavigationDelegate?
     var orderId: String?
+    var orderErrorCallBack: ((IokaError) -> Void)?
     
     init(delegate: GetOrderForPaymentNavigationDelegate, orderId: String) {
         self.delegate = delegate
@@ -35,7 +37,7 @@ class GetOrderForPaymentViewModel {
             case .success(let orderResponse):
                 self.prepareOrder(order: orderResponse, error: nil)
             case .failure(let error):
-                self.prepareOrder(order: nil, error: error)
+                self.orderErrorCallBack?(error)
             }
         }
     }

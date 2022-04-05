@@ -119,8 +119,8 @@ class PaymentResultView: UIView {
     }
     
     private func setPaymentData() {
-        if let orderResponse = paymentResponse {
-            errorDescriptionLabel.text = orderResponse.error?.message
+        if let paymentResponse = paymentResponse {
+            errorDescriptionLabel.text = paymentResponse.error?.message
         }
         
         if let error = error {
@@ -128,12 +128,16 @@ class PaymentResultView: UIView {
         }
     }
     
-    
-    //FIXME:  Order number 
     private func setOrderData(order: GetOrderResponse?) {
         guard let order = order else { return }
 
         orderPriceLabel.text = String(order.amount)
-        orderNumberLabel.text = order.external_id
+        let locale = IokaLocalizable.orderNumber
+        if let orderNumber = order.external_id {
+            orderNumberLabel.text = String(format: locale, orderNumber)
+        } else {
+            orderNumberLabel.text = String(format: locale, order.id)
+        }
+        
     }
 }

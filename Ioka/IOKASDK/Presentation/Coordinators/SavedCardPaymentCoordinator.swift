@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol SavedCardPaymentNavigationDelegate: NSObject {
-    func dismissView()
-    func completeSavedCardPaymentFlow(status: PaymentResult, error: IokaError?, response: CardPaymentResponse?)
-}
-
 
 class SavedCardPaymentCoordinator: NSObject, Coordinator {
     
@@ -24,7 +19,8 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     var iokaBrowserState: IokaBrowserState?
     var paymentResult: PaymentResult?
     var error: IokaError?
-    var response: CardPaymentResponse?
+    var paymentResponse: CardPaymentResponse?
+    var orderResponse: GetOrderResponse?
     
     var topViewController: UIViewController!
     
@@ -41,7 +37,8 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     
     private lazy var paymentResultViewController: PaymentResultViewController = {
         guard let paymentResult = paymentResult else { fatalError("Please provide paymentResult") }
-        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self)
+        guard let order = orderResponse else { fatalError("Please provide order to construct CardPaymentViewController") }
+        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.paymentResponse, delegate: self, order: order)
     }()
     
     private lazy var errorPopUpViewController: ErrorPopUpViewController = {
@@ -54,6 +51,11 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
         return IokaFactory.shared.initiateCreatePaymentForSavedCardViewController(card: card, orderAccessToken: orderAccessToken, delegate: self)
     }()
     
+    private lazy var getOrderForPaymentViewController: GetOrderForPaymentViewController = {
+        guard let orderAccessToken = orderAccessToken else { fatalError("Order Access token wasn't provided") }
+        return IokaFactory.shared.initiateGetOrderForPaymentViewController(delegate: self, orderId: orderAccessToken.trimTokens())
+    }()
+    
     init(navigationViewController: UINavigationController) {
         self.navigationViewController = navigationViewController
         self.routerCoordinator = RouterNavigation(navigationViewController: navigationViewController)
@@ -62,12 +64,7 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
     
     func startFlow() {
         guard let card = card else { return }
-        switch card.cvc_required {
-        case true:
-            showSavedCardPaymentForm()
-        case false:
-            showSavedCardPaymentForm()
-        }
+        showViewControllerProgressWrapper(cvcRequired: card.cvc_required)
     }
     
     func finishFlow(coordinator: Coordinator) {
@@ -106,8 +103,12 @@ class SavedCardPaymentCoordinator: NSObject, Coordinator {
         routerCoordinator.dismissViewController(animated: false, completion: nil)
     }
     
-    func showViewControllerProgressWrapper() {
-        routerCoordinator.presentViewController(createPaymentForSavedCardViewController, animated: false, completion: nil)
+    func showViewControllerProgressWrapper(cvcRequired: Bool) {
+        if cvcRequired {
+            routerCoordinator.presentViewController(getOrderForPaymentViewController, animated: false, completion: nil)
+        } else {
+            routerCoordinator.presentViewController(createPaymentForSavedCardViewController, animated: false, completion: nil)
+        }
     }
     
     func dismissViewControllerProgressWrapper() {
@@ -130,7 +131,7 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
         } else {
             self.paymentResult = status
             self.error = error
-            self.response = response
+            self.paymentResponse = response
             self.showPaymentResult()
             self.dismissSavedCardPaymentForm()
         }
@@ -144,24 +145,25 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
         switch iokaBrowserState {
         case .createCardPayment(_, _):
             
-            if let cardPaymentResponse = cardPaymentResponse, cardPaymentResponse.error == nil {
+            if let cardPaymentResponse = cardPaymentResponse, let error = cardPaymentResponse.error {
+                self.paymentResult = .paymentFailed
+                self.error = error
+                self.paymentResponse = cardPaymentResponse
+                self.showErrorPopUp()
+                dismiss3DSecure()
+            } else if cardPaymentResponse?.error == nil {
                 self.paymentResult = .paymentSucceed
                 self.error = nil
-                self.response = cardPaymentResponse
+                self.paymentResponse = cardPaymentResponse
                 self.showPaymentResult()
-            } else if let error = cardPaymentResponse?.error {
+                dismiss3DSecure()
+            } else {
                 self.paymentResult = .paymentFailed
                 self.error = error
-                self.response = cardPaymentResponse
-                self.showErrorPopUp()
-            }
-            if let error = error {
-                self.paymentResult = .paymentFailed
-                self.error = error
-                self.response = nil
+                self.paymentResponse = nil
                 self.showPaymentResult()
+                dismiss3DSecure()
             }
-            self.dismiss3DSecure()
         case .createBinding( _, _):
             self.dismiss3DSecure()
         }
@@ -185,17 +187,41 @@ extension SavedCardPaymentCoordinator: SavedCardPaymentNavigationDelegate, IokaB
 
 
 extension SavedCardPaymentCoordinator: CreatePaymentForSavedCardNavigationDelegate {
-    func paymentCreated(response: CardPaymentResponse?, error: IokaError?, status: PaymentResult) {
+    func dismissCreatePaymentProgressWrapper() {
+        DispatchQueue.main.async {
+            self.dismissViewControllerProgressWrapper()
+        }
+    }
+    
+    func paymentCreated(orderResponse: GetOrderResponse, paymentResponse: CardPaymentResponse?, error: IokaError?, status: PaymentResult) {
+        self.paymentResult = status
+        self.error = error
+        self.paymentResponse = paymentResponse
+        self.orderResponse = orderResponse
         dismissViewControllerProgressWrapper()
-        if let response = response, let actionURL = response.action?.url {
+        
+        if let response = paymentResponse, let actionURL = response.action?.url {
             self.url = "\(actionURL)?return_url=https://ioka.kz"
             self.iokaBrowserState = .createCardPayment(orderId: response.order_id, paymentId: response.id)
             self.show3DSecure()
         } else {
-            self.paymentResult = status
-            self.error = error
-            self.response = response
             self.showPaymentResult()
+        }
+    }
+}
+
+extension SavedCardPaymentCoordinator: GetOrderForPaymentNavigationDelegate {
+    func dismissGetOrderProgressWrapper() {
+        DispatchQueue.main.async {
+            self.dismissViewControllerProgressWrapper()
+        }
+    }
+    
+    func gotOrder(order: GetOrderResponse?, error: IokaError?) {
+        DispatchQueue.main.async {
+            self.dismissViewControllerProgressWrapper()
+            self.orderResponse = order
+            self.showSavedCardPaymentForm()
         }
     }
 }

@@ -53,10 +53,12 @@ class PaymentTypeView: UIView {
     public func reloadTableView(models: [GetCardResponse]) {
         
         UIView.animate(withDuration: 0.5) { [weak self] in
-            self?.tableView.reloadData()
-            self?.tableView.layoutIfNeeded()
-            self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
-            self?.updateConstraints()
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.tableView.layoutIfNeeded()
+                self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
+                self?.updateConstraints()
+            }
         }
     }
     

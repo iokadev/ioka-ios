@@ -22,14 +22,14 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     var iokaBrowserState: IokaBrowserState?
     var paymentResult: PaymentResult?
     var error: IokaError?
-    var response: CardPaymentResponse?
+    var paymentResponse: CardPaymentResponse?
     var orderAccessToken: String?
-    var order: GetOrderResponse?
+    var orderResponse: GetOrderResponse?
     
     var topViewController: UIViewController!
     
     private lazy var cardPaymentViewController: CardPaymentViewController = {
-        guard let order = order else { fatalError("Please provide order to construct CardPaymentViewController") }
+        guard let order = orderResponse else { fatalError("Please provide order to construct CardPaymentViewController") }
 
         return IokaFactory.shared.initiateCardPaymentViewController(orderAccesToken: IOKA.shared.orderAccessToken, delegate: self, order: order)
     }()
@@ -41,8 +41,8 @@ class CardPaymentCoordinator: NSObject, Coordinator {
     
     private lazy var paymentResultViewController: PaymentResultViewController = {
         guard let paymentResult = paymentResult else { fatalError("Please provide paymentResult") }
-        guard let order = order else { fatalError("Please provide order to construct CardPaymentViewController") }
-        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.response, delegate: self, order: order)
+        guard let order = orderResponse else { fatalError("Please provide order to construct CardPaymentViewController") }
+        return IokaFactory.shared.initiatePaymentResultViewController(paymentResult: paymentResult, error: self.error, response: self.paymentResponse, delegate: self, order: order)
     }()
     
     private lazy var getOrderForPaymentViewController: GetOrderForPaymentViewController = {
@@ -112,7 +112,7 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
         } else {
             self.paymentResult = status
             self.error = error
-            self.response = response
+            self.paymentResponse = response
             self.showPaymentResult()
             self.dismissCardPaymentForm()
         }
@@ -125,24 +125,26 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
     func closeIokaBrowserViewController(_ viewController: UIViewController, iokaBrowserState: IokaBrowserState, cardPaymentResponse: CardPaymentResponse?, getCardResponse: GetCardResponse?, error: IokaError?) {
         switch iokaBrowserState {
         case .createCardPayment(_, _):
-            if let cardPaymentResponse = cardPaymentResponse, cardPaymentResponse.error == nil {
-                self.paymentResult = .paymentSucceed
-                self.error = nil
-                self.response = cardPaymentResponse
-                self.showPaymentResult()
-            } else {
-                self.paymentResult = .paymentFailed
-                self.error = nil
-                self.response = cardPaymentResponse
-                self.showPaymentResult()
-            }
-            if let error = error {
+            
+            if let cardPaymentResponse = cardPaymentResponse, let error = cardPaymentResponse.error {
                 self.paymentResult = .paymentFailed
                 self.error = error
-                self.response = nil
+                self.paymentResponse = cardPaymentResponse
                 self.showPaymentResult()
+                dismiss3DSecure()
+            } else if cardPaymentResponse?.error == nil {
+                self.paymentResult = .paymentSucceed
+                self.error = nil
+                self.paymentResponse = cardPaymentResponse
+                self.showPaymentResult()
+                dismiss3DSecure()
+            } else {
+                self.paymentResult = .paymentFailed
+                self.error = error
+                self.paymentResponse = nil
+                self.showPaymentResult()
+                dismiss3DSecure()
             }
-            self.dismiss3DSecure()
         case .createBinding( _, _):
             self.dismiss3DSecure()
         }
@@ -160,9 +162,15 @@ extension CardPaymentCoordinator: CardPaymentNavigationDelegate, IokaBrowserView
 }
 
 extension CardPaymentCoordinator: GetOrderForPaymentNavigationDelegate {
+    func dismissGetOrderProgressWrapper() {
+        DispatchQueue.main.async {
+            self.dismissViewControllerProgressWrapper()
+        }
+    }
+    
     func gotOrder(order: GetOrderResponse?, error: IokaError?) {
         DispatchQueue.main.async {
-            self.order = order
+            self.orderResponse = order
             self.showCardPaymentForm()
             self.dismissViewControllerProgressWrapper()
         }
