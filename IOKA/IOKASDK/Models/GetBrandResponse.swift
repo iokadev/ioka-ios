@@ -8,6 +8,6 @@
 import Foundation
 
 
-struct GetBrandResponse: Codable {
+struct GetBrandResponse: Decodable {
     let brand: PaymentSystem
 }

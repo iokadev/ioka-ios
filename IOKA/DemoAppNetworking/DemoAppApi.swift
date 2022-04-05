@@ -9,25 +9,25 @@ import Foundation
 
 
 
-
+// Здесь можно просто подключить alamofire. Networking SDK не будет публичным.
 class DemoAppApi {
     static let shared = DemoAppApi()
     
     private let endPointRouter = EndPointRouter<DemoAppEndPoint>()
     
-    private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
+    private func decodeAnyObject<T: Decodable>(data: Data, model: T.Type) -> T? {
             let response = try? JSONDecoder().decode(T.self, from: data)
             return response
     }
     
-    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
+    private func handleRequest<T: Decodable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
         if let error = error {
-            completion(nil, IokaError(code: .networkError, message: error.localizedDescription))
+            completion(nil, NetworkError.other(error))
             return
         }
         
         guard let data = data else {
-            completion(nil, IokaError(code: .noData, message: "No data from call"))
+            completion(nil, NetworkError.noData)
             return
         }
         
@@ -39,7 +39,7 @@ class DemoAppApi {
                 let responseObject = self.decodeAnyObject(data: data, model: T.self)
                 completion(responseObject, nil)
             case .failure:
-                let responseObject = self.decodeAnyObject(data: data, model: IokaError.self)
+                let responseObject = self.decodeAnyObject(data: data, model: APIError.self)
                 completion(nil, responseObject)
             }
         }
@@ -47,19 +47,18 @@ class DemoAppApi {
     
     
     func createOrder(price: String, completion: @escaping(CreateOrderResponse?) -> Void) {
-        endPointRouter.request(.createOrder(price: price)) { data, response, error in
-            if let data = data {
-                let object = self.decodeAnyObject(data: data, model: CreateOrderResponse.self)
-                completion(object)
-            }
+        endPointRouter.request(.createOrder(price: price)) { (result: Result<CreateOrderResponse, Error>) in
+            completion(try? result.get())
         }
     }
     
     func getProfile(completion: @escaping(GetProfileResponse?, IokaError?) -> Void) {
-        endPointRouter.request(.getProfile) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetProfileResponse.self) { result, error in
-                completion(result, error)
-            }
+        endPointRouter.request(.getProfile) { (result: Result<GetProfileResponse, Error>) in
+            let error: Error? = {
+                if case let .failure(error) = result { return error } else { return nil }
+            }()
+            
+            completion(try? result.get(), error)
         }
     }
 }

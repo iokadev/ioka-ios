@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum PaymentSystem: String, Codable {
+enum PaymentSystem: String, Decodable {
     case VISA =  "VISA"
     case AMERICAN_EXPRESS = "AMERICAN_EXPRESS"
     case MASTERCARD = "MASTERCARD"

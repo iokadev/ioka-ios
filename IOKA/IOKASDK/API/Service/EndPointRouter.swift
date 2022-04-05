@@ -9,19 +9,27 @@ import Foundation
 
 
 class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
+    // не нужна очередь запросов? 
     private var task: URLSessionTask?
     
-    func request(_ route: EndPoint, completion: @escaping NetworkRouterCompletion) {
+    func request<Response: Decodable>(_ route: EndPoint, completion: @escaping (Result<Response, Error>) -> Void) {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
-            task = session.dataTask(with: request, completionHandler: { data, response, error in
-                completion(data, response, error)
+            task = session.dataTask(with: request, completionHandler: { [weak self] data, response, error in
+                guard let self = self else { return }
                 
+                let result: Result<Response, Error> = self.mapResponse(data: data, response: response, error: error)
+                
+                // из других мест нужно удалить dispatch.main.async теперь
+                DispatchQueue.main.async {
+                    completion(result)
+                }
             })
-        }catch {
-            completion(nil, nil, error)
+        } catch {
+            completion(.failure(NetworkError.encodingFailed))
         }
+        
         self.task?.resume()
     }
     
@@ -29,7 +37,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         self.task?.cancel()
     }
     
-    fileprivate func buildRequest(from route: EndPoint) throws -> URLRequest {
+    private func buildRequest(from route: EndPoint) throws -> URLRequest {
         var request = URLRequest(url: route.baseUrl.appendingPathComponent(route.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 10.0)
@@ -51,9 +59,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         }
     }
     
-    
-    
-    fileprivate func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
+    private func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
         
         do {
             if let bodyParameters = bodyParameters {
@@ -68,10 +74,40 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         }
     }
     
-    fileprivate func addAdditionalHeaders(_ additionalHeaders: HTTPHeaders?, request: inout URLRequest) {
+    private func addAdditionalHeaders(_ additionalHeaders: HTTPHeaders?, request: inout URLRequest) {
         guard let additionalHeaders = additionalHeaders else { return }
         for (key, value) in additionalHeaders {
             request.setValue(value, forHTTPHeaderField: key)
+        }
+    }
+    
+    private func mapResponse<T: Decodable>(data: Data?, response: URLResponse?, error: Error?) -> Result<T, Error> {
+        switch (data, error) {
+        case (.none, .none):
+            return .failure(NetworkError.noData)
+        case (_, .some(let error)) where error is URLError:
+            return .failure(NetworkError.urlError(error as! URLError))
+        case (_, .some(let error)):
+            return .failure(NetworkError.other(error))
+        case (.some(let data), .none):
+            // мы не можем быть уверены, что с сервера всегда будут приходить только те статусы, которые перечислены в енаме HTTPResponseStatus.
+            // guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
+            
+            let statusIsValid = (200..<300).contains((response as? HTTPURLResponse)?.statusCode ?? 0)
+            
+            if statusIsValid {
+                do {
+                    return .success(try JSONDecoder().decode(T.self, from: data))
+                } catch {
+                    return .failure(NetworkError.decodingError)
+                }
+            } else {
+                do {
+                    return .failure(try JSONDecoder().decode(EndPoint.EndpointError.self, from: data))
+                } catch {
+                    return .failure(NetworkError.invalidHTTPStatusCode)
+                }
+            }
         }
     }
 }

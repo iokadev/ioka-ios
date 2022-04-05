@@ -9,7 +9,8 @@ import Foundation
 
 
 
-struct Card: Codable {
+// Надо бы как-то по-другому назвать. Типа CardParameters может
+struct Card: Encodable {
     var pan: String?
     var exp: String?
     var cvc: String?

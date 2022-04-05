@@ -7,8 +7,8 @@
 
 import Foundation
 
-
-enum PaymentStatus: String, Codable {
+// Это нужно сделать как nested type внутри PaymentDTO. С названием Status.
+enum PaymentStatus: String, Decodable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case CAPTURED = "CAPTURED"

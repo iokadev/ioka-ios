@@ -7,195 +7,73 @@
 
 import Foundation
 
-typealias paymentCreationCompletion = (IokaResult<CardPaymentResponse, IokaError>) -> Void
-typealias getBrandCompletion = (IokaResult<GetBrandResponse, IokaError>) -> Void
-typealias getEmitterByBinCodeCompletion = (IokaResult<GetEmitterByBinCodeResponse, IokaError>) -> Void
-typealias getCardsCompletion = (IokaResult<[GetCardResponse], IokaError>) -> Void
-typealias createBindingCompletion = (IokaResult<GetCardResponse, IokaError>) -> Void
-typealias deleteCardByIDResponseCompletion = (IokaError?) -> Void
-typealias getCardByIDCompletion = (IokaResult<GetCardResponse, IokaError>) -> Void
-typealias getPaymentByIDResponseCompletion = (IokaResult<CardPaymentResponse, IokaError>) -> Void
-typealias getOrderByIDResponseCompletion = (IokaResult<GetOrderResponse, IokaError>) -> Void
-
-
-enum IokaResult<success, failure> {
-    case success(success)
-    case failure(failure)
-}
-
-
 class IokaApi {
+    
     static let environment: NetworkEnvironment = .stage
     static let shared = IokaApi()
     
     private let endPointRouter = EndPointRouter<IokaApiEndPoint>()
     
-    private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
-        let response = try! JSONDecoder().decode(T.self, from: data)
-        return response
+    // Сюда надо передавать orderAccessToken. Нельзя внутри IokaEndpoint лезть в фасад Ioka. Так получается бардак со связями между слоями.
+    func createCardPayment(orderId: String, card: Card, completion: @escaping (Result<CardPaymentResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .createCardPayment(orderId: orderId,
+                               card: card),
+            completion: completion)
     }
     
-    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
-        if let error = error {
-            completion(nil, IokaError(code: .networkError, message: error.localizedDescription))
-            return
-        }
-        
-        guard let data = data else {
-            completion(nil, IokaError(code: .noData, message: "No data from call"))
-            return
-        }
-        
-        if let response = response as? HTTPURLResponse {
-            guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
-        
-            switch result.responseType {
-            case .success:
-                guard let responseObject = self.decodeAnyObject(data: data, model: T.self) else { return }
-                completion(responseObject, nil)
-            case .failure:
-                guard let responseObject = self.decodeAnyObject(data: data, model: IokaError.self) else { return }
-                completion(nil, responseObject)
-            }
-        }
+    func getBrand(partialBin: String, completion: @escaping (Result<GetBrandResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .getBrand(partialBin: partialBin),
+            completion: completion)
     }
     
-    func createCardPayment(orderId: String, card: Card, completion: @escaping(paymentCreationCompletion)) {
-        endPointRouter.request(.createCardPayment(orderId: orderId, card: card)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: CardPaymentResponse.self) { result, error in
-        
-                if let error = error {
-                    completion(.failure(error))
-                }
-                
-                if let result = result {
-                    completion(.success(result))
-                }
-            }
-        }
+    func getEmitterByBinCode(binCode: String, completion: @escaping (Result<GetEmitterByBinCodeResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .getEmitterByBinCode(binCode: binCode),
+            completion: completion)
     }
     
-    func getBrand(partialBin: String, completion: @escaping(getBrandCompletion)) {
-        endPointRouter.request(.getBrand(partialBin: partialBin)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetBrandResponse.self) { result, error in
-                
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
+    func getCards(customerId: String, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
+        endPointRouter.request(
+            .getCards(customerId: customerId),
+            completion: completion)
     }
     
-    func getEmitterByBinCode(binCode: String, completion: @escaping(getEmitterByBinCodeCompletion)) {
-        endPointRouter.request(.getEmitterByBinCode(binCode: binCode)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetEmitterByBinCodeResponse.self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
+    func createBinding(customerId: String, card: Card, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .createBinding(customerId: customerId, card: card),
+            completion: completion)
+
     }
     
-    func getCards(customerId: String, completion: @escaping(getCardsCompletion)) {
-        endPointRouter.request(.getCards(customerId: customerId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: [GetCardResponse].self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
-    
-    func createBinding(customerId: String, card: Card, completion: @escaping(createBindingCompletion)) {
-        endPointRouter.request(.createBinding(customerId: customerId, card: card)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetCardResponse.self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
-    }
-    
-    func deleteCard(customerId: String, cardId: String, completion: @escaping(deleteCardByIDResponseCompletion)) {
-        endPointRouter.request(.deleteCardByID(customerId: customerId, cardId: cardId)) { data, response, error in
-            
-            if let response = response as? HTTPURLResponse {
-                guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
-            
-                switch result.responseType {
+    func deleteCard(customerId: String, cardId: String, completion: @escaping (Error?) -> Void) {
+        endPointRouter.request(
+            .deleteCardByID(customerId: customerId, cardId: cardId)) { (result: Result<EmptyResponse, Error>) in
+                switch result {
                 case .success:
                     completion(nil)
-                case .failure:
-                    guard let data = data else { completion(IokaError(code: .noData, message: "No data returned from server"))
-                        return  }
-                    guard let responseObject = self.decodeAnyObject(data: data, model: IokaError.self) else { return }
-                    completion(responseObject)
+                case .failure(let error):
+                    completion(error)
                 }
             }
-            
-            if let error = error {
-                completion(IokaError(code: .networkError, message: error.localizedDescription))
-                return
-            }
-            
-        }
     }
     
-    func getCardByID(customerId: String, cardId: String, completion: @escaping(getCardByIDCompletion)) {
-        endPointRouter.request(.getCardByID(customerId: customerId, cardId: cardId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetCardResponse.self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
+    func getCardByID(customerId: String, cardId: String, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .getCardByID(customerId: customerId, cardId: cardId),
+            completion: completion)
     }
     
-    func getPaymentByID(orderId: String, paymentId: String, completion: @escaping(getPaymentByIDResponseCompletion)) {
-        endPointRouter.request(.getPaymentByID(orderId: orderId, paymentId: paymentId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: CardPaymentResponse.self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
+    func getPaymentByID(orderId: String, paymentId: String, completion: @escaping (Result<CardPaymentResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .getPaymentByID(orderId: orderId, paymentId: paymentId),
+            completion: completion)
     }
     
-    func getOrderByID(orderId: String, completion: @escaping(getOrderByIDResponseCompletion)) {
-        endPointRouter.request(.getOrderByID(orderId: orderId)) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetOrderResponse.self) { result, error in
-                if let result = result {
-                    completion(.success(result))
-                }
-                
-                if let error = error {
-                    completion(.failure(error))
-                }
-            }
-        }
+    func getOrderByID(orderId: String, completion: @escaping (Result<GetOrderResponse, Error>) -> Void) {
+        endPointRouter.request(
+            .getOrderByID(orderId: orderId),
+            completion: completion)
     }
 }

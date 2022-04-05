@@ -12,8 +12,10 @@ enum DemoAppEndPoint {
     case getProfile
 }
 
+struct DemoAppError: Decodable, Error {}
+
 extension DemoAppEndPoint: EndPointType {
-    
+    typealias EndpointError = DemoAppError
     var environmentBaseURL: String {
         return "https://ioka-example-mobile-backend.herokuapp.com/"
     }

@@ -21,6 +21,7 @@ class RouterNavigation: NSObject {
 extension RouterNavigation: RouterCoordinator {
     
     func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        // зачем везде main.async?
         DispatchQueue.main.async {
             self.navigationViewController.pushViewController(viewController, animated: animated)
         }
@@ -44,6 +45,7 @@ extension RouterNavigation: RouterCoordinator {
         }
     }
     
+    // лучше просто pushViewController
     func startFlow(_ viewController: UIViewController) {
         DispatchQueue.main.async {
             self.navigationViewController.pushViewController(viewController, animated: true)
