@@ -16,31 +16,53 @@ class IOKA: IokaThemeProtocol {
     var publicApiKey: String?
     var theme: IokaColors = .defaultTheme
     
+    var setupInput: SetupInput?
+    
     func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
         self.theme = theme.iokaColors
         self.publicApiKey = publicApiKey
+        
+        self.setupInput = SetupInput(apiKey: APIKey(key: self.publicApiKey!), theme: Theme(colors: IokaColors.defaultTheme))
     }
     
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
         self.orderAccessToken = orderAccessToken
-        let coordinator = CardPaymentCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.topViewController = viewController
-        coordinator.orderAccessToken = orderAccessToken
-        coordinator.startFlow()
+        guard let setupInput = setupInput else { return }
+        let featuresFactory = FeaturesFactory(setupInput: setupInput)
+        
+        do {
+            let token = try AccessToken(token: orderAccessToken)
+            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController)
+            let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
+            let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, navigationController:  viewController.navigationController ?? UINavigationController())
+            
+            coordinator.start()
+        } catch let error {
+            print(error)
+        }
     }
     
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
+        
         self.orderAccessToken = orderAccessToken
-        let coordinator = SavedCardPaymentCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.card = card
-        coordinator.orderAccessToken = orderAccessToken
-        coordinator.topViewController = viewController
-        coordinator.startFlow()
+        guard let setupInput = setupInput else { return }
+        let featuresFactory = FeaturesFactory(setupInput: setupInput)
+        
+        do {
+            let token = try AccessToken(token: orderAccessToken)
+            let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController, cardResponse: card)
+            let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
+            let coordnitar = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
+            
+            coordnitar.start()
+        } catch let error {
+            print(error)
+        }
     }
     
-    func getCards(customerAccessToken: String, completion: @escaping(getCardsCompletion)) {
+    func getCards(customerAccessToken: String, completion: @escaping(Result<[GetCardResponse], Error>) -> Void) {
         self.customerAccessToken = customerAccessToken
-        IokaApi.shared.getCards(customerId: customerAccessToken.trimTokens()) { [weak self] result in
+        API.shared.getCards(customerId: customerAccessToken.trimTokens()) { [weak self] result in
             guard let _ = self else { return }
             
             switch result {
@@ -53,16 +75,33 @@ class IOKA: IokaThemeProtocol {
     }
     
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
-        self.customerAccessToken = customerAccessToken
-        let coordinator = SaveCardCoordinator(navigationViewController: viewController.navigationController ?? UINavigationController())
-        coordinator.topViewController = viewController
-        coordinator.startFlow()
+        let setupInput = SetupInput(apiKey: APIKey(key: self.publicApiKey!), theme: Theme(colors: IokaColors.defaultTheme))
+        let featuresFactory = FeaturesFactory(setupInput: setupInput)
+        
+        
+        do {
+            let customerAccesstoken = try AccessToken(token: customerAccessToken)
+            let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, hideSaveCardCheckbox: true)
+            let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
+            let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
+            
+            
+            coordinator.start()
+            
+        } catch let error {
+            print(error)
+        }
     }
     
     func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {
-        IokaApi.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] error in
-            guard let _ = self else { return }  
-            completion(error)
+        API.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] result in
+            guard let _ = self else { return }
+            switch result {
+            case .success( _):
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
         }
     }
 }

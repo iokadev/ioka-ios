@@ -28,4 +28,12 @@ struct GetOrderResponse: Codable {
     var failure_url: String?//-
     var template: String? //-
     var checkout_url: String?//-
+    
+    var hasCustomerId: Bool {
+        if customer_id == nil {
+            return false
+        } else {
+            return true
+        }
+    }
 }

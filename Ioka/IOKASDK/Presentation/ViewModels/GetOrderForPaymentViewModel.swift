@@ -30,7 +30,7 @@ class GetOrderForPaymentViewModel {
     
     func getOrder() {
         guard let orderId = orderId else { return }
-        IokaApi.shared.getOrderByID(orderId: orderId) {[weak self] result in
+        API.shared.getOrderByID(orderId: orderId) {[weak self] result in
             guard let self = self else { return }
             
             switch result {

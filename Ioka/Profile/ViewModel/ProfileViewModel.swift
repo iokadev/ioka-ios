@@ -14,11 +14,14 @@ class ProfileViewModel {
         
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
-            DemoAppApi.shared.getProfile { [weak self] result, error in
+            DemoAppApi.shared.getProfile { [weak self] result in
                 guard let _ = self else { return }
-                guard let customerAccessToken = result?.customer_access_token else { return }
-                DispatchQueue.main.async {
-                    completion(customerAccessToken)
+                
+                switch result {
+                case .success(let createOrderResponse):
+                    completion(createOrderResponse.customer_access_token)
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
             }
         }

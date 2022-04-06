@@ -8,6 +8,11 @@
 import Foundation
 
 
+struct DemoAppError: Codable {
+    var code: String
+    var message: String
+}
+
 
 
 class DemoAppApi {
@@ -20,14 +25,14 @@ class DemoAppApi {
             return response
     }
     
-    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, IokaError?) -> Void)) {
+    private func handleRequest<T: Codable>(data: Data?, response: URLResponse?, error: Error?, model: T.Type, completion: @escaping((T?, DemoAppError?) -> Void)) {
         if let error = error {
-            completion(nil, IokaError(code: .networkError, message: error.localizedDescription))
+            completion(nil, DemoAppError(code: "sdsd", message: error.localizedDescription))
             return
         }
         
         guard let data = data else {
-            completion(nil, IokaError(code: .noData, message: "No data from call"))
+            completion(nil, DemoAppError(code: "dsds", message: "No data from call"))
             return
         }
         
@@ -39,28 +44,20 @@ class DemoAppApi {
                 let responseObject = self.decodeAnyObject(data: data, model: T.self)
                 completion(responseObject, nil)
             case .failure:
-                let responseObject = self.decodeAnyObject(data: data, model: IokaError.self)
+                let responseObject = self.decodeAnyObject(data: data, model: DemoAppError.self)
                 completion(nil, responseObject)
             }
         }
     }
     
     
-    func createOrder(price: String, completion: @escaping(CreateOrderResponse?) -> Void) {
-        endPointRouter.request(.createOrder(price: price)) { data, response, error in
-            if let data = data {
-                let object = self.decodeAnyObject(data: data, model: CreateOrderResponse.self)
-                completion(object)
-            }
-        }
+    func createOrder(price: String, completion: @escaping(Result<CreateOrderResponse, Error>) -> Void) {
+
+        endPointRouter.request(.createOrder(price: price), completion: completion)
     }
     
-    func getProfile(completion: @escaping(GetProfileResponse?, IokaError?) -> Void) {
-        endPointRouter.request(.getProfile) { data, response, error in
-            self.handleRequest(data: data, response: response, error: error, model: GetProfileResponse.self) { result, error in
-                completion(result, error)
-            }
-        }
+    func getProfile(completion: @escaping(Result<GetProfileResponse, Error>) -> Void) {
+        endPointRouter.request(.getProfile, completion: completion)
     }
 }
 

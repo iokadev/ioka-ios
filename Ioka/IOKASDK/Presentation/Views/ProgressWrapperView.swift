@@ -22,7 +22,6 @@ class ProgressWrapperView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
-        animate()
     }
     
     convenience init(state: ProgressWrapperViewState) {

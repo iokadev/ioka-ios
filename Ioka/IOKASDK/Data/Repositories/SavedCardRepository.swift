@@ -1,0 +1,48 @@
+//
+//  SavedCardRepository.swift
+//  Ioka
+//
+//  Created by ablai erzhanov on 06.04.2022.
+//
+
+import Foundation
+
+
+final class SavedCardRepository {
+    let api: IokaAPIProtocol
+    
+    init(api: IokaAPIProtocol) {
+        self.api = api
+    }
+    
+    func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
+        api.getCards(customerId: customerAccessToken.id) { result in
+            completion(result)
+        }
+    }
+    
+    func saveCard(customerAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+        api.createBinding(customerId: customerAccessToken.id, card: cardParameters) { result in
+            completion(result.toSavedCardsResult())
+        }
+    }
+    
+    func getStatus(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+        api.getCardByID(customerId: customerAccessToken.id, cardId: cardId) { result in
+            completion(result.toSavedCardsResult())
+        }
+    }
+}
+
+extension Result where Success == GetCardResponse {
+    func toSavedCardsResult() -> Result<SavedCard, Error> {
+        Result<SavedCard, Error> {
+            switch self {
+            case .success(let response):
+                return try response.toSavedCard()
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+}

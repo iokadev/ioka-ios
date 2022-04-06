@@ -12,19 +12,27 @@ class OrderConfirmationViewModel {
     
     
     func createOrder(order: OrderModel, completion: @escaping(String) -> Void) {
-        DemoAppApi.shared.createOrder(price: order.orderPrice) { createOrderResponse in
-            if let createOrderResponse = createOrderResponse {
-                DispatchQueue.main.async {
-                    completion(createOrderResponse.order_access_token)
-                }
-                
+        DemoAppApi.shared.createOrder(price: order.orderPrice) { [weak self] result in
+            guard let _ = self else { return }
+            
+            switch result {
+            case .success(let createOrderResponse):
+                completion(createOrderResponse.order_access_token)
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
     }
     
     func getProfile(completion: @escaping(String?) -> Void) {
-        DemoAppApi.shared.getProfile { result, error in
-            completion(result?.customer_access_token)
+        DemoAppApi.shared.getProfile { [weak self] result in
+            guard let _ = self else { return }
+            switch result {
+            case .success(let createOrderResponse):
+                completion(createOrderResponse.customer_access_token)
+            case .failure(let error):
+                debugPrint(error.localizedDescription)
+            }
         }
     }
     

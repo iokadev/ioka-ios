@@ -13,6 +13,8 @@ enum DemoAppEndPoint {
 }
 
 extension DemoAppEndPoint: EndPointType {
+    typealias EndpointError = APIError
+    
     
     var environmentBaseURL: String {
         return "https://ioka-example-mobile-backend.herokuapp.com/"

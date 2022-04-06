@@ -32,10 +32,10 @@ class IokaButton: UIButton {
     
     convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil, backGroundColor: UIColor? = nil) {
         self.init(frame: CGRect())
-        self.iokaButtonState = iokaButtonState
         self.title = title
         self.imageName = imageName
         self.backgroundColor = backGroundColor
+        self.iokaButtonState = iokaButtonState
         setupButton()
     }
     
