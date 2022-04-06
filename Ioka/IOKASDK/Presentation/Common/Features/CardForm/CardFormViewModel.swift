@@ -10,12 +10,16 @@ import UIKit
 
 class CardFormViewModel {
     
+    let api: IokaAPIProtocol
+    
+    init(api: IokaAPIProtocol) {
+        self.api = api
+    }
+    
     
     func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {
-        API.shared.getBrand(partialBin: partialBin) {[weak self] result in
-            
-            guard let _ = self else { return }
-            
+        
+        api.getBrand(partialBin: partialBin) { result in
             switch result {
             case .success(let getBrandResponse):
                 completion(getBrandResponse)
@@ -26,9 +30,8 @@ class CardFormViewModel {
     }
     
     func getBankEmiiter(binCode: String) {
-        API.shared.getEmitterByBinCode(binCode: binCode.trimEmitterBinCode()) { [weak self] response in
-            guard let _ = self else { return }
-//            print("DEBUG: Response is \(response)")
+        api.getEmitterByBinCode(binCode: binCode) { result in
+            var _ = ""
         }
     }
     

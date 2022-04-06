@@ -25,11 +25,18 @@ class SaveCardFlowFactory {
     }
     
     func makeSaveCard(delegate: SaveCardNavigationDelegate) -> SaveCardViewController{
-        featuresFactory.makeSaveCard(delegate: delegate, customerAccessToken: self.input.customerAccesstoken)
+        featuresFactory.makeSaveCard(delegate: delegate, customerAccessToken: self.input.customerAccesstoken, repository: savedCardRepository())
     }
     
     func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, cardId: String) -> ThreeDSecureViewController {
-        featuresFactory.make3DSecure(delegate: delegate, state: .saveCard(repository: featuresFactory.savedCardRepository(), customerAccessToken: input.customerAccesstoken), url: url, cardId: cardId, paymentId: nil)
+        featuresFactory.make3DSecure(delegate: delegate, state: .saveCard(repository: savedCardRepository(), customerAccessToken: input.customerAccesstoken), url: url, cardId: cardId, paymentId: nil)
     }
     
+    func savedCardRepository() -> SavedCardRepository {
+        return SavedCardRepository(api: api)
+    }
+    
+    private lazy var api: IokaAPIProtocol = {
+        API(apiKey: input.setupInput.apiKey)
+    }()
 }

@@ -26,7 +26,7 @@ class PaymentMethodsViewModel {
     let repository: PaymentRepository
     let orderAccessToken: AccessToken
     let order: Order
-    var childViewModel = CardFormViewModel()
+    var childViewModel: CardFormViewModel
     var cardPaymentFailure: ((IokaError?) -> Void)?
     
     
@@ -35,6 +35,7 @@ class PaymentMethodsViewModel {
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken
         self.order = order
+        self.childViewModel = CardFormViewModel(api: repository.api)
     }
     
 

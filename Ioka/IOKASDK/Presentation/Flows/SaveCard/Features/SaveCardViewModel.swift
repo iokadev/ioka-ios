@@ -17,7 +17,7 @@ protocol SaveCardNavigationDelegate: NSObject {
 class SaveCardViewModel {
     
     var delegate: SaveCardNavigationDelegate?
-    var childViewModel = CardFormViewModel()
+    var childViewModel: CardFormViewModel
     let repository: SavedCardRepository
     let customerAccessToken: AccessToken
     var errorCompletion: ((Error) -> Void)?
@@ -29,6 +29,7 @@ class SaveCardViewModel {
         self.delegate = delegate
         self.repository = repository
         self.customerAccessToken = customerAccessToken
+        self.childViewModel = CardFormViewModel(api: repository.api)
     }
     
     func saveCard(card: Card) {

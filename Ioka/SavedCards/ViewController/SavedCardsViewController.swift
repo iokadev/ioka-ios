@@ -93,6 +93,7 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
         let vc = DeleteSavedCardViewController()
         vc.card = card
         vc.delegate = self
+        vc.customerAccessToken = customerAccessToken
         vc.modalPresentationStyle = .overFullScreen
         self.navigationController?.present(vc, animated: false, completion: nil)
     }

@@ -16,19 +16,17 @@ final class SavedCardRepository {
     }
     
     func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
-        api.getCards(customerId: customerAccessToken.id) { result in
-            completion(result)
-        }
+        api.getCards(customerAccessToken: customerAccessToken, completion: completion)
     }
     
     func saveCard(customerAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<SavedCard, Error>) -> Void) {
-        api.createBinding(customerId: customerAccessToken.id, card: cardParameters) { result in
+        api.createBinding(customerAccessToken: customerAccessToken, card: cardParameters) { result in
             completion(result.toSavedCardsResult())
         }
     }
     
     func getStatus(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCard, Error>) -> Void) {
-        api.getCardByID(customerId: customerAccessToken.id, cardId: cardId) { result in
+        api.getCardByID(customerAccessToken: customerAccessToken, cardId: cardId) { result in
             completion(result.toSavedCardsResult())
         }
     }

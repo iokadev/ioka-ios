@@ -12,6 +12,9 @@ import UIKit
 struct FeaturesFactory {
     
     let setupInput: SetupInput
+    private lazy var api: IokaAPIProtocol = {
+        API(apiKey: setupInput.apiKey)
+    }()
     
     init(setupInput: SetupInput) {
         self.setupInput = setupInput
@@ -19,27 +22,27 @@ struct FeaturesFactory {
     
     // MARK: - Features
     
-    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order) -> PaymentMethodsViewController {
-        let viewModel = PaymentMethodsViewModel(repository: paymentRepository(), delegate: delegate, orderAccessToken: orderAccessToken, order: order)
+    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository) -> PaymentMethodsViewController {
+        let viewModel = PaymentMethodsViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken, order: order)
         let vc = PaymentMethodsViewController()
         vc.viewModel = viewModel
         return vc
     }
     
-    func makeOrderForPayment(viewController: UIViewController,delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken) -> ViewControllerProgressWrapper{
-        let viewModel = OrderForPaymentViewModel(repository: orderRepository(), delegate: delegate, orderAccessToken: orderAccessToken)
+    func makeOrderForPayment(viewController: UIViewController,delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository) -> ViewControllerProgressWrapper{
+        let viewModel = OrderForPaymentViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         return wrapper
     }
     
-    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken) -> ViewControllerProgressWrapper{
-        let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: orderRepository(), orderAccessToken: orderAccessToken)
+    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository) -> ViewControllerProgressWrapper{
+        let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         return wrapper
     }
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: GetCardResponse) -> CVVViewController {
-        let viewModel = CVVViewModel(delegate: delegate, repository: paymentRepository(), orderAccessToken: orderAccessToken)
+    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: GetCardResponse, repository: PaymentRepository) -> CVVViewController {
+        let viewModel = CVVViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
         let vc = CVVViewController()
         vc.card = card
         vc.modalPresentationStyle = .overFullScreen
@@ -61,8 +64,8 @@ struct FeaturesFactory {
         return vc
     }
     
-    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken) -> SaveCardViewController {
-        let viewModel = SaveCardViewModel(delegate: delegate, repository: savedCardRepository(), customerAccessToken: customerAccessToken)
+    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository) -> SaveCardViewController {
+        let viewModel = SaveCardViewModel(delegate: delegate, repository: repository, customerAccessToken: customerAccessToken)
         let vc = SaveCardViewController()
         vc.viewModel = viewModel
         return vc
@@ -75,18 +78,4 @@ struct FeaturesFactory {
         vc.viewModel = viewModel
         return vc
     }
-    
-    func paymentRepository() -> PaymentRepository {
-        return PaymentRepository(api: api)
-    }
-    
-    func savedCardRepository() -> SavedCardRepository {
-        return SavedCardRepository(api: api)
-    }
-    
-    func orderRepository() -> OrderRepository {
-        return OrderRepository(api: api)
-    }
-    
-    private var api = API()
 }

@@ -11,22 +11,16 @@ import UIKit
 
 class IOKA: IokaThemeProtocol {
     static let shared = IOKA()
-    var customerAccessToken: String?
-    var orderAccessToken: String?
-    var publicApiKey: String?
     var theme: IokaColors = .defaultTheme
     
     var setupInput: SetupInput?
     
     func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
         self.theme = theme.iokaColors
-        self.publicApiKey = publicApiKey
-        
-        self.setupInput = SetupInput(apiKey: APIKey(key: self.publicApiKey!), theme: Theme(colors: IokaColors.defaultTheme))
+        self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: Theme(colors: IokaColors.defaultTheme))
     }
     
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
-        self.orderAccessToken = orderAccessToken
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
@@ -43,8 +37,6 @@ class IOKA: IokaThemeProtocol {
     }
     
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
-        
-        self.orderAccessToken = orderAccessToken
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
@@ -61,23 +53,21 @@ class IOKA: IokaThemeProtocol {
     }
     
     func getCards(customerAccessToken: String, completion: @escaping(Result<[GetCardResponse], Error>) -> Void) {
-        self.customerAccessToken = customerAccessToken
-        API.shared.getCards(customerId: customerAccessToken.trimTokens()) { [weak self] result in
-            guard let _ = self else { return }
-            
-            switch result {
-            case .success(let cards):
-                completion(.success(cards))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+        guard let setupInput = setupInput else { return }
+        let api = API(apiKey: setupInput.apiKey)
+        
+        do {
+            let customerAccessToken = try AccessToken(token: customerAccessToken)
+            api.getCards(customerAccessToken: customerAccessToken, completion: completion)
+        } catch let error {
+            print(error)
         }
     }
     
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
-        let setupInput = SetupInput(apiKey: APIKey(key: self.publicApiKey!), theme: Theme(colors: IokaColors.defaultTheme))
+        guard let setupInput = setupInput else { return }
+
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
-        
         
         do {
             let customerAccesstoken = try AccessToken(token: customerAccessToken)
@@ -93,15 +83,16 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
-    func deleteSavedCard(customerId: String, cardId: String, completion: @escaping(IokaError?) -> Void) {
-        API.shared.deleteCard(customerId: customerId, cardId: cardId) { [weak self] result in
-            guard let _ = self else { return }
-            switch result {
-            case .success( _):
-                completion(nil)
-            case .failure(let error):
-                completion(error)
-            }
+    func deleteSavedCard(customerAccessToken: String, cardId: String, completion: @escaping(Result<EmptyResponse, Error>) -> Void) {
+        
+        guard let setupInput = setupInput else { return }
+        let api = API(apiKey: setupInput.apiKey)
+        
+        do {
+            let customerAccessToken = try AccessToken(token: customerAccessToken)
+            api.deleteCard(customerAccessToken: customerAccessToken, cardId: cardId, completion: completion)
+        } catch let error {
+            print(error)
         }
     }
 }

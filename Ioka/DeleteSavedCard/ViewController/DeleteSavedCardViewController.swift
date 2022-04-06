@@ -16,6 +16,7 @@ class DeleteSavedCardViewController: UIViewController {
     
     let deleteView = DeleteSavedCardView()
     var card: GetCardResponse!
+    var customerAccessToken: String!
     weak var delegate: DeleteSavedCardViewControllerDelegate?
     
     override func loadView() {
@@ -42,10 +43,14 @@ extension DeleteSavedCardViewController: DeleteSavedCardViewDelegate {
     
     func deleteSavedCard(_ view: DeleteSavedCardView) {
         self.dismiss(animated: false, completion: nil)
-        IOKA.shared.deleteSavedCard(customerId: card.customer_id, cardId: card.id) { error in
-            DispatchQueue.main.async {
+        
+        IOKA.shared.deleteSavedCard(customerAccessToken: customerAccessToken, cardId: card.id) {[weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
                 self.delegate?.closeDeleteCardViewController(self, card: self.card, error: error)
-                
+            case .success( _):
+                self.delegate?.closeDeleteCardViewController(self, card: self.card, error: nil)
             }
         }
     }

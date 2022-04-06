@@ -17,7 +17,7 @@ final class OrderRepository {
     }
     
     func getOrder(orderAccessToken: AccessToken, completion: @escaping(Result<Order, Error>) -> Void) {
-        api.getOrderByID(orderId: orderAccessToken.id) { result in
+        api.getOrderByID(orderAccessToken: orderAccessToken) { result in
             completion(result.toOrderResult())
         }
     }
