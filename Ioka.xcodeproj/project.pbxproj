@@ -85,7 +85,6 @@
 		6DB0A35427FBA8A2008A8381 /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */; };
 		6DB0A35527FBA8A2008A8381 /* IokaImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */; };
 		6DB0A35627FBA8A2008A8381 /* IokaIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */; };
-		6DB0A35727FBA8A2008A8381 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E327FBA8A1008A8381 /* Localizable.strings */; };
 		6DB0A35827FBA8A2008A8381 /* IokaLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */; };
 		6DB0A35A27FBA8A2008A8381 /* SavedCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E827FBA8A1008A8381 /* SavedCardsViewModel.swift */; };
 		6DB0A35B27FBA8A2008A8381 /* DemoAppErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2EA27FBA8A1008A8381 /* DemoAppErrorView.swift */; };
@@ -141,6 +140,7 @@
 		6DCA1F1F27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F1E27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift */; };
 		6DCA1F2127FD530600ACDAF3 /* OrderForPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2027FD530600ACDAF3 /* OrderForPaymentViewModel.swift */; };
 		6DCA1F2327FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */; };
+		6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2627FE480200ACDAF3 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,7 +224,6 @@
 		6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
 		6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaImages.swift; sourceTree = "<group>"; };
 		6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaIcons.swift; sourceTree = "<group>"; };
-		6DB0A2E327FBA8A1008A8381 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaLocalizable.swift; sourceTree = "<group>"; };
 		6DB0A2E827FBA8A1008A8381 /* SavedCardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsViewModel.swift; sourceTree = "<group>"; };
 		6DB0A2EA27FBA8A1008A8381 /* DemoAppErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoAppErrorView.swift; sourceTree = "<group>"; };
@@ -280,6 +279,8 @@
 		6DCA1F1E27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProgressWrapper.swift; sourceTree = "<group>"; };
 		6DCA1F2027FD530600ACDAF3 /* OrderForPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderForPaymentViewModel.swift; sourceTree = "<group>"; };
 		6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardViewModel.swift; sourceTree = "<group>"; };
+		6DCA1F2527FE480200ACDAF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DCA1F2727FE48D300ACDAF3 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -633,7 +634,7 @@
 		6DB0A2E227FBA8A1008A8381 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2E327FBA8A1008A8381 /* Localizable.strings */,
+				6DCA1F2627FE480200ACDAF3 /* Localizable.strings */,
 				6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */,
 			);
 			path = Localization;
@@ -1085,6 +1086,7 @@
 			knownRegions = (
 				en,
 				Base,
+				kk,
 			);
 			mainGroup = 6DB0A13227FBA42C008A8381;
 			productRefGroup = 6DB0A13C27FBA42C008A8381 /* Products */;
@@ -1102,7 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DB0A14B27FBA42D008A8381 /* LaunchScreen.storyboard in Resources */,
-				6DB0A35727FBA8A2008A8381 /* Localizable.strings in Resources */,
+				6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */,
 				6DB0A36727FBAAC6008A8381 /* Assets.xcassets in Resources */,
 				6DB0A14627FBA42C008A8381 /* Main.storyboard in Resources */,
 			);
@@ -1267,6 +1269,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		6DCA1F2627FE480200ACDAF3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DCA1F2527FE480200ACDAF3 /* en */,
+				6DCA1F2727FE48D300ACDAF3 /* kk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1274,6 +1285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1335,6 +1347,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
