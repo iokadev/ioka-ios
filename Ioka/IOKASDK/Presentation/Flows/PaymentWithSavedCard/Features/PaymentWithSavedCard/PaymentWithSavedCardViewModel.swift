@@ -8,6 +8,7 @@
 import Foundation
 
 
+// REVIEW: Уже есть же OrderForPaymentViewModel
 class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     
     var delegate: PaymentWithSavedCardNavigationDelegate?

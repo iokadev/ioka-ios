@@ -9,23 +9,31 @@ import Foundation
 import UIKit
 
 
+// REVIEW: Надо назвать Ioka
 class IOKA: IokaThemeProtocol {
     static let shared = IOKA()
     var theme: IokaColors = .defaultTheme
     
     var setupInput: SetupInput?
     
+    // REVIEW: setup(apiKey:theme:)
     func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
         self.theme = theme.iokaColors
         self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: Theme(colors: IokaColors.defaultTheme))
     }
     
+    // REVIEW: startPaymentFlow(sourceViewController:orderAccessToken:)
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
-        guard let setupInput = setupInput else { return }
+        guard let setupInput = setupInput else {
+            // REVIEW: assertionFailure
+            return
+        }
+        
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
         do {
             let token = try AccessToken(token: orderAccessToken)
+            
             let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, navigationController:  viewController.navigationController ?? UINavigationController())
@@ -36,6 +44,7 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
+    // REVIEW: startPaymentWithSavedCardFlow(sourceViewController:orderAccessToken:card:)
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
@@ -44,6 +53,7 @@ class IOKA: IokaThemeProtocol {
             let token = try AccessToken(token: orderAccessToken)
             let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController, cardResponse: card)
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
+            // REVIEW: coordinator
             let coordnitar = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
             
             coordnitar.start()
@@ -64,6 +74,7 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
+    // REVIEW: sourceViewController
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
         guard let setupInput = setupInput else { return }
 
@@ -71,6 +82,8 @@ class IOKA: IokaThemeProtocol {
         
         do {
             let customerAccesstoken = try AccessToken(token: customerAccessToken)
+            
+            // REVIEW: поля hideSaveCardCheckbox здесь не должно быть, потому что для флоу save card оно не имеет смысла
             let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, hideSaveCardCheckbox: true)
             let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
             let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
@@ -83,6 +96,7 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
+    // REVIEW: здесь лучше Error? передавать в completion
     func deleteSavedCard(customerAccessToken: String, cardId: String, completion: @escaping(Result<EmptyResponse, Error>) -> Void) {
         
         guard let setupInput = setupInput else { return }

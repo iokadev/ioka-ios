@@ -8,6 +8,7 @@
 import Foundation
 
 enum AuthenticationKeys {
+    // REVIEW: Лучше camelCase
     static let API_KEY = "X-Public-Key"
     static let ORDER_ACCESS_TOKEN_KEY = "X-Order-Access-Token"
     static let CUSTOMER_ACCESS_TOKEN_KEY = "X-Customer-Access-Token"
@@ -30,6 +31,7 @@ enum NetworkEnvironment {
     case stage
 }
 
+// REVIEW: 👍🏻
 struct IokaApiEndPoint: EndPointType {
     var baseUrl: URL {
         guard let url = URL(string: environmentBaseURL) else { fatalError("Please present base URL") }
@@ -82,6 +84,7 @@ struct IokaApiEndPoint: EndPointType {
             self.path = "customers/\(customerAccessToken.id)/bindings"
             self.httpMethod = .post
             self.task = .requestParametersAndHeaders(bodyParameters: card.dictionary, urlParameters: nil, additionalHeaders: [AuthenticationKeys.CUSTOMER_ACCESS_TOKEN_KEY: customerAccessToken.token])
+            // REVIEW: "Content-Type": "application/json; charset=utf-8" надо? если да, то это должно где-то в одном месте сетится для всех post запросов.
         case .getCardByID(let customerAccessToken, let cardId):
             self.path = "customers/\(customerAccessToken.id)/cards/\(cardId)"
             self.httpMethod = .get
@@ -93,6 +96,7 @@ struct IokaApiEndPoint: EndPointType {
         case .getOrderByID(let orderAccessToken):
             self.path = "orders/\(orderAccessToken.id)"
             self.httpMethod = .get
+            // REVIEW: почему где-то есть APIKey, где-то нет? он должен быть везде, и должен сетиться где-то в одном месте
             self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.API_KEY: apiKey.key, AuthenticationKeys.ORDER_ACCESS_TOKEN_KEY: orderAccessToken.token])
         }
     }

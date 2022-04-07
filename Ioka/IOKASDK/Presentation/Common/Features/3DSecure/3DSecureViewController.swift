@@ -20,6 +20,9 @@ class ThreeDSecureViewController:  IokaViewController {
     
     override func loadView() {
         super.loadView()
+        
+        // REVIEW: это во viewDidLoad должно быть
+
         navView.backgroundColor = IOKA.shared.theme.background
         self.view.backgroundColor = IOKA.shared.theme.background
         self.view.addSubview(navView)
@@ -68,9 +71,11 @@ extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigatio
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         
+        // REVIEW: здесь нужно проверять что редирект произошел на returnUrl. Проверка по-хорошему должна происходить во viewModel
         self.webView.isHidden = true
         loadingIndicator.isHidden = false
     
+        // REVIEW: задержка не нужна
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.viewModel.handleRedirect()
         }

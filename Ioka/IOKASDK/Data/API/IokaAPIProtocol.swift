@@ -7,7 +7,7 @@
 
 import Foundation
 
-// реализация IokaAPI тоже в эту папку пойдет
+// REVIEW: реализация IokaAPI тоже в эту папку пойдет
 
 protocol IokaAPIProtocol {
     func createCardPayment(orderAccessToken: AccessToken, card: Card, completion: @escaping (Result<CardPaymentResponse, Error>) -> Void)

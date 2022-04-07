@@ -18,15 +18,13 @@ class OrderConfirmationViewController: UIViewController {
     var paymentTypeState: PaymentTypeState = .empty
     let viewModel = OrderConfirmationViewModel()
 
+    override func loadView() {
+        view = orderConfirmationView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         orderConfirmationView.delegate = self
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.addSubview(orderConfirmationView)
-        orderConfirmationView.frame = self.view.frame
     }
     
     override func viewWillAppear(_ animated: Bool) {

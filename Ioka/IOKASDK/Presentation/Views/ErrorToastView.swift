@@ -20,6 +20,7 @@ class ErrorToastView: UIView {
         }
     }
     
+    // REVIEW: по коду нигде не должно быть обращений в фасад Ioka. В данном случае тема должна прокидываться через фактори, для этого мы её помещаем в SetupInput и передаём в фактори.
     private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.nonadaptableText, iokaTextAlignemnt: .left)
     private let closeButton = IokaButton(imageName: "closeError")
     

@@ -15,7 +15,7 @@ extension IokaError {
     }
 }
 
-// выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
+// REVIEW: выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
 
 struct APIError: LocalizedError, Decodable {
     let code: Code

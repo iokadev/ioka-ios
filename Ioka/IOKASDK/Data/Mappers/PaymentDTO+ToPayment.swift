@@ -15,7 +15,6 @@ extension CardPaymentResponse {
 }
 
 extension PaymentStatus {
-    // принцип такой, что Domain не должен знать о DTO-шках из слоя Data. Поэтому маппинг делаем в слое Data.
     func toPaymentStatus(error: APIError?, actionDTO: ActionDTO?) throws -> Payment.Status {
         switch self {
         case .PENDING, .CANCELLED:

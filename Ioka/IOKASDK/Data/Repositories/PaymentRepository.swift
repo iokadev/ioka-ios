@@ -1,7 +1,7 @@
 //
 //  PaymentRepository.swift
 //  IOKA
-//
+//  REVIEW: Убери меня из авторов везде. Я показал тебе реализацию этих файлов в качестве ревью. Здесь везде это уже твой код.
 //  Created by Тимур Табынбаев on 04.04.2022.
 //
 
@@ -21,6 +21,7 @@ final class PaymentRepository {
         }
     }
     
+    // REVIEW: при такой реализации можно обойтись одним методом - createCardPayment, так как кроме названия методов сейчас всё - одинаковое.
     func createSavedCardPayment(orderAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<Payment, Error>) -> Void) {
         api.createCardPayment(orderAccessToken: orderAccessToken, card: cardParameters) { result in
             completion(result.toPaymentResult())

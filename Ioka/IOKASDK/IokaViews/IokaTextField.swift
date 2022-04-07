@@ -74,6 +74,7 @@ class IokaTextField: UITextField {
         switch placeHolderType {
         case .cardNumber:
             self.placeholder = IokaLocalizable.enterCardNumber
+            // REVIEW:  inputType - creditCardNumber
         case .dateExpiration:
             self.placeholder = IokaLocalizable.cardExpiration
         case .cvv:

@@ -10,6 +10,7 @@ import Foundation
 
 class PaymentResultViewModel {
     
+    // REVIEW: PaymentResultNavigationDelegate ?
     weak var paymentWithSavedCardDelegate: PaymentWithSavedCardNavigationDelegate?
     weak var paymentMethodsDelegate: PaymentMethodsNavigationDelegate?
     

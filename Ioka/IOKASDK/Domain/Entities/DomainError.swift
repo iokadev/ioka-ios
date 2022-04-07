@@ -14,10 +14,19 @@ enum DomainError: LocalizedError {
     case noActionForRequiresActionStatus
     case invalidActionUrl
     
+    // REVIEW: Это ещё надо локализовать
     var errorDescription: String? {
         switch self {
-        default:
-            return ""
+        case .invalidTokenFormat:
+            return "Некорректный формат токена"
+        case .invalidPaymentStatus:
+            return "Некорректный статус платежа"
+        case .noErrorForDeclinedStatus:
+            return "Остутствует объект ошибки для статуса Declined"
+        case .noActionForRequiresActionStatus:
+            return "Отсутствует объект Action для статуса RequiresAction"
+        case .invalidActionUrl:
+            return "Некорректный Action URL"
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// надо переименовать в PaymentDTO
+// REVIEW: надо переименовать в PaymentDTO. И все DTOs в этой папке переименовать соответственно.
 struct CardPaymentResponse: Decodable {
     
     let id: String //-Идентификатор платежа

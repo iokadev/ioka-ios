@@ -5,8 +5,11 @@
 //  Created by ablai erzhanov on 11.03.2022.
 //
 
+// REVIEW: IokaEndpoint, APIError, DTOs тоже в эту папку все пойдут. Всё, что относится к API Ioka - сюда. Всё по сети, что утилитарное, не зависящее от Ioka - в папку Infrastructure/Networking.
+
 import Foundation
 
+// REVIEW: лучше IokaAPI. Так как будем делать этот класс публичным.
 class API: IokaAPIProtocol {
     
     let apiKey: APIKey
