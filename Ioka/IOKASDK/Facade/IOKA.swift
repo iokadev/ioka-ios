@@ -22,7 +22,7 @@ class IOKA: IokaThemeProtocol {
         self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: Theme(colors: IokaColors.defaultTheme))
     }
     
-    // REVIEW: startPaymentFlow(sourceViewController:orderAccessToken:)
+    // REVIEW: startPaymentFlow(sourceViewController:orderAccessToken:completion:)
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
         guard let setupInput = setupInput else {
             // REVIEW: assertionFailure
@@ -44,7 +44,7 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
-    // REVIEW: startPaymentWithSavedCardFlow(sourceViewController:orderAccessToken:card:)
+    // REVIEW: startPaymentWithSavedCardFlow(sourceViewController:orderAccessToken:card:completion:)
     func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
@@ -74,7 +74,7 @@ class IOKA: IokaThemeProtocol {
         }
     }
     
-    // REVIEW: sourceViewController
+    // REVIEW: sourceViewController,completion
     func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
         guard let setupInput = setupInput else { return }
 
