@@ -16,12 +16,10 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
-            task = session.dataTask(with: request, completionHandler: { [weak self] data, response, error in
-                guard let self = self else { return }
+            task = session.dataTask(with: request, completionHandler: { data, response, error in
                 
                 let result: Result<Response, Error> = self.mapResponse(data: data, response: response, error: error)
                 
-                // из других мест нужно удалить dispatch.main.async теперь
                 DispatchQueue.main.async {
                     completion(result)
                 }

@@ -20,6 +20,7 @@ protocol PaymentWithSavedCardNavigationDelegate: NSObject {
     func dismissCVVForm(error: Error)
     func dismissCVVForm(apiError: Error)
     func dismissPaymentResult()
+    func dismissErrorPopup()
 }
 
 

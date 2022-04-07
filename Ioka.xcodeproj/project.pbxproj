@@ -48,7 +48,7 @@
 		6DB0A31427FBA8A1008A8381 /* IokaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */; };
 		6DB0A31527FBA8A1008A8381 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */; };
 		6DB0A31627FBA8A1008A8381 /* IokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */; };
-		6DB0A31727FBA8A1008A8381 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29227FBA8A1008A8381 /* IOKA.swift */; };
+		6DB0A31727FBA8A1008A8381 /* Ioka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29227FBA8A1008A8381 /* Ioka.swift */; };
 		6DB0A31827FBA8A1008A8381 /* GetBrandResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */; };
 		6DB0A31A27FBA8A1008A8381 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */; };
 		6DB0A31B27FBA8A1008A8381 /* Payer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29727FBA8A1008A8381 /* Payer.swift */; };
@@ -85,7 +85,6 @@
 		6DB0A35427FBA8A2008A8381 /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */; };
 		6DB0A35527FBA8A2008A8381 /* IokaImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */; };
 		6DB0A35627FBA8A2008A8381 /* IokaIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */; };
-		6DB0A35727FBA8A2008A8381 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E327FBA8A1008A8381 /* Localizable.strings */; };
 		6DB0A35827FBA8A2008A8381 /* IokaLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */; };
 		6DB0A35A27FBA8A2008A8381 /* SavedCardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2E827FBA8A1008A8381 /* SavedCardsViewModel.swift */; };
 		6DB0A35B27FBA8A2008A8381 /* DemoAppErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2EA27FBA8A1008A8381 /* DemoAppErrorView.swift */; };
@@ -141,6 +140,7 @@
 		6DCA1F1F27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F1E27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift */; };
 		6DCA1F2127FD530600ACDAF3 /* OrderForPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2027FD530600ACDAF3 /* OrderForPaymentViewModel.swift */; };
 		6DCA1F2327FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */; };
+		6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2627FE480200ACDAF3 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,7 +187,7 @@
 		6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaImageView.swift; sourceTree = "<group>"; };
 		6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
 		6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaTextField.swift; sourceTree = "<group>"; };
-		6DB0A29227FBA8A1008A8381 /* IOKA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
+		6DB0A29227FBA8A1008A8381 /* Ioka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ioka.swift; sourceTree = "<group>"; };
 		6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBrandResponse.swift; sourceTree = "<group>"; };
 		6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
 		6DB0A29727FBA8A1008A8381 /* Payer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payer.swift; sourceTree = "<group>"; };
@@ -224,7 +224,6 @@
 		6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
 		6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaImages.swift; sourceTree = "<group>"; };
 		6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaIcons.swift; sourceTree = "<group>"; };
-		6DB0A2E327FBA8A1008A8381 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaLocalizable.swift; sourceTree = "<group>"; };
 		6DB0A2E827FBA8A1008A8381 /* SavedCardsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardsViewModel.swift; sourceTree = "<group>"; };
 		6DB0A2EA27FBA8A1008A8381 /* DemoAppErrorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoAppErrorView.swift; sourceTree = "<group>"; };
@@ -280,6 +279,8 @@
 		6DCA1F1E27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerProgressWrapper.swift; sourceTree = "<group>"; };
 		6DCA1F2027FD530600ACDAF3 /* OrderForPaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderForPaymentViewModel.swift; sourceTree = "<group>"; };
 		6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardViewModel.swift; sourceTree = "<group>"; };
+		6DCA1F2527FE480200ACDAF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DCA1F2727FE48D300ACDAF3 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -545,7 +546,7 @@
 		6DB0A29127FBA8A1008A8381 /* Facade */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A29227FBA8A1008A8381 /* IOKA.swift */,
+				6DB0A29227FBA8A1008A8381 /* Ioka.swift */,
 				6DB0A3DF27FC8276008A8381 /* SetupInput.swift */,
 			);
 			path = Facade;
@@ -633,7 +634,7 @@
 		6DB0A2E227FBA8A1008A8381 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2E327FBA8A1008A8381 /* Localizable.strings */,
+				6DCA1F2627FE480200ACDAF3 /* Localizable.strings */,
 				6DB0A2E427FBA8A1008A8381 /* IokaLocalizable.swift */,
 			);
 			path = Localization;
@@ -1085,6 +1086,7 @@
 			knownRegions = (
 				en,
 				Base,
+				kk,
 			);
 			mainGroup = 6DB0A13227FBA42C008A8381;
 			productRefGroup = 6DB0A13C27FBA42C008A8381 /* Products */;
@@ -1102,7 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6DB0A14B27FBA42D008A8381 /* LaunchScreen.storyboard in Resources */,
-				6DB0A35727FBA8A2008A8381 /* Localizable.strings in Resources */,
+				6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */,
 				6DB0A36727FBAAC6008A8381 /* Assets.xcassets in Resources */,
 				6DB0A14627FBA42C008A8381 /* Main.storyboard in Resources */,
 			);
@@ -1149,7 +1151,7 @@
 				6DB0A35D27FBA8A2008A8381 /* AddNewCardTableViewCell.swift in Sources */,
 				6DB0A3C927FBF871008A8381 /* PaymentFlowFactory.swift in Sources */,
 				6DB0A35B27FBA8A2008A8381 /* DemoAppErrorView.swift in Sources */,
-				6DB0A31727FBA8A1008A8381 /* IOKA.swift in Sources */,
+				6DB0A31727FBA8A1008A8381 /* Ioka.swift in Sources */,
 				6DB0A33E27FBA8A2008A8381 /* CardFormViewModel.swift in Sources */,
 				6DB0A3DA27FBF9D8008A8381 /* CVVViewModel.swift in Sources */,
 				6DB0A34C27FBA8A2008A8381 /* ErrorToastView.swift in Sources */,
@@ -1267,6 +1269,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		6DCA1F2627FE480200ACDAF3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6DCA1F2527FE480200ACDAF3 /* en */,
+				6DCA1F2727FE48D300ACDAF3 /* kk */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1274,6 +1285,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -1335,6 +1347,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

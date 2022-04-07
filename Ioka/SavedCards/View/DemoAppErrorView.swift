@@ -20,7 +20,7 @@ class DemoAppErrorView: UIView {
         }
     }
     
-    private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.nonadaptableText, iokaTextAlignemnt: .left)
+    private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.nonadaptableText, iokaTextAlignemnt: .left)
     private let closeButton = IokaButton(imageName: "closeError")
     
     override init(frame: CGRect) {
@@ -37,10 +37,10 @@ class DemoAppErrorView: UIView {
         
         if let error = error {
             self.errorLabel.text = error.message
-            self.backgroundColor = IOKA.shared.theme.error
+            self.backgroundColor = Ioka.shared.theme.error
         } else {
             self.errorLabel.text = "карта удалена"
-            self.backgroundColor = IOKA.shared.theme.success
+            self.backgroundColor = Ioka.shared.theme.success
         }
         
     }

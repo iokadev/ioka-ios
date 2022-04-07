@@ -15,6 +15,9 @@ enum IokaLocalizable {
     static var enterCardNumber = NSLocalizedString("enterCardNumber", comment: "")
     static var cardExpiration = NSLocalizedString("cardExpiration", comment: "")
     static var cvv = NSLocalizedString("cvv", comment: "")
+    static var priceTng = NSLocalizedString("priceTng", comment: "")
+    static var serverError = NSLocalizedString("serverError", comment: "")
+    
     
     static var orderPaid = NSLocalizedString("orderPaid", comment: "")
     static var ok = NSLocalizedString("ok", comment: "")

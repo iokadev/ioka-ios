@@ -42,6 +42,10 @@ class PaymentWithSavedCardFlowFactory {
         featuresFactory.makePaymentResult(delegate, nil)
     }
     
+    func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate) -> ErrorPopUpViewController {
+        featuresFactory.makePaymentResultPopup(delegate: delegate)
+    }
+    
     func paymentRepository() -> PaymentRepository {
         return PaymentRepository(api: api)
     }

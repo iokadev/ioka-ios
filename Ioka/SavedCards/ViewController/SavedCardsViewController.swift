@@ -10,7 +10,7 @@ import UIKit
 
 class SavedCardsViewController: UIViewController {
     
-    var models: [GetCardResponse] = []
+    var models = [GetCardResponse]()
     
     let tableView = UITableView()
     let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.tertiaryBackground, cornerRadius: 8)
@@ -99,7 +99,7 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
     }
     
     func viewTapped(_ view: AddNewCardTableViewCell) {
-        IOKA.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
+        Ioka.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
     }
 }
 
@@ -110,10 +110,17 @@ extension SavedCardsViewController: DeleteSavedCardViewControllerDelegate, DemoA
     }
     
     func closeDeleteCardViewController(_ viewController: UIViewController, card: GetCardResponse, error: IokaError?) {
-        resultView.error = error
-        resultView.delegate = self
-        self.view.addSubview(resultView)
-        resultView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 58, paddingRight: 16)
+        switch error {
+        case .some(let error):
+            resultView.error = error
+            resultView.delegate = self
+            self.view.addSubview(resultView)
+            resultView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 58, paddingRight: 16)
+        case .none:
+            self.models.removeAll { $0.id == card.id}
+            self.tableView.reloadData()
+        }
+       
     }
     
     

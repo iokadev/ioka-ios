@@ -16,7 +16,7 @@ class CVVViewController: IokaViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = IOKA.shared.theme.foreground
+        self.view.backgroundColor = Ioka.shared.theme.foreground
         contentView.delegate = self
         contentView.configureView(card: card)
     }

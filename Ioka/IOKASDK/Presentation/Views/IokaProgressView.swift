@@ -17,7 +17,7 @@ class IokaProgressView: UIView {
     private lazy var shapeLayer = CAShapeLayer()
     
     override init(frame: CGRect) {
-        self.color = IOKA.shared.theme.secondary
+        self.color = Ioka.shared.theme.secondary
         self.lineWidth = 6
         super.init(frame: frame)
         

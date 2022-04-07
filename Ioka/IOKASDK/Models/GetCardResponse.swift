@@ -17,6 +17,8 @@ enum SavedCardStatus: String, Decodable {
 
 struct GetCardResponse: Decodable {
     
+    
+    
     let id: String //-Идентификатор платежа
     let customer_id: String //-Идентификатор родительского заказа
     var status: SavedCardStatus?

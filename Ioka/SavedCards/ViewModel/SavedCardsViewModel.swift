@@ -14,7 +14,7 @@ class SavedCardsViewModel {
     func getCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?) -> Void) {
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
-            IOKA.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
+            Ioka.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
                 guard let _ = self else { return }
                 
                 switch result {

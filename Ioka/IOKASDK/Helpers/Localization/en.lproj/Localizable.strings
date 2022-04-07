@@ -1,0 +1,44 @@
+/*
+  Localizable.strings
+  iOKA
+
+  Created by ablai erzhanov on 23.03.2022.
+  
+*/
+
+// MARK: - PaymentWithCard -
+"saveCard" = "Картаны сақтау";
+"transactionProtected" = "Барлық транзакциялар қорғалған";
+"pay" = "Төлеу";
+"enterCardNumber" = "Карта нөмірін енгізіңіз";
+"cardExpiration" = "АА/ЖЖ";
+"cvv" = "CVV";
+"priceTng" = "Төленетін  ₸";
+"orPayCard" = "Немесе картамен төлеңіз";
+"serverError"= "Сервер тарапындағы қате. Кейінірек қайталап көріңіз";
+"cvvExplained" = "Картаның артқы жағындағы 3 сан";
+"newCard" = "Жаңа карта";
+
+"cardScan" = "Картаны сканерлеу";
+"cardScanExplained" = "Картаны жақтауға салыңыз, ол автоматты түрде есептеледі";
+"scanAgain" = "Қайта сканерлеу";
+"everythingRight" = "Барлығы дұрыс";
+"checkCardNymber" = "Карта нөмірін тексеріңіз";
+
+"orderPaid" = "Тапсырыс төленді";
+"ok" = "Түсінікті";
+"paymentFailed" = "Төлем орындалмады";
+"retry" = "Қайтадан қайталап көріңіз";
+"orderNumber" = "Төлем №%@";
+
+
+"paymentConfirmation" = "Төлемді растау";
+"continueButton" = "Жалғастыру";
+
+"save" = "Сақтау";
+
+"paymentProcessing" = "Төлем жасалуда";
+"goPayment" = "Төлемге өту";
+
+
+

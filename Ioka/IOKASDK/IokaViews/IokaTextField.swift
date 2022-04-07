@@ -29,11 +29,11 @@ class IokaTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.textColor = IOKA.shared.theme.text
-        self.backgroundColor = IOKA.shared.theme.fill4
+        self.textColor = Ioka.shared.theme.text
+        self.backgroundColor = Ioka.shared.theme.fill4
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
-        self.layer.borderColor = IOKA.shared.theme.background.cgColor
+        self.layer.borderColor = Ioka.shared.theme.background.cgColor
 
     }
     
@@ -85,13 +85,13 @@ class IokaTextField: UITextField {
     func checkInputData() {
         switch iokaTextFieldState {
         case .startTyping:
-            self.layer.borderColor = IOKA.shared.theme.primary.cgColor
+            self.layer.borderColor = Ioka.shared.theme.primary.cgColor
         case .wrongInputData:
-            self.layer.borderColor = IOKA.shared.theme.error.cgColor
+            self.layer.borderColor = Ioka.shared.theme.error.cgColor
         case .nonActive:
-            self.layer.borderColor = IOKA.shared.theme.background.cgColor
+            self.layer.borderColor = Ioka.shared.theme.background.cgColor
         case .correctInputData:
-            self.layer.borderColor = IOKA.shared.theme.background.cgColor
+            self.layer.borderColor = Ioka.shared.theme.background.cgColor
         }
     }
 }
