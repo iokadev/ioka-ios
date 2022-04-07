@@ -48,7 +48,7 @@
 		6DB0A31427FBA8A1008A8381 /* IokaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */; };
 		6DB0A31527FBA8A1008A8381 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */; };
 		6DB0A31627FBA8A1008A8381 /* IokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */; };
-		6DB0A31727FBA8A1008A8381 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29227FBA8A1008A8381 /* IOKA.swift */; };
+		6DB0A31727FBA8A1008A8381 /* Ioka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29227FBA8A1008A8381 /* Ioka.swift */; };
 		6DB0A31827FBA8A1008A8381 /* GetBrandResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */; };
 		6DB0A31A27FBA8A1008A8381 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */; };
 		6DB0A31B27FBA8A1008A8381 /* Payer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29727FBA8A1008A8381 /* Payer.swift */; };
@@ -187,7 +187,7 @@
 		6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaImageView.swift; sourceTree = "<group>"; };
 		6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
 		6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaTextField.swift; sourceTree = "<group>"; };
-		6DB0A29227FBA8A1008A8381 /* IOKA.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
+		6DB0A29227FBA8A1008A8381 /* Ioka.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ioka.swift; sourceTree = "<group>"; };
 		6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBrandResponse.swift; sourceTree = "<group>"; };
 		6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
 		6DB0A29727FBA8A1008A8381 /* Payer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payer.swift; sourceTree = "<group>"; };
@@ -546,7 +546,7 @@
 		6DB0A29127FBA8A1008A8381 /* Facade */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A29227FBA8A1008A8381 /* IOKA.swift */,
+				6DB0A29227FBA8A1008A8381 /* Ioka.swift */,
 				6DB0A3DF27FC8276008A8381 /* SetupInput.swift */,
 			);
 			path = Facade;
@@ -1151,7 +1151,7 @@
 				6DB0A35D27FBA8A2008A8381 /* AddNewCardTableViewCell.swift in Sources */,
 				6DB0A3C927FBF871008A8381 /* PaymentFlowFactory.swift in Sources */,
 				6DB0A35B27FBA8A2008A8381 /* DemoAppErrorView.swift in Sources */,
-				6DB0A31727FBA8A1008A8381 /* IOKA.swift in Sources */,
+				6DB0A31727FBA8A1008A8381 /* Ioka.swift in Sources */,
 				6DB0A33E27FBA8A2008A8381 /* CardFormViewModel.swift in Sources */,
 				6DB0A3DA27FBF9D8008A8381 /* CVVViewModel.swift in Sources */,
 				6DB0A34C27FBA8A2008A8381 /* ErrorToastView.swift in Sources */,

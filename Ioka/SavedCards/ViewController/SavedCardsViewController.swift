@@ -99,7 +99,7 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
     }
     
     func viewTapped(_ view: AddNewCardTableViewCell) {
-        IOKA.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
+        Ioka.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
     }
 }
 

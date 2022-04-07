@@ -54,7 +54,7 @@ struct IokaApiEndPoint: EndPointType {
         if apiKey.isStaging {
             self.environmentBaseURL =  "https://stage-api.ioka.kz/v2/"
         } else {
-            self.environmentBaseURL = "https://api.ioka.kz/V2/"
+            self.environmentBaseURL = "https://api.ioka.kz/v2/"
         }
         
         switch endPoint {

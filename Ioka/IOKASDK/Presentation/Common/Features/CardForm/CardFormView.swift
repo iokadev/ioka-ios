@@ -40,8 +40,8 @@ class CardFormView: UIView {
     let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: Typography.subtitle)
     let saveCardToggle = UISwitch()
     let createButton = IokaButton(iokaButtonState: .disabled)
-    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.success)
-    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: IOKA.shared.theme.success)
+    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.success)
+    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: Ioka.shared.theme.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var errorView = ErrorToastView()
@@ -153,8 +153,10 @@ class CardFormView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = IOKA.shared.theme.background
+        self.backgroundColor = Ioka.shared.theme.background
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
+        self.addSubview(self.errorView)
+        self.errorView.alpha = 0.0
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
         
@@ -172,6 +174,8 @@ class CardFormView: UIView {
         transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
         
         transactionImageView.centerY(in: transactionLabel, right: transactionLabel.leftAnchor, paddingRight: 8, width: 24, height: 24)
+        self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
+        
     }
     
     private func setupSaveCardUI(price: Int?) {
@@ -180,7 +184,8 @@ class CardFormView: UIView {
         switch cardFormState {
         case .payment:
             guard let price = price else { return }
-            self.titleLabel.text = "К оплате \(price) ₸"
+            let locale = IokaLocalizable.priceTng
+            self.titleLabel.text = String(format: locale, String(price))
             self.addSubview(stackViewForCardSaving)
             stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
         case .saving:
@@ -236,8 +241,9 @@ extension CardFormView: ErrorToastViewDelegate {
     public func showErrorView(error: IokaError) {
         DispatchQueue.main.async {
             self.errorView.error = error
-            self.addSubview(self.errorView)
-            self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
+            UIView.animate(withDuration: 1.0) {
+                self.errorView.alpha = 1.0
+            }
         }
     }
     
@@ -245,7 +251,7 @@ extension CardFormView: ErrorToastViewDelegate {
         DispatchQueue.main.async {
             self.createButton.iokaButtonState = .disabled
             self.createButton.hideLoading(showTitle: true)
-            self.errorView.removeFromSuperview()
+            self.errorView.alpha = 0.0
         }
     }
 }

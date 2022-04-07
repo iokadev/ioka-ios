@@ -15,11 +15,11 @@ class ErrorPopUpView: UIView {
     
     weak var delegate: ErrorPopUpViewDelegate?
     
-    private let backgroundView = IokaCustomView(backGroundColor: IOKA.shared.theme.background, cornerRadius: 12)
+    private let backgroundView = IokaCustomView(backGroundColor: Ioka.shared.theme.background, cornerRadius: 12)
     private let errorImageview = IokaImageView(imageName: "XCircle")
-    private let errorTitleLabel = IokaLabel(title: IokaLocalizable.paymentFailed, iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.text, iokaTextAlignemnt: .center)
-    private let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: IOKA.shared.theme.grey, iokaTextAlignemnt: .center)
-    private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backGroundColor: IOKA.shared.theme.secondary)
+    private let errorTitleLabel = IokaLabel(title: IokaLocalizable.paymentFailed, iokaFont: Typography.title, iokaTextColor: Ioka.shared.theme.text, iokaTextAlignemnt: .center)
+    private let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.grey, iokaTextAlignemnt: .center)
+    private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backGroundColor: Ioka.shared.theme.secondary)
     
     
     override init(frame: CGRect) {
@@ -37,8 +37,7 @@ class ErrorPopUpView: UIView {
     }
     
     private func setActions() {
-        tryAgainButton.addTarget(self, action: #selector(handleTryAgainButton), for: .touchUpInside
-        )
+        tryAgainButton.addTarget(self, action: #selector(handleTryAgainButton), for: .touchUpInside)
     }
     
     @objc private func handleTryAgainButton() {
@@ -47,7 +46,7 @@ class ErrorPopUpView: UIView {
     
     
     private func setUI() {
-        self.backgroundColor = IOKA.shared.theme.foreground
+        self.backgroundColor = Ioka.shared.theme.foreground
         self.addSubview(backgroundView)
         backgroundView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 282, paddingLeft: 40, paddingRight: 40)
         

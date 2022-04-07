@@ -20,8 +20,8 @@ class ThreeDSecureViewController:  IokaViewController {
     
     override func loadView() {
         super.loadView()
-        navView.backgroundColor = IOKA.shared.theme.background
-        self.view.backgroundColor = IOKA.shared.theme.background
+        navView.backgroundColor = Ioka.shared.theme.background
+        self.view.backgroundColor = Ioka.shared.theme.background
         self.view.addSubview(navView)
         self.view.addSubview(webView)
         self.view.addSubview(loadingIndicator)

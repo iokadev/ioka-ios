@@ -16,7 +16,7 @@ enum ProgressWrapperViewState {
 class ProgressWrapperView: UIView {
     
     private let progressView = IokaProgressView()
-    private let titleLabel = IokaLabel(iokaFont: Typography.title, iokaTextColor: IOKA.shared.theme.background, iokaTextAlignemnt: .center)
+    private let titleLabel = IokaLabel(iokaFont: Typography.title, iokaTextColor: Ioka.shared.theme.background, iokaTextAlignemnt: .center)
     
     
     override init(frame: CGRect) {
@@ -48,7 +48,7 @@ class ProgressWrapperView: UIView {
     
     
     private func setupUI() {
-        self.backgroundColor = IOKA.shared.theme.foreground
+        self.backgroundColor = Ioka.shared.theme.foreground
         [progressView, titleLabel].forEach { self.addSubview($0) }
         
         progressView.center(in: self, in: self, width: 80, height: 80)

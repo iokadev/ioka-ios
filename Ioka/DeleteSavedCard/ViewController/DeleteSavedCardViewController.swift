@@ -44,7 +44,7 @@ extension DeleteSavedCardViewController: DeleteSavedCardViewDelegate {
     func deleteSavedCard(_ view: DeleteSavedCardView) {
         self.dismiss(animated: false, completion: nil)
         
-        IOKA.shared.deleteSavedCard(customerAccessToken: customerAccessToken, cardId: card.id) {[weak self] result in
+        Ioka.shared.deleteSavedCard(customerAccessToken: customerAccessToken, cardId: card.id) {[weak self] result in
             guard let self = self else { return }
             switch result {
             case .failure(let error):
