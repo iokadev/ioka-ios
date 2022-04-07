@@ -23,6 +23,7 @@ class IOKA: IokaThemeProtocol {
     }
     
     // REVIEW: startPaymentFlow(sourceViewController:orderAccessToken:completion:)
+    // REVIEW: в сompletion предлагаю передавать enum FlowResult { case succeeded, case cancelled, case failed(Error) } 
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
         guard let setupInput = setupInput else {
             // REVIEW: assertionFailure
