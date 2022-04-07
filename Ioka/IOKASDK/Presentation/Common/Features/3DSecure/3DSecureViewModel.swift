@@ -8,6 +8,9 @@
 import Foundation
 
 protocol ThreeDSecureNavigationDelegate {
+    // REVIEW: предлагаю по-другому делать методы в NavigationDelegate-ах - сделать методы, сообщающие о событиях: типа didSomething().
+    // Здесь будет didFinishThreeDSecure(error: Error?) и didCloseThreeDSecure()
+    // Для PaymentMethodsNavigationDelegate это будет didFinishPayment(error: Error?), didClosePaymentMethods(), didRequireThreeDSecure(action: Action)
     func dismissThreeDSecure()
     func dismissThreeDSecure(payment: Payment)
     func dismissThreeDSecure(apiError: APIError)
@@ -15,6 +18,7 @@ protocol ThreeDSecureNavigationDelegate {
     func dismissThreeDSecure(savedCard: SavedCard)
 }
 
+// REVIEW: State -> Input
 enum ThreeDSecureState {
     case saveCard(repository: SavedCardRepository, customerAccessToken: AccessToken)
     case payment(repository: PaymentRepository, orderAccessToken: AccessToken)
@@ -25,6 +29,8 @@ class ThreeDSecureViewModel {
     
     var delegate: ThreeDSecureNavigationDelegate?
     var state: ThreeDSecureState
+    
+    // REVIEW: эти параметры в State(Input) нельзя положить?
     var cardId: String?
     var paymentId: String?
     
@@ -61,6 +67,7 @@ class ThreeDSecureViewModel {
                     self.delegate?.dismissThreeDSecure()
                 }
             case .failure(let error):
+                // REVIEW: if error is APIError self.delegate.didFinish3DSecure(error: error) else show toast. Внизу так же.
                 self.delegate?.dismissThreeDSecure(error: error)
             }
         }

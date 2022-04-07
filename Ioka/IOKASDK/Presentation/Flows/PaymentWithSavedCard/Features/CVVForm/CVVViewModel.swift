@@ -7,6 +7,7 @@
 
 import Foundation
 
+// REVIEW: у нас же логика: одна feature - один NavigationDelegate (OrderForPaymentNavigationDelegate, PaymentResultNavigationDelegate). Я не совсем понял, почему вот этот протокол появился.
 protocol PaymentWithSavedCardNavigationDelegate: NSObject {
     func showProgressWrapper()
     func showCVVForm()

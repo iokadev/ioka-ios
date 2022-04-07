@@ -15,7 +15,7 @@ extension IokaError {
     }
 }
 
-// выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
+// REVIEW: выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
 
 struct APIError: LocalizedError, Decodable {
     let code: Code
@@ -48,12 +48,16 @@ extension APIError {
         case invalidPaymentToken = "InvalidPaymentToken"
         case paymentTokenNotFound = "PaymentTokenNotFound"
         case customerNotFound = "CustomerNotFound"
-        case DECLINED_BY_BANK_LIMIT = "DECLINED_BY_BANK_LIMIT" // ?
+        
+        // REVIEW: это откуда?
+        case DECLINED_BY_BANK_LIMIT = "DECLINED_BY_BANK_LIMIT"
         case customerExists = "CustomerExists"
         case cardNotFound = "CardNotFound"
         case bindingStarted = "BindingStarted"
         case bindingNotFound = "BindingNotFound"
         case webhookNotFound = "WebhookNotFound"
         case binNotFound = "BinNotFound"
+        
+        // REVIEW: нужно добавить case Undefined и написать кастомный декодинг. Чтобы в случае если появится новый код ошибки, у нас приложение нормально это обработало.
     }
 }

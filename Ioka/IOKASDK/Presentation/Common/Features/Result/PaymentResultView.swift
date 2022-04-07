@@ -132,6 +132,7 @@ class PaymentResultView: UIView {
         if let orderNumber = order.externalId {
             orderNumberLabel.text = String(format: locale, orderNumber)
         } else {
+            // REVIEW: если externalId нет, то лейбл надо скрывать
             orderNumberLabel.text = String(format: locale, order.id)
         }
         

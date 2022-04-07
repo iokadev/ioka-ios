@@ -22,4 +22,6 @@ enum PaymentSystem: String, Codable {
     case HIPERCARD = "HIPERCARD"
     case ELO = "ELO"
     case UNKNOWN = "UNKNOWN"
+    
+    // REVIEW: кастомный декодинг с дефолтным декодингом в unknown. на случай если придёт другая платежная система
 }

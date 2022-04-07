@@ -8,7 +8,7 @@
 import Foundation
 
 
-
+// REVIEW: Надо бы как-то по-другому назвать. Типа CardParameters может
 struct Card: Codable {
     var pan: String?
     var exp: String?

@@ -27,6 +27,9 @@ class PaymentCoordinator: NSObject {
         showViewControllerProgressWrapperFlow()
     }
     
+    // REVIEW: думаю, слово flow не нужно в методах ниже. они же не flow, а features. Поэтому либо show...Feature, либо без ничего, типа showPaymentMethods.
+    
+    // REVIEW: showOrderForPayment()
     func showViewControllerProgressWrapperFlow() {
         let wrapper = factory.makeOrderForPayment(delegate: self)
         self.viewControllerProgressWrapper = wrapper

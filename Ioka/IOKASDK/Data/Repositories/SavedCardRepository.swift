@@ -15,6 +15,7 @@ final class SavedCardRepository {
         self.api = api
     }
     
+    // REVIEW: здесь нужно возвращать [SavedCard], а в сущность SavedCard добавлять все поля, которые нужны в слое отображения
     func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
         api.getCards(customerAccessToken: customerAccessToken, completion: completion)
     }

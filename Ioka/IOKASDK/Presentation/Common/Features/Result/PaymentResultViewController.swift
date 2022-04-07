@@ -16,6 +16,8 @@ class PaymentResultViewController: IokaViewController {
     
     lazy var contentView = PaymentResultView()
     var viewModel: PaymentResultViewModel!
+    
+    // REVIEW: здесь лучше использовать NotificationFeedbackGenerator и делать success либо failure feedback. Для ErrorPopup и ErrorToast тоже такой же генератор и делать failure.
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var error: Error?
     var order: Order?

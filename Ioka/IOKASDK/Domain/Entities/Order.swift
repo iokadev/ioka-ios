@@ -13,7 +13,9 @@ struct Order {
     let id: String
     var externalId: String?
     var hasCustomerId: Bool
+    // isExpired и isPaid можно убрать. все равно не используем же
     var isExpired: Bool = false
     var isPaid: Bool = false
     var price: Int
+    // currency не нужно?
 }

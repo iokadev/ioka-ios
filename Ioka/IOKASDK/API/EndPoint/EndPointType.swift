@@ -7,7 +7,7 @@
 
 import Foundation
 
-// лучше кажется Endpoint (point с маленькой буквы)
+// REVIEW: лучше кажется Endpoint (point с маленькой буквы)
 protocol EndPointType {
     associatedtype EndpointError: Error, Decodable
     

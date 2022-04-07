@@ -7,6 +7,7 @@
 
 import Foundation
 
+// REVIEW: Theme должен быть в своём отдельном файле в Infrastucture/DesignSystem
 struct Theme {
     var colors: IokaColors
 }

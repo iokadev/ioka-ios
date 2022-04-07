@@ -9,7 +9,7 @@ import Foundation
 
 
 class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
-    // не нужна очередь запросов? 
+    // REVIEW: не нужна очередь запросов?
     private var task: URLSessionTask?
     
     func request<Response: Decodable>(_ route: EndPoint, completion: @escaping (Result<Response, Error>) -> Void) {
@@ -21,7 +21,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
                 
                 let result: Result<Response, Error> = self.mapResponse(data: data, response: response, error: error)
                 
-                // из других мест нужно удалить dispatch.main.async теперь
+                // REVIEW: из других мест нужно удалить dispatch.main.async теперь
                 DispatchQueue.main.async {
                     completion(result)
                 }
@@ -90,7 +90,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         case (_, .some(let error)):
             return .failure(NetworkError.other(error))
         case (.some(let data), .none):
-            // мы не можем быть уверены, что с сервера всегда будут приходить только те статусы, которые перечислены в енаме HTTPResponseStatus.
+            // REVIEW: мы не можем быть уверены, что с сервера всегда будут приходить только те статусы, которые перечислены в енаме HTTPResponseStatus.
             // guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
             
             let statusIsValid = (200..<300).contains((response as? HTTPURLResponse)?.statusCode ?? 0)
