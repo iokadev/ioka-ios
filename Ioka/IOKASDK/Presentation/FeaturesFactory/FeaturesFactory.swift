@@ -78,4 +78,12 @@ struct FeaturesFactory {
         vc.viewModel = viewModel
         return vc
     }
+    
+    func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate) -> ErrorPopUpViewController {
+        let viewModel = ErrorPopUpViewModel(delegate: delegate)
+        let vc = ErrorPopUpViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        vc.viewModel = viewModel
+        return vc
+    }
 }

@@ -105,11 +105,10 @@ class CardFormView: UIView {
             guard let cvc = cvvTextField.text else { return }
             guard let exp = dateExpirationTextField.text else { return }
             delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+            self.endEditing(true)
         default:
             delegate?.checkCreateButtonState(self)
         }
-
-       
     }
     
     @objc func didChangeText(textField: UITextField) {

@@ -7,15 +7,16 @@
 
 import Foundation
 
-protocol ErrorPopUpNavigationDelegate {
-    func dismiss()
-}
-
 
 class ErrorPopUpViewModel {
-    var delegate: ErrorPopUpNavigationDelegate?
+    
+    weak var paymentWithSavedCardDelegate: PaymentWithSavedCardNavigationDelegate?
+    
+    init(delegate: PaymentWithSavedCardNavigationDelegate) {
+        self.paymentWithSavedCardDelegate = delegate
+    }
     
     func dismiss() {
-        delegate?.dismiss()
+        self.paymentWithSavedCardDelegate?.dismissErrorPopup()
     }
 }
