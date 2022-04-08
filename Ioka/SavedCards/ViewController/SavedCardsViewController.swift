@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SavedCardsViewController: UIViewController {
+internal class SavedCardsViewController: UIViewController {
     
     var models = [GetCardResponse]()
     
@@ -99,7 +99,9 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
     }
     
     func viewTapped(_ view: AddNewCardTableViewCell) {
-        Ioka.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken)
+        Ioka.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken) { result in
+            
+        }
     }
 }
 

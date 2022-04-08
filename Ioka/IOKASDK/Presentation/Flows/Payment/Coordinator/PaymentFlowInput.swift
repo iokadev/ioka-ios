@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct PaymentFlowInput {
+internal struct PaymentFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
     let viewController: UIViewController

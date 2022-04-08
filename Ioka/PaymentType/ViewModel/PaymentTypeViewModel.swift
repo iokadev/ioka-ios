@@ -7,11 +7,10 @@
 
 import Foundation
 
-class PaymentTypeViewModel {
+internal class PaymentTypeViewModel {
     func getCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?, IokaError?) -> Void) {
         
-//        let queue = DispatchQueue.global(qos: .userInitiated)
-//        queue.async {
+
             Ioka.shared.getCards(customerAccessToken: customerAccessToken) {[weak self] result in
                 print(result)
                 guard let _ = self else { return }
@@ -22,6 +21,5 @@ class PaymentTypeViewModel {
                     completion(nil, error)
                 }
             }
-//        }/
     }
 }

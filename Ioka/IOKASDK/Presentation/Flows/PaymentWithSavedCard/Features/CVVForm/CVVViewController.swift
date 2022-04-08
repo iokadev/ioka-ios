@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CVVViewController: IokaViewController {
+internal class CVVViewController: IokaViewController {
     
     private lazy var contentView = CVVView()
     var card: GetCardResponse!
@@ -16,7 +16,7 @@ class CVVViewController: IokaViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = Ioka.shared.theme.foreground
+        self.view.backgroundColor = colors.foreground
         contentView.delegate = self
         contentView.configureView(card: card)
     }

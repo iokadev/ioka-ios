@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 
-class ThreeDSecureViewController:  IokaViewController {
+internal class ThreeDSecureViewController:  IokaViewController {
     
     var viewModel: ThreeDSecureViewModel!
     var url: URL!
@@ -20,8 +20,8 @@ class ThreeDSecureViewController:  IokaViewController {
     
     override func loadView() {
         super.loadView()
-        navView.backgroundColor = Ioka.shared.theme.background
-        self.view.backgroundColor = Ioka.shared.theme.background
+        navView.backgroundColor = colors.background
+        self.view.backgroundColor = colors.background
         self.view.addSubview(navView)
         self.view.addSubview(webView)
         self.view.addSubview(loadingIndicator)

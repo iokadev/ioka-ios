@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class PaymentRepository {
+internal final class PaymentRepository {
     let api: IokaAPIProtocol
     
     init(api: IokaAPIProtocol) {
@@ -34,7 +34,7 @@ final class PaymentRepository {
     }
 }
 
-extension Result where Success == CardPaymentResponse {
+extension Result where Success == PaymentDTO {
     func toPaymentResult() -> Result<Payment, Error> {
         Result<Payment, Error> {
             switch self {

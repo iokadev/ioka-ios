@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum PaymentTypeState {
+internal enum PaymentTypeState {
     case applePay(title: String)
     case savedCard(card: GetCardResponse)
     case creditCard(title: String)
@@ -16,11 +16,11 @@ enum PaymentTypeState {
     case empty
 }
 
-protocol PaymentTypeViewDelegate: NSObject {
+internal protocol PaymentTypeViewDelegate: NSObject {
     func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState)
 }
 
-class PaymentTypeView: UIView {
+internal class PaymentTypeView: UIView {
     
 
     weak var delegate: PaymentTypeViewDelegate?
@@ -35,7 +35,7 @@ class PaymentTypeView: UIView {
     lazy var bankCardView = BankCardView(delegate: self)
     lazy var payWithCashView = PayWithCashView(delegate: self)
     var closeButton = IokaButton(imageName: "chevronLeft")
-    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: Typography.title, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
+    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: typography.title, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
     var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
     var paymentTypeState: PaymentTypeState?
     var heightConstraint: NSLayoutConstraint?

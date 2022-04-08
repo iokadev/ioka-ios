@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PaymentFlowFactory {
+internal class PaymentFlowFactory {
     let input: PaymentFlowInput
     let featuresFactory: FeaturesFactory
     

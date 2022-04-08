@@ -7,18 +7,18 @@
 
 import UIKit
 
-protocol DeleteSavedCardViewDelegate: NSObject {
+internal protocol DeleteSavedCardViewDelegate: NSObject {
     func closeDeleteSavedCardView(_ view: DeleteSavedCardView)
     func deleteSavedCard(_ view: DeleteSavedCardView)
 }
 
-class DeleteSavedCardView: UIView {
+internal class DeleteSavedCardView: UIView {
     
     public weak var delegate: DeleteSavedCardViewDelegate?
     
     private let backGroundView = UIView()
     private let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
-    private let title = IokaLabel(iokaFont: Typography.title, iokaTextColor: DemoAppColors.text)
+    private let title = IokaLabel(iokaFont: typography.title, iokaTextColor: DemoAppColors.text)
     private let deleteCardButton = UIButton()
     private let cancelButton = UIButton()
     

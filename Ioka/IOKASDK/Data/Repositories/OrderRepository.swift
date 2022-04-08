@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class OrderRepository {
+internal final class OrderRepository {
     private let api: IokaAPIProtocol
     
     
@@ -19,6 +19,13 @@ final class OrderRepository {
     func getOrder(orderAccessToken: AccessToken, completion: @escaping(Result<Order, Error>) -> Void) {
         api.getOrderByID(orderAccessToken: orderAccessToken) { result in
             completion(result.toOrderResult())
+        }
+    }
+    
+    func createPayment(orderAccessToken: AccessToken, card: GetCardResponse, completion: @escaping(Result<Payment, Error>) -> Void) {
+        let card = Card(cardId: card.id)
+        api.createCardPayment(orderAccessToken: orderAccessToken, card: card) { result in
+            completion(result.toPaymentResult())
         }
     }
 }

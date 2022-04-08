@@ -8,7 +8,7 @@
 import Foundation
 
 
-class ProfileViewModel {
+internal class ProfileViewModel {
     
     func getProfile(completion: @escaping(String) -> Void) {
         

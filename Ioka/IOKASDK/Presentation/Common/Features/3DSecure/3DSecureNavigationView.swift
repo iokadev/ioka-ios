@@ -7,16 +7,16 @@
 
 import UIKit
 
-protocol IokaBrowserNavigationViewDelegate: NSObject {
+internal protocol IokaBrowserNavigationViewDelegate: NSObject {
     func closeBrowser()
 }
 
 
-class IokaBrowserNavigationView: UIView {
+internal class IokaBrowserNavigationView: UIView {
     
     weak var delegate: IokaBrowserNavigationViewDelegate?
     
-    private let title = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: Typography.title, iokaTextColor: Ioka.shared.theme.text)
+    private let title = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: typography.title, iokaTextColor: colors.text)
     private let closeButton = IokaButton(imageName: "Close")
     
     

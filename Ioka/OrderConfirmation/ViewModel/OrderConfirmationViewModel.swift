@@ -8,7 +8,7 @@
 import Foundation
 
 
-class OrderConfirmationViewModel {
+internal class OrderConfirmationViewModel {
     
     
     func createOrder(order: OrderModel, completion: @escaping(String) -> Void) {

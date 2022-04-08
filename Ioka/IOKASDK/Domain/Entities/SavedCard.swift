@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct SavedCard {
+internal struct SavedCard {
     
     enum Status {
         case succeeded

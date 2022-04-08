@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderConfirmationViewController: UIViewController {
+internal class OrderConfirmationViewController: UIViewController {
     
     var order: OrderModel? {
         didSet {
@@ -20,21 +20,17 @@ class OrderConfirmationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Оформление заказа"
         orderConfirmationView.delegate = self
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.addSubview(orderConfirmationView)
-        orderConfirmationView.frame = self.view.frame
+    override func loadView() {
+        self.view = orderConfirmationView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-        self.title = "Оформление заказа"
-        self.navigationController?.navigationBar.isHidden = false
-    }
+        self.tabBarController?.tabBar.isHidden = true    }
 }
 
 
@@ -68,12 +64,16 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startCheckoutWithSavedCardFlow(viewController: self, orderAccessToken: orderAccessToken, card: card)
+                Ioka.shared.startCheckoutWithSavedCardFlow(viewController: self, orderAccessToken: orderAccessToken, card: card) { result in
+                    
+                }
             }
         case .creditCard( _):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startCheckoutFlow(viewController: self, orderAccessToken: orderAccessToken)
+                Ioka.shared.startCheckoutFlow(viewController: self, orderAccessToken: orderAccessToken) { result in
+                    
+                }
             }
         case .cash(let title):
             print(title)

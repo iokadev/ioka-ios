@@ -10,15 +10,15 @@ import UIKit
 
 
 
-protocol ProfileViewDelegate: NSObject {
+internal protocol ProfileViewDelegate: NSObject {
     func showSavedCard(_ profileView: ProfileView)
 }
 
-class ProfileView: UIView {
+internal class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     
-    let navigationTitleLabel = IokaLabel(title: "Профиль", iokaFont: Typography.title, iokaTextColor: DemoAppColors.text)
+    let navigationTitleLabel = IokaLabel(title: "Профиль", iokaFont: typography.title, iokaTextColor: DemoAppColors.text)
     let saveCardProfileView = SaveCardProfileView()
     let languageProfileView = LanguageProfileView()
     let themeProfileView = ThemeProfileView()

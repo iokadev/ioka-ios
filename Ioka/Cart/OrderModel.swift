@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct OrderModel: Codable {
+internal struct OrderModel: Codable {
     let orderPrice: String
     let orderTitle: String
     let orderNumber: String

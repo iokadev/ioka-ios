@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-protocol BankCardViewDelegate: NSObject {
+internal protocol BankCardViewDelegate: NSObject {
     func handleViewTap(_ view: BankCardView, isPayWithCashSelected: Bool)
 }
 
-class BankCardView: UIView {
+internal class BankCardView: UIView {
     
     let creditCardImageView = IokaImageView(imageName: "Credit-card")
-    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: BankCardViewDelegate?

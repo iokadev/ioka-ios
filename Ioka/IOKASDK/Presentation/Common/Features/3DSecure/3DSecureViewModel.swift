@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ThreeDSecureNavigationDelegate {
+internal protocol ThreeDSecureNavigationDelegate {
     func dismissThreeDSecure()
     func dismissThreeDSecure(payment: Payment)
     func dismissThreeDSecure(apiError: APIError)
@@ -15,13 +15,13 @@ protocol ThreeDSecureNavigationDelegate {
     func dismissThreeDSecure(savedCard: SavedCard)
 }
 
-enum ThreeDSecureState {
+internal enum ThreeDSecureState {
     case saveCard(repository: SavedCardRepository, customerAccessToken: AccessToken)
     case payment(repository: PaymentRepository, orderAccessToken: AccessToken)
 }
 
 
-class ThreeDSecureViewModel {
+internal class ThreeDSecureViewModel {
     
     var delegate: ThreeDSecureNavigationDelegate?
     var state: ThreeDSecureState

@@ -8,7 +8,7 @@
 import UIKit
 
 
-protocol CardFormViewDelegate: NSObject {
+internal protocol CardFormViewDelegate: NSObject {
     func getBrand(_ view: CardFormView, with partialBin: String)
     func getEmitterByBinCode(_ view: CardFormView, with binCode: String)
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String)
@@ -23,25 +23,25 @@ enum CardFormState {
     case saving
 }
 
-enum TextFieldType {
+internal enum TextFieldType {
     case cardNumber
     case cvv
     case dateExpiration
 }
 
 
-class CardFormView: UIView {
+internal class CardFormView: UIView {
 
-    let titleLabel = IokaLabel(iokaFont: Typography.title)
+    let titleLabel = IokaLabel(iokaFont: typography.title)
     let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
     let cvvTextField = IokaTextField(placeHolderType: .cvv)
-    let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: Typography.subtitle)
+    let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
     let saveCardToggle = UISwitch()
     let createButton = IokaButton(iokaButtonState: .disabled)
-    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.success)
-    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: Ioka.shared.theme.success)
+    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
+    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: colors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var errorView = ErrorToastView()
@@ -152,7 +152,7 @@ class CardFormView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = Ioka.shared.theme.background
+        self.backgroundColor = colors.background
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
         self.addSubview(self.errorView)
         self.errorView.alpha = 0.0

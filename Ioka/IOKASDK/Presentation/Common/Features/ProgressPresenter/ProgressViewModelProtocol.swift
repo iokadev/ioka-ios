@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum ProgressViewModelState {
+internal enum ProgressViewModelState {
     case idle
     case progress
     case error
 }
 
 
-protocol ProgressViewModelProtocol {
+internal protocol ProgressViewModelProtocol {
     var state: ProgressViewModelState { get set }
     func getOrder()
 }

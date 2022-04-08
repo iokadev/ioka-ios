@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct PaymentWithSavedCardFlowInput {
+internal struct PaymentWithSavedCardFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
     let viewController: UIViewController
@@ -15,7 +15,7 @@ struct PaymentWithSavedCardFlowInput {
 }
 
 
-class PaymentWithSavedCardFlowFactory {
+internal class PaymentWithSavedCardFlowFactory {
     let input: PaymentWithSavedCardFlowInput
     let featuresFactory: FeaturesFactory
     
@@ -27,7 +27,7 @@ class PaymentWithSavedCardFlowFactory {
     
     
     func makeOrderForPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository())
+        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse)
     }
     
     func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {

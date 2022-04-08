@@ -8,7 +8,7 @@
 import Foundation
 
 
-class SavedCardsViewModel {
+internal class SavedCardsViewModel {
     
     
     func getCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?) -> Void) {

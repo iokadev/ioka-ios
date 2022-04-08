@@ -8,7 +8,7 @@
 import Foundation
 
 
-class OrderForPaymentViewModel: ProgressViewModelProtocol {
+ internal class OrderForPaymentViewModel: ProgressViewModelProtocol {
     
     var delegate: PaymentMethodsNavigationDelegate?
     var state: ProgressViewModelState
@@ -27,11 +27,23 @@ class OrderForPaymentViewModel: ProgressViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let order):
-                self.delegate?.dismissProgressWrapper(order)
+                self.dismissProgressWrapperWithOrder(order)
             case .failure(let error):
-                self.delegate?.dismissProgressWrapper(error)
+                self.dismissProgressWrapperWithError(error)
             }
         }
+    }
+    
+    func dismissProgressWrapperWithError(_ error: Error) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.delegate?.dismissProgressWrapper(error)
+        })
+    }
+    
+    func dismissProgressWrapperWithOrder(_ order: Order) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.delegate?.dismissProgressWrapper(order)
+        })
     }
     
 }

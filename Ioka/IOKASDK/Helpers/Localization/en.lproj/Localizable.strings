@@ -6,39 +6,35 @@
   
 */
 
-// MARK: - PaymentWithCard -
-"saveCard" = "Картаны сақтау";
-"transactionProtected" = "Барлық транзакциялар қорғалған";
-"pay" = "Төлеу";
-"enterCardNumber" = "Карта нөмірін енгізіңіз";
-"cardExpiration" = "АА/ЖЖ";
+"saveCard" = "Сохранить карту";
+"transactionProtected" = "Все транзакции защищены";
+"pay" = "Оплатить";
+"enterCardNumber" = "Введите номер карты";
+"cardExpiration" = "ММ/ГГ";
 "cvv" = "CVV";
-"priceTng" = "Төленетін  ₸";
-"orPayCard" = "Немесе картамен төлеңіз";
-"serverError"= "Сервер тарапындағы қате. Кейінірек қайталап көріңіз";
-"cvvExplained" = "Картаның артқы жағындағы 3 сан";
-"newCard" = "Жаңа карта";
+"priceTng" = "К оплате %@ ₸";
+"orPayCard" = "Или оплатите картой";
+"serverError"= "Ошибка на стороне сервера. Попробуйте позже";
+"cvvExplained" = "3 цифры на обороте карты";
+"newCard" = "Новая карта";
 
-"cardScan" = "Картаны сканерлеу";
-"cardScanExplained" = "Картаны жақтауға салыңыз, ол автоматты түрде есептеледі";
-"scanAgain" = "Қайта сканерлеу";
-"everythingRight" = "Барлығы дұрыс";
-"checkCardNymber" = "Карта нөмірін тексеріңіз";
+"cardScan" = "Сканирование карты";
+"cardScanExplained" = "Поместите карту в рамку,она считается автоматически";
+"scanAgain" = "Отсканировать еще раз";
+"everythingRight" = "Все верно";
+"checkCardNymber" = "Проверьте номер карты";
 
-"orderPaid" = "Тапсырыс төленді";
-"ok" = "Түсінікті";
-"paymentFailed" = "Төлем орындалмады";
-"retry" = "Қайтадан қайталап көріңіз";
-"orderNumber" = "Төлем №%@";
-
-
-"paymentConfirmation" = "Төлемді растау";
-"continueButton" = "Жалғастыру";
-
-"save" = "Сақтау";
-
-"paymentProcessing" = "Төлем жасалуда";
-"goPayment" = "Төлемге өту";
+"orderPaid" = "Заказ оплачен";
+"ok" = "Понятно";
+"paymentFailed" = "Платеж не прошел";
+"retry" = "Попробовать заново";
+"orderNumber" = "Заказ №%@";
 
 
+"paymentConfirmation" = "Подтверждение оплаты";
+"continueButton" = "Продолжить";
 
+"save" = "Сохранить";
+
+"paymentProcessing" = "Проводим оплату";
+"goPayment" = "Переходим к оплате";

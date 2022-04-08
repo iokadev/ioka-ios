@@ -8,8 +8,7 @@
 import Foundation
 
 
-
-struct APIKey {
+internal struct APIKey {
     var key: String
     var isStaging: Bool
     

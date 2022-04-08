@@ -8,19 +8,19 @@
 import Foundation
 import UIKit
 
-protocol PaymentResultViewDelegate: NSObject {
+internal protocol PaymentResultViewDelegate: NSObject {
     func tryAgain()
     func closePaymentResult()
 }
 
-class PaymentResultView: UIView {
+internal class PaymentResultView: UIView {
     
     private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()
-    private let orderTitleLabel = IokaLabel(iokaFont: Typography.heading)
-    let orderNumberLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.grey)
-    let orderPriceLabel = IokaLabel(iokaFont: Typography.heading2, iokaTextColor: Ioka.shared.theme.text)
-    let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.grey)
+    private let orderTitleLabel = IokaLabel(iokaFont: typography.heading)
+    let orderNumberLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey)
+    let orderPriceLabel = IokaLabel(iokaFont: typography.heading2, iokaTextColor: colors.text)
+    let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey)
     private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
     
     weak var delegate: PaymentResultViewDelegate?
@@ -103,13 +103,13 @@ class PaymentResultView: UIView {
         switch orderStatusState {
         case .paymentSucceed:
             orderTitleLabel.text = IokaLocalizable.orderPaid
-            orderTitleLabel.textColor = Ioka.shared.theme.success
+            orderTitleLabel.textColor = colors.success
             errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
             imageView.image = IokaImages.checkCircle
         case .paymentFailed:
             orderTitleLabel.text = IokaLocalizable.paymentFailed
-            orderTitleLabel.textColor = Ioka.shared.theme.text
+            orderTitleLabel.textColor = colors.text
             orderPriceLabel.isHidden = true
             orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)

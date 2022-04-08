@@ -8,15 +8,15 @@
 
 import UIKit
 
-protocol PayWithCashViewDelegate: NSObject {
+internal protocol PayWithCashViewDelegate: NSObject {
     func handleViewTap(_ view: PayWithCashView, isPayWithCashSelected: Bool)
 }
 
 
-class PayWithCashView: UIView {
+internal class PayWithCashView: UIView {
     
     let payWithCashImageView = IokaImageView(imageName: "cash")
-    let payWithCashlabel = IokaLabel(title: "Наличными курьеру", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let payWithCashlabel = IokaLabel(title: "Наличными курьеру", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     weak var delegate: PayWithCashViewDelegate?
     var isPayWithCashSelected: Bool = false

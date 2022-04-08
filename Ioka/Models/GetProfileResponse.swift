@@ -8,6 +8,6 @@
 import Foundation
 
 
-struct GetProfileResponse: Codable {
+internal struct GetProfileResponse: Codable {
     let customer_access_token: String
 }

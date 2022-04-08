@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol OrderConfirmationViewDelegate: NSObject {
+internal protocol OrderConfirmationViewDelegate: NSObject {
     func confirmButtonWasPressed(_ orderView: OrderConfirmationView)
     func showPaymentTypeViewController(_ view: OrderConfirmationView)
 }
 
-class OrderConfirmationView: UIView {
+internal class OrderConfirmationView: UIView {
     
     var order: OrderModel? {
         didSet {
@@ -24,9 +24,9 @@ class OrderConfirmationView: UIView {
     weak var delegate: OrderConfirmationViewDelegate?
     
     public lazy var paymentView = PaymentView(delegate: self)
-    private let orderTitleLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: DemoAppColors.grey, iokaTextAlignemnt: .center)
+    private let orderTitleLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: DemoAppColors.grey, iokaTextAlignemnt: .center)
     private let orderImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    private let orderPriceLabel = IokaLabel(iokaFont: Typography.heading, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
+    private let orderPriceLabel = IokaLabel(iokaFont: typography.heading, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
     private let orderInformationView = OrderInformationView()
     private let confirmButton = IokaButton(iokaButtonState: .enabled, title: "Оформить")
     private let paymentTypeImageView = IokaImageView(imageName: "paymentType")

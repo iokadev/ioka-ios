@@ -7,50 +7,50 @@
 
 import Foundation
 
-class API: IokaAPIProtocol {
+internal class API: IokaAPIProtocol {
     
     let apiKey: APIKey
     
-    private let endPointRouter = EndPointRouter<IokaApiEndPoint>()
+    private let endpointRouter = EndpointRouter<IokaApiEndpoint>()
     
     
     init(apiKey: APIKey) {
         self.apiKey = apiKey
     }
     
-    func createCardPayment(orderAccessToken: AccessToken, card: Card, completion: @escaping (Result<CardPaymentResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .createCardPayment(orderAccessToken: orderAccessToken, card: card)), completion: completion)
+    func createCardPayment(orderAccessToken: AccessToken, card: Card, completion: @escaping (Result<PaymentDTO, Error>) -> Void) {
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createCardPayment(orderAccessToken: orderAccessToken, card: card)), completion: completion)
     }
     
     func getBrand(partialBin: String, completion: @escaping (Result<GetBrandResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getBrand(partialBin: partialBin)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getBrand(partialBin: partialBin)), completion: completion)
     }
     
     func getEmitterByBinCode(binCode: String, completion: @escaping (Result<GetEmitterByBinCodeResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getEmitterByBinCode(binCode: binCode)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getEmitterByBinCode(binCode: binCode)), completion: completion)
     }
     
     func getCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getCards(customerAccessToken: customerAccessToken)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getCards(customerAccessToken: customerAccessToken)), completion: completion)
     }
     
     func createBinding(customerAccessToken: AccessToken, card: Card, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .createBinding(customerAccessToken: customerAccessToken, card: card)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createBinding(customerAccessToken: customerAccessToken, card: card)), completion: completion)
     }
     
     func deleteCard(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<EmptyResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .deleteCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .deleteCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
     }
     
     func getCardByID(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
     }
     
-    func getPaymentByID(orderAccessToken: AccessToken, paymentId: String, completion: @escaping (Result<CardPaymentResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getPaymentByID(orderAccessToken: orderAccessToken, paymentId: paymentId)), completion: completion)
+    func getPaymentByID(orderAccessToken: AccessToken, paymentId: String, completion: @escaping (Result<PaymentDTO, Error>) -> Void) {
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getPaymentByID(orderAccessToken: orderAccessToken, paymentId: paymentId)), completion: completion)
     }
     
     func getOrderByID(orderAccessToken: AccessToken, completion: @escaping (Result<GetOrderResponse, Error>) -> Void) {
-        endPointRouter.request(IokaApiEndPoint(apiKey: apiKey, endPoint: .getOrderByID(orderAccessToken: orderAccessToken)), completion: completion)
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getOrderByID(orderAccessToken: orderAccessToken)), completion: completion)
     }
 }

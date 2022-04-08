@@ -7,15 +7,15 @@
 
 import UIKit
 
-enum SaveCardStatus {
+internal enum SaveCardStatus {
     case savingSucceed
     case savingFailed
 }
 
 
-class SaveCardViewController: IokaViewController {
+internal class SaveCardViewController: IokaViewController {
     
-    public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
+    public var onButtonPressed: ((PaymentResult, IokaError?, PaymentDTO?) -> Void)?
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!
@@ -35,8 +35,7 @@ class SaveCardViewController: IokaViewController {
     func handleBindings() {
         viewModel.errorCompletion = { [weak self] error in
             guard let self = self else { return }
-            self.contentView.showErrorView(error: error)
-            self.handleSaveButton(state: .savingFailure)
+            self.showError(error: error)
         }
         
         viewModel.successCompletion = { [weak self] in
@@ -49,6 +48,11 @@ class SaveCardViewController: IokaViewController {
             guard let self = self, let cardBrand = cardBrand else { return }
             self.contentView.cardNumberTextField.setCardBrandIcon(imageName: cardBrand.brand.rawValue)
         }
+    }
+    
+    func showError(error: Error) {
+        contentView.showErrorView(error: error)
+        handleSaveButton(state: .savingFailure)
     }
     
     func handleSaveButton(state: IokaButtonState) {

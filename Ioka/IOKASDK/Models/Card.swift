@@ -8,8 +8,7 @@
 import Foundation
 
 
-
-struct Card: Codable {
+internal struct Card: Codable {
     var pan: String?
     var exp: String?
     var cvc: String?
@@ -25,7 +24,7 @@ struct Card: Codable {
         self.cvc = cvc
     }
     
-    init(cardId: String, cvc: String?) {
+    init(cardId: String, cvc: String? = nil) {
         self.card_id = cardId
         self.cvc = cvc
     }

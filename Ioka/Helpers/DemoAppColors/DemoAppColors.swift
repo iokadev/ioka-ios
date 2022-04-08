@@ -8,7 +8,7 @@
 import UIKit
 
 
-enum DemoAppColors {
+internal enum DemoAppColors {
     static var nonadaptableText = UIColor(named: "nonadaptableText")
     static var background = UIColor(named: "Background")
     static var text = UIColor(named: "Text")

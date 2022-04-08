@@ -7,13 +7,8 @@
 
 import Foundation
 
-struct Theme {
-    var colors: IokaColors
-}
 
-
-struct SetupInput {
-  let apiKey: APIKey
-//  let applePayConfiguration: ApplePayConfiguration
+internal struct SetupInput {
+    let apiKey: APIKey
     let theme: Theme
 }

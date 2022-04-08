@@ -8,7 +8,7 @@
 import Foundation
 
 
-class ErrorPopUpViewModel {
+internal class ErrorPopUpViewModel {
     
     weak var paymentWithSavedCardDelegate: PaymentWithSavedCardNavigationDelegate?
     

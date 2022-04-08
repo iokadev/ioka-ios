@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 
 
-class Ioka: IokaThemeProtocol {
+public class Ioka {
     static let shared = Ioka()
-    var theme: IokaColors = .defaultTheme
-    
     var setupInput: SetupInput?
+    var theme: Theme = .defaultTheme
+    var currentCoordinator: Coordinator?
     
-    func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
-        self.theme = theme.iokaColors
-        self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: Theme(colors: IokaColors.defaultTheme))
+    func setup(publicApiKey: String, theme: Theme? = .defaultTheme) {
+        self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: theme ?? .defaultTheme)
+        self.theme = theme ?? .defaultTheme
     }
     
-    func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String) {
+    func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
@@ -29,14 +29,18 @@ class Ioka: IokaThemeProtocol {
             let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, navigationController:  viewController.navigationController ?? UINavigationController())
-            
             coordinator.start()
+            currentCoordinator = coordinator
+            coordinator.resultCompletion = { result in
+                completion(result)
+                self.currentCoordinator = nil
+            }
         } catch let error {
-            print(error)
+            completion(.failed(error))
         }
     }
     
-    func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse) {
+    func startCheckoutWithSavedCardFlow(viewController: UIViewController, orderAccessToken: String, card: GetCardResponse, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else { return }
         let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
@@ -44,11 +48,39 @@ class Ioka: IokaThemeProtocol {
             let token = try AccessToken(token: orderAccessToken)
             let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController, cardResponse: card)
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
-            let coordnitar = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
+            let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
+            currentCoordinator = coordinator
+            coordinator.start()
             
-            coordnitar.start()
+            coordinator.resultCompletion = { result in
+                completion(result)
+                self.currentCoordinator = nil
+            }
         } catch let error {
-            print(error)
+            completion(.failed(error))
+        }
+    }
+    
+    func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String, completion: @escaping(FlowResult) -> Void) {
+        guard let setupInput = setupInput else { return }
+
+        let featuresFactory = FeaturesFactory(setupInput: setupInput)
+        
+        do {
+            let customerAccesstoken = try AccessToken(token: customerAccessToken)
+            let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, hideSaveCardCheckbox: true)
+            let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
+            let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
+            currentCoordinator = coordinator
+            coordinator.start()
+            
+            coordinator.resultCompletion = { result in
+                completion(result)
+                self.currentCoordinator = nil
+            }
+            
+        } catch let error {
+            completion(.failed(error))
         }
     }
     
@@ -60,26 +92,7 @@ class Ioka: IokaThemeProtocol {
             let customerAccessToken = try AccessToken(token: customerAccessToken)
             api.getCards(customerAccessToken: customerAccessToken, completion: completion)
         } catch let error {
-            print(error)
-        }
-    }
-    
-    func startSaveCardFlow(viewController: UIViewController, customerAccessToken: String) {
-        guard let setupInput = setupInput else { return }
-
-        let featuresFactory = FeaturesFactory(setupInput: setupInput)
-        
-        do {
-            let customerAccesstoken = try AccessToken(token: customerAccessToken)
-            let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, hideSaveCardCheckbox: true)
-            let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
-            let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
-            
-            
-            coordinator.start()
-            
-        } catch let error {
-            print(error)
+            completion(.failure(error))
         }
     }
     
@@ -92,7 +105,7 @@ class Ioka: IokaThemeProtocol {
             let customerAccessToken = try AccessToken(token: customerAccessToken)
             api.deleteCard(customerAccessToken: customerAccessToken, cardId: cardId, completion: completion)
         } catch let error {
-            print(error)
+            completion(.failure(error))
         }
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Action {
+internal struct Action {
     private static let returnUrl = "https://ioka.kz"
     
     let returnUrl = Self.returnUrl

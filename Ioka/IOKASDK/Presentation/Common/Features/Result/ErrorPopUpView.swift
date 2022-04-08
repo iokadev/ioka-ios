@@ -7,19 +7,19 @@
 
 import UIKit
 
-protocol ErrorPopUpViewDelegate: NSObject {
+internal protocol ErrorPopUpViewDelegate: NSObject {
     func dismissView(_ view: ErrorPopUpView)
 }
 
-class ErrorPopUpView: UIView {
+internal class ErrorPopUpView: UIView {
     
     weak var delegate: ErrorPopUpViewDelegate?
     
-    private let backgroundView = IokaCustomView(backGroundColor: Ioka.shared.theme.background, cornerRadius: 12)
+    private let backgroundView = IokaCustomView(backGroundColor: colors.background, cornerRadius: 12)
     private let errorImageview = IokaImageView(imageName: "XCircle")
-    private let errorTitleLabel = IokaLabel(title: IokaLocalizable.paymentFailed, iokaFont: Typography.title, iokaTextColor: Ioka.shared.theme.text, iokaTextAlignemnt: .center)
-    private let errorDescriptionLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.grey, iokaTextAlignemnt: .center)
-    private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backGroundColor: Ioka.shared.theme.secondary)
+    private let errorTitleLabel = IokaLabel(title: IokaLocalizable.paymentFailed, iokaFont: typography.title, iokaTextColor: colors.text, iokaTextAlignemnt: .center)
+    private let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey, iokaTextAlignemnt: .center)
+    private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backGroundColor: colors.secondary)
     
     
     override init(frame: CGRect) {
@@ -46,7 +46,7 @@ class ErrorPopUpView: UIView {
     
     
     private func setUI() {
-        self.backgroundColor = Ioka.shared.theme.foreground
+        self.backgroundColor = colors.foreground
         self.addSubview(backgroundView)
         backgroundView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 282, paddingLeft: 40, paddingRight: 40)
         

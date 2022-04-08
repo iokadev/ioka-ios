@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ErrorPopUpViewController: IokaViewController {
+internal class ErrorPopUpViewController: IokaViewController {
     
     var viewModel: ErrorPopUpViewModel!
     private let contentView = ErrorPopUpView()

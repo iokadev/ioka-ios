@@ -10,11 +10,11 @@ import UIKit
 
 
 
-class LanguageProfileView: UIView {
+internal class LanguageProfileView: UIView {
     
     let languageImageView = IokaImageView(imageName: "Language")
-    let languageLabel = IokaLabel(title: "Язык", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
-    let currentLanguageLabel = IokaLabel(title: "Русский", iokaFont: Typography.body, iokaTextColor: DemoAppColors.grey)
+    let languageLabel = IokaLabel(title: "Язык", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
+    let currentLanguageLabel = IokaLabel(title: "Русский", iokaFont: typography.body, iokaTextColor: DemoAppColors.grey)
     let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {

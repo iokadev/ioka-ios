@@ -10,10 +10,10 @@ import UIKit
 
 
 
-class ThemeProfileView: UIView {
+internal class ThemeProfileView: UIView {
     
     let themeImageView = IokaImageView(imageName: "Theme")
-    let languageLabel = IokaLabel(title: "Темная тема", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let languageLabel = IokaLabel(title: "Темная тема", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let themeToggle = UISwitch()
     
     override init(frame: CGRect) {

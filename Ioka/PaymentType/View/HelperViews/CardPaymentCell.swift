@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-protocol CardPaymentCellDelegate: NSObject {
+internal protocol CardPaymentCellDelegate: NSObject {
     func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: GetCardResponse)
 }
 
-class CardPaymentCell: UITableViewCell {
+internal class CardPaymentCell: UITableViewCell {
     static let cellId = "CardPaymentCell"
     
     let cardBrandImageView = UIImageView()
-    let panMaskedLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let panMaskedLabel = IokaLabel( title: "Apple pay", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: CardPaymentCellDelegate?

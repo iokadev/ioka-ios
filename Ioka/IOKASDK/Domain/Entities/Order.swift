@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Order {
+internal struct Order {
     
     let id: String
     var externalId: String?

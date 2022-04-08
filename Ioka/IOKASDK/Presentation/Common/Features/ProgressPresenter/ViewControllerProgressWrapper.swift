@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ViewControllerProgressWrapper {
+internal class ViewControllerProgressWrapper {
     
     let viewController: UIViewController
     var viewModel: ProgressViewModelProtocol
@@ -20,6 +20,7 @@ class ViewControllerProgressWrapper {
         self.viewModel = viewModel
         viewModel.getOrder()
         setUI()
+        self.viewController.navigationController?.navigationBar.isHidden = true
     }
     
     func startProgress() {
@@ -51,6 +52,7 @@ class ViewControllerProgressWrapper {
     
     
     func setUI() {
+        errorView.isHidden = true
         self.viewController.view.addSubview(errorView)
         self.errorView.anchor(left: self.viewController.view.leftAnchor, bottom: viewController.view.bottomAnchor, right: viewController.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
         
