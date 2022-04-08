@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol DemoAppErrorViewDelegate: NSObject {
+internal protocol DemoAppErrorViewDelegate: NSObject {
     func closeErrorView(_ view: DemoAppErrorView)
 }
 
-class DemoAppErrorView: UIView {
+internal class DemoAppErrorView: UIView {
     
     public weak var delegate: DemoAppErrorViewDelegate?
     public var error: IokaError? {

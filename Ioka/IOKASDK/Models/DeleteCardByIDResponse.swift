@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct DeleteCardByIDResponse: Codable {
+internal struct DeleteCardByIDResponse: Codable {
     let code: String
     let message: String
 }

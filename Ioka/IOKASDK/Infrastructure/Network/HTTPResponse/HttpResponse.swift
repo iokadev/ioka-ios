@@ -8,7 +8,7 @@
 import Foundation
 
 /// The response class representation of status codes, these get grouped by their first digit.
-enum ResponseType {
+internal enum ResponseType {
     
     /// - success: This class of status codes indicates the action requested by the client was received, understood, accepted, and processed successfully.
     case success
@@ -18,7 +18,7 @@ enum ResponseType {
 }
 
 
-enum HTTPResponseStatus: Int {
+internal enum HTTPResponseStatus: Int {
     
     /// - created:
     case created = 201

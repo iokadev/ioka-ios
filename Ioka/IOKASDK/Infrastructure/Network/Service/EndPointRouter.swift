@@ -8,11 +8,11 @@
 import Foundation
 
 
-class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
+internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
     // не нужна очередь запросов? 
     private var task: URLSessionTask?
     
-    func request<Response: Decodable>(_ route: EndPoint, completion: @escaping (Result<Response, Error>) -> Void) {
+    func request<Response: Decodable>(_ route: Endpoint, completion: @escaping (Result<Response, Error>) -> Void) {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
@@ -35,7 +35,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
         self.task?.cancel()
     }
     
-    private func buildRequest(from route: EndPoint) throws -> URLRequest {
+    private func buildRequest(from route: Endpoint) throws -> URLRequest {
         var request = URLRequest(url: route.baseUrl.appendingPathComponent(route.path),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
                                  timeoutInterval: 10.0)
@@ -101,7 +101,7 @@ class EndPointRouter<EndPoint: EndPointType>: NetworkRouter {
                 }
             } else {
                 do {
-                    return .failure(try JSONDecoder().decode(EndPoint.EndpointError.self, from: data))
+                    return .failure(try JSONDecoder().decode(Endpoint.EndpointError.self, from: data))
                 } catch {
                     return .failure(NetworkError.invalidHTTPStatusCode)
                 }

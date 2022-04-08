@@ -8,7 +8,7 @@
 import UIKit
 
 
-class IokaViewController: UIViewController {
+internal class IokaViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol IokaBrowserNavigationViewDelegate: NSObject {
+internal protocol IokaBrowserNavigationViewDelegate: NSObject {
     func closeBrowser()
 }
 
 
-class IokaBrowserNavigationView: UIView {
+internal class IokaBrowserNavigationView: UIView {
     
     weak var delegate: IokaBrowserNavigationViewDelegate?
     

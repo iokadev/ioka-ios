@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol PaymentViewDelegate: NSObject {
+internal protocol PaymentViewDelegate: NSObject {
     func handleViewTap(_ view: PaymentView)
 }
 
 
-class PaymentView: UIView {
+internal class PaymentView: UIView {
     
     public var paymentState: PaymentTypeState = .empty {
         didSet {

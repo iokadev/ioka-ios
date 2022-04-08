@@ -7,9 +7,9 @@
 
 import UIKit
 
-var colors = Ioka.shared.theme.colors
+internal var colors = Ioka.shared.theme.colors
 
-struct Colors {
+internal struct Colors {
     var nonadaptableText: UIColor
     var background: UIColor
     var text: UIColor
@@ -26,6 +26,6 @@ struct Colors {
 }
 
 
-extension Colors {
+internal extension Colors {
     static var defaultTheme = Colors(nonadaptableText: UIColor(named: "nonadaptableText")!, background: UIColor(named: "Background")!, text: UIColor(named: "Text")!, divider: UIColor(named: "Divider")!, fill4: UIColor(named: "Fill4")!, secondaryBackground: UIColor(named: "SecondaryBackground")!, tertiaryBackground: UIColor(named: "TertiaryBackground")!, foreground: UIColor(named: "Foreground")!, primary: UIColor(named: "Primary")!, secondary: UIColor(named: "Secondary")!, error: UIColor(named: "Error")!, success: UIColor(named: "Success")!, grey: UIColor(named: "Grey")!)
 }

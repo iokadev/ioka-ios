@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 
-
-class ProductCell: UITableViewCell {
+internal class ProductCell: UITableViewCell {
     
     let backView: UIView = {
         let view = UIView()

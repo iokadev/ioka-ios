@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class IokaLabel: UILabel {
+internal class IokaLabel: UILabel {
     
     var title: String?
     var iokaFont: UIFont?

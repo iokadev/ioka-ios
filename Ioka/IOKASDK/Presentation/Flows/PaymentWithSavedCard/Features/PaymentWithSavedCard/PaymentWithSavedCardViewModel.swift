@@ -8,7 +8,7 @@
 import Foundation
 
 
-class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
+internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     
     var delegate: PaymentWithSavedCardNavigationDelegate?
     var state: ProgressViewModelState

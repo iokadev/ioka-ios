@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol GetCardTableViewCellDelegate: NSObject {
+internal protocol GetCardTableViewCellDelegate: NSObject {
     func deleteCard(_ view: GetCardTableViewCell, card: GetCardResponse)
 }
 
 
 
-class GetCardTableViewCell: UITableViewCell {
+internal class GetCardTableViewCell: UITableViewCell {
     static let cellId = "GetCardTableViewCell"
     
     let creditCardImageView = IokaImageView()

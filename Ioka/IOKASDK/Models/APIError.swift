@@ -7,9 +7,9 @@
 
 import Foundation
 
-typealias IokaError = Error
+internal typealias IokaError = Error
 
-extension IokaError {
+internal extension IokaError {
     var message: String {
         return localizedDescription
     }
@@ -17,7 +17,7 @@ extension IokaError {
 
 // выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
 
-struct APIError: LocalizedError, Decodable {
+internal struct APIError: LocalizedError, Decodable {
     let code: String
     let message: String
     
@@ -26,7 +26,7 @@ struct APIError: LocalizedError, Decodable {
     }
 }
 
-extension APIError {
+internal extension APIError {
     enum Code: String, Decodable {
         case unauthorized = "Unauthorized"
         case forbidden = "Forbidden"

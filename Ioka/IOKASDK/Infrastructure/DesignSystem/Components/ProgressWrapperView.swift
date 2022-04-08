@@ -7,13 +7,13 @@
 
 import UIKit
 
-enum ProgressWrapperViewState {
+internal enum ProgressWrapperViewState {
     case payment
     case order
 }
 
 
-class ProgressWrapperView: UIView {
+internal class ProgressWrapperView: UIView {
     
     private let progressView = IokaProgressView()
     private let titleLabel = IokaLabel(iokaFont: typography.title, iokaTextColor: colors.background, iokaTextAlignemnt: .center)

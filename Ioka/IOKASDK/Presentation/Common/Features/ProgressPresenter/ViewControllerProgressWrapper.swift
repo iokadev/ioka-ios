@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ViewControllerProgressWrapper {
+internal class ViewControllerProgressWrapper {
     
     let viewController: UIViewController
     var viewModel: ProgressViewModelProtocol

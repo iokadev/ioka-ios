@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct SetupInput {
+internal struct SetupInput {
     let apiKey: APIKey
     let theme: Theme
 }

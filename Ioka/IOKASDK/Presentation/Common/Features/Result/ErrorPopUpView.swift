@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol ErrorPopUpViewDelegate: NSObject {
+internal protocol ErrorPopUpViewDelegate: NSObject {
     func dismissView(_ view: ErrorPopUpView)
 }
 
-class ErrorPopUpView: UIView {
+internal class ErrorPopUpView: UIView {
     
     weak var delegate: ErrorPopUpViewDelegate?
     

@@ -8,14 +8,14 @@
 import Foundation
 import UIKit
 
-enum IokaButtonState {
+internal enum IokaButtonState {
     case disabled
     case enabled
     case savingSuccess
     case savingFailure
 }
 
-class IokaButton: UIButton {
+internal class IokaButton: UIButton {
     
     var iokaButtonState: IokaButtonState? {
         didSet {

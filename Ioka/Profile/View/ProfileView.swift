@@ -10,11 +10,11 @@ import UIKit
 
 
 
-protocol ProfileViewDelegate: NSObject {
+internal protocol ProfileViewDelegate: NSObject {
     func showSavedCard(_ profileView: ProfileView)
 }
 
-class ProfileView: UIView {
+internal class ProfileView: UIView {
     
     weak var delegate: ProfileViewDelegate?
     

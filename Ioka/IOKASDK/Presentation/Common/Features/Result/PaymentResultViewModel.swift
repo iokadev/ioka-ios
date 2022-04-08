@@ -8,7 +8,7 @@
 import Foundation
 
 
-class PaymentResultViewModel {
+internal class PaymentResultViewModel {
     
     weak var paymentWithSavedCardDelegate: PaymentWithSavedCardNavigationDelegate?
     weak var paymentMethodsDelegate: PaymentMethodsNavigationDelegate?

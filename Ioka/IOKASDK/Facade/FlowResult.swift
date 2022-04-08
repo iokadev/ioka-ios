@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum FlowResult {
+internal enum FlowResult {
     case succeeded
     case cancelled
     case failed(Error)

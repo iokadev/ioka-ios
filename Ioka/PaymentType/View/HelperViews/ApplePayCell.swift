@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol ApplePayCellDelegate: NSObject {
+internal protocol ApplePayCellDelegate: NSObject {
     func handleViewTap(_ view: ApplePayCell, isPayWithCashSelected: Bool)
 }
 
-class ApplePayCell: UITableViewCell {
+internal class ApplePayCell: UITableViewCell {
     static let cellId = "ApplePayCell"
     
     let applePayImageView = IokaImageView(imageName: "Apple_Pay_Mark_RGB_041619")

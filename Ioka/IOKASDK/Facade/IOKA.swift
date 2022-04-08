@@ -9,9 +9,7 @@ import Foundation
 import UIKit
 
 
-
-
-class Ioka {
+public class Ioka {
     static let shared = Ioka()
     var setupInput: SetupInput?
     var theme: Theme = .defaultTheme

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DomainError: LocalizedError {
+internal enum DomainError: LocalizedError {
     case invalidTokenFormat
     case invalidPaymentStatus
     case noErrorForDeclinedStatus

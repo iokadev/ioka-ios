@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaymentMethodsViewController: IokaViewController {
+internal class PaymentMethodsViewController: IokaViewController {
     
     private lazy var contentView = CardFormView(state: .payment, price: viewModel.order.price)
     var viewModel: PaymentMethodsViewModel!

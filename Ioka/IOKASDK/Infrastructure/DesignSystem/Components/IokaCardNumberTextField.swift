@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class IokaCardNumberTextField: IokaTextField {
+internal class IokaCardNumberTextField: IokaTextField {
     
     
     let iconContainerView: UIView = {

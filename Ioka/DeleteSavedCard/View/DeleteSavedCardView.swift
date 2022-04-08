@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol DeleteSavedCardViewDelegate: NSObject {
+internal protocol DeleteSavedCardViewDelegate: NSObject {
     func closeDeleteSavedCardView(_ view: DeleteSavedCardView)
     func deleteSavedCard(_ view: DeleteSavedCardView)
 }
 
-class DeleteSavedCardView: UIView {
+internal class DeleteSavedCardView: UIView {
     
     public weak var delegate: DeleteSavedCardViewDelegate?
     

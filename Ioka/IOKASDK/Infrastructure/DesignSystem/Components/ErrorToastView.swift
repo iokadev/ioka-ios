@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol ErrorToastViewDelegate: NSObject {
+internal protocol ErrorToastViewDelegate: NSObject {
     func closeErrorView(_ view: ErrorToastView)
 }
 
-class ErrorToastView: UIView {
+internal class ErrorToastView: UIView {
     
     public weak var delegate: ErrorToastViewDelegate?
     public var error: IokaError? {

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct Payer: Codable {
+internal struct Payer: Codable {
     let pan_masked: String
     let expiry_date: String
     var holder: String?

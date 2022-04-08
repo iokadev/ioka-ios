@@ -8,12 +8,12 @@
 import UIKit
 
 
-protocol OrderInformationViewDelegate: NSObject {
+internal protocol OrderInformationViewDelegate: NSObject {
     func handleViewTap(_ view: PayWithCashView, isPayWithCashSelected: Bool)
 }
 
 
-class OrderInformationView: UIView {
+internal class OrderInformationView: UIView {
     
     private let orderAdressLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     private let orderTimeLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)

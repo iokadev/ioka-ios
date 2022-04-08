@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Payment {
+internal struct Payment {
     enum Status {
         case succeeded
         case declined(APIError)

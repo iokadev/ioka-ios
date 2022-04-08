@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SavedCardStatus: String, Decodable {
+internal enum SavedCardStatus: String, Decodable {
     case PENDING = "PENDING"
     case APPROVED = "APPROVED"
     case DECLINED = "DECLINED"
@@ -15,7 +15,7 @@ enum SavedCardStatus: String, Decodable {
 }
 
 
-struct GetCardResponse: Decodable {
+internal struct GetCardResponse: Decodable {
     
     
     

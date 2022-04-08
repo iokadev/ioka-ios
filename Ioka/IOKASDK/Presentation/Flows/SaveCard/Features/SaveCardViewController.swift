@@ -7,15 +7,15 @@
 
 import UIKit
 
-enum SaveCardStatus {
+internal enum SaveCardStatus {
     case savingSucceed
     case savingFailed
 }
 
 
-class SaveCardViewController: IokaViewController {
+internal class SaveCardViewController: IokaViewController {
     
-    public var onButtonPressed: ((PaymentResult, IokaError?, CardPaymentResponse?) -> Void)?
+    public var onButtonPressed: ((PaymentResult, IokaError?, PaymentDTO?) -> Void)?
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!

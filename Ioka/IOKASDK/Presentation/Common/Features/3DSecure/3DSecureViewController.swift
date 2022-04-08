@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 
-class ThreeDSecureViewController:  IokaViewController {
+internal class ThreeDSecureViewController:  IokaViewController {
     
     var viewModel: ThreeDSecureViewModel!
     var url: URL!

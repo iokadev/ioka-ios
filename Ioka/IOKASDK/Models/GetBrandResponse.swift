@@ -8,6 +8,6 @@
 import Foundation
 
 
-struct GetBrandResponse: Codable {
+internal struct GetBrandResponse: Codable {
     let brand: PaymentSystem
 }

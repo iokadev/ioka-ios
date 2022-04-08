@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-enum PaymentTypeState {
+internal enum PaymentTypeState {
     case applePay(title: String)
     case savedCard(card: GetCardResponse)
     case creditCard(title: String)
@@ -16,11 +16,11 @@ enum PaymentTypeState {
     case empty
 }
 
-protocol PaymentTypeViewDelegate: NSObject {
+internal protocol PaymentTypeViewDelegate: NSObject {
     func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState)
 }
 
-class PaymentTypeView: UIView {
+internal class PaymentTypeView: UIView {
     
 
     weak var delegate: PaymentTypeViewDelegate?

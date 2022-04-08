@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct FeaturesFactory {
+internal struct FeaturesFactory {
     
     let setupInput: SetupInput
     private lazy var api: IokaAPIProtocol = {

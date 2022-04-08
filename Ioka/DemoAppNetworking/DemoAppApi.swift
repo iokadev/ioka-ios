@@ -8,17 +8,17 @@
 import Foundation
 
 
-struct DemoAppError: Codable {
+internal struct DemoAppError: Codable {
     var code: String
     var message: String
 }
 
 
 
-class DemoAppApi {
+internal class DemoAppApi {
     static let shared = DemoAppApi()
     
-    private let endPointRouter = EndPointRouter<DemoAppEndPoint>()
+    private let endpointRouter = EndpointRouter<DemoAppEndPoint>()
     
     private func decodeAnyObject<T: Codable>(data: Data, model: T.Type) -> T? {
             let response = try? JSONDecoder().decode(T.self, from: data)
@@ -53,15 +53,15 @@ class DemoAppApi {
     
     func createOrder(price: String, completion: @escaping(Result<CreateOrderResponse, Error>) -> Void) {
 
-        endPointRouter.request(.createOrder(price: price), completion: completion)
+        endpointRouter.request(.createOrder(price: price), completion: completion)
     }
     
     func getProfile(completion: @escaping(Result<GetProfileResponse, Error>) -> Void) {
-        endPointRouter.request(.getProfile, completion: completion)
+        endpointRouter.request(.getProfile, completion: completion)
     }
 }
 
-struct CreateOrderResponse: Codable {
+internal struct CreateOrderResponse: Codable {
     let order_access_token: String
     let customer_access_token: String
 }

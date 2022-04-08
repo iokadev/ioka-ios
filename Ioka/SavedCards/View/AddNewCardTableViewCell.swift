@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 
-protocol AddNewCardTablewViewCellDelegate: NSObject {
+internal protocol AddNewCardTablewViewCellDelegate: NSObject {
     func viewTapped(_ view: AddNewCardTableViewCell)
 }
 
 
 
-class AddNewCardTableViewCell: UITableViewCell {
+internal class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
     let addCardImageView = IokaImageView(imageName: "addCard")

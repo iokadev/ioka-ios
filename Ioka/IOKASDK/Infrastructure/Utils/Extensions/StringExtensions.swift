@@ -8,7 +8,7 @@
 import Foundation
 
 
-extension String {
+internal extension String {
     
     func trimCardNumberText() -> String {
         self.components(separatedBy: .whitespaces).joined()

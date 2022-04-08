@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class SavedCardsViewController: UIViewController {
+internal class SavedCardsViewController: UIViewController {
     
     var models = [GetCardResponse]()
     

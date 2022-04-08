@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum AuthenticationKeys {
+internal enum AuthenticationKeys {
     static let API_KEY = "X-Public-Key"
     static let ORDER_ACCESS_TOKEN_KEY = "X-Order-Access-Token"
     static let CUSTOMER_ACCESS_TOKEN_KEY = "X-Customer-Access-Token"
 }
 
-enum IokaApiEndPointType {
+internal enum IokaApiEndpointType {
     case getBrand(partialBin: String)
     case getEmitterByBinCode(binCode: String)
     case createCardPayment(orderAccessToken: AccessToken, card: Card)
@@ -25,12 +25,12 @@ enum IokaApiEndPointType {
     case getOrderByID(orderAccessToken: AccessToken)
 }
 
-enum NetworkEnvironment {
+internal enum NetworkEnvironment {
     case production
     case stage
 }
 
-struct IokaApiEndPoint: EndPointType {
+internal struct IokaApiEndpoint: EndpointType {
     var baseUrl: URL {
         guard let url = URL(string: environmentBaseURL) else { fatalError("Please present base URL") }
         return url
@@ -49,7 +49,7 @@ struct IokaApiEndPoint: EndPointType {
     var environmentBaseURL: String
     
     
-    init(apiKey: APIKey, endPoint: IokaApiEndPointType) {
+    init(apiKey: APIKey, endpoint: IokaApiEndpointType) {
         
         if apiKey.isStaging {
             self.environmentBaseURL =  "https://stage-api.ioka.kz/v2/"
@@ -57,7 +57,7 @@ struct IokaApiEndPoint: EndPointType {
             self.environmentBaseURL = "https://api.ioka.kz/v2/"
         }
         
-        switch endPoint {
+        switch endpoint {
         case .getBrand(let partialBin):
             self.path = "brands"
             self.httpMethod = .get

@@ -10,7 +10,7 @@ import UIKit
 
 
 
-class LanguageProfileView: UIView {
+internal class LanguageProfileView: UIView {
     
     let languageImageView = IokaImageView(imageName: "Language")
     let languageLabel = IokaLabel(title: "Язык", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)

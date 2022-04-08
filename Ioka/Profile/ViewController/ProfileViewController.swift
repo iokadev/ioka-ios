@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
+internal class ProfileViewController: UIViewController {
     
     let profileView = ProfileView()
     let viewModel = ProfileViewModel()

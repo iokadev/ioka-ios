@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-var typography = Ioka.shared.theme.typography
+internal var typography = Ioka.shared.theme.typography
 
-struct Typography {
+internal struct Typography {
     var heading: UIFont
     var heading2: UIFont
     var title: UIFont
@@ -21,7 +21,7 @@ struct Typography {
     var subtitleSmall: UIFont
 }
 
-extension Typography {
+internal extension Typography {
     static var defaultFonts = Typography(heading: UIFont.systemFont(ofSize: 28, weight: .semibold),
                                              heading2: UIFont.systemFont(ofSize: 24, weight: .regular),
                                              title: UIFont.systemFont(ofSize: 18, weight: .semibold),

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class IokaProgressView: UIView {
+internal class IokaProgressView: UIView {
     
     let color: UIColor
     let lineWidth: CGFloat

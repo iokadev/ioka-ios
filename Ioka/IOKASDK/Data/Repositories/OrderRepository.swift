@@ -8,7 +8,7 @@
 import Foundation
 
 
-final class OrderRepository {
+internal final class OrderRepository {
     private let api: IokaAPIProtocol
     
     

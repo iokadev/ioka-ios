@@ -7,12 +7,12 @@
 
 import UIKit
 
-enum PaymentResult {
+internal enum PaymentResult {
     case paymentSucceed
     case paymentFailed
 }
 
-class PaymentResultViewController: IokaViewController {
+internal class PaymentResultViewController: IokaViewController {
     
     lazy var contentView = PaymentResultView()
     var viewModel: PaymentResultViewModel!

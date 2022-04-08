@@ -8,11 +8,11 @@
 import UIKit
 
 
-protocol DeleteSavedCardViewControllerDelegate: NSObject {
+internal protocol DeleteSavedCardViewControllerDelegate: NSObject {
     func closeDeleteCardViewController(_ viewController: UIViewController, card: GetCardResponse, error: IokaError?)
 }
 
-class DeleteSavedCardViewController: UIViewController {
+internal class DeleteSavedCardViewController: UIViewController {
     
     let deleteView = DeleteSavedCardView()
     var card: GetCardResponse!

@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct GetOrderResponse: Codable {
+internal struct GetOrderResponse: Codable {
     
     let id: String //-Идентификатор платежа
     let status: String

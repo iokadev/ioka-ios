@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol CVVViewDelegate: NSObject {
+internal protocol CVVViewDelegate: NSObject {
     func closeView(_ view: CVVView)
     func makePayment(_ view: CVVView)
 }
 
-class CVVView: UIView {
+internal class CVVView: UIView {
     
     weak var delegate: CVVViewDelegate?
     

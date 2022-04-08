@@ -8,7 +8,7 @@
 import UIKit
 
 enum IokaImages {
-    static var checkCircle = UIImage(named: "CheckCircle")
-    static var xCircle = UIImage(named: "XCircle")
-    static var mark = UIImage(named: "mark")
+    static var checkCircle = UIImage(named: "CheckCircle", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var xCircle = UIImage(named: "XCircle", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var mark = UIImage(named: "mark", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
 }

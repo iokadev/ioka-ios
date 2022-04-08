@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum DemoAppImages {
+internal enum DemoAppImages {
     static var bin = UIImage(named: "Bin")
     static var profile = UIImage(named: "Profile")
     static var uncheckIcon = UIImage(named: "uncheckIcon")

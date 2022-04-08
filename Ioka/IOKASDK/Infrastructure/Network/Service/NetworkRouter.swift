@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol NetworkRouter: AnyObject {
-    associatedtype EndPoint: EndPointType
-    func request<Response: Decodable>(_ route: EndPoint, completion: @escaping (Result<Response, Error>) -> Void)
+internal protocol NetworkRouter: AnyObject {
+    associatedtype Endpoint: EndpointType
+    func request<Response: Decodable>(_ route: Endpoint, completion: @escaping (Result<Response, Error>) -> Void)
     func cancel()
 }

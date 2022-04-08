@@ -8,7 +8,7 @@
 import UIKit
 
 
-protocol CardFormViewDelegate: NSObject {
+internal protocol CardFormViewDelegate: NSObject {
     func getBrand(_ view: CardFormView, with partialBin: String)
     func getEmitterByBinCode(_ view: CardFormView, with binCode: String)
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String)
@@ -23,14 +23,14 @@ enum CardFormState {
     case saving
 }
 
-enum TextFieldType {
+internal enum TextFieldType {
     case cardNumber
     case cvv
     case dateExpiration
 }
 
 
-class CardFormView: UIView {
+internal class CardFormView: UIView {
 
     let titleLabel = IokaLabel(iokaFont: typography.title)
     let closeButton = IokaButton(imageName: "Close")

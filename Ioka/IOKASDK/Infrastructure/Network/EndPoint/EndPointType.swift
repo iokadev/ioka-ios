@@ -7,8 +7,8 @@
 
 import Foundation
 
-// лучше кажется Endpoint (point с маленькой буквы)
-protocol EndPointType {
+
+internal protocol EndpointType {
     associatedtype EndpointError: Error, Decodable
     
     var baseUrl: URL { get }

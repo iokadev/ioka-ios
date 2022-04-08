@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol OrderConfirmationViewDelegate: NSObject {
+internal protocol OrderConfirmationViewDelegate: NSObject {
     func confirmButtonWasPressed(_ orderView: OrderConfirmationView)
     func showPaymentTypeViewController(_ view: OrderConfirmationView)
 }
 
-class OrderConfirmationView: UIView {
+internal class OrderConfirmationView: UIView {
     
     var order: OrderModel? {
         didSet {

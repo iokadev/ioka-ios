@@ -9,33 +9,31 @@ import Foundation
 import UIKit
 
 
-// Fix : Function for getting images and bundle
-// - This is public enum for merchants to get bank payment system icons
 public enum PaymentSystemIcons {
-    static var AMERICAN_EXPRESS = UIImage(named: "AMERICAN_EXPRESS")
-    static var DINER_CLUB = UIImage(named: "DINER_CLUB")
-    static var MAESTRO = UIImage(named: "MAESTRO")
-    static var MASTERCARD = UIImage(named: "MASTERCARD")
-    static var MIR = UIImage(named: "MIR")
-    static var UNION_PAY = UIImage(named: "UNION_PAY")
-    static var VISA = UIImage(named: "VISA")
+    static var AMERICAN_EXPRESS = UIImage(named: "AMERICAN_EXPRESS", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var DINER_CLUB = UIImage(named: "DINER_CLUB", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var MAESTRO = UIImage(named: "MAESTRO", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var MASTERCARD = UIImage(named: "MASTERCARD", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var MIR = UIImage(named: "MIR", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var UNION_PAY = UIImage(named: "UNION_PAY", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var VISA = UIImage(named: "VISA", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
 }
     
-enum BankEmitters {
-    static var AlfaBank = UIImage(named: "alfaBank")
-    static var AltynBank = UIImage(named: "altynBank")
-    static var ATFBank = UIImage(named: "atfBank")
-    static var BankRBK = UIImage(named: "bankrbk")
-    static var Centercredit = UIImage(named: "centercredit")
-    static var EurasianBank = UIImage(named: "eurasianBank")
-    static var ForteBank = UIImage(named: "forteBank")
-    static var FreedomFinance = UIImage(named: "freedom")
-    static var HalykBank = UIImage(named: "halykBank")
-    static var HomeCredit = UIImage(named: "homeCredit")
-    static var Jysan = UIImage(named: "jysan")
-    static var Kaspi = UIImage(named: "kaspibank")
-    static var KazPost = UIImage(named: "kazpost")
-    static var Nurbank = UIImage(named: "nurbank")
-    static var Sberbank = UIImage(named: "sberbank")
-    static var VTBBank = UIImage(named: "vtbbank")
+public enum BankEmitters {
+    static var AlfaBank = UIImage(named: "alfaBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var AltynBank = UIImage(named: "altynBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var ATFBank = UIImage(named: "atfBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var BankRBK = UIImage(named: "bankrbk", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var Centercredit = UIImage(named: "centercredit", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var EurasianBank = UIImage(named: "eurasianBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var ForteBank = UIImage(named: "forteBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var FreedomFinance = UIImage(named: "freedom", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var HalykBank = UIImage(named: "halykBank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var HomeCredit = UIImage(named: "homeCredit", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var Jysan = UIImage(named: "jysan", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var Kaspi = UIImage(named: "kaspibank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var KazPost = UIImage(named: "kazpost", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var Nurbank = UIImage(named: "nurbank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var Sberbank = UIImage(named: "sberbank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
+    static var VTBBank = UIImage(named: "vtbbank", in: Bundle(identifier: "Ioka.Ioka"), compatibleWith: nil)
 }

@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-protocol CardPaymentCellDelegate: NSObject {
+internal protocol CardPaymentCellDelegate: NSObject {
     func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: GetCardResponse)
 }
 
-class CardPaymentCell: UITableViewCell {
+internal class CardPaymentCell: UITableViewCell {
     static let cellId = "CardPaymentCell"
     
     let cardBrandImageView = UIImageView()

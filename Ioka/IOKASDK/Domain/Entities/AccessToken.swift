@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AccessToken {
+internal struct AccessToken {
     let token: String
     
     let id: String

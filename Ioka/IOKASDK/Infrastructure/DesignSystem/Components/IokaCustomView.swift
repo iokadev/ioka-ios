@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-class IokaCustomView: UIView {
+internal class IokaCustomView: UIView {
  
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension CardPaymentResponse {
+extension PaymentDTO {
     func toPayment() throws -> Payment {
         Payment(id: id,
                 status: try status.toPaymentStatus(error: error, actionDTO: action))

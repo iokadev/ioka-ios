@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol PaymentResultViewDelegate: NSObject {
+internal protocol PaymentResultViewDelegate: NSObject {
     func tryAgain()
     func closePaymentResult()
 }
 
-class PaymentResultView: UIView {
+internal class PaymentResultView: UIView {
     
     private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()

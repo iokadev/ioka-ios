@@ -8,21 +8,21 @@
 import Foundation
 import UIKit
 
-enum IokaTextFieldState {
+internal enum IokaTextFieldState {
     case startTyping
     case wrongInputData
     case correctInputData
     case nonActive
 }
 
-enum TextFieldPlaceHolders: String {
+internal enum TextFieldPlaceHolders: String {
     case cardNumber
     case dateExpiration
     case cvv
 }
 
 
-class IokaTextField: UITextField {
+internal class IokaTextField: UITextField {
     
     private var textPadding = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: -240)
     var placeHolderType: TextFieldPlaceHolders?

@@ -8,7 +8,7 @@
 import UIKit
 
 
-class PaymentWithSavedCardCoordinator: NSObject {
+internal class PaymentWithSavedCardCoordinator: NSObject {
 
     
     let factory: PaymentWithSavedCardFlowFactory

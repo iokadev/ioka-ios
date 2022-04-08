@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum DemoAppEndPoint {
+internal enum DemoAppEndPoint {
     case createOrder(price: String)
     case getProfile
 }
 
-extension DemoAppEndPoint: EndPointType {
+ extension DemoAppEndPoint: EndpointType {
     typealias EndpointError = APIError
     
     

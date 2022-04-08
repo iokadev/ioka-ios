@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 
-
-class IokaImageView: UIImageView {
+internal class IokaImageView: UIImageView {
     
     var imageName: String? {
         didSet {

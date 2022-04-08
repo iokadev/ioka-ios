@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol PayWithCashViewDelegate: NSObject {
+internal protocol PayWithCashViewDelegate: NSObject {
     func handleViewTap(_ view: PayWithCashView, isPayWithCashSelected: Bool)
 }
 
 
-class PayWithCashView: UIView {
+internal class PayWithCashView: UIView {
     
     let payWithCashImageView = IokaImageView(imageName: "cash")
     let payWithCashlabel = IokaLabel(title: "Наличными курьеру", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)

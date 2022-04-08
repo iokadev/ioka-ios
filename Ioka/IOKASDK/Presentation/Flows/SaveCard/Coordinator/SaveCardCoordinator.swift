@@ -9,7 +9,7 @@ import UIKit
 import WebKit
 
 
-class SaveCardCoordinator: NSObject {
+internal class SaveCardCoordinator: NSObject {
 
     
     let factory: SaveCardFlowFactory

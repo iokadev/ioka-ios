@@ -9,11 +9,11 @@ import UIKit
 
 import UIKit
 
-protocol PaymentTypeViewControllerDelegate: NSObject {
+internal protocol PaymentTypeViewControllerDelegate: NSObject {
     func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState)
 }
 
-class PaymentTypeViewController: UIViewController {
+internal class PaymentTypeViewController: UIViewController {
     
     let contentView = PaymentTypeView()
     let viewModel = PaymentTypeViewModel()

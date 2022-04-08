@@ -8,7 +8,7 @@
 import UIKit
 
 
-class CardFormViewModel {
+internal class CardFormViewModel {
     
     let api: IokaAPIProtocol
     

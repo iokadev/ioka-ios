@@ -8,18 +8,17 @@
 import Foundation
 
 
-public typealias HTTPHeaders = [String:String]
+internal typealias HTTPHeaders = [String:String]
 
-public enum AccessTokenTypes {
+internal enum AccessTokenTypes {
     case apiKey
     case customerAccessToken
 }
 
-public enum HTTPTask {
+internal enum HTTPTask {
     case request
     case requestParameters(bodyParameters: Parameters?, urlParameters:  Parameters?)
     case requestParametersAndHeaders(bodyParameters: Parameters?, urlParameters:  Parameters?, additionalHeaders: HTTPHeaders?)
-    // MARK:  Расширение для будущего использование например: Download, upload
 }
 
 

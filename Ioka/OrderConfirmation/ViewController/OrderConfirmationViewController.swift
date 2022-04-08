@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OrderConfirmationViewController: UIViewController {
+internal class OrderConfirmationViewController: UIViewController {
     
     var order: OrderModel? {
         didSet {

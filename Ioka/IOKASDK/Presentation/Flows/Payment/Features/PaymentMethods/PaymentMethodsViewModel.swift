@@ -8,7 +8,7 @@
 import Foundation
 
 
-protocol PaymentMethodsNavigationDelegate: NSObject {
+internal protocol PaymentMethodsNavigationDelegate: NSObject {
     func dismissPaymentMethodsViewController()
     func dismissPaymentMethodsViewController(_ payment: Payment)
     func dismissPaymentMethodsViewController(_ action: Action, payment: Payment)
@@ -20,7 +20,7 @@ protocol PaymentMethodsNavigationDelegate: NSObject {
 }
 
 
-class PaymentMethodsViewModel {
+internal class PaymentMethodsViewModel {
     
     var delegate: PaymentMethodsNavigationDelegate?
     let repository: PaymentRepository

@@ -8,14 +8,7 @@
 import Foundation
 
 
-struct SaveCardFlowInput {
-    let setupInput: SetupInput
-    let customerAccesstoken: AccessToken
-    let hideSaveCardCheckbox: Bool
-}
-
-
-class SaveCardFlowFactory {
+internal class SaveCardFlowFactory {
     let input: SaveCardFlowInput
     let featuresFactory: FeaturesFactory
     

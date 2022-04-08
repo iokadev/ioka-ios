@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class SaveCardProfileView: UIView {
+internal class SaveCardProfileView: UIView {
     
     let creditCardImageView = IokaImageView(imageName: "Credit-card")
     let saveCardlabel = IokaLabel(title: "Сохраненные карты", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)

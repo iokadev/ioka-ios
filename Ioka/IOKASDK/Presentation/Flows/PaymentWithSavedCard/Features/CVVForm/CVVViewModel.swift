@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PaymentWithSavedCardNavigationDelegate: NSObject {
+internal protocol PaymentWithSavedCardNavigationDelegate: NSObject {
     func showProgressWrapper()
     func showCVVForm()
     func showThreeDSecure(_ action: Action, payment: Payment)
@@ -23,7 +23,7 @@ protocol PaymentWithSavedCardNavigationDelegate: NSObject {
 }
 
 
-class CVVViewModel {
+internal class CVVViewModel {
     
     var delegate: PaymentWithSavedCardNavigationDelegate?
     
