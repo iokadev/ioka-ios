@@ -20,7 +20,7 @@ class ErrorToastView: UIView {
         }
     }
     
-    private let errorLabel = IokaLabel(iokaFont: Typography.subtitle, iokaTextColor: Ioka.shared.theme.nonadaptableText, iokaTextAlignemnt: .left)
+    private let errorLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableText, iokaTextAlignemnt: .left)
     private let closeButton = IokaButton(imageName: "closeError")
     
     override init(frame: CGRect) {
@@ -46,7 +46,7 @@ class ErrorToastView: UIView {
     }
     
     private func setUI() {
-        self.backgroundColor = Ioka.shared.theme.error
+        self.backgroundColor = colors.error
         self.layer.cornerRadius = 12
         [errorLabel, closeButton].forEach{ self.addSubview($0) }
         

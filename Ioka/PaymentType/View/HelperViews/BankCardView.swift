@@ -15,7 +15,7 @@ protocol BankCardViewDelegate: NSObject {
 class BankCardView: UIView {
     
     let creditCardImageView = IokaImageView(imageName: "Credit-card")
-    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let saveCardlabel = IokaLabel(title: "Банковской картой", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: BankCardViewDelegate?

@@ -15,7 +15,7 @@ class ApplePayCell: UITableViewCell {
     static let cellId = "ApplePayCell"
     
     let applePayImageView = IokaImageView(imageName: "Apple_Pay_Mark_RGB_041619")
-    let applePayLabel = IokaLabel( title: "Apple pay", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let applePayLabel = IokaLabel( title: "Apple pay", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: ApplePayCellDelegate?

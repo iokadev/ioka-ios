@@ -15,6 +15,11 @@ enum IokaTextFieldState {
     case nonActive
 }
 
+enum TextFieldPlaceHolders: String {
+    case cardNumber
+    case dateExpiration
+    case cvv
+}
 
 
 class IokaTextField: UITextField {
@@ -29,11 +34,11 @@ class IokaTextField: UITextField {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.textColor = Ioka.shared.theme.text
-        self.backgroundColor = Ioka.shared.theme.fill4
+        self.textColor = colors.text
+        self.backgroundColor = colors.fill4
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
-        self.layer.borderColor = Ioka.shared.theme.background.cgColor
+        self.layer.borderColor = colors.background.cgColor
 
     }
     
@@ -85,13 +90,13 @@ class IokaTextField: UITextField {
     func checkInputData() {
         switch iokaTextFieldState {
         case .startTyping:
-            self.layer.borderColor = Ioka.shared.theme.primary.cgColor
+            self.layer.borderColor = colors.primary.cgColor
         case .wrongInputData:
-            self.layer.borderColor = Ioka.shared.theme.error.cgColor
+            self.layer.borderColor = colors.error.cgColor
         case .nonActive:
-            self.layer.borderColor = Ioka.shared.theme.background.cgColor
+            self.layer.borderColor = colors.background.cgColor
         case .correctInputData:
-            self.layer.borderColor = Ioka.shared.theme.background.cgColor
+            self.layer.borderColor = colors.background.cgColor
         }
     }
 }

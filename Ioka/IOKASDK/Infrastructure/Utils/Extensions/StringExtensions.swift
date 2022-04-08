@@ -17,17 +17,7 @@ extension String {
     func trimDateExpirationText() -> String {
         self.components(separatedBy: "/").joined()
     }
-    
-    func trimTokens() -> String {
-        var text = self
-        if let dotRange = text.range(of: "_secret") {
-            text.removeSubrange(dotRange.lowerBound..<text.endIndex)
-            return text
-        } else {
-            return text
-        }
-    }
-    
+        
     func trimEmitterBinCode() -> String {
         let trimmedText = self.components(separatedBy: .whitespaces).joined()
         let mySubstring = String(trimmedText.prefix(5))

@@ -18,7 +18,7 @@ class DeleteSavedCardView: UIView {
     
     private let backGroundView = UIView()
     private let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
-    private let title = IokaLabel(iokaFont: Typography.title, iokaTextColor: DemoAppColors.text)
+    private let title = IokaLabel(iokaFont: typography.title, iokaTextColor: DemoAppColors.text)
     private let deleteCardButton = UIButton()
     private let cancelButton = UIButton()
     

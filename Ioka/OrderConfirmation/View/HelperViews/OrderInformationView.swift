@@ -15,8 +15,8 @@ protocol OrderInformationViewDelegate: NSObject {
 
 class OrderInformationView: UIView {
     
-    private let orderAdressLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
-    private let orderTimeLabel = IokaLabel(iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    private let orderAdressLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
+    private let orderTimeLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     private let orderAdressImageView = IokaImageView(imageName: "orderAdress")
     private let orderTimeImageView = IokaImageView(imageName: "orderTime")
     private let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)

@@ -63,8 +63,7 @@
 		6DB0A32427FBA8A1008A8381 /* IOKAConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */; };
 		6DB0A32527FBA8A1008A8381 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */; };
 		6DB0A32627FBA8A1008A8381 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */; };
-		6DB0A32727FBA8A1008A8381 /* TextFieldPlaceHolders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A427FBA8A1008A8381 /* TextFieldPlaceHolders.swift */; };
-		6DB0A32827FBA8A1008A8381 /* IokaTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A627FBA8A1008A8381 /* IokaTheme.swift */; };
+		6DB0A32827FBA8A1008A8381 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A627FBA8A1008A8381 /* Theme.swift */; };
 		6DB0A33427FBA8A2008A8381 /* IokaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */; };
 		6DB0A33827FBA8A2008A8381 /* SaveCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2BE27FBA8A1008A8381 /* SaveCardCoordinator.swift */; };
 		6DB0A33B27FBA8A2008A8381 /* ErrorPopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2C227FBA8A1008A8381 /* ErrorPopUpViewModel.swift */; };
@@ -142,6 +141,7 @@
 		6DCA1F2327FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */; };
 		6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2627FE480200ACDAF3 /* Localizable.strings */; };
 		6DCA1F2927FFD5FA00ACDAF3 /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */; };
+		6DCA1F3427FFEF4200ACDAF3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F3327FFEF4200ACDAF3 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,8 +203,7 @@
 		6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOKAConstraints.swift; sourceTree = "<group>"; };
 		6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		6DB0A2A427FBA8A1008A8381 /* TextFieldPlaceHolders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldPlaceHolders.swift; sourceTree = "<group>"; };
-		6DB0A2A627FBA8A1008A8381 /* IokaTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaTheme.swift; sourceTree = "<group>"; };
+		6DB0A2A627FBA8A1008A8381 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaViewController.swift; sourceTree = "<group>"; };
 		6DB0A2BE27FBA8A1008A8381 /* SaveCardCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCardCoordinator.swift; sourceTree = "<group>"; };
 		6DB0A2C227FBA8A1008A8381 /* ErrorPopUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorPopUpViewModel.swift; sourceTree = "<group>"; };
@@ -283,6 +282,7 @@
 		6DCA1F2527FE480200ACDAF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DCA1F2727FE48D300ACDAF3 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
+		6DCA1F3327FFEF4200ACDAF3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -516,33 +516,15 @@
 		6DB0A28827FBA8A1008A8381 /* IOKASDK */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */,
 				6DB0A29127FBA8A1008A8381 /* Facade */,
 				6DB0A38127FBDF5A008A8381 /* Data */,
 				6DB0A38D27FBDF77008A8381 /* Domain */,
 				6DB0A2B927FBA8A1008A8381 /* Presentation */,
-				6DB0A39727FBDF93008A8381 /* API */,
-				6DB0A2A527FBA8A1008A8381 /* Theme */,
-				6DB0A28927FBA8A1008A8381 /* IokaViews */,
+				6DCA1F2A27FFE89700ACDAF3 /* Infrastructure */,
 				6DB0A29327FBA8A1008A8381 /* Models */,
-				6DB0A29F27FBA8A1008A8381 /* Extensions */,
 				6DB0A2DE27FBA8A1008A8381 /* Helpers */,
 			);
 			path = IOKASDK;
-			sourceTree = "<group>";
-		};
-		6DB0A28927FBA8A1008A8381 /* IokaViews */ = {
-			isa = PBXGroup;
-			children = (
-				6DB0A28A27FBA8A1008A8381 /* IokaStackView.swift */,
-				6DB0A28B27FBA8A1008A8381 /* IokaButton.swift */,
-				6DB0A28C27FBA8A1008A8381 /* IokaCardNumberTextField.swift */,
-				6DB0A28D27FBA8A1008A8381 /* IokaCustomView.swift */,
-				6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */,
-				6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */,
-				6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */,
-			);
-			path = IokaViews;
 			sourceTree = "<group>";
 		};
 		6DB0A29127FBA8A1008A8381 /* Facade */ = {
@@ -574,22 +556,10 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6DB0A29F27FBA8A1008A8381 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				6DB0A2A027FBA8A1008A8381 /* Typography.swift */,
-				6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */,
-				6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */,
-				6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */,
-				6DB0A2A427FBA8A1008A8381 /* TextFieldPlaceHolders.swift */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		6DB0A2A527FBA8A1008A8381 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2A627FBA8A1008A8381 /* IokaTheme.swift */,
+				6DB0A2A627FBA8A1008A8381 /* Theme.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -600,38 +570,16 @@
 				6DB0A3B927FBF75A008A8381 /* FeaturesFactory */,
 				6DB0A3BA27FBF77B008A8381 /* Flows */,
 				6DB0A3BB27FBF78E008A8381 /* Common */,
-				6DB0A2D427FBA8A1008A8381 /* Views */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		6DB0A2D427FBA8A1008A8381 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				6DB0A2D527FBA8A1008A8381 /* ErrorToastView.swift */,
-				6DB0A2D627FBA8A1008A8381 /* IokaProgressView.swift */,
-				6DB0A2DC27FBA8A1008A8381 /* ProgressWrapperView.swift */,
-				6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		6DB0A2DE27FBA8A1008A8381 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2DF27FBA8A1008A8381 /* Images */,
 				6DB0A2E227FBA8A1008A8381 /* Localization */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		6DB0A2DF27FBA8A1008A8381 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-				6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */,
-				6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */,
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		6DB0A2E227FBA8A1008A8381 /* Localization */ = {
@@ -776,7 +724,7 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		6DB0A39727FBDF93008A8381 /* API */ = {
+		6DB0A39727FBDF93008A8381 /* Network */ = {
 			isa = PBXGroup;
 			children = (
 				6DB0A39827FBDF93008A8381 /* Encoding */,
@@ -784,7 +732,7 @@
 				6DB0A3A127FBDF93008A8381 /* HTTPResponse */,
 				6DB0A3A327FBDF93008A8381 /* Service */,
 			);
-			path = API;
+			path = Network;
 			sourceTree = "<group>";
 		};
 		6DB0A39827FBDF93008A8381 /* Encoding */ = {
@@ -1047,6 +995,98 @@
 			path = ProgressPresenter;
 			sourceTree = "<group>";
 		};
+		6DCA1F2A27FFE89700ACDAF3 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA1F2B27FFE8C900ACDAF3 /* Coordinator */,
+				6DB0A39727FBDF93008A8381 /* Network */,
+				6DCA1F2C27FFE8D700ACDAF3 /* Utils */,
+				6DCA1F2D27FFE8ED00ACDAF3 /* DesignSystem */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		6DCA1F2B27FFE8C900ACDAF3 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6DCA1F2C27FFE8D700ACDAF3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA1F3127FFE97000ACDAF3 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		6DCA1F2D27FFE8ED00ACDAF3 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA1F3227FFE9B300ACDAF3 /* Typography */,
+				6DCA1F3027FFE93200ACDAF3 /* Components */,
+				6DCA1F2F27FFE92A00ACDAF3 /* Icons */,
+				6DCA1F2E27FFE92200ACDAF3 /* Colors */,
+				6DB0A2A527FBA8A1008A8381 /* Theme */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		6DCA1F2E27FFE92200ACDAF3 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				6DCA1F3327FFEF4200ACDAF3 /* Colors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		6DCA1F2F27FFE92A00ACDAF3 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				6DB0A2E027FBA8A1008A8381 /* IokaImages.swift */,
+				6DB0A2E127FBA8A1008A8381 /* IokaIcons.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		6DCA1F3027FFE93200ACDAF3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */,
+				6DB0A2D527FBA8A1008A8381 /* ErrorToastView.swift */,
+				6DB0A2D627FBA8A1008A8381 /* IokaProgressView.swift */,
+				6DB0A2DC27FBA8A1008A8381 /* ProgressWrapperView.swift */,
+				6DB0A2DD27FBA8A1008A8381 /* ToolTipView.swift */,
+				6DB0A28A27FBA8A1008A8381 /* IokaStackView.swift */,
+				6DB0A28B27FBA8A1008A8381 /* IokaButton.swift */,
+				6DB0A28C27FBA8A1008A8381 /* IokaCardNumberTextField.swift */,
+				6DB0A28D27FBA8A1008A8381 /* IokaCustomView.swift */,
+				6DB0A28E27FBA8A1008A8381 /* IokaImageView.swift */,
+				6DB0A28F27FBA8A1008A8381 /* IokaLabel.swift */,
+				6DB0A29027FBA8A1008A8381 /* IokaTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		6DCA1F3127FFE97000ACDAF3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */,
+				6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */,
+				6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6DCA1F3227FFE9B300ACDAF3 /* Typography */ = {
+			isa = PBXGroup;
+			children = (
+				6DB0A2A027FBA8A1008A8381 /* Typography.swift */,
+			);
+			path = Typography;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1191,13 +1231,13 @@
 				6DB0A30227FBA8A1008A8381 /* OrderInformationView.swift in Sources */,
 				6DCA1F0F27FCFEDE00ACDAF3 /* SaveCardFlowFactory.swift in Sources */,
 				6DB0A38B27FBDF5A008A8381 /* PaymentDTO+ToPayment.swift in Sources */,
-				6DB0A32727FBA8A1008A8381 /* TextFieldPlaceHolders.swift in Sources */,
 				6DB0A32027FBA8A1008A8381 /* CardPaymentResponse.swift in Sources */,
 				6DB0A34B27FBA8A2008A8381 /* 3DSecureViewController.swift in Sources */,
-				6DB0A32827FBA8A1008A8381 /* IokaTheme.swift in Sources */,
+				6DB0A32827FBA8A1008A8381 /* Theme.swift in Sources */,
 				6DB0A3B427FBDF93008A8381 /* NetworkError.swift in Sources */,
 				6DB0A36227FBA8A2008A8381 /* ProductCell.swift in Sources */,
 				6DB0A35027FBA8A2008A8381 /* CardFormView.swift in Sources */,
+				6DCA1F3427FFEF4200ACDAF3 /* Colors.swift in Sources */,
 				6D652F9C27FCDACE00E8686B /* SavedCard.swift in Sources */,
 				6DB0A3D027FBF8AB008A8381 /* PaymentMethodsView.swift in Sources */,
 				6DB0A31427FBA8A1008A8381 /* IokaImageView.swift in Sources */,

@@ -19,7 +19,7 @@ class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
     let addCardImageView = IokaImageView(imageName: "addCard")
-    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let showAddCardimageView = IokaImageView(imageName: "chevronRight")
     
     weak var delegate: AddNewCardTablewViewCellDelegate?

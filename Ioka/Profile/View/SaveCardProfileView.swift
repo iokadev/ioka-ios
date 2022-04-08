@@ -12,7 +12,7 @@ import UIKit
 class SaveCardProfileView: UIView {
     
     let creditCardImageView = IokaImageView(imageName: "Credit-card")
-    let saveCardlabel = IokaLabel(title: "Сохраненные карты", iokaFont: Typography.body, iokaTextColor: DemoAppColors.text)
+    let saveCardlabel = IokaLabel(title: "Сохраненные карты", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
     let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {

@@ -21,7 +21,7 @@ class PaymentView: UIView {
     }
     
     public weak var delegate: PaymentViewDelegate?
-    private let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: Typography.body, iokaTextColor: DemoAppColors.grey)
+    private let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: typography.body, iokaTextColor: DemoAppColors.grey)
     private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
     private let chevronRightImageView = IokaImageView(imageName: "chevronRight")
     

@@ -9,14 +9,16 @@ import Foundation
 import UIKit
 
 
-class Ioka: IokaThemeProtocol {
+
+
+class Ioka {
     static let shared = Ioka()
-    var theme: IokaColors = .defaultTheme
     var setupInput: SetupInput?
+    var theme: Theme = .defaultTheme
     
-    func setUp(publicApiKey: String, theme: IokaTheme = .defaultTheme) {
-        self.theme = theme.iokaColors
-        self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: Theme(colors: IokaColors.defaultTheme))
+    func setup(publicApiKey: String, theme: Theme? = .defaultTheme) {
+        self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: theme ?? .defaultTheme)
+        self.theme = theme ?? .defaultTheme
     }
     
     func startCheckoutFlow(viewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
