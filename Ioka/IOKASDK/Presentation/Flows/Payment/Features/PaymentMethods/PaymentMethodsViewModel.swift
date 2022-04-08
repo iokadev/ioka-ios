@@ -53,7 +53,7 @@ class PaymentMethodsViewModel {
                     self.delegate?.dismissPaymentMethodsViewController(action, payment: payment)
                 }
             case .failure(let error):
-                self.delegate?.dismissPaymentMethodsViewController(error)
+                self.cardPaymentFailure?(error)
             }
         }
     }

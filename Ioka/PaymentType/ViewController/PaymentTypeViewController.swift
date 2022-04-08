@@ -52,6 +52,11 @@ class PaymentTypeViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
 }
 
 

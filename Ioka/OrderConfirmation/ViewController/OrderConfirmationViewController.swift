@@ -20,6 +20,7 @@ class OrderConfirmationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Оформление заказа"
         orderConfirmationView.delegate = self
     }
     
@@ -29,9 +30,7 @@ class OrderConfirmationViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-        self.title = "Оформление заказа"
-    }
+        self.tabBarController?.tabBar.isHidden = true    }
 }
 
 

@@ -20,6 +20,7 @@ class ViewControllerProgressWrapper {
         self.viewModel = viewModel
         viewModel.getOrder()
         setUI()
+        self.viewController.navigationController?.navigationBar.isHidden = true
     }
     
     func startProgress() {

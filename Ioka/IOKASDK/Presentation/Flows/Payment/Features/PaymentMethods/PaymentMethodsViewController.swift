@@ -11,6 +11,10 @@ class PaymentMethodsViewController: IokaViewController {
     
     private lazy var contentView = CardFormView(state: .payment, price: viewModel.order.price)
     var viewModel: PaymentMethodsViewModel!
+    
+    override func loadView() {
+        self.view = contentView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,12 +23,15 @@ class PaymentMethodsViewController: IokaViewController {
         viewModel.cardPaymentFailure = { [weak self] error in
             if let error = error {
                 self?.contentView.showErrorView(error: error)
+                self?.handlePayButton(state: .disabled)
             }
         }
     }
     
-    override func loadView() {
-        self.view = contentView
+    func handlePayButton(state: IokaButtonState) {
+        self.contentView.endEditing(true)
+        self.contentView.createButton.iokaButtonState = state
+        self.contentView.createButton.hideLoading(showTitle: true)
     }
 }
 
