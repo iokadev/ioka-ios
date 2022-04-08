@@ -8,9 +8,9 @@
 import UIKit
 
 
-internal class PaymentCoordinator: NSObject {
+internal class PaymentCoordinator: NSObject, Coordinator {
     let factory: PaymentFlowFactory
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
     private var order: Order?
     
     var paymentMethodsViewController: PaymentMethodsViewController?

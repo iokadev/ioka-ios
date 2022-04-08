@@ -9,11 +9,11 @@ import UIKit
 import WebKit
 
 
-internal class SaveCardCoordinator: NSObject {
+internal class SaveCardCoordinator: NSObject, Coordinator {
 
     
     let factory: SaveCardFlowFactory
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
     
     var saveCardViewController: SaveCardViewController?
     var threeDSecureViewController: ThreeDSecureViewController?

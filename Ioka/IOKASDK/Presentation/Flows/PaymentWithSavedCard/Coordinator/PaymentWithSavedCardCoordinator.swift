@@ -8,11 +8,10 @@
 import UIKit
 
 
-internal class PaymentWithSavedCardCoordinator: NSObject {
+internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
 
-    
     let factory: PaymentWithSavedCardFlowFactory
-    let navigationController: UINavigationController
+    var navigationController: UINavigationController
     private var order: Order?
     
     var cvvViewControlelr: CVVViewController?

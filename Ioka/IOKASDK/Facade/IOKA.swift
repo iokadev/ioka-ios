@@ -13,6 +13,7 @@ public class Ioka {
     static let shared = Ioka()
     var setupInput: SetupInput?
     var theme: Theme = .defaultTheme
+    var currentCoordinator: Coordinator?
     
     func setup(publicApiKey: String, theme: Theme? = .defaultTheme) {
         self.setupInput = SetupInput(apiKey: APIKey(key: publicApiKey), theme: theme ?? .defaultTheme)
@@ -29,9 +30,10 @@ public class Ioka {
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, navigationController:  viewController.navigationController ?? UINavigationController())
             coordinator.start()
-            
+            currentCoordinator = coordinator
             coordinator.resultCompletion = { result in
                 completion(result)
+                self.currentCoordinator = nil
             }
         } catch let error {
             completion(.failed(error))
@@ -47,11 +49,12 @@ public class Ioka {
             let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: viewController, cardResponse: card)
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
-            
+            currentCoordinator = coordinator
             coordinator.start()
             
             coordinator.resultCompletion = { result in
                 completion(result)
+                self.currentCoordinator = nil
             }
         } catch let error {
             completion(.failed(error))
@@ -68,11 +71,12 @@ public class Ioka {
             let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, hideSaveCardCheckbox: true)
             let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
             let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: viewController.navigationController ?? UINavigationController())
-            
+            currentCoordinator = coordinator
             coordinator.start()
             
             coordinator.resultCompletion = { result in
                 completion(result)
+                self.currentCoordinator = nil
             }
             
         } catch let error {
