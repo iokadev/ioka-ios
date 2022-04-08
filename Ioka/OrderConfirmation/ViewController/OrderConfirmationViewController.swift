@@ -64,12 +64,16 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startCheckoutWithSavedCardFlow(viewController: self, orderAccessToken: orderAccessToken, card: card)
+                Ioka.shared.startCheckoutWithSavedCardFlow(viewController: self, orderAccessToken: orderAccessToken, card: card) { result in
+                    
+                }
             }
         case .creditCard( _):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startCheckoutFlow(viewController: self, orderAccessToken: orderAccessToken)
+                Ioka.shared.startCheckoutFlow(viewController: self, orderAccessToken: orderAccessToken) { result in
+                    
+                }
             }
         case .cash(let title):
             print(title)

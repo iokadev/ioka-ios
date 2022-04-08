@@ -18,6 +18,8 @@ class PaymentCoordinator: NSObject {
     var viewControllerProgressWrapper: ViewControllerProgressWrapper?
     var threeDSecureViewController: ThreeDSecureViewController?
     
+    var resultCompletion: ((FlowResult) -> Void)?
+    
     init(factory: PaymentFlowFactory, navigationController: UINavigationController) {
         self.factory = factory
         self.navigationController = navigationController
@@ -70,10 +72,12 @@ class PaymentCoordinator: NSObject {
 extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavigationDelegate {
     func dismissPaymentResult() {
         dismissPaymentResultFlow()
+        resultCompletion?(.succeeded)
     }
     
     func dismissPaymentMethodsViewController() {
         dismissPaymentMethodsFlow()
+        resultCompletion?(.cancelled)
     }
     
     func dismissPaymentMethodsViewController(_ payment: Payment) {
@@ -91,12 +95,14 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
         showPaymentResultFlow()
         paymentResultViewController?.configure(error: error)
         dismissPaymentMethodsFlow()
+        resultCompletion?(.failed(error))
     }
     
     func dismissPaymentMethodsViewController(_ apiError: APIError) {
         showPaymentResultFlow()
         paymentResultViewController?.configure(error: apiError)
         dismissPaymentMethodsFlow()
+        resultCompletion?(.failed(apiError))
     }
     
     func dismissProgressWrapper(_ order: Order) {
@@ -108,10 +114,12 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
     func dismissProgressWrapper(_ error: Error) {
         self.viewControllerProgressWrapper?.hideProgress()
         self.viewControllerProgressWrapper?.showError(error: error)
+        resultCompletion?(.failed(error))
     }
     
     func dismissThreeDSecure() {
         dismiss3DSecureFlow()
+        resultCompletion?(.cancelled)
     }
     
     func dismissThreeDSecure(payment: Payment) {
@@ -124,12 +132,14 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
         self.dismiss3DSecureFlow()
         self.showPaymentResultFlow()
         self.paymentResultViewController?.configure(error: apiError)
+        resultCompletion?(.failed(apiError))
     }
     
     func dismissThreeDSecure(error: Error) {
         self.dismiss3DSecureFlow()
         self.showPaymentResultFlow()
         self.paymentResultViewController?.configure(error: error)
+        resultCompletion?(.failed(error))
     }
     
     func dismissThreeDSecure(savedCard: SavedCard) {

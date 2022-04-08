@@ -18,6 +18,9 @@ class SaveCardCoordinator: NSObject {
     var saveCardViewController: SaveCardViewController?
     var threeDSecureViewController: ThreeDSecureViewController?
     
+    var resultCompletion: ((FlowResult) -> Void)?
+    var succeeded = false
+    
     init(factory: SaveCardFlowFactory, navigationController: UINavigationController) {
         self.factory = factory
         self.navigationController = navigationController
@@ -59,6 +62,7 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
     
     func dismissSaveCardViewController() {
         self.dismissSaveCard()
+        succeeded ? resultCompletion?(.succeeded) : resultCompletion?(.cancelled)
     }
     
     func dismissThreeDSecure() {
@@ -71,17 +75,20 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
     
     func dismissThreeDSecure(apiError: APIError) {
         self.dismiss3DSecure()
-        saveCardViewController?.viewModel.errorCompletion?(apiError)
+        saveCardViewController?.showError(error: apiError)
+        resultCompletion?(.failed(apiError))
     }
     
     func dismissThreeDSecure(error: Error) {
         self.dismiss3DSecure()
-        saveCardViewController?.viewModel.errorCompletion?(error)
+        saveCardViewController?.showError(error: error)
+        resultCompletion?(.failed(error))
     }
     
     func dismissThreeDSecure(savedCard: SavedCard) {
         self.dismiss3DSecure()
         saveCardViewController?.viewModel.successCompletion?()
+        succeeded = true
     }
 }
 

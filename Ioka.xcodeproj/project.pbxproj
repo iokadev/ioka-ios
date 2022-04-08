@@ -141,6 +141,7 @@
 		6DCA1F2127FD530600ACDAF3 /* OrderForPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2027FD530600ACDAF3 /* OrderForPaymentViewModel.swift */; };
 		6DCA1F2327FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */; };
 		6DCA1F2427FE480200ACDAF3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2627FE480200ACDAF3 /* Localizable.strings */; };
+		6DCA1F2927FFD5FA00ACDAF3 /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -281,6 +282,7 @@
 		6DCA1F2227FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardViewModel.swift; sourceTree = "<group>"; };
 		6DCA1F2527FE480200ACDAF3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6DCA1F2727FE48D300ACDAF3 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +550,7 @@
 			children = (
 				6DB0A29227FBA8A1008A8381 /* Ioka.swift */,
 				6DB0A3DF27FC8276008A8381 /* SetupInput.swift */,
+				6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */,
 			);
 			path = Facade;
 			sourceTree = "<group>";
@@ -1125,6 +1128,7 @@
 				6DB0A2FB27FBA8A1008A8381 /* LanguageProfileView.swift in Sources */,
 				6DB0A2FC27FBA8A1008A8381 /* SaveCardProfileView.swift in Sources */,
 				6DB0A36027FBA8A2008A8381 /* DeleteSavedCardViewController.swift in Sources */,
+				6DCA1F2927FFD5FA00ACDAF3 /* FlowResult.swift in Sources */,
 				6DB0A3AB27FBDF93008A8381 /* JSONParameterEncoder.swift in Sources */,
 				6DCA1F1627FD29F500ACDAF3 /* 3DSecureView.swift in Sources */,
 				6DB0A31B27FBA8A1008A8381 /* Payer.swift in Sources */,

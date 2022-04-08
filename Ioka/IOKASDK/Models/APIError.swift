@@ -18,7 +18,7 @@ extension IokaError {
 // выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
 
 struct APIError: LocalizedError, Decodable {
-    let code: Code
+    let code: String
     let message: String
     
     var errorDescription: String? {
@@ -48,7 +48,7 @@ extension APIError {
         case invalidPaymentToken = "InvalidPaymentToken"
         case paymentTokenNotFound = "PaymentTokenNotFound"
         case customerNotFound = "CustomerNotFound"
-        case DECLINED_BY_BANK_LIMIT = "DECLINED_BY_BANK_LIMIT" // ?
+        case declinedByBankLimit = "DeclinedByBankLimit" // ?
         case customerExists = "CustomerExists"
         case cardNotFound = "CardNotFound"
         case bindingStarted = "BindingStarted"
