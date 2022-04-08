@@ -21,6 +21,13 @@ final class OrderRepository {
             completion(result.toOrderResult())
         }
     }
+    
+    func createPayment(orderAccessToken: AccessToken, card: GetCardResponse, completion: @escaping(Result<Payment, Error>) -> Void) {
+        let card = Card(cardId: card.id)
+        api.createCardPayment(orderAccessToken: orderAccessToken, card: card) { result in
+            completion(result.toPaymentResult())
+        }
+    }
 }
 
 

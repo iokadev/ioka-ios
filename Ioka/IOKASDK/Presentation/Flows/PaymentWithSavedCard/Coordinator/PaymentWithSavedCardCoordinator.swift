@@ -48,6 +48,10 @@ class PaymentWithSavedCardCoordinator: NSObject {
         self.navigationController.pushViewController(vc, animated: false)
     }
     
+    func showResultFlow(hasError: Bool) {
+        hasError ? showErrorPopupFlow() : showPaymentResultFlow()
+    }
+    
     func showPaymentResultFlow() {
         let vc = factory.makePaymentResult(delegate: self)
         self.paymentResultViewController = vc
@@ -83,17 +87,17 @@ class PaymentWithSavedCardCoordinator: NSObject {
 extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegate, ThreeDSecureNavigationDelegate {
     
     func showPaymentResult(apiError: APIError) {
-        showPaymentResultFlow()
-        self.paymentResultViewController?.configure(error: apiError)
+        self.showResultFlow(hasError: true)
+        self.errorPopupViewController?.showError(apiError)
     }
     
     func showPaymentResult(error: Error) {
-        showPaymentResultFlow()
-        self.paymentResultViewController?.configure(error: error)
+        showResultFlow(hasError: true)
+        self.errorPopupViewController?.showError(error)
     }
     
     func showPaymentResult() {
-        self.showPaymentResultFlow()
+        showResultFlow(hasError: false)
         self.paymentResultViewController?.configure(order: self.order)
     }
     
@@ -122,10 +126,20 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
         self.viewControllerProgressWrapper?.showError(error: error)
     }
     
-    func dismissProgressWrappper(_ order: Order) {
+    func dismissProgressWrapper(_ order: Order, isCVVRequired: Bool, apiError: APIError?) {
         self.viewControllerProgressWrapper?.hideProgress()
         self.order = order
-        self.showCVVFlow()
+        if isCVVRequired {
+            self.showCVVFlow()
+        } else {
+            if apiError != nil {
+                showResultFlow(hasError: true)
+                self.errorPopupViewController?.showError(apiError!)
+            } else {
+                showResultFlow(hasError: false)
+                self.paymentResultViewController?.configure(order: self.order)
+            }
+        }
     }
     
     func dismissCVVForm() {
@@ -146,19 +160,19 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     
     func dismissThreeDSecure(payment: Payment) {
         self.dismiss3DSecureFlow()
-        self.showPaymentResultFlow()
+        self.showResultFlow(hasError: false)
         self.paymentResultViewController?.configure(order: self.order)
     }
     
     func dismissThreeDSecure(apiError: APIError) {
         self.dismiss3DSecureFlow()
-        self.showErrorPopupFlow()
+        self.showResultFlow(hasError: true)
         self.errorPopupViewController?.showError(apiError)
     }
     
     func dismissThreeDSecure(error: Error) {
         self.dismiss3DSecureFlow()
-        self.showErrorPopupFlow()
+        self.showResultFlow(hasError: true)
         self.errorPopupViewController?.showError(error)
     }
     

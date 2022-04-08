@@ -25,7 +25,7 @@ struct Card: Codable {
         self.cvc = cvc
     }
     
-    init(cardId: String, cvc: String?) {
+    init(cardId: String, cvc: String? = nil) {
         self.card_id = cardId
         self.cvc = cvc
     }

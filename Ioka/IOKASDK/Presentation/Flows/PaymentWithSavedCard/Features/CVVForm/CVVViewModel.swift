@@ -15,7 +15,7 @@ protocol PaymentWithSavedCardNavigationDelegate: NSObject {
     func showPaymentResult(apiError: APIError)
     func showPaymentResult(error: Error)
     func dismissProgressWrapper(_ error: Error)
-    func dismissProgressWrappper(_ order: Order)
+    func dismissProgressWrapper(_ order: Order, isCVVRequired: Bool, apiError: APIError?)
     func dismissCVVForm()
     func dismissCVVForm(error: Error)
     func dismissCVVForm(apiError: Error)

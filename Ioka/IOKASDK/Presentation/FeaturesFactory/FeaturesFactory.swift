@@ -35,8 +35,8 @@ struct FeaturesFactory {
         return wrapper
     }
     
-    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository) -> ViewControllerProgressWrapper{
-        let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
+    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: GetCardResponse) -> ViewControllerProgressWrapper{
+        let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken, card: card)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         return wrapper
     }

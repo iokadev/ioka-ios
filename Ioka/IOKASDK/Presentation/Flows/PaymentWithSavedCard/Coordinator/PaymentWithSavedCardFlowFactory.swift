@@ -27,7 +27,7 @@ class PaymentWithSavedCardFlowFactory {
     
     
     func makeOrderForPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository())
+        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse)
     }
     
     func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {

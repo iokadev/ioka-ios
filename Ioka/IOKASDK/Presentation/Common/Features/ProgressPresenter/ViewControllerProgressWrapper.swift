@@ -51,6 +51,7 @@ class ViewControllerProgressWrapper {
     
     
     func setUI() {
+        errorView.isHidden = true
         self.viewController.view.addSubview(errorView)
         self.errorView.anchor(left: self.viewController.view.leftAnchor, bottom: viewController.view.bottomAnchor, right: viewController.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
         

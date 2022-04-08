@@ -23,17 +23,14 @@ class OrderConfirmationViewController: UIViewController {
         orderConfirmationView.delegate = self
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        self.view.addSubview(orderConfirmationView)
-        orderConfirmationView.frame = self.view.frame
+    override func loadView() {
+        self.view = orderConfirmationView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
         self.title = "Оформление заказа"
-        self.navigationController?.navigationBar.isHidden = false
     }
 }
 
