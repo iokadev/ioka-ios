@@ -9,14 +9,14 @@ import UIKit
 
 internal var cornerRadius = Ioka.shared.theme.cornerRadius
 
-internal enum Theme {
+public enum Theme {
     case defaultTheme
     case custom(colors: Colors? = Colors.defaultTheme,
                 cornerRadius: CGFloat? = 12,
                 typography: Typography? = Typography.defaultFonts)
 }
 
-internal extension Theme {
+extension Theme {
     
     var colors: Colors {
         switch self {

@@ -10,17 +10,17 @@ import UIKit
 
 
 public class Ioka {
-    static let shared = Ioka()
+    static public let shared = Ioka()
     var setupInput: SetupInput?
     var theme: Theme = .defaultTheme
     var currentCoordinator: Coordinator?
     
-    func setup(apiKey: String, theme: Theme? = .defaultTheme) {
+    public func setup(apiKey: String, theme: Theme? = .defaultTheme) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme ?? .defaultTheme)
         self.theme = theme ?? .defaultTheme
     }
     
-    func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
+    public func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -43,7 +43,7 @@ public class Ioka {
         }
     }
     
-    func startCheckoutWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCardDTO, completion: @escaping(FlowResult) -> Void) {
+    public func startCheckoutWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCardDTO, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -67,7 +67,7 @@ public class Ioka {
         }
     }
     
-    func startSaveCardFlow(sourceViewController: UIViewController, customerAccessToken: String, completion: @escaping(FlowResult) -> Void) {
+    public func startSaveCardFlow(sourceViewController: UIViewController, customerAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -93,7 +93,7 @@ public class Ioka {
         }
     }
     
-    func getCards(customerAccessToken: String, completion: @escaping(Result<[SavedCardDTO], Error>) -> Void) {
+    public func getCards(customerAccessToken: String, completion: @escaping(Result<[SavedCardDTO], Error>) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failure(DomainError.invalidTokenFormat))
             return
@@ -108,7 +108,7 @@ public class Ioka {
         }
     }
     
-    func deleteSavedCard(customerAccessToken: String, cardId: String, completion: @escaping(Error?) -> Void) {
+    public func deleteSavedCard(customerAccessToken: String, cardId: String, completion: @escaping(Error?) -> Void) {
         
         guard let setupInput = setupInput else {
             completion(DomainError.invalidTokenFormat)
