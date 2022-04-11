@@ -15,7 +15,7 @@ internal enum SavedCardStatus: String, Decodable {
 }
 
 
-internal struct GetCardResponse: Decodable {
+internal struct SavedCardDTO: Decodable {
     
     
     

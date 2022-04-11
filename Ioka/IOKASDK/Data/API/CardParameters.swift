@@ -8,7 +8,7 @@
 import Foundation
 
 
-internal struct Card: Codable {
+internal struct CardParameters: Codable {
     var pan: String?
     var exp: String?
     var cvc: String?

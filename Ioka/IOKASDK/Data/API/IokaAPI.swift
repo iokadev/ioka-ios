@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal class API: IokaAPIProtocol {
+public class IokaApi: IokaAPIProtocol {
     
     let apiKey: APIKey
     
@@ -50,7 +50,7 @@ internal class API: IokaAPIProtocol {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getPaymentByID(orderAccessToken: orderAccessToken, paymentId: paymentId)), completion: completion)
     }
     
-    func getOrderByID(orderAccessToken: AccessToken, completion: @escaping (Result<GetOrderResponse, Error>) -> Void) {
+    func getOrderByID(orderAccessToken: AccessToken, completion: @escaping (Result<OrderDTO, Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getOrderByID(orderAccessToken: orderAccessToken)), completion: completion)
     }
 }
