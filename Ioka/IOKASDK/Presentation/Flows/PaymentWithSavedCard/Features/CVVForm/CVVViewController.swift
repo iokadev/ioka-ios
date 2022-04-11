@@ -11,7 +11,7 @@ import UIKit
 internal class CVVViewController: IokaViewController {
     
     private lazy var contentView = CVVView()
-    var card: GetCardResponse!
+    var card: SavedCardDTO!
     var viewModel: CVVViewModel!
     
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ extension CVVViewController: CVVViewDelegate {
     
     func makePayment(_ view: CVVView) {
         guard let text = view.cvvTextField.text else { return }
-        let card = Card(cardId: card.id, cvc: text)
+        let card = CardParameters(cardId: card.id, cvc: text)
         viewModel.createPayment(cardParameters: card)
     }
 }

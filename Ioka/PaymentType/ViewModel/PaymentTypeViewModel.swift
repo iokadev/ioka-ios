@@ -8,7 +8,7 @@
 import Foundation
 
 internal class PaymentTypeViewModel {
-    func getCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?, IokaError?) -> Void) {
+    func getCards(customerAccessToken: String, completion: @escaping([SavedCardDTO]?, Error?) -> Void) {
         
 
             Ioka.shared.getCards(customerAccessToken: customerAccessToken) {[weak self] result in

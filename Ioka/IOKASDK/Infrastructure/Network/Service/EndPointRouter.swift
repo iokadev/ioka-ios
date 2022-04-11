@@ -41,6 +41,10 @@ internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
                                  timeoutInterval: 10.0)
         request.httpMethod = route.httpMethod.rawValue
         
+        if route.httpMethod == .post {
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        }
+        
         do {
             switch route.task {
             case .request:
@@ -58,7 +62,7 @@ internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
     }
     
     private func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
-        
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         do {
             if let bodyParameters = bodyParameters {
                 try JSONParameterEncoder.encode(urlRequest: &request, with: bodyParameters)
@@ -74,6 +78,7 @@ internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
     
     private func addAdditionalHeaders(_ additionalHeaders: HTTPHeaders?, request: inout URLRequest) {
         guard let additionalHeaders = additionalHeaders else { return }
+        
         for (key, value) in additionalHeaders {
             request.setValue(value, forHTTPHeaderField: key)
         }

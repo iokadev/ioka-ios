@@ -18,7 +18,7 @@ public class IokaApi: IokaAPIProtocol {
         self.apiKey = apiKey
     }
     
-    func createCardPayment(orderAccessToken: AccessToken, card: Card, completion: @escaping (Result<PaymentDTO, Error>) -> Void) {
+    func createCardPayment(orderAccessToken: AccessToken, card: CardParameters, completion: @escaping (Result<PaymentDTO, Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createCardPayment(orderAccessToken: orderAccessToken, card: card)), completion: completion)
     }
     
@@ -30,11 +30,11 @@ public class IokaApi: IokaAPIProtocol {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getEmitterByBinCode(binCode: binCode)), completion: completion)
     }
     
-    func getCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
+    func getCards(customerAccessToken: AccessToken, completion: @escaping (Result<[SavedCardDTO], Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getCards(customerAccessToken: customerAccessToken)), completion: completion)
     }
     
-    func createBinding(customerAccessToken: AccessToken, card: Card, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
+    func createBinding(customerAccessToken: AccessToken, card: CardParameters, completion: @escaping (Result<SavedCardDTO, Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createBinding(customerAccessToken: customerAccessToken, card: card)), completion: completion)
     }
     
@@ -42,7 +42,7 @@ public class IokaApi: IokaAPIProtocol {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .deleteCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
     }
     
-    func getCardByID(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<GetCardResponse, Error>) -> Void) {
+    func getCardByID(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCardDTO, Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getCardByID(customerAccessToken: customerAccessToken, cardId: cardId)), completion: completion)
     }
     

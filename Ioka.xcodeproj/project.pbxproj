@@ -13,9 +13,9 @@
 		6D652F9A27FCDA6800E8686B /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9927FCDA6800E8686B /* Order.swift */; };
 		6D652F9C27FCDACE00E8686B /* SavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9B27FCDACE00E8686B /* SavedCard.swift */; };
 		6D652F9E27FCDE9E00E8686B /* SavedCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9D27FCDE9E00E8686B /* SavedCardRepository.swift */; };
-		6D652FA027FCDF3300E8686B /* SavedCardDTO+toSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9F27FCDF3300E8686B /* SavedCardDTO+toSavedCard.swift */; };
+		6D652FA027FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9F27FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift */; };
 		6D652FA227FCE61000E8686B /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652FA127FCE61000E8686B /* OrderRepository.swift */; };
-		6D652FA427FCE6E200E8686B /* OrderDTO+toOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652FA327FCE6E200E8686B /* OrderDTO+toOrder.swift */; };
+		6D652FA427FCE6E200E8686B /* OrderDTO+ToOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652FA327FCE6E200E8686B /* OrderDTO+ToOrder.swift */; };
 		6DB0A13F27FBA42C008A8381 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A13E27FBA42C008A8381 /* AppDelegate.swift */; };
 		6DB0A14127FBA42C008A8381 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A14027FBA42C008A8381 /* SceneDelegate.swift */; };
 		6DB0A14627FBA42C008A8381 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A14427FBA42C008A8381 /* Main.storyboard */; };
@@ -55,12 +55,12 @@
 		6DB0A31827FBA8A1008A8381 /* GetBrandResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */; };
 		6DB0A31A27FBA8A1008A8381 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */; };
 		6DB0A31B27FBA8A1008A8381 /* Payer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29727FBA8A1008A8381 /* Payer.swift */; };
-		6DB0A31C27FBA8A1008A8381 /* GetOrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29827FBA8A1008A8381 /* GetOrderResponse.swift */; };
-		6DB0A31D27FBA8A1008A8381 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29927FBA8A1008A8381 /* Card.swift */; };
+		6DB0A31C27FBA8A1008A8381 /* OrderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29827FBA8A1008A8381 /* OrderDTO.swift */; };
+		6DB0A31D27FBA8A1008A8381 /* CardParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29927FBA8A1008A8381 /* CardParameters.swift */; };
 		6DB0A31E27FBA8A1008A8381 /* GetEmitterByBinCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29A27FBA8A1008A8381 /* GetEmitterByBinCodeResponse.swift */; };
 		6DB0A31F27FBA8A1008A8381 /* PaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29B27FBA8A1008A8381 /* PaymentSystem.swift */; };
 		6DB0A32127FBA8A1008A8381 /* PaymentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29D27FBA8A1008A8381 /* PaymentStatus.swift */; };
-		6DB0A32227FBA8A1008A8381 /* GetCardResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29E27FBA8A1008A8381 /* GetCardResponse.swift */; };
+		6DB0A32227FBA8A1008A8381 /* SavedCardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A29E27FBA8A1008A8381 /* SavedCardDTO.swift */; };
 		6DB0A32327FBA8A1008A8381 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A027FBA8A1008A8381 /* Typography.swift */; };
 		6DB0A32427FBA8A1008A8381 /* IOKAConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */; };
 		6DB0A32527FBA8A1008A8381 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */; };
@@ -108,7 +108,7 @@
 		6DB0A3A927FBDF93008A8381 /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39927FBDF93008A8381 /* ParameterEncoding.swift */; };
 		6DB0A3AA27FBDF93008A8381 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39A27FBDF93008A8381 /* URLParameterEncoder.swift */; };
 		6DB0A3AB27FBDF93008A8381 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39B27FBDF93008A8381 /* JSONParameterEncoder.swift */; };
-		6DB0A3AC27FBDF93008A8381 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39D27FBDF93008A8381 /* API.swift */; };
+		6DB0A3AC27FBDF93008A8381 /* IokaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39D27FBDF93008A8381 /* IokaAPI.swift */; };
 		6DB0A3AD27FBDF93008A8381 /* EndpointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A39F27FBDF93008A8381 /* EndpointType.swift */; };
 		6DB0A3AE27FBDF93008A8381 /* IokaApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A3A027FBDF93008A8381 /* IokaApiEndpoint.swift */; };
 		6DB0A3AF27FBDF93008A8381 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A3A227FBDF93008A8381 /* HttpResponse.swift */; };
@@ -145,15 +145,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6D24850828000AE8000F36C7 /* PaymentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentDTO.swift; path = Ioka/IOKASDK/Models/PaymentDTO.swift; sourceTree = SOURCE_ROOT; };
+		6D24850828000AE8000F36C7 /* PaymentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PaymentDTO.swift; path = Ioka/IokaSDK/Data/API/PaymentDTO.swift; sourceTree = SOURCE_ROOT; };
 		6D24850A28000B2A000F36C7 /* SaveCardFlowInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SaveCardFlowInput.swift; path = Ioka/IOKASDK/Presentation/Flows/SaveCard/Coordinator/SaveCardFlowInput.swift; sourceTree = SOURCE_ROOT; };
 		6D24850C28000C0E000F36C7 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Coordinator.swift; path = Ioka/IOKASDK/Presentation/Flows/SaveCard/Coordinator/Coordinator.swift; sourceTree = SOURCE_ROOT; };
 		6D652F9927FCDA6800E8686B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6D652F9B27FCDACE00E8686B /* SavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCard.swift; sourceTree = "<group>"; };
 		6D652F9D27FCDE9E00E8686B /* SavedCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardRepository.swift; sourceTree = "<group>"; };
-		6D652F9F27FCDF3300E8686B /* SavedCardDTO+toSavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedCardDTO+toSavedCard.swift"; sourceTree = "<group>"; };
+		6D652F9F27FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedCardDTO+ToSavedCard.swift"; sourceTree = "<group>"; };
 		6D652FA127FCE61000E8686B /* OrderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRepository.swift; sourceTree = "<group>"; };
-		6D652FA327FCE6E200E8686B /* OrderDTO+toOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDTO+toOrder.swift"; sourceTree = "<group>"; };
+		6D652FA327FCE6E200E8686B /* OrderDTO+ToOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDTO+ToOrder.swift"; sourceTree = "<group>"; };
 		6DB0A13B27FBA42C008A8381 /* Ioka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ioka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB0A13E27FBA42C008A8381 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6DB0A14027FBA42C008A8381 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,12 +195,12 @@
 		6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetBrandResponse.swift; sourceTree = "<group>"; };
 		6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
 		6DB0A29727FBA8A1008A8381 /* Payer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Payer.swift; sourceTree = "<group>"; };
-		6DB0A29827FBA8A1008A8381 /* GetOrderResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetOrderResponse.swift; sourceTree = "<group>"; };
-		6DB0A29927FBA8A1008A8381 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		6DB0A29827FBA8A1008A8381 /* OrderDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderDTO.swift; sourceTree = "<group>"; };
+		6DB0A29927FBA8A1008A8381 /* CardParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardParameters.swift; sourceTree = "<group>"; };
 		6DB0A29A27FBA8A1008A8381 /* GetEmitterByBinCodeResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetEmitterByBinCodeResponse.swift; sourceTree = "<group>"; };
 		6DB0A29B27FBA8A1008A8381 /* PaymentSystem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSystem.swift; sourceTree = "<group>"; };
 		6DB0A29D27FBA8A1008A8381 /* PaymentStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentStatus.swift; sourceTree = "<group>"; };
-		6DB0A29E27FBA8A1008A8381 /* GetCardResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCardResponse.swift; sourceTree = "<group>"; };
+		6DB0A29E27FBA8A1008A8381 /* SavedCardDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedCardDTO.swift; sourceTree = "<group>"; };
 		6DB0A2A027FBA8A1008A8381 /* Typography.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		6DB0A2A127FBA8A1008A8381 /* IOKAConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOKAConstraints.swift; sourceTree = "<group>"; };
 		6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
@@ -248,7 +248,7 @@
 		6DB0A39927FBDF93008A8381 /* ParameterEncoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
 		6DB0A39A27FBDF93008A8381 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
 		6DB0A39B27FBDF93008A8381 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
-		6DB0A39D27FBDF93008A8381 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		6DB0A39D27FBDF93008A8381 /* IokaAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaAPI.swift; sourceTree = "<group>"; };
 		6DB0A39F27FBDF93008A8381 /* EndpointType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndpointType.swift; sourceTree = "<group>"; };
 		6DB0A3A027FBDF93008A8381 /* IokaApiEndpoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaApiEndpoint.swift; sourceTree = "<group>"; };
 		6DB0A3A227FBDF93008A8381 /* HttpResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
@@ -521,7 +521,6 @@
 				6DB0A38D27FBDF77008A8381 /* Domain */,
 				6DB0A2B927FBA8A1008A8381 /* Presentation */,
 				6DCA1F2A27FFE89700ACDAF3 /* Infrastructure */,
-				6DB0A29327FBA8A1008A8381 /* Models */,
 				6DB0A2DE27FBA8A1008A8381 /* Helpers */,
 			);
 			path = IokaSDK;
@@ -535,25 +534,6 @@
 				6DCA1F2827FFD5FA00ACDAF3 /* FlowResult.swift */,
 			);
 			path = Facade;
-			sourceTree = "<group>";
-		};
-		6DB0A29327FBA8A1008A8381 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */,
-				6DB0A29A27FBA8A1008A8381 /* GetEmitterByBinCodeResponse.swift */,
-				6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */,
-				6DB0A29E27FBA8A1008A8381 /* GetCardResponse.swift */,
-				6DB0A29827FBA8A1008A8381 /* GetOrderResponse.swift */,
-				6DB0A3B527FBE058008A8381 /* APIError.swift */,
-				6DB0A29D27FBA8A1008A8381 /* PaymentStatus.swift */,
-				6DB0A29B27FBA8A1008A8381 /* PaymentSystem.swift */,
-				6DB0A29927FBA8A1008A8381 /* Card.swift */,
-				6DB0A29727FBA8A1008A8381 /* Payer.swift */,
-				6DB0A3B727FBE0AE008A8381 /* EmptyResponse.swift */,
-				6D24850828000AE8000F36C7 /* PaymentDTO.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		6DB0A2A527FBA8A1008A8381 /* Theme */ = {
@@ -686,7 +666,20 @@
 			isa = PBXGroup;
 			children = (
 				6DB0A38527FBDF5A008A8381 /* IokaAPIProtocol.swift */,
-				6DB0A39D27FBDF93008A8381 /* API.swift */,
+				6DB0A39D27FBDF93008A8381 /* IokaAPI.swift */,
+				6DB0A3A027FBDF93008A8381 /* IokaApiEndpoint.swift */,
+				6D24850828000AE8000F36C7 /* PaymentDTO.swift */,
+				6DB0A29827FBA8A1008A8381 /* OrderDTO.swift */,
+				6DB0A29E27FBA8A1008A8381 /* SavedCardDTO.swift */,
+				6DB0A3B527FBE058008A8381 /* APIError.swift */,
+				6DB0A29427FBA8A1008A8381 /* GetBrandResponse.swift */,
+				6DB0A29A27FBA8A1008A8381 /* GetEmitterByBinCodeResponse.swift */,
+				6DB0A29627FBA8A1008A8381 /* DeleteCardByIDResponse.swift */,
+				6DB0A29D27FBA8A1008A8381 /* PaymentStatus.swift */,
+				6DB0A29B27FBA8A1008A8381 /* PaymentSystem.swift */,
+				6DB0A29927FBA8A1008A8381 /* CardParameters.swift */,
+				6DB0A29727FBA8A1008A8381 /* Payer.swift */,
+				6DB0A3B727FBE0AE008A8381 /* EmptyResponse.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -696,8 +689,8 @@
 			children = (
 				6DB0A38727FBDF5A008A8381 /* PaymentDTO+ToPayment.swift */,
 				6DB0A38827FBDF5A008A8381 /* ActionDTO+ToAction.swift */,
-				6D652F9F27FCDF3300E8686B /* SavedCardDTO+toSavedCard.swift */,
-				6D652FA327FCE6E200E8686B /* OrderDTO+toOrder.swift */,
+				6D652F9F27FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift */,
+				6D652FA327FCE6E200E8686B /* OrderDTO+ToOrder.swift */,
 			);
 			path = Mappers;
 			sourceTree = "<group>";
@@ -749,7 +742,6 @@
 			isa = PBXGroup;
 			children = (
 				6DB0A39F27FBDF93008A8381 /* EndpointType.swift */,
-				6DB0A3A027FBDF93008A8381 /* IokaApiEndpoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -1175,20 +1167,20 @@
 				6DB0A3AA27FBDF93008A8381 /* URLParameterEncoder.swift in Sources */,
 				6DB0A35E27FBA8A2008A8381 /* SavedCardsViewController.swift in Sources */,
 				6DB0A34327FBA8A2008A8381 /* SaveCardViewController.swift in Sources */,
-				6DB0A31C27FBA8A1008A8381 /* GetOrderResponse.swift in Sources */,
+				6DB0A31C27FBA8A1008A8381 /* OrderDTO.swift in Sources */,
 				6DB0A30827FBA8A1008A8381 /* GetProfileResponse.swift in Sources */,
 				6DB0A35C27FBA8A2008A8381 /* GetCardTableViewCell.swift in Sources */,
 				6DB0A33827FBA8A2008A8381 /* SaveCardCoordinator.swift in Sources */,
 				6DB0A35227FBA8A2008A8381 /* PaymentResultView.swift in Sources */,
 				6DB0A30527FBA8A1008A8381 /* DemoAppApi.swift in Sources */,
-				6D652FA027FCDF3300E8686B /* SavedCardDTO+toSavedCard.swift in Sources */,
+				6D652FA027FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift in Sources */,
 				6DB0A3B627FBE058008A8381 /* APIError.swift in Sources */,
 				6DB0A31627FBA8A1008A8381 /* IokaTextField.swift in Sources */,
 				6DB0A35F27FBA8A2008A8381 /* DeleteSavedCardView.swift in Sources */,
 				6DB0A35827FBA8A2008A8381 /* IokaLocalizable.swift in Sources */,
 				6DB0A39327FBDF77008A8381 /* AccessToken.swift in Sources */,
 				6DB0A30E27FBA8A1008A8381 /* ApplePayCell.swift in Sources */,
-				6DB0A32227FBA8A1008A8381 /* GetCardResponse.swift in Sources */,
+				6DB0A32227FBA8A1008A8381 /* SavedCardDTO.swift in Sources */,
 				6DB0A3D427FBF912008A8381 /* PaymentWithSavedCardCoordinator.swift in Sources */,
 				6DB0A35D27FBA8A2008A8381 /* AddNewCardTableViewCell.swift in Sources */,
 				6DB0A3C927FBF871008A8381 /* PaymentFlowFactory.swift in Sources */,
@@ -1252,11 +1244,11 @@
 				6DB0A3AE27FBDF93008A8381 /* IokaApiEndpoint.swift in Sources */,
 				6DB0A30127FBA8A1008A8381 /* PaymentView.swift in Sources */,
 				6DB0A2F827FBA8A1008A8381 /* MainTabBarController.swift in Sources */,
-				6DB0A31D27FBA8A1008A8381 /* Card.swift in Sources */,
+				6DB0A31D27FBA8A1008A8381 /* CardParameters.swift in Sources */,
 				6DB0A34627FBA8A2008A8381 /* ErrorPopUpViewController.swift in Sources */,
 				6DB0A39527FBDF77008A8381 /* Payment.swift in Sources */,
 				6DCA1F1F27FD4E1B00ACDAF3 /* ViewControllerProgressWrapper.swift in Sources */,
-				6DB0A3AC27FBDF93008A8381 /* API.swift in Sources */,
+				6DB0A3AC27FBDF93008A8381 /* IokaAPI.swift in Sources */,
 				6DB0A3DC27FBF9E2008A8381 /* CVVViewController.swift in Sources */,
 				6DB0A14127FBA42C008A8381 /* SceneDelegate.swift in Sources */,
 				6DB0A30727FBA8A1008A8381 /* DemoAppImages.swift in Sources */,
@@ -1279,7 +1271,7 @@
 				6DB0A32327FBA8A1008A8381 /* Typography.swift in Sources */,
 				6DB0A3B227FBDF93008A8381 /* HTTPMethod.swift in Sources */,
 				6D652F9E27FCDE9E00E8686B /* SavedCardRepository.swift in Sources */,
-				6D652FA427FCE6E200E8686B /* OrderDTO+toOrder.swift in Sources */,
+				6D652FA427FCE6E200E8686B /* OrderDTO+ToOrder.swift in Sources */,
 				6D24850D28000C0E000F36C7 /* Coordinator.swift in Sources */,
 				6DB0A3B827FBE0AE008A8381 /* EmptyResponse.swift in Sources */,
 				6DB0A3C527FBF852008A8381 /* PaymentCoordinator.swift in Sources */,

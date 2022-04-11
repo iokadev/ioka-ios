@@ -8,8 +8,8 @@
 import Foundation
 
 
-extension GetOrderResponse {
+extension OrderDTO {
     func toOrder() throws -> Order {
-        Order(id: id, externalId: external_id, hasCustomerId: hasCustomerId, price: amount)
+        Order(id: id, externalId: external_id, hasCustomerId: hasCustomerId, price: amount, currency: currency)
     }
 }

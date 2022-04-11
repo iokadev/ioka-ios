@@ -36,8 +36,8 @@ internal class CVVViewModel {
         self.orderCustomerAccessToken = orderAccessToken
     }
     
-    func createPayment(cardParameters: Card) {
-        repository.createSavedCardPayment(orderAccessToken: orderCustomerAccessToken, cardParameters: cardParameters) { [weak self] result in
+    func createPayment(cardParameters: CardParameters) {
+        repository.createCardPayment(orderAccessToken: orderCustomerAccessToken, cardParameters: cardParameters) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let payment):

@@ -8,7 +8,7 @@
 import UIKit
 
 internal protocol GetCardTableViewCellDelegate: NSObject {
-    func deleteCard(_ view: GetCardTableViewCell, card: GetCardResponse)
+    func deleteCard(_ view: GetCardTableViewCell, card: SavedCardDTO)
 }
 
 
@@ -21,7 +21,7 @@ internal class GetCardTableViewCell: UITableViewCell {
     let deleteImageView = IokaImageView(imageName: "deleteProduct")
     let seperatorView: UIView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
     let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
-    var card: GetCardResponse?
+    var card: SavedCardDTO?
     
     weak var delegate: GetCardTableViewCellDelegate?
     
@@ -35,7 +35,7 @@ internal class GetCardTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(model: GetCardResponse) {
+    public func configure(model: SavedCardDTO) {
         self.card = model
         self.cardNumberLabel.text = model.pan_masked.trimPanMasked()
         guard let paymentSystem = model.payment_system else { return }

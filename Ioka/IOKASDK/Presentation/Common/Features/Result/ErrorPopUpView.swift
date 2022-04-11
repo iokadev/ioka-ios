@@ -32,8 +32,8 @@ internal class ErrorPopUpView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configureView(error: IokaError) {
-        self.errorDescriptionLabel.text = error.message
+    public func configureView(error: Error) {
+        self.errorDescriptionLabel.text = error.localizedDescription
     }
     
     private func setActions() {

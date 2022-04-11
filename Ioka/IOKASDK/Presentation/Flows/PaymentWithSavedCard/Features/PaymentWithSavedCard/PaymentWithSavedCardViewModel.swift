@@ -14,9 +14,9 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     var state: ProgressViewModelState
     var repository: OrderRepository
     var orderAccessToken: AccessToken
-    var card: GetCardResponse
+    var card: SavedCardDTO
     
-    init(delegate: PaymentWithSavedCardNavigationDelegate, repository: OrderRepository, orderAccessToken: AccessToken, card: GetCardResponse) {
+    init(delegate: PaymentWithSavedCardNavigationDelegate, repository: OrderRepository, orderAccessToken: AccessToken, card: SavedCardDTO) {
         self.state = .progress
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken

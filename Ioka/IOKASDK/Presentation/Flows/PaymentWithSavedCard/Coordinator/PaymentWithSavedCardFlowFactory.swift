@@ -11,7 +11,8 @@ internal struct PaymentWithSavedCardFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
     let viewController: UIViewController
-    let cardResponse: GetCardResponse
+    let cardResponse: SavedCardDTO
+    let theme: Theme
 }
 
 
@@ -27,23 +28,23 @@ internal class PaymentWithSavedCardFlowFactory {
     
     
     func makeOrderForPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse)
+        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse, theme: input.theme)
     }
     
     func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {
-        featuresFactory.makeSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository())
+        featuresFactory.makeSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository(), theme: input.theme)
     }
     
     func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, paymentId: String) -> ThreeDSecureViewController {
-        featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId)
+        featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId, theme: input.theme)
     }
     
     func makePaymentResult(delegate: PaymentWithSavedCardNavigationDelegate) -> PaymentResultViewController {
-        featuresFactory.makePaymentResult(delegate, nil)
+        featuresFactory.makePaymentResult(delegate, nil, theme: input.theme)
     }
     
     func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate) -> ErrorPopUpViewController {
-        featuresFactory.makePaymentResultPopup(delegate: delegate)
+        featuresFactory.makePaymentResultPopup(delegate: delegate, theme: input.theme)
     }
     
     func paymentRepository() -> PaymentRepository {
@@ -55,6 +56,6 @@ internal class PaymentWithSavedCardFlowFactory {
     }
     
     private lazy var api: IokaAPIProtocol = {
-        API(apiKey: input.setupInput.apiKey)
+        IokaApi(apiKey: input.setupInput.apiKey)
     }()
 }

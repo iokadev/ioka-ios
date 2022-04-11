@@ -237,7 +237,7 @@ extension CardFormView: UITextFieldDelegate {
 
 extension CardFormView: ErrorToastViewDelegate {
     
-    public func showErrorView(error: IokaError) {
+    public func showErrorView(error: Error) {
         DispatchQueue.main.async {
             self.errorView.error = error
             UIView.animate(withDuration: 1.0) {

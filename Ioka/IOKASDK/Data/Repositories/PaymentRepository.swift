@@ -1,9 +1,6 @@
 //
 //  PaymentRepository.swift
 //  IOKA
-//
-//  Created by Тимур Табынбаев on 04.04.2022.
-//
 
 import Foundation
 
@@ -14,15 +11,9 @@ internal final class PaymentRepository {
         self.api = api
     }
     
-    func createCardPayment(orderAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<Payment, Error>) -> Void) {
+    func createCardPayment(orderAccessToken: AccessToken, cardParameters: CardParameters, completion: @escaping (Result<Payment, Error>) -> Void) {
         api.createCardPayment(orderAccessToken: orderAccessToken,
                               card: cardParameters) { result in
-            completion(result.toPaymentResult())
-        }
-    }
-    
-    func createSavedCardPayment(orderAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<Payment, Error>) -> Void) {
-        api.createCardPayment(orderAccessToken: orderAccessToken, card: cardParameters) { result in
             completion(result.toPaymentResult())
         }
     }

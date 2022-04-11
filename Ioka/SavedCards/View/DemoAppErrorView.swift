@@ -14,7 +14,7 @@ internal protocol DemoAppErrorViewDelegate: NSObject {
 internal class DemoAppErrorView: UIView {
     
     public weak var delegate: DemoAppErrorViewDelegate?
-    public var error: IokaError? {
+    public var error: Error? {
         didSet {
             configureErrorView(error: error)
         }
@@ -33,14 +33,14 @@ internal class DemoAppErrorView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureErrorView(error: IokaError?) {
+    private func configureErrorView(error: Error?) {
         
         if let error = error {
-            self.errorLabel.text = error.message
-            self.backgroundColor = colors.error
+            self.errorLabel.text = error.localizedDescription
+            self.backgroundColor = DemoAppColors.error
         } else {
             self.errorLabel.text = "карта удалена"
-            self.backgroundColor = colors.success
+            self.backgroundColor = DemoAppColors.success
         }
         
     }

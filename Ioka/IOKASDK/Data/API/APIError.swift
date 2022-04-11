@@ -7,16 +7,6 @@
 
 import Foundation
 
-internal typealias IokaError = Error
-
-internal extension IokaError {
-    var message: String {
-        return localizedDescription
-    }
-}
-
-// выше - заглушки, чтобы компилятор не ругался. По факту нужно будет по всему проекту заменить IokaError на Error
-
 internal struct APIError: LocalizedError, Decodable {
     let code: String
     let message: String

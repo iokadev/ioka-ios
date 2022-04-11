@@ -18,4 +18,7 @@ internal struct SavedCard {
     
     let status: Status
     let id: String
+    var paymentSystem: String?
+    var emitter: String?
+    var holder: String?
 }

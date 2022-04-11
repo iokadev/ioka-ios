@@ -11,7 +11,7 @@ import Foundation
 internal class SavedCardsViewModel {
     
     
-    func getCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?) -> Void) {
+    func getCards(customerAccessToken: String, completion: @escaping([SavedCardDTO]?) -> Void) {
         let queue = DispatchQueue.global(qos: .userInitiated)
         queue.async {
             Ioka.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] result in

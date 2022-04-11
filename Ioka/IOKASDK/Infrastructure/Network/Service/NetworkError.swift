@@ -1,9 +1,6 @@
 //
 //  NetworkError.swift
 //  IOKA
-//
-//  Created by Тимур Табынбаев on 04.04.2022.
-//
 
 import Foundation
 
@@ -20,17 +17,17 @@ internal enum NetworkError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .noData:
-            return ""
+            return "Нет данных от сервера"
         case .decodingError:
-            return ""
+            return "Неверный формат данных"
         case .invalidHTTPStatusCode:
-            return ""
+            return "Неизвестная ошибка"
         case .parameterNil:
-            return ""
+            return "Неизвестная ошибка"
         case .encodingFailed:
-            return ""
+            return "Неизвестная ошибка"
         case .missingUrl:
-            return ""
+            return "Неизвестная ошибка"
         case .urlError(let error):
             return error.localizedDescription
         case .other(let error):

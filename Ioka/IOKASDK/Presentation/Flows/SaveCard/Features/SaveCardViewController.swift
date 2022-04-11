@@ -15,10 +15,11 @@ internal enum SaveCardStatus {
 
 internal class SaveCardViewController: IokaViewController {
     
-    public var onButtonPressed: ((PaymentResult, IokaError?, PaymentDTO?) -> Void)?
+    public var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!
+    var theme: Theme!
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
    
 
@@ -124,7 +125,7 @@ extension SaveCardViewController: CardFormViewDelegate {
     }
     
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
-        let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
+        let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
         
         viewModel.saveCard(card: card)
     }

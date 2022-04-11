@@ -22,8 +22,8 @@ internal final class OrderRepository {
         }
     }
     
-    func createPayment(orderAccessToken: AccessToken, card: GetCardResponse, completion: @escaping(Result<Payment, Error>) -> Void) {
-        let card = Card(cardId: card.id)
+    func createPayment(orderAccessToken: AccessToken, card: SavedCardDTO, completion: @escaping(Result<Payment, Error>) -> Void) {
+        let card = CardParameters(cardId: card.id)
         api.createCardPayment(orderAccessToken: orderAccessToken, card: card) { result in
             completion(result.toPaymentResult())
         }
@@ -31,7 +31,7 @@ internal final class OrderRepository {
 }
 
 
-extension Result where Success == GetOrderResponse {
+extension Result where Success == OrderDTO {
     func toOrderResult() -> Result<Order, Error> {
         Result<Order, Error> {
             switch self {

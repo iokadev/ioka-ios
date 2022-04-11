@@ -13,7 +13,6 @@ internal struct Order {
     let id: String
     var externalId: String?
     var hasCustomerId: Bool
-    var isExpired: Bool = false
-    var isPaid: Bool = false
     var price: Int
+    var currency: String
 }

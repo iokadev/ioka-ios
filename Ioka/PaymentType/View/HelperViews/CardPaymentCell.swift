@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 internal protocol CardPaymentCellDelegate: NSObject {
-    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: GetCardResponse)
+    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: SavedCardDTO)
 }
 
 internal class CardPaymentCell: UITableViewCell {
@@ -21,7 +21,7 @@ internal class CardPaymentCell: UITableViewCell {
     let checkImageView = IokaImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: CardPaymentCellDelegate?
-    private var cardResponse: GetCardResponse?
+    private var cardResponse: SavedCardDTO?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -33,7 +33,7 @@ internal class CardPaymentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(model: GetCardResponse, delegate: CardPaymentCellDelegate) {
+    public func configure(model: SavedCardDTO, delegate: CardPaymentCellDelegate) {
         self.delegate = delegate
         self.cardResponse = model
         self.panMaskedLabel.text = model.pan_masked.trimPanMasked()
@@ -76,10 +76,10 @@ internal class CardPaymentCell: UITableViewCell {
         cardBrandImageView.contentMode = .scaleAspectFit
         [cardBrandImageView, panMaskedLabel, checkImageView].forEach{ self.contentView.addSubview($0) }
         
-        cardBrandImageView.anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, bottom: self.contentView.bottomAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 16, width: 24, height: 24)
+        cardBrandImageView.centerY(in: self, left: self.contentView.leftAnchor, paddingLeft: 16, width: 24, height: 24)
         
-        panMaskedLabel.centerY(in: self.contentView, left: cardBrandImageView.rightAnchor, paddingLeft: 12)
+        panMaskedLabel.centerY(in: self, left: cardBrandImageView.rightAnchor, paddingLeft: 12)
         
-        checkImageView.centerY(in: self.contentView, right: self.contentView.rightAnchor, paddingRight: 16, width: 24, height: 24)
+        checkImageView.centerY(in: self, right: self.contentView.rightAnchor, paddingRight: 16, width: 24, height: 24)
     }
 }

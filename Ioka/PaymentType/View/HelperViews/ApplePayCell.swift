@@ -67,10 +67,10 @@ internal class ApplePayCell: UITableViewCell {
         applePayImageView.contentMode = .scaleAspectFit
         [applePayImageView, applePayLabel, checkImageView].forEach{ self.contentView.addSubview($0) }
         
-        applePayImageView.anchor(top: self.contentView.topAnchor, left: self.contentView.leftAnchor, bottom: self.contentView.bottomAnchor, paddingTop: 16, paddingLeft: 16, paddingBottom: 16, width: 24, height: 24)
+        applePayImageView.centerY(in: self, left: self.contentView.leftAnchor, paddingLeft: 16, width: 24, height: 24)
         
-        applePayLabel.centerY(in: applePayImageView, left: applePayImageView.rightAnchor, paddingLeft: 12)
+        applePayLabel.centerY(in: self, left: applePayImageView.rightAnchor, paddingLeft: 12)
         
-        checkImageView.centerY(in: self.contentView, right: self.contentView.rightAnchor, paddingRight: 16, width: 24, height: 24)
+        checkImageView.centerY(in: self, right: self.contentView.rightAnchor, paddingRight: 16, width: 24, height: 24)
     }
 }

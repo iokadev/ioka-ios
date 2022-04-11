@@ -14,7 +14,7 @@ internal protocol ErrorToastViewDelegate: NSObject {
 internal class ErrorToastView: UIView {
     
     public weak var delegate: ErrorToastViewDelegate?
-    public var error: IokaError? {
+    public var error: Error? {
         didSet {
             configureErrorView(error: error)
         }
@@ -33,7 +33,7 @@ internal class ErrorToastView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func configureErrorView(error: IokaError?) {
+    private func configureErrorView(error: Error?) {
         self.errorLabel.text = IokaLocalizable.serverError
     }
     

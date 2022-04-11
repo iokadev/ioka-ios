@@ -10,5 +10,5 @@ import Foundation
 internal struct SaveCardFlowInput {
     let setupInput: SetupInput
     let customerAccesstoken: AccessToken
-    let hideSaveCardCheckbox: Bool
+    var theme: Theme
 }

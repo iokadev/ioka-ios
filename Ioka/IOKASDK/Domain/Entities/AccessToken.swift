@@ -1,10 +1,6 @@
 //
 //  AccessToken.swift
 //  IOKA
-//
-//  Created by Тимур Табынбаев on 05.04.2022.
-//
-
 import Foundation
 
 internal struct AccessToken {

@@ -44,30 +44,24 @@ internal class IokaButton: UIButton {
     }
     
     public func showSuccess() {
-        DispatchQueue.main.async {
-            self.setImage(IokaImages.mark, for: .normal)
-        }
+        self.setImage(IokaImages.mark, for: .normal)
     }
 
     public func showLoading() {
-        DispatchQueue.main.async {
-            self.title = self.titleLabel?.text
-            self.setTitle("", for: .normal)
-            let activityIndicator = self.createActivityIndicator()
-            
-            self.showSpinning(activityIndicator)
-        }
+        self.title = self.titleLabel?.text
+        self.setTitle("", for: .normal)
+        let activityIndicator = self.createActivityIndicator()
+        
+        self.showSpinning(activityIndicator)
     }
 
     public func hideLoading(showTitle: Bool) {
-        DispatchQueue.main.async {
-            self.activityIndicator.stopAnimating()
-            switch showTitle {
-            case true:
-                self.setTitle(self.title, for: .normal)
-            case false:
-                self.setTitle("", for: .normal)
-            }
+        self.activityIndicator.stopAnimating()
+        switch showTitle {
+        case true:
+            self.setTitle(self.title, for: .normal)
+        case false:
+            self.setTitle("", for: .normal)
         }
     }
 
@@ -87,15 +81,19 @@ internal class IokaButton: UIButton {
         switch state {
         case .disabled:
             self.backgroundColor = colors.grey
+            self.isUserInteractionEnabled = false
         case .enabled:
             self.backgroundColor = colors.primary
+            self.isUserInteractionEnabled = true
         case .savingSuccess:
             self.backgroundColor = colors.success
             self.hideLoading(showTitle: true)
+            self.isUserInteractionEnabled = true
             showSuccess()
         case .savingFailure:
             hideLoading(showTitle: true)
             self.backgroundColor = colors.grey
+            self.isUserInteractionEnabled = false
         }
     }
     

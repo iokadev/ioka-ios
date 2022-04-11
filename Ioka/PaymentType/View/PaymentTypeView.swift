@@ -10,7 +10,7 @@ import UIKit
 
 internal enum PaymentTypeState {
     case applePay(title: String)
-    case savedCard(card: GetCardResponse)
+    case savedCard(card: SavedCardDTO)
     case creditCard(title: String)
     case cash(title: String)
     case empty
@@ -50,7 +50,7 @@ internal class PaymentTypeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func reloadTableView(models: [GetCardResponse]) {
+    public func reloadTableView(models: [SavedCardDTO]) {
         
         UIView.animate(withDuration: 0.5) { [weak self] in
             DispatchQueue.main.async {
@@ -71,7 +71,7 @@ internal class PaymentTypeView: UIView {
         delegate?.saveButtonWasPressed(self, state: paymentTypeState)
     }
     
-    public func setupUI(models: [GetCardResponse]) {
+    public func setupUI(models: [SavedCardDTO]) {
         self.backgroundColor = DemoAppColors.secondaryBackground
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
@@ -103,7 +103,7 @@ extension PaymentTypeView: PayWithCashViewDelegate, BankCardViewDelegate, AppleP
         payWithCashView.isPayWithCashSelected = false
     }
     
-    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: GetCardResponse) {
+    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: SavedCardDTO) {
         guard isPayWithCashSelected else { return }
         self.paymentTypeState = .savedCard(card: cardResponse)
         bankCardView.uncheckView()

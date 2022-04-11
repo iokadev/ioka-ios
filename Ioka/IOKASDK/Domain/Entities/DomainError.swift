@@ -1,9 +1,6 @@
 //
 //  DomainError.swift
 //  IOKA
-//
-//  Created by Тимур Табынбаев on 05.04.2022.
-//
 
 import Foundation
 
@@ -16,8 +13,16 @@ internal enum DomainError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        default:
-            return ""
+        case .invalidTokenFormat:
+            return "Некорректный формат токена"
+        case .invalidPaymentStatus:
+            return "Некорректный статус платежа"
+        case .noErrorForDeclinedStatus:
+            return "Остутствует объект ошибки для статуса Declined"
+        case .noActionForRequiresActionStatus:
+            return "Отсутствует объект Action для статуса RequiresAction"
+        case .invalidActionUrl:
+            return "Некорректный Action URL"
         }
     }
 }

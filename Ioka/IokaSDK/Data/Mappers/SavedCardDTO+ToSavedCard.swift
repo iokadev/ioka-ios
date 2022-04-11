@@ -8,9 +8,9 @@
 import Foundation
 
 
-extension GetCardResponse {
+extension SavedCardDTO {
     func toSavedCard() throws -> SavedCard {
-        SavedCard(status: try status!.toSavedCardStatus(error: error, actionDTO: action), id: id)
+        SavedCard(status: try status!.toSavedCardStatus(error: error, actionDTO: action), id: id, paymentSystem: payment_system, emitter: emitter, holder: holder)
     }
 }
 

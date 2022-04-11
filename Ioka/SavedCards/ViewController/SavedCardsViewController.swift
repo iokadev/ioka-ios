@@ -10,7 +10,7 @@ import UIKit
 
 internal class SavedCardsViewController: UIViewController {
     
-    var models = [GetCardResponse]()
+    var models = [SavedCardDTO]()
     
     let tableView = UITableView()
     let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.tertiaryBackground, cornerRadius: 8)
@@ -89,7 +89,7 @@ extension SavedCardsViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTableViewCellDelegate {
-    func deleteCard(_ view: GetCardTableViewCell, card: GetCardResponse) {
+    func deleteCard(_ view: GetCardTableViewCell, card: SavedCardDTO) {
         let vc = DeleteSavedCardViewController()
         vc.card = card
         vc.delegate = self
@@ -99,7 +99,7 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
     }
     
     func viewTapped(_ view: AddNewCardTableViewCell) {
-        Ioka.shared.startSaveCardFlow(viewController: self, customerAccessToken: customerAccessToken) { result in
+        Ioka.shared.startSaveCardFlow(sourceViewController: self, customerAccessToken: customerAccessToken) { result in
             
         }
     }
@@ -111,7 +111,7 @@ extension SavedCardsViewController: DeleteSavedCardViewControllerDelegate, DemoA
         resultView.removeFromSuperview()
     }
     
-    func closeDeleteCardViewController(_ viewController: UIViewController, card: GetCardResponse, error: IokaError?) {
+    func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCardDTO, error: Error?) {
         switch error {
         case .some(let error):
             resultView.error = error

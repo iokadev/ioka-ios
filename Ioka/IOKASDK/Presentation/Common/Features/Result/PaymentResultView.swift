@@ -120,7 +120,7 @@ internal class PaymentResultView: UIView {
     
     private func setPaymentData() {
         if let error = error {
-            errorDescriptionLabel.text = error.message
+            errorDescriptionLabel.text = error.localizedDescription
         }
     }
     

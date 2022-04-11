@@ -15,11 +15,11 @@ internal final class SavedCardRepository {
         self.api = api
     }
     
-    func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[GetCardResponse], Error>) -> Void) {
+    func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[SavedCardDTO], Error>) -> Void) {
         api.getCards(customerAccessToken: customerAccessToken, completion: completion)
     }
     
-    func saveCard(customerAccessToken: AccessToken, cardParameters: Card, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+    func saveCard(customerAccessToken: AccessToken, cardParameters: CardParameters, completion: @escaping (Result<SavedCard, Error>) -> Void) {
         api.createBinding(customerAccessToken: customerAccessToken, card: cardParameters) { result in
             completion(result.toSavedCardsResult())
         }
@@ -32,7 +32,7 @@ internal final class SavedCardRepository {
     }
 }
 
-extension Result where Success == GetCardResponse {
+extension Result where Success == SavedCardDTO {
     func toSavedCardsResult() -> Result<SavedCard, Error> {
         Result<SavedCard, Error> {
             switch self {

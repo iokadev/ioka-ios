@@ -19,6 +19,7 @@ internal class PaymentResultViewController: IokaViewController {
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var error: Error?
     var order: Order?
+    var theme: Theme!
     var paymentResult: PaymentResult!
     
     override func loadView() {
@@ -31,7 +32,7 @@ internal class PaymentResultViewController: IokaViewController {
         feedbackGenerator.impactOccurred()
     }
     
-    func configure(error: IokaError? = nil, order: Order? = nil) {
+    func configure(error: Error? = nil, order: Order? = nil) {
         if let error = error {
             contentView.configureView(error: error, paymentResult: .paymentFailed)
         } else if let order = order {

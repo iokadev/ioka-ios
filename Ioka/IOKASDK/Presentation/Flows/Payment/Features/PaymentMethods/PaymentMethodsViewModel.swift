@@ -27,7 +27,7 @@ internal class PaymentMethodsViewModel {
     let orderAccessToken: AccessToken
     let order: Order
     var childViewModel: CardFormViewModel
-    var cardPaymentFailure: ((IokaError?) -> Void)?
+    var cardPaymentFailure: ((Error?) -> Void)?
     
     
     init(repository: PaymentRepository, delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order) {
@@ -40,7 +40,7 @@ internal class PaymentMethodsViewModel {
     
 
     
-    func createCardPayment(card: Card) {
+    func createCardPayment(card: CardParameters) {
         repository.createCardPayment(orderAccessToken: orderAccessToken, cardParameters: card) { result in
             switch result {
             case .success(let payment):

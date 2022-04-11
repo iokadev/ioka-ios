@@ -32,7 +32,7 @@ internal class DeleteSavedCardView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuredeleteCardView(card: GetCardResponse?) {
+    func configuredeleteCardView(card: SavedCardDTO?) {
         guard let card = card else { return }
         self.title.text =  "Вы уверены, что хотите удалить карту \(card.pan_masked.trimPanMasked())?"
     }

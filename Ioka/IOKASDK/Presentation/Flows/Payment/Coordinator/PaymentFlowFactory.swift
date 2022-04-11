@@ -18,19 +18,19 @@ internal class PaymentFlowFactory {
     }
     
     func makeOrderForPayment(delegate: PaymentMethodsNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository())
+        featuresFactory.makeOrderForPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), theme: input.theme)
     }
     
     func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, order: Order) -> PaymentMethodsViewController {
-        featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository())
+        featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository(), theme: input.theme)
     }
     
     func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, paymentId: String) -> ThreeDSecureViewController {
-        featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId)
+        featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId, theme: input.theme)
     }
     
     func makePaymentResult(delegate: PaymentMethodsNavigationDelegate) -> PaymentResultViewController {
-        featuresFactory.makePaymentResult(nil, delegate)
+        featuresFactory.makePaymentResult(nil, delegate, theme: input.theme)
     }
     
     func paymentRepository() -> PaymentRepository {
@@ -42,6 +42,6 @@ internal class PaymentFlowFactory {
     }
     
     private lazy var api: IokaAPIProtocol = {
-        API(apiKey: input.setupInput.apiKey)
+        IokaApi(apiKey: input.setupInput.apiKey)
     }()
 }

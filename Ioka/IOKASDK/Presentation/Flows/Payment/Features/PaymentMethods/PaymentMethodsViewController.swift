@@ -11,6 +11,7 @@ internal class PaymentMethodsViewController: IokaViewController {
     
     private lazy var contentView = CardFormView(state: .payment, price: viewModel.order.price)
     var viewModel: PaymentMethodsViewModel!
+    var theme: Theme!
     
     override func loadView() {
         self.view = contentView
@@ -103,7 +104,7 @@ extension PaymentMethodsViewController: CardFormViewDelegate {
     }
     
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
-        let card = Card(pan: cardNumber, exp: exp, cvc: cvc)
+        let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
         viewModel.createCardPayment(card: card)
     }
 }

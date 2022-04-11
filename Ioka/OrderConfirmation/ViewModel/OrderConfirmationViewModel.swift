@@ -36,7 +36,7 @@ internal class OrderConfirmationViewModel {
         }
     }
     
-    func getSavedCards(customerAccessToken: String, completion: @escaping([GetCardResponse]?, IokaError?) -> Void) {
+    func getSavedCards(customerAccessToken: String, completion: @escaping([SavedCardDTO]?, Error?) -> Void) {
         Ioka.shared.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
             guard let _ = self else { return }
             switch result {

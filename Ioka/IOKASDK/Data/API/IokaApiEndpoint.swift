@@ -16,10 +16,10 @@ internal enum AuthenticationKeys {
 internal enum IokaApiEndpointType {
     case getBrand(partialBin: String)
     case getEmitterByBinCode(binCode: String)
-    case createCardPayment(orderAccessToken: AccessToken, card: Card)
+    case createCardPayment(orderAccessToken: AccessToken, card: CardParameters)
     case getPaymentByID(orderAccessToken: AccessToken, paymentId: String)
     case getCards(customerAccessToken: AccessToken)
-    case createBinding(customerAccessToken: AccessToken, card: Card)
+    case createBinding(customerAccessToken: AccessToken, card: CardParameters)
     case getCardByID(customerAccessToken: AccessToken, cardId: String)
     case deleteCardByID(customerAccessToken: AccessToken, cardId: String)
     case getOrderByID(orderAccessToken: AccessToken)

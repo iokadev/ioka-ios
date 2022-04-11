@@ -28,6 +28,7 @@ internal class ThreeDSecureViewModel {
     var cardId: String?
     var paymentId: String?
     
+    var showError: ((Error) -> Void)?
     
     init(delegate: ThreeDSecureNavigationDelegate, state: ThreeDSecureState, cardId: String?, paymentId: String?) {
         self.delegate = delegate
@@ -44,6 +45,14 @@ internal class ThreeDSecureViewModel {
         case .payment(let repository, let orderAccessToken):
             guard let paymentId = paymentId else { return }
             getPayment(repository: repository, orderAccessToken: orderAccessToken, paymentId: paymentId)
+        }
+    }
+    
+    func checkReturnUrl(_ url: URL?) -> Bool {
+        if url == URL(string: "https://ioka.kz/") {
+            return true
+        } else {
+            return false
         }
     }
     
@@ -80,7 +89,7 @@ internal class ThreeDSecureViewModel {
                     self.delegate?.dismissThreeDSecure()
                 }
             case .failure(let error):
-                self.delegate?.dismissThreeDSecure(error: error)
+                self.showError?(error)
             }
         }
     }

@@ -32,7 +32,7 @@ internal class SaveCardViewModel {
         self.childViewModel = CardFormViewModel(api: repository.api)
     }
     
-    func saveCard(card: Card) {
+    func saveCard(card: CardParameters) {
         
         repository.saveCard(customerAccessToken: customerAccessToken, cardParameters: card) {[weak self] result in
             guard let self = self else { return }
