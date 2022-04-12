@@ -54,7 +54,12 @@ internal class ViewControllerProgressWrapper {
     func setUI() {
         errorView.isHidden = true
         self.viewController.navigationController?.view.addSubview(errorView)
-        self.errorView.anchor(left: self.viewController.view.leftAnchor, bottom: viewController.view.bottomAnchor, right: viewController.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
+        self.errorView.anchor(left: self.viewController.navigationController?.view.leftAnchor,
+                              bottom: viewController.navigationController?.view.bottomAnchor,
+                              right: viewController.navigationController?.view.rightAnchor,
+                              paddingLeft: 16,
+                              paddingBottom: 114,
+                              paddingRight: 16)
         
         self.viewController.navigationController?.view.addSubview(progressView)
         progressView.fillView(viewController.view)
