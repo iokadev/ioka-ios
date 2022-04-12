@@ -1,0 +1,41 @@
+/*
+  Localizable.strings
+  iOKA
+
+  Created by ablai erzhanov on 23.03.2022.
+  
+*/
+
+
+"saveCard" = "Сохранить карту";
+"transactionProtected" = "Все транзакции защищены";
+"pay" = "Оплатить";
+"enterCardNumber" = "Введите номер карты";
+"cardExpiration" = "ММ/ГГ";
+"cvv" = "CVV";
+"priceTng" = "К оплате %@ ₸";
+"orPayCard" = "Или оплатите картой";
+"serverError"= "Ошибка на стороне сервера. Попробуйте позже";
+"cvvExplained" = "3 цифры на обороте карты";
+"newCard" = "Новая карта";
+
+"cardScan" = "Сканирование карты";
+"cardScanExplained" = "Поместите карту в рамку,она считается автоматически";
+"scanAgain" = "Отсканировать еще раз";
+"everythingRight" = "Все верно";
+"checkCardNymber" = "Проверьте номер карты";
+
+"orderPaid" = "Заказ оплачен";
+"ok" = "Понятно";
+"paymentFailed" = "Платеж не прошел";
+"retry" = "Попробовать заново";
+"orderNumber" = "Заказ №%@";
+
+
+"paymentConfirmation" = "Подтверждение оплаты";
+"continueButton" = "Продолжить";
+
+"save" = "Сохранить";
+
+"paymentProcessing" = "Проводим оплату";
+"goPayment" = "Переходим к оплате";
