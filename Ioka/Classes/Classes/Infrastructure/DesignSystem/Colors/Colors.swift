@@ -25,11 +25,6 @@ public struct Colors {
     var grey: UIColor
 }
 
-
-//extension Colors {
-//    static public var defaultTheme = Colors(nonadaptableText: UIColor(named: "nonadaptableText")!, background: UIColor(named: "Background")!, text: UIColor(named: "Text")!, divider: UIColor(named: "Divider")!, fill4: UIColor(named: "Fill4")!, secondaryBackground: UIColor(named: "SecondaryBackground")!, tertiaryBackground: UIColor(named: "TertiaryBackground")!, foreground: UIColor(named: "Foreground")!, primary: UIColor(named: "Primary")!, secondary: UIColor(named: "Secondary")!, error: UIColor(named: "Error")!, success: UIColor(named: "Success")!, grey: UIColor(named: "Grey")!)
-//}
-
 extension Colors {
     static public var defaultTheme = Colors(
         nonadaptableText: UIColor(named: "nonadaptableText", in: IokaBundle.bundle, compatibleWith: nil)!,
@@ -49,12 +44,16 @@ extension Colors {
 
 
 final class IokaBundle {
-   
     static let bundle: Bundle = {
-        
-        guard let bundle = Bundle(identifier: "Ioka") else { return Bundle(for: IokaBundle.self)}
+        let myBundle = Bundle(for: IokaBundle.self)
 
-        return bundle
+        guard let resourceBundleURL = myBundle.url(
+            forResource: “Ioka”, withExtension: "bundle")
+            else { fatalError(“Ioka.bundle not found") }
+
+        guard let resourceBundle = Bundle(url: resourceBundleURL)
+            else { fatalError("Cannot access Ioka.bundle") }
+
+        return resourceBundle
     }()
 }
-
