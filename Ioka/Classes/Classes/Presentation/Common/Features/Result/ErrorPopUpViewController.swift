@@ -7,10 +7,10 @@
 
 import UIKit
 
-internal class ErrorPopUpViewController: IokaViewController {
+internal class ErrorPopUpViewController: UIViewController {
     
     var viewModel: ErrorPopUpViewModel!
-    var theme: Theme!
+    var theme: IokaTheme!
     private let contentView = ErrorPopUpView()
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     

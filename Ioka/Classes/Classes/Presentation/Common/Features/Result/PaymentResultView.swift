@@ -132,7 +132,7 @@ internal class PaymentResultView: UIView {
         if let orderNumber = order.externalId {
             orderNumberLabel.text = String(format: locale, orderNumber)
         } else {
-            orderNumberLabel.text = String(format: locale, order.id)
+            orderNumberLabel.isHidden = true
         }
         
     }

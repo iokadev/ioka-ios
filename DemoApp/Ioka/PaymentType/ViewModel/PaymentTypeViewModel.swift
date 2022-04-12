@@ -12,7 +12,6 @@ internal class PaymentTypeViewModel {
         
 
             Ioka.shared.getCards(customerAccessToken: customerAccessToken) {[weak self] result in
-                print(result)
                 guard let _ = self else { return }
                 switch result {
                 case .success(let cards):

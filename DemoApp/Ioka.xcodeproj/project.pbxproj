@@ -67,7 +67,6 @@
 		6DB0A32527FBA8A1008A8381 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */; };
 		6DB0A32627FBA8A1008A8381 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */; };
 		6DB0A32827FBA8A1008A8381 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2A627FBA8A1008A8381 /* Theme.swift */; };
-		6DB0A33427FBA8A2008A8381 /* IokaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */; };
 		6DB0A33827FBA8A2008A8381 /* SaveCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2BE27FBA8A1008A8381 /* SaveCardCoordinator.swift */; };
 		6DB0A33B27FBA8A2008A8381 /* ErrorPopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2C227FBA8A1008A8381 /* ErrorPopUpViewModel.swift */; };
 		6DB0A33E27FBA8A2008A8381 /* CardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A2C527FBA8A1008A8381 /* CardFormViewModel.swift */; };
@@ -211,7 +210,6 @@
 		6DB0A2A227FBA8A1008A8381 /* CodableExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
 		6DB0A2A327FBA8A1008A8381 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		6DB0A2A627FBA8A1008A8381 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaViewController.swift; sourceTree = "<group>"; };
 		6DB0A2BE27FBA8A1008A8381 /* SaveCardCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveCardCoordinator.swift; sourceTree = "<group>"; };
 		6DB0A2C227FBA8A1008A8381 /* ErrorPopUpViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorPopUpViewModel.swift; sourceTree = "<group>"; };
 		6DB0A2C527FBA8A1008A8381 /* CardFormViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardFormViewModel.swift; sourceTree = "<group>"; };
@@ -1054,7 +1052,6 @@
 		6DCA1F3027FFE93200ACDAF3 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A2B827FBA8A1008A8381 /* IokaViewController.swift */,
 				6DB0A2D527FBA8A1008A8381 /* ErrorToastView.swift */,
 				6DB0A2D627FBA8A1008A8381 /* IokaProgressView.swift */,
 				6DB0A2DC27FBA8A1008A8381 /* ProgressWrapperView.swift */,
@@ -1286,7 +1283,6 @@
 				6DB0A34E27FBA8A2008A8381 /* 3DSecureNavigationView.swift in Sources */,
 				6DB0A3CE27FBF8A3008A8381 /* PaymentMethodsViewController.swift in Sources */,
 				6DB0A31127FBA8A1008A8381 /* IokaButton.swift in Sources */,
-				6DB0A33427FBA8A2008A8381 /* IokaViewController.swift in Sources */,
 				6DCA1F2327FD542000ACDAF3 /* PaymentWithSavedCardViewModel.swift in Sources */,
 				6DB0A35627FBA8A2008A8381 /* IokaIcons.swift in Sources */,
 				6DB0A31827FBA8A1008A8381 /* GetBrandResponse.swift in Sources */,
@@ -1485,7 +1481,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ioka.Ioka;
+				PRODUCT_BUNDLE_IDENTIFIER = Ioka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1516,7 +1512,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = Ioka.Ioka;
+				PRODUCT_BUNDLE_IDENTIFIER = Ioka;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

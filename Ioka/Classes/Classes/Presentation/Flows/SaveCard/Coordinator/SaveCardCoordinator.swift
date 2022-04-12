@@ -32,23 +32,25 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
     
     func showSaveCardFlow() {
         let vc = factory.makeSaveCard(delegate: self)
+        vc.modalPresentationStyle = .overFullScreen
         self.saveCardViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func show3DSecure(url: URL, cardId: String) {
         let vc = factory.make3DSecure(delegate: self, url: url, cardId: cardId)
+        vc.modalPresentationStyle = .overFullScreen
         self.threeDSecureViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func dismiss3DSecure() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != threeDSecureViewController }
+        self.navigationController.dismiss(animated: false)
         
     }
     
     func dismissSaveCard() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != saveCardViewController }
+        self.navigationController.dismiss(animated: false)
     }
 }
 

@@ -22,7 +22,7 @@ internal struct FeaturesFactory {
     
     // MARK: - Features
     
-    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository, theme: Theme) -> PaymentMethodsViewController {
+    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository, theme: IokaTheme) -> PaymentMethodsViewController {
         let viewModel = PaymentMethodsViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken, order: order)
         let vc = PaymentMethodsViewController()
         vc.viewModel = viewModel
@@ -30,21 +30,21 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makeOrderForPayment(viewController: UIViewController,delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, theme: Theme) -> ViewControllerProgressWrapper{
+    func makeOrderForPayment(viewController: UIViewController,delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, theme: IokaTheme) -> ViewControllerProgressWrapper{
         let viewModel = OrderForPaymentViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         wrapper.theme = theme
         return wrapper
     }
     
-    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCardDTO, theme: Theme) -> ViewControllerProgressWrapper{
+    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCardDTO, theme: IokaTheme) -> ViewControllerProgressWrapper{
         let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken, card: card)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         wrapper.theme = theme
         return wrapper
     }
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCardDTO, repository: PaymentRepository, theme: Theme) -> CVVViewController {
+    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCardDTO, repository: PaymentRepository, theme: IokaTheme) -> CVVViewController {
         let viewModel = CVVViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
         let vc = CVVViewController()
         vc.card = card
@@ -53,7 +53,7 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makePaymentResult(_ delegateSavedCardPayment: PaymentWithSavedCardNavigationDelegate? , _ delegatePaymentMethods: PaymentMethodsNavigationDelegate?, theme: Theme) -> PaymentResultViewController {
+    func makePaymentResult(_ delegateSavedCardPayment: PaymentWithSavedCardNavigationDelegate? , _ delegatePaymentMethods: PaymentMethodsNavigationDelegate?, theme: IokaTheme) -> PaymentResultViewController {
         let vc = PaymentResultViewController()
         if let delegate = delegateSavedCardPayment {
             let viewModel = PaymentResultViewModel(delegate: delegate)
@@ -68,7 +68,7 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository, theme: Theme) -> SaveCardViewController {
+    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository, theme: IokaTheme) -> SaveCardViewController {
         let viewModel = SaveCardViewModel(delegate: delegate, repository: repository, customerAccessToken: customerAccessToken)
         let vc = SaveCardViewController()
         vc.viewModel = viewModel
@@ -76,7 +76,7 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, state: ThreeDSecureState, url: URL, cardId: String?, paymentId: String?, theme: Theme) -> ThreeDSecureViewController {
+    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, state: ThreeDSecureState, url: URL, cardId: String?, paymentId: String?, theme: IokaTheme) -> ThreeDSecureViewController {
         let vc = ThreeDSecureViewController()
         vc.url = url
         let viewModel = ThreeDSecureViewModel(delegate: delegate, state: state, cardId: cardId, paymentId: paymentId)
@@ -85,7 +85,7 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate,  theme: Theme) -> ErrorPopUpViewController {
+    func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate,  theme: IokaTheme) -> ErrorPopUpViewController {
         let viewModel = ErrorPopUpViewModel(delegate: delegate)
         let vc = ErrorPopUpViewController()
         vc.modalPresentationStyle = .overFullScreen

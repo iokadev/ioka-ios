@@ -14,14 +14,13 @@ internal class ViewControllerProgressWrapper {
     var viewModel: ProgressViewModelProtocol
     private lazy var progressView = ProgressWrapperView(state: .order)
     private lazy var errorView = ErrorToastView()
-    var theme: Theme!
+    var theme: IokaTheme!
     
     init(viewController: UIViewController, viewModel: ProgressViewModelProtocol) {
         self.viewController = viewController
         self.viewModel = viewModel
         viewModel.getOrder()
         setUI()
-        self.viewController.navigationController?.navigationBar.isHidden = true
     }
     
     func startProgress() {
@@ -54,10 +53,10 @@ internal class ViewControllerProgressWrapper {
     
     func setUI() {
         errorView.isHidden = true
-        self.viewController.view.addSubview(errorView)
+        self.viewController.navigationController?.view.addSubview(errorView)
         self.errorView.anchor(left: self.viewController.view.leftAnchor, bottom: viewController.view.bottomAnchor, right: viewController.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
         
-        self.viewController.view.addSubview(progressView)
+        self.viewController.navigationController?.view.addSubview(progressView)
         progressView.fillView(viewController.view)
     }
 }

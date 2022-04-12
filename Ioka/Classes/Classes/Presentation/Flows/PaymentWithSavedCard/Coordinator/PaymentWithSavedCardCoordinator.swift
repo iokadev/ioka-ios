@@ -45,8 +45,9 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     
     func show3DSecureFlow(url: URL, paymentId: String) {
         let vc = factory.make3DSecure(delegate: self, url: url, paymentId: paymentId)
+        vc.modalPresentationStyle = .overFullScreen
         self.threeDSecureViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func showResultFlow(hasError: Bool) {
@@ -55,8 +56,9 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     
     func showPaymentResultFlow() {
         let vc = factory.makePaymentResult(delegate: self)
+        vc.modalPresentationStyle = .overFullScreen
         self.paymentResultViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func showErrorPopupFlow() {
@@ -66,8 +68,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     }
     
     func dismiss3DSecureFlow() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != threeDSecureViewController }
-        
+        self.navigationController.dismiss(animated: false)
     }
     
     func dismissCVVFlow() {
@@ -75,13 +76,12 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     }
     
     func dismissPaymentResultFlow() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != paymentResultViewController }
+        self.navigationController.dismiss(animated: false)
     }
     
     func dismissErorPopupFlow() {
         self.navigationController.dismiss(animated: false)
     }
-    
 }
 
 

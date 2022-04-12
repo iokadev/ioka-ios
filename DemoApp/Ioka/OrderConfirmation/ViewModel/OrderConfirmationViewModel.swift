@@ -19,7 +19,7 @@ internal class OrderConfirmationViewModel {
             case .success(let createOrderResponse):
                 completion(createOrderResponse.order_access_token)
             case .failure(let error):
-                print(error.localizedDescription)
+                var error = error
             }
         }
     }
@@ -31,7 +31,7 @@ internal class OrderConfirmationViewModel {
             case .success(let createOrderResponse):
                 completion(createOrderResponse.customer_access_token)
             case .failure(let error):
-                debugPrint(error.localizedDescription)
+                var error = error
             }
         }
     }

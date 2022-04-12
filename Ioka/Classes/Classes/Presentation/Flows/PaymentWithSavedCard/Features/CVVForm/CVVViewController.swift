@@ -8,7 +8,7 @@
 import UIKit
 
 
-internal class CVVViewController: IokaViewController {
+internal class CVVViewController: UIViewController {
     
     private lazy var contentView = CVVView()
     var card: SavedCardDTO!

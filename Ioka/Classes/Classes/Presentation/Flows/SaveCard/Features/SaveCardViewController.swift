@@ -13,13 +13,13 @@ internal enum SaveCardStatus {
 }
 
 
-internal class SaveCardViewController: IokaViewController {
+internal class SaveCardViewController: UIViewController {
     
     public var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!
-    var theme: Theme!
+    var theme: IokaTheme!
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
    
 

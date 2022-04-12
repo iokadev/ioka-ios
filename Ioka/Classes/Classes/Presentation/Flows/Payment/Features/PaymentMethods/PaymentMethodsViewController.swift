@@ -7,11 +7,11 @@
 
 import UIKit
 
-internal class PaymentMethodsViewController: IokaViewController {
+internal class PaymentMethodsViewController: UIViewController {
     
     private lazy var contentView = CardFormView(state: .payment, price: viewModel.order.price)
     var viewModel: PaymentMethodsViewModel!
-    var theme: Theme!
+    var theme: IokaTheme!
     
     override func loadView() {
         self.view = contentView

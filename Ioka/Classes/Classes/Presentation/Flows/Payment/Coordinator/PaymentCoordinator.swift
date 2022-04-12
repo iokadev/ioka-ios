@@ -38,33 +38,36 @@ internal class PaymentCoordinator: NSObject, Coordinator {
     func showPaymentMethodsFlow() {
         guard let order = order else { return }
         let vc = factory.makePaymentMethods(delegate: self, order: order)
+        vc.modalPresentationStyle = .overFullScreen
         self.paymentMethodsViewController = vc
-        navigationController.pushViewController(vc, animated: false)
+        navigationController.present(vc, animated: false)
     }
     
     func show3DSecureFlow(url: URL, paymentId: String) {
         let vc = factory.make3DSecure(delegate: self, url: url, paymentId: paymentId)
+        vc.modalPresentationStyle = .overFullScreen
         self.threeDSecureViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func showPaymentResultFlow() {
         let vc = factory.makePaymentResult(delegate: self)
+        vc.modalPresentationStyle = .overFullScreen
         self.paymentResultViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.present(vc, animated: false)
     }
     
     func dismiss3DSecureFlow() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != threeDSecureViewController }
+        self.navigationController.dismiss(animated: false)
         
     }
     
     func dismissPaymentMethodsFlow() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != paymentMethodsViewController }
+        self.navigationController.dismiss(animated: false)
     }
     
     func dismissPaymentResultFlow() {
-        self.navigationController.viewControllers = self.navigationController.viewControllers.filter { $0 != paymentResultViewController }
+        self.navigationController.dismiss(animated: false)
     }
     
 }
@@ -81,27 +84,27 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
     }
     
     func dismissPaymentMethodsViewController(_ payment: Payment) {
+        dismissPaymentMethodsFlow()
         showPaymentResultFlow()
         paymentResultViewController?.configure(order: self.order)
-        dismissPaymentMethodsFlow()
     }
     
     func dismissPaymentMethodsViewController(_ action: Action, payment: Payment) {
-        show3DSecureFlow(url: action.url, paymentId: payment.id)
         dismissPaymentMethodsFlow()
+        show3DSecureFlow(url: action.url, paymentId: payment.id)
     }
     
     func dismissPaymentMethodsViewController(_ error: Error) {
+        dismissPaymentMethodsFlow()
         showPaymentResultFlow()
         paymentResultViewController?.configure(error: error)
-        dismissPaymentMethodsFlow()
         resultCompletion?(.failed(error))
     }
     
     func dismissPaymentMethodsViewController(_ apiError: APIError) {
+        dismissPaymentMethodsFlow()
         showPaymentResultFlow()
         paymentResultViewController?.configure(error: apiError)
-        dismissPaymentMethodsFlow()
         resultCompletion?(.failed(apiError))
     }
     
@@ -123,9 +126,9 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
     }
     
     func dismissThreeDSecure(payment: Payment) {
+        dismiss3DSecureFlow()
         showPaymentResultFlow()
         paymentResultViewController?.configure(order: self.order)
-        dismiss3DSecureFlow()
     }
     
     func dismissThreeDSecure(apiError: APIError) {
@@ -136,9 +139,9 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
     }
     
     func dismissThreeDSecure(error: Error) {
-        self.dismiss3DSecureFlow()
         self.showPaymentResultFlow()
         self.paymentResultViewController?.configure(error: error)
+        self.dismiss3DSecureFlow()
         resultCompletion?(.failed(error))
     }
     

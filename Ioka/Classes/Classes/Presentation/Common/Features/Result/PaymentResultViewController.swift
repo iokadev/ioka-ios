@@ -12,14 +12,14 @@ internal enum PaymentResult {
     case paymentFailed
 }
 
-internal class PaymentResultViewController: IokaViewController {
+internal class PaymentResultViewController: UIViewController {
     
     lazy var contentView = PaymentResultView()
     var viewModel: PaymentResultViewModel!
     let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var error: Error?
     var order: Order?
-    var theme: Theme!
+    var theme: IokaTheme!
     var paymentResult: PaymentResult!
     
     override func loadView() {

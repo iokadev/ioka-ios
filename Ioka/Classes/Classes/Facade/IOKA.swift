@@ -12,12 +12,12 @@ import UIKit
 public class Ioka {
     static public let shared = Ioka()
     var setupInput: SetupInput?
-    var theme: Theme = .defaultTheme
+    var theme: IokaTheme = .default
     var currentCoordinator: Coordinator?
     
-    public func setup(apiKey: String, theme: Theme? = .defaultTheme) {
-        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme ?? .defaultTheme)
-        self.theme = theme ?? .defaultTheme
+    public func setup(apiKey: String, theme: IokaTheme = .default) {
+        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme ?? .default)
+        self.theme = theme ?? .default
     }
     
     public func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {

@@ -9,11 +9,11 @@ import UIKit
 import WebKit
 
 
-internal class ThreeDSecureViewController:  IokaViewController, UIScrollViewDelegate {
+internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelegate {
     
     var viewModel: ThreeDSecureViewModel!
     var url: URL!
-    var theme: Theme!
+    var theme: IokaTheme!
     var webView = WKWebView()
     var navView = IokaBrowserNavigationView()
     private lazy var loadingIndicator = IokaProgressView()
