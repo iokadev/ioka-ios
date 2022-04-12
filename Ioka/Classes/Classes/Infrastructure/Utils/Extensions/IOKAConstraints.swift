@@ -89,7 +89,9 @@ internal extension UIView {
         }
     }
     
-    func fillView( _ view: UIView) {
+    func fillView( _ view: UIView?) {
+        guard let view = view else { return }
+
         translatesAutoresizingMaskIntoConstraints = false
         
         anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor)
