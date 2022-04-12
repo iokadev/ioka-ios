@@ -16,8 +16,8 @@ public class Ioka {
     var currentCoordinator: Coordinator?
     
     public func setup(apiKey: String, theme: IokaTheme = .default) {
-        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme ?? .default)
-        self.theme = theme ?? .default
+        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme )
+        self.theme = theme 
     }
     
     public func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {

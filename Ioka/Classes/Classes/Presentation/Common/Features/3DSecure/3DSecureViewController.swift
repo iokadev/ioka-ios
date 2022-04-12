@@ -71,6 +71,7 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
         viewModel.showError = { [weak self] error in
             guard let self = self else { return }
             self.showErrorView(error: error)
+            self.loadingIndicator.stopIndicator()
         }
     }
 }
