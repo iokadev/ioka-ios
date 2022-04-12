@@ -74,6 +74,11 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
             self.loadingIndicator.stopIndicator()
         }
     }
+    
+    func hideWebViewWithLoader() {
+        self.webView.isHidden = true
+        loadingIndicator.isHidden = false
+    }
 }
 
 extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigationViewDelegate  {
@@ -83,8 +88,7 @@ extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigatio
     
     func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
         
-        self.webView.isHidden = true
-        loadingIndicator.isHidden = false
+        hideWebViewWithLoader()
         
         if viewModel.checkReturnUrl(webView.url) {
             DispatchQueue.main.async {

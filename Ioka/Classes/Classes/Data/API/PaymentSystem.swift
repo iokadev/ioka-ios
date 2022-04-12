@@ -5,10 +5,10 @@
 //  Created by ablai erzhanov on 02.03.2022.
 //
 
-import Foundation
+import UIKit
 
 
-internal enum PaymentSystem: String, Codable {
+public enum PaymentSystem: String, Codable {
     case VISA =  "VISA"
     case AMERICAN_EXPRESS = "AMERICAN_EXPRESS"
     case MASTERCARD = "MASTERCARD"
@@ -22,4 +22,17 @@ internal enum PaymentSystem: String, Codable {
     case HIPERCARD = "HIPERCARD"
     case ELO = "ELO"
     case UNKNOWN = "UNKNOWN"
+}
+
+extension PaymentSystem {
+    public static func icon(for system: String) -> UIImage? {
+        let paymentSystem = PaymentSystem(rawValue: system)
+        
+        switch paymentSystem {
+        case .VISA, .AMERICAN_EXPRESS, .DINER_CLUB, .MAESTRO, .MIR, .UNION_PAY, .MASTERCARD:
+            return UIImage(named: system, in: IokaBundle.bundle, compatibleWith: nil)
+        default :
+            return nil
+        }
+    }
 }
