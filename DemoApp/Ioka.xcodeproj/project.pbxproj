@@ -154,7 +154,7 @@
 		6D25C2052805986E00734E92 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D25C2062805986E00734E92 /* kk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = kk; path = kk.lproj/Localizable.strings; sourceTree = "<group>"; };
 		6D25C2072805986E00734E92 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6D25C2082805986E00734E92 /* IokaLocalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IokaLocalizable.swift; sourceTree = "<group>"; };
+		6D25C2082805986E00734E92 /* IokaLocalizable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IokaLocalizable.swift; path = ../../Classes/Classes/Helpers/IokaLocalizable.swift; sourceTree = "<group>"; };
 		6D652F9927FCDA6800E8686B /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		6D652F9B27FCDACE00E8686B /* SavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCard.swift; sourceTree = "<group>"; };
 		6D652F9D27FCDE9E00E8686B /* SavedCardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCardRepository.swift; sourceTree = "<group>"; };
