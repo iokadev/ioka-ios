@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.source                = { :git => "https://github.com/iokadev/ioka-ios.git", :tag => s.version.to_s }
   s.source_files = "Ioka/Classes/**/*.{swift}"
   s.resource_bundles = {
-    'Ioka' => ['Ioka/Resources/**/*.{xcassets, .lproj, .strings}'] }
+    'Ioka' => ['Ioka/Resources/**/*.{xcassets, .lproj, .strings}', ''Ioka/Localization/**/*.{.lproj, .strings}'] }
 
   s.swift_version= '5.0'
   
