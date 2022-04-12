@@ -40,10 +40,10 @@ internal class IokaImageView: UIImageView {
     func setupImageView() {
         guard let imageName = imageName else { return }
         if let imageTintColor = imageTintColor {
-            self.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+            self.image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil)?.withRenderingMode(.alwaysTemplate)
             self.tintColor = imageTintColor
         } else {
-            self.image = UIImage(named: imageName)
+            self.image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil)
         }
     }
 }

@@ -71,7 +71,7 @@ internal class IokaButton: UIButton {
         self.layer.cornerRadius = 12
         handlePayButtonState(state: iokaButtonState)
         if let imageName = imageName {
-            self.setImage(UIImage(named: imageName), for: .normal)
+            self.setImage(UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil), for: .normal)
         }
     }
     
