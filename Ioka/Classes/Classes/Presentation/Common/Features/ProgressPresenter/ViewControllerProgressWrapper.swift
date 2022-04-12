@@ -62,6 +62,6 @@ internal class ViewControllerProgressWrapper {
                               paddingRight: 16)
         
         self.viewController.navigationController?.view.addSubview(progressView)
-        progressView.fillView(viewController.view)
+        progressView.fillView(self.viewController.navigationController?.view)
     }
 }
