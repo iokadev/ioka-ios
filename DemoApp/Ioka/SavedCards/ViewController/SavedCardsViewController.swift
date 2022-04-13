@@ -13,6 +13,8 @@ internal class SavedCardsViewController: UIViewController {
     
     var models = [SavedCardDTO]()
     
+    var closeButton = DemoButton(imageName: "chevronLeft", backGroundColor: .clear)
+    var titleLabel = DemoLabel(title: "Способ оплаты", font: typography.title, textColor: colors.text, textAlignment: .center)
     let tableView = UITableView()
     let backgroundView = DemoCustomView(backGroundColor: colors.tertiaryBackground, cornerRadius: 8)
     var customerAccessToken: String!
@@ -23,24 +25,25 @@ internal class SavedCardsViewController: UIViewController {
     override func loadView() {
         super.loadView()
         self.view.backgroundColor = colors.secondaryBackground
-        self.view.addSubview(tableView)
+        [closeButton, titleLabel, tableView].forEach {
+            self.view.addSubview($0)
+        }
+        
         tableView.layer.cornerRadius = 12
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpTableView()
+        setupActions()
+        setupUI()
         viewModel.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
             guard let models = result else { return }
             self?.models.append(contentsOf: models)
             self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
+            self?.view.layoutIfNeeded()
             self?.tableView.reloadData()
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,14 +59,25 @@ internal class SavedCardsViewController: UIViewController {
     private func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = 56
         tableView.register(AddNewCardTableViewCell.self, forCellReuseIdentifier: AddNewCardTableViewCell.cellId)
         tableView.register(GetCardTableViewCell.self, forCellReuseIdentifier: GetCardTableViewCell.cellId)
     }
     
+    private func setupActions() {
+        self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
+    }
+    
+    @objc private func handleCloseButton() {
+        navigationController?.popViewController(animated: true)
+    }
+    
     private func setupUI() {
+        closeButton.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
+        titleLabel.center(in: self.view, in: closeButton)
         tableView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 116, paddingLeft: 16, paddingRight: 16)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: CGFloat(56 * models.count) + 56)
+        self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: 56)
         self.heightConstraint?.isActive = true
     }
 }
