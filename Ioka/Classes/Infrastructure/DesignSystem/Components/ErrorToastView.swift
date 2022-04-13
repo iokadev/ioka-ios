@@ -34,7 +34,7 @@ internal class ErrorToastView: UIView {
     }
     
     private func configureErrorView(error: Error?) {
-        self.errorLabel.text = IokaLocalizable.serverError
+        self.errorLabel.text = error?.localizedDescription
     }
     
     private func setActions() {

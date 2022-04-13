@@ -248,8 +248,6 @@ extension CardFormView: ErrorToastViewDelegate {
     
     func closeErrorView(_ view: ErrorToastView) {
         DispatchQueue.main.async {
-            self.createButton.iokaButtonState = .disabled
-            self.createButton.hideLoading(showTitle: true)
             self.errorView.alpha = 0.0
         }
     }

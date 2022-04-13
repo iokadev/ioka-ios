@@ -16,22 +16,10 @@ internal enum NetworkError: LocalizedError {
     
     var errorDescription: String? {
         switch self {
-        case .noData:
-            return "Нет данных от сервера"
-        case .decodingError:
-            return "Неверный формат данных"
-        case .invalidHTTPStatusCode:
-            return "Неизвестная ошибка"
-        case .parameterNil:
-            return "Неизвестная ошибка"
-        case .encodingFailed:
-            return "Неизвестная ошибка"
-        case .missingUrl:
-            return "Неизвестная ошибка"
         case .urlError(let error):
             return error.localizedDescription
-        case .other(let error):
-            return error.localizedDescription
+        default:
+            return IokaLocalizable.serverError
         }
     }
 }
