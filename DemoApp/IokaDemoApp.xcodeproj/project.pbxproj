@@ -26,7 +26,7 @@
 		6DB0A30327FBA8A1008A8381 /* OrderConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27127FBA8A1008A8381 /* OrderConfirmationViewController.swift */; };
 		6DB0A30427FBA8A1008A8381 /* DemoAppEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27327FBA8A1008A8381 /* DemoAppEndPoint.swift */; };
 		6DB0A30527FBA8A1008A8381 /* DemoAppApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27427FBA8A1008A8381 /* DemoAppApi.swift */; };
-		6DB0A30727FBA8A1008A8381 /* DemoAppImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27927FBA8A1008A8381 /* DemoAppImages.swift */; };
+		6DB0A30727FBA8A1008A8381 /* DemoImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27927FBA8A1008A8381 /* DemoImages.swift */; };
 		6DB0A30827FBA8A1008A8381 /* GetProfileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27B27FBA8A1008A8381 /* GetProfileResponse.swift */; };
 		6DB0A30927FBA8A1008A8381 /* PaymentTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A27E27FBA8A1008A8381 /* PaymentTypeViewModel.swift */; };
 		6DB0A30A27FBA8A1008A8381 /* PaymentTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A28027FBA8A1008A8381 /* PaymentTypeView.swift */; };
@@ -90,7 +90,7 @@
 		6DB0A27127FBA8A1008A8381 /* OrderConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderConfirmationViewController.swift; sourceTree = "<group>"; };
 		6DB0A27327FBA8A1008A8381 /* DemoAppEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoAppEndPoint.swift; sourceTree = "<group>"; };
 		6DB0A27427FBA8A1008A8381 /* DemoAppApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoAppApi.swift; sourceTree = "<group>"; };
-		6DB0A27927FBA8A1008A8381 /* DemoAppImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoAppImages.swift; sourceTree = "<group>"; };
+		6DB0A27927FBA8A1008A8381 /* DemoImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImages.swift; sourceTree = "<group>"; };
 		6DB0A27B27FBA8A1008A8381 /* GetProfileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetProfileResponse.swift; sourceTree = "<group>"; };
 		6DB0A27E27FBA8A1008A8381 /* PaymentTypeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTypeViewModel.swift; sourceTree = "<group>"; };
 		6DB0A28027FBA8A1008A8381 /* PaymentTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentTypeView.swift; sourceTree = "<group>"; };
@@ -312,7 +312,7 @@
 		6DB0A27827FBA8A1008A8381 /* DemoAppImages */ = {
 			isa = PBXGroup;
 			children = (
-				6DB0A27927FBA8A1008A8381 /* DemoAppImages.swift */,
+				6DB0A27927FBA8A1008A8381 /* DemoImages.swift */,
 			);
 			path = DemoAppImages;
 			sourceTree = "<group>";
@@ -685,7 +685,7 @@
 				6DB0A30127FBA8A1008A8381 /* PaymentView.swift in Sources */,
 				6DB0A2F827FBA8A1008A8381 /* MainTabBarController.swift in Sources */,
 				6DB0A14127FBA42C008A8381 /* SceneDelegate.swift in Sources */,
-				6DB0A30727FBA8A1008A8381 /* DemoAppImages.swift in Sources */,
+				6DB0A30727FBA8A1008A8381 /* DemoImages.swift in Sources */,
 				6DB0A30A27FBA8A1008A8381 /* PaymentTypeView.swift in Sources */,
 				6DB0A2FA27FBA8A1008A8381 /* ProfileView.swift in Sources */,
 				AFC2B4D42806D02800630F70 /* EndPointType.swift in Sources */,

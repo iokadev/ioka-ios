@@ -43,11 +43,11 @@ internal class CardPaymentCell: UITableViewCell {
     }
     
     public func uncheckView() {
-        self.checkImageView.image = DemoAppImages.uncheckIcon
+        self.checkImageView.image = DemoImages.uncheckIcon
     }
     
     public func checkkView() {
-        self.checkImageView.image = DemoAppImages.checkIcon
+        self.checkImageView.image = DemoImages.checkIcon
     }
     
     public func changeViewSelection() {
