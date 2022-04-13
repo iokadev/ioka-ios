@@ -1,5 +1,5 @@
 //
-//  iOKA.swift
+//  Ioka.swift
 //  iOKA
 //
 //  Created by ablai erzhanov on 02.03.2022.
@@ -43,7 +43,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
     ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure.
-    public func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -78,7 +78,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или любой
     ///   экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта была
     ///   отклонена, .cancelled - если пользователь закрыл экран ввода CVV или экран 3DSecure.
-    public func startCheckoutWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCardDTO, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCardDTO, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
