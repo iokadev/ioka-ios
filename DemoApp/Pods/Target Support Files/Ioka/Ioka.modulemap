@@ -1,6 +1,0 @@
-framework module Ioka {
-  umbrella header "Ioka-umbrella.h"
-
-  export *
-  module * { export * }
-}
