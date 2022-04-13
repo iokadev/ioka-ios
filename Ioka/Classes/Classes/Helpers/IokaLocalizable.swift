@@ -42,11 +42,11 @@ enum IokaLocalizable {
     private static func localized(_ key: String) -> String {
       switch locale {
         case .automatic:
-        return NSLocalizedString(key, comment: "")
+          return IokaBundle.bundle.localizedString(forKey: key, value: key, table: nil)
         default:
-          let path = Bundle.main.path(forResource: locale.rawValue, ofType: "lproj")!
+          let path = IokaBundle.bundle.path(forResource: locale.rawValue, ofType: "lproj")!
         let bundle = Bundle(path: path)!
-        return NSLocalizedString(key, tableName: nil, bundle: bundle, value: "", comment: "")
+        return NSLocalizedString(key, tableName: nil, bundle: bundle, value: key, comment: "")
       }
     }
     

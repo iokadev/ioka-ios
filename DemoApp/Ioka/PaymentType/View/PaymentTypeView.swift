@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Ioka
 
 internal enum PaymentTypeState {
     case applePay(title: String)
@@ -18,6 +19,7 @@ internal enum PaymentTypeState {
 
 internal protocol PaymentTypeViewDelegate: NSObject {
     func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState)
+    func closeButtonWasPressed(_ paymentTypeView: PaymentTypeView)
 }
 
 internal class PaymentTypeView: UIView {
@@ -28,15 +30,15 @@ internal class PaymentTypeView: UIView {
     let tableView: UITableView = {
         let tv = UITableView()
         tv.isScrollEnabled = false
-        tv.backgroundColor = DemoAppColors.tertiaryBackground
+        tv.backgroundColor = colors.tertiaryBackground
         tv.layer.cornerRadius = 8
         return tv
     }()
     lazy var bankCardView = BankCardView(delegate: self)
     lazy var payWithCashView = PayWithCashView(delegate: self)
-    var closeButton = IokaButton(imageName: "chevronLeft")
-    var titleLabel = IokaLabel(title: "Способ оплаты", iokaFont: typography.title, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
-    var saveButton = IokaButton(iokaButtonState: .enabled, title: "Сохранить")
+    var closeButton = DemoButton(imageName: "chevronLeft", backGroundColor: .clear)
+    var titleLabel = DemoLabel(title: "Способ оплаты", font: typography.title, textColor: colors.text, textAlignment: .center)
+    var saveButton = DemoButton(title: "Сохранить")
     var paymentTypeState: PaymentTypeState?
     var heightConstraint: NSLayoutConstraint?
     
@@ -64,6 +66,7 @@ internal class PaymentTypeView: UIView {
     
     private func setupActions() {
         self.saveButton.addTarget(self, action: #selector(handleSaveButton), for: .touchUpInside)
+        self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
     }
     
     @objc private func handleSaveButton() {
@@ -71,8 +74,12 @@ internal class PaymentTypeView: UIView {
         delegate?.saveButtonWasPressed(self, state: paymentTypeState)
     }
     
+    @objc private func handleCloseButton() {
+        delegate?.closeButtonWasPressed(self)
+    }
+    
     public func setupUI(models: [SavedCardDTO]) {
-        self.backgroundColor = DemoAppColors.secondaryBackground
+        self.backgroundColor = colors.secondaryBackground
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
         closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)

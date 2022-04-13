@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Ioka
 
 internal protocol DeleteSavedCardViewDelegate: NSObject {
     func closeDeleteSavedCardView(_ view: DeleteSavedCardView)
@@ -17,8 +18,8 @@ internal class DeleteSavedCardView: UIView {
     public weak var delegate: DeleteSavedCardViewDelegate?
     
     private let backGroundView = UIView()
-    private let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
-    private let title = IokaLabel(iokaFont: typography.title, iokaTextColor: DemoAppColors.text)
+    private let deleteCardImageView = DemoImageView(imageName: "deleteProduct")
+    private let title = DemoLabel(font: typography.title, textColor: colors.text)
     private let deleteCardButton = UIButton()
     private let cancelButton = UIButton()
     
@@ -51,12 +52,12 @@ internal class DeleteSavedCardView: UIView {
     }
     
     private func setUI() {
-        self.backgroundColor = DemoAppColors.foreground
+        self.backgroundColor = colors.foreground
         self.addSubview(backGroundView)
         
         backGroundView.layer.cornerRadius = 12
         backGroundView.layer.masksToBounds = true
-        backGroundView.backgroundColor = DemoAppColors.background
+        backGroundView.backgroundColor = colors.background
         backGroundView.centerY(in: self, left: self.leftAnchor, paddingLeft: 40, right: self.rightAnchor, paddingRight: 40)
         
         [deleteCardImageView, title, deleteCardButton, cancelButton].forEach{ backGroundView.addSubview($0) }
@@ -65,7 +66,7 @@ internal class DeleteSavedCardView: UIView {
         deleteCardButton.setTitle("Удалить", for: .normal)
         deleteCardButton.layer.cornerRadius = 12
         deleteCardButton.layer.masksToBounds = true
-        deleteCardButton.backgroundColor = DemoAppColors.error
+        deleteCardButton.backgroundColor = colors.error
         cancelButton.backgroundColor = .clear
         cancelButton.setTitleColor(.black, for: .normal)
         

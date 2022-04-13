@@ -15,13 +15,13 @@ internal protocol OrderInformationViewDelegate: NSObject {
 
 internal class OrderInformationView: UIView {
     
-    private let orderAdressLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    private let orderTimeLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    private let orderAdressImageView = IokaImageView(imageName: "orderAdress")
-    private let orderTimeImageView = IokaImageView(imageName: "orderTime")
-    private let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
-    private let chevronRightImageViewAdress = IokaImageView(imageName: "chevronRight")
-    private let chevronRightImageViewTime = IokaImageView(imageName: "chevronRight")
+    private let orderAdressLabel = DemoLabel(font: typography.body, textColor: colors.text)
+    private let orderTimeLabel = DemoLabel(font: typography.body, textColor: colors.text)
+    private let orderAdressImageView = DemoImageView(imageName: "orderAdress")
+    private let orderTimeImageView = DemoImageView(imageName: "orderTime")
+    private let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
+    private let chevronRightImageViewAdress = DemoImageView(imageName: "chevronRight")
+    private let chevronRightImageViewTime = DemoImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,7 +39,7 @@ internal class OrderInformationView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         [orderAdressLabel, orderTimeLabel, orderAdressImageView, orderTimeImageView, seperatorView, chevronRightImageViewAdress, chevronRightImageViewTime].forEach{ self.addSubview($0) }
         

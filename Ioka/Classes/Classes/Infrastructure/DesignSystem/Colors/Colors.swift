@@ -10,19 +10,19 @@ import UIKit
 internal var colors = Ioka.shared.theme.colors
 
 public struct Colors {
-    var nonadaptableText: UIColor
-    var background: UIColor
-    var text: UIColor
-    var divider: UIColor
-    var fill4: UIColor
-    var secondaryBackground: UIColor
-    var tertiaryBackground: UIColor
-    var foreground: UIColor
-    var primary: UIColor
-    var secondary: UIColor
-    var error: UIColor
-    var success: UIColor
-    var grey: UIColor
+    public var nonadaptableText: UIColor
+    public var background: UIColor
+    public var text: UIColor
+    public var divider: UIColor
+    public var fill4: UIColor
+    public var secondaryBackground: UIColor
+    public var tertiaryBackground: UIColor
+    public var foreground: UIColor
+    public var primary: UIColor
+    public var secondary: UIColor
+    public var error: UIColor
+    public var success: UIColor
+    public var grey: UIColor
 }
 
 extension Colors {

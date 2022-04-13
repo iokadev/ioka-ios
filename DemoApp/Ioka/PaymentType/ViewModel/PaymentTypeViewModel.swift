@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Ioka
 
 internal class PaymentTypeViewModel {
     func getCards(customerAccessToken: String, completion: @escaping([SavedCardDTO]?, Error?) -> Void) {

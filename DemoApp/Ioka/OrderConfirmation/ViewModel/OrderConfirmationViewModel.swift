@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import Ioka
 
 internal class OrderConfirmationViewModel {
     
@@ -18,8 +18,8 @@ internal class OrderConfirmationViewModel {
             switch result {
             case .success(let createOrderResponse):
                 completion(createOrderResponse.order_access_token)
-            case .failure(let error):
-                var error = error
+            case .failure:
+                break
             }
         }
     }
@@ -30,8 +30,8 @@ internal class OrderConfirmationViewModel {
             switch result {
             case .success(let createOrderResponse):
                 completion(createOrderResponse.customer_access_token)
-            case .failure(let error):
-                var error = error
+            case .failure:
+                break
             }
         }
     }

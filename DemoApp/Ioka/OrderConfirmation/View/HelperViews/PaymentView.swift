@@ -21,9 +21,9 @@ internal class PaymentView: UIView {
     }
     
     public weak var delegate: PaymentViewDelegate?
-    private let paymentTypeLabel = IokaLabel(title: "Выберите способ оплаты", iokaFont: typography.body, iokaTextColor: DemoAppColors.grey)
-    private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
-    private let chevronRightImageView = IokaImageView(imageName: "chevronRight")
+    private let paymentTypeLabel = DemoLabel(title: "Выберите способ оплаты", font: typography.body, textColor: colors.grey)
+    private let paymentTypeImageView = DemoImageView(imageName: "paymentType")
+    private let chevronRightImageView = DemoImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -53,26 +53,26 @@ internal class PaymentView: UIView {
         switch paymentState {
         case .empty:
             paymentTypeLabel.text = "Выберите способ оплаты"
-            paymentTypeLabel.textColor = DemoAppColors.grey
+            paymentTypeLabel.textColor = colors.grey
         case .savedCard(let card):
             paymentTypeLabel.text = card.pan_masked.trimPanMasked()
-            paymentTypeLabel.textColor = DemoAppColors.text
+            paymentTypeLabel.textColor = colors.text
             guard let paymentSystem = card.payment_system else { return }
             paymentTypeImageView.image = UIImage(named: paymentSystem)
         case .creditCard(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.text
+            paymentTypeLabel.textColor = colors.text
         case .applePay(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.text
+            paymentTypeLabel.textColor = colors.text
         case .cash(let title):
             paymentTypeLabel.text = title
-            paymentTypeLabel.textColor = DemoAppColors.text
+            paymentTypeLabel.textColor = colors.text
         }
     }
   
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         
         [paymentTypeLabel, paymentTypeImageView, chevronRightImageView].forEach{ self.addSubview($0) }

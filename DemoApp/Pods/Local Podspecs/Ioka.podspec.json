@@ -17,14 +17,10 @@
     "git": "https://github.com/iokadev/ioka-ios.git",
     "tag": "0.0.1"
   },
-  "source_files": [
-    "Ioka/Classes/**/*.{swift}",
-    "Ioka/Resources/Localization**/*.{lproj}"
-  ],
+  "source_files": "Ioka/Classes/**/*.{swift}",
   "resource_bundles": {
     "Ioka": [
-      "Ioka/Resources/**/*.{xcassets}",
-      "Ioka/Resources/Localization*"
+      "Ioka/Resources/**/*.{xcassets, lproj}"
     ]
   },
   "swift_versions": "5.0",

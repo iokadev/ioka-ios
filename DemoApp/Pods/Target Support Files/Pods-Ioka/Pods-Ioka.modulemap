@@ -1,6 +1,0 @@
-framework module Pods_Ioka {
-  umbrella header "Pods-Ioka-umbrella.h"
-
-  export *
-  module * { export * }
-}

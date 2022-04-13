@@ -18,9 +18,9 @@ internal protocol AddNewCardTablewViewCellDelegate: NSObject {
 internal class AddNewCardTableViewCell: UITableViewCell {
     static let cellId = "AddNewCardTableViewCell"
     
-    let addCardImageView = IokaImageView(imageName: "addCard")
-    let addCardLabel = IokaLabel( title: "Добавить новую карту", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    let showAddCardimageView = IokaImageView(imageName: "chevronRight")
+    let addCardImageView = DemoImageView(imageName: "addCard")
+    let addCardLabel = DemoLabel( title: "Добавить новую карту", font: typography.body, textColor: colors.text)
+    let showAddCardimageView = DemoImageView(imageName: "chevronRight")
     
     weak var delegate: AddNewCardTablewViewCellDelegate?
     
@@ -43,7 +43,7 @@ internal class AddNewCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }

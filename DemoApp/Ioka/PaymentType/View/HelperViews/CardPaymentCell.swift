@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Ioka
 
 internal protocol CardPaymentCellDelegate: NSObject {
     func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: SavedCardDTO)
@@ -17,8 +18,8 @@ internal class CardPaymentCell: UITableViewCell {
     static let cellId = "CardPaymentCell"
     
     let cardBrandImageView = UIImageView()
-    let panMaskedLabel = IokaLabel( title: "Apple pay", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    let checkImageView = IokaImageView(imageName: "uncheckIcon")
+    let panMaskedLabel = DemoLabel( title: "Apple pay", font: typography.body, textColor: colors.text)
+    let checkImageView = DemoImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: CardPaymentCellDelegate?
     private var cardResponse: SavedCardDTO?
@@ -71,7 +72,7 @@ internal class CardPaymentCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         cardBrandImageView.contentMode = .scaleAspectFit
         [cardBrandImageView, panMaskedLabel, checkImageView].forEach{ self.contentView.addSubview($0) }

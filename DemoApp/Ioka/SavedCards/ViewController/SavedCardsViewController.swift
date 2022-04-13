@@ -7,13 +7,14 @@
 
 import Foundation
 import UIKit
+import Ioka
 
 internal class SavedCardsViewController: UIViewController {
     
     var models = [SavedCardDTO]()
     
     let tableView = UITableView()
-    let backgroundView = IokaCustomView(backGroundColor: DemoAppColors.tertiaryBackground, cornerRadius: 8)
+    let backgroundView = DemoCustomView(backGroundColor: colors.tertiaryBackground, cornerRadius: 8)
     var customerAccessToken: String!
     let viewModel = SavedCardsViewModel()
     let resultView = DemoAppErrorView()
@@ -21,7 +22,7 @@ internal class SavedCardsViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        self.view.backgroundColor = DemoAppColors.secondaryBackground
+        self.view.backgroundColor = colors.secondaryBackground
         self.view.addSubview(tableView)
         tableView.layer.cornerRadius = 12
     }

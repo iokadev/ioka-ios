@@ -24,13 +24,13 @@ internal class OrderConfirmationView: UIView {
     weak var delegate: OrderConfirmationViewDelegate?
     
     public lazy var paymentView = PaymentView(delegate: self)
-    private let orderTitleLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: DemoAppColors.grey, iokaTextAlignemnt: .center)
-    private let orderImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    private let orderPriceLabel = IokaLabel(iokaFont: typography.heading, iokaTextColor: DemoAppColors.text, iokaTextAlignemnt: .center)
+    private let orderTitleLabel = DemoLabel(font: typography.subtitle, textColor: colors.grey, textAlignment: .center)
+    private let orderImageView = DemoImageView(imageName: "productImage", cornerRadius: 8)
+    private let orderPriceLabel = DemoLabel(font: typography.heading, textColor: colors.text, textAlignment: .center)
     private let orderInformationView = OrderInformationView()
-    private let confirmButton = IokaButton(iokaButtonState: .enabled, title: "Оформить")
-    private let paymentTypeImageView = IokaImageView(imageName: "paymentType")
-    private let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
+    private let confirmButton = DemoButton(title: "Оформить")
+    private let paymentTypeImageView = DemoImageView(imageName: "paymentType")
+    private let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,7 +60,7 @@ internal class OrderConfirmationView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = DemoAppColors.secondaryBackground
+        self.backgroundColor = colors.secondaryBackground
         [orderTitleLabel, orderImageView, orderPriceLabel, orderInformationView, paymentView, confirmButton].forEach{ self.addSubview($0) }
         
         

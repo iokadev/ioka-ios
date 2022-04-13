@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Ioka
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

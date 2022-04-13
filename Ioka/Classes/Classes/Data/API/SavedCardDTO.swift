@@ -19,16 +19,16 @@ public struct SavedCardDTO: Decodable {
     
     
     
-    let id: String //-Идентификатор платежа
-    let customer_id: String //-Идентификатор родительского заказа
+    public let id: String //-Идентификатор платежа
+    public let customer_id: String //-Идентификатор родительского заказа
     var status: SavedCardStatus?
-    let created_at: String //-Время создания платежа
-    let pan_masked: String //-Авторизованная сумма
-    let expiry_date: String //-Сумма списания
-    let holder: String? //-Сумма возврата
-    let payment_system: String? //-Комиссия процессинга
-    var emitter: String?
-    var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
+    public let created_at: String //-Время создания платежа
+    public let pan_masked: String //-Авторизованная сумма
+    public let expiry_date: String //-Сумма списания
+    public let holder: String? //-Сумма возврата
+    public let payment_system: String? //-Комиссия процессинга
+    public var emitter: String?
+    public var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
     var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
     var action: ActionDTO?//-Данные для прохождения 3DSecure на стороне Банка
 }

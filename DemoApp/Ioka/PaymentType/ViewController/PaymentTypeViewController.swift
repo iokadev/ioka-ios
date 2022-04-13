@@ -6,8 +6,7 @@
 //
 
 import UIKit
-
-import UIKit
+import Ioka
 
 internal protocol PaymentTypeViewControllerDelegate: NSObject {
     func popPaymentViewController(_ paymentTypeViewController: PaymentTypeViewController, state: PaymentTypeState)
@@ -88,5 +87,9 @@ extension PaymentTypeViewController: PaymentTypeViewDelegate {
     func saveButtonWasPressed(_ paymentTypeView: PaymentTypeView, state: PaymentTypeState) {
         delegate?.popPaymentViewController(self, state: state)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func closeButtonWasPressed(_ paymentTypeView: PaymentTypeView) {
+        navigationController?.popViewController(animated: true)
     }
 }

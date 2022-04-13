@@ -11,14 +11,14 @@ import UIKit
 internal var typography = Ioka.shared.theme.typography
 
 public struct Typography {
-    var heading: UIFont
-    var heading2: UIFont
-    var title: UIFont
-    var bodySemibold: UIFont
-    var body: UIFont
-    var subtitle: UIFont
-    var subtitleSemiBold: UIFont
-    var subtitleSmall: UIFont
+    public var heading: UIFont
+    public var heading2: UIFont
+    public var title: UIFont
+    public var bodySemibold: UIFont
+    public var body: UIFont
+    public var subtitle: UIFont
+    public var subtitleSemiBold: UIFont
+    public var subtitleSmall: UIFont
 }
 
 public extension Typography {

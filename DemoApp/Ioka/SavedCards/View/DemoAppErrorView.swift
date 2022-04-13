@@ -20,8 +20,8 @@ internal class DemoAppErrorView: UIView {
         }
     }
     
-    private let errorLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableText, iokaTextAlignemnt: .left)
-    private let closeButton = IokaButton(imageName: "closeError")
+    private let errorLabel = DemoLabel(font: typography.subtitle, textColor: colors.nonadaptableText, textAlignment: .left)
+    private let closeButton = DemoButton(imageName: "closeError")
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,10 +37,10 @@ internal class DemoAppErrorView: UIView {
         
         if let error = error {
             self.errorLabel.text = error.localizedDescription
-            self.backgroundColor = DemoAppColors.error
+            self.backgroundColor = colors.error
         } else {
             self.errorLabel.text = "карта удалена"
-            self.backgroundColor = DemoAppColors.success
+            self.backgroundColor = colors.success
         }
         
     }

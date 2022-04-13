@@ -15,9 +15,9 @@ internal protocol PayWithCashViewDelegate: NSObject {
 
 internal class PayWithCashView: UIView {
     
-    let payWithCashImageView = IokaImageView(imageName: "cash")
-    let payWithCashlabel = IokaLabel(title: "Наличными курьеру", iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    let checkImageView = IokaImageView(imageName: "uncheckIcon")
+    let payWithCashImageView = DemoImageView(imageName: "cash")
+    let payWithCashlabel = DemoLabel(title: "Наличными курьеру", font: typography.body, textColor: colors.text)
+    let checkImageView = DemoImageView(imageName: "uncheckIcon")
     weak var delegate: PayWithCashViewDelegate?
     var isPayWithCashSelected: Bool = false
     
@@ -64,7 +64,7 @@ internal class PayWithCashView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         [payWithCashImageView, payWithCashlabel, checkImageView].forEach{ self.addSubview($0) }
         

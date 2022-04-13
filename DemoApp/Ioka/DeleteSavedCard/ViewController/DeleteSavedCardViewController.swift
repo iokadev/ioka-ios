@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Ioka
 
 internal protocol DeleteSavedCardViewControllerDelegate: NSObject {
     func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCardDTO, error: Error?)

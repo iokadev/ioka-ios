@@ -16,11 +16,11 @@ internal class CartViewController: UIViewController, UITableViewDataSource, UITa
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.backgroundColor = DemoAppColors.secondaryBackground
+        tableView.backgroundColor = colors.secondaryBackground
         return tableView
     }()
     
-    let goConfitmationButton = IokaButton(iokaButtonState: .enabled, title: "Перейти к оформлению")
+    let goConfitmationButton = DemoButton(title: "Перейти к оформлению")
     
     
     override func viewDidLoad() {

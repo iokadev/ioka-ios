@@ -20,12 +20,12 @@ internal class ProductCell: UITableViewCell {
     
     static let cellId = "ProductCell"
     
-    let productNumber = IokaLabel(iokaFont: typography.subtitleSmall, iokaTextColor: DemoAppColors.grey)
-    let productTitle = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    let productImageView = IokaImageView(imageName: "productImage", cornerRadius: 8)
-    let productPriceLabel = IokaLabel(iokaFont: typography.bodySemibold, iokaTextColor: DemoAppColors.text)
-    let deleteImageView = IokaImageView(imageName: "deleteProduct")
-    let seperatorView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
+    let productNumber = DemoLabel(font: typography.subtitleSmall, textColor: colors.grey)
+    let productTitle = DemoLabel(font: typography.body, textColor: colors.text)
+    let productImageView = DemoImageView(imageName: "productImage", cornerRadius: 8)
+    let productPriceLabel = DemoLabel(font: typography.bodySemibold, textColor: colors.text)
+    let deleteImageView = DemoImageView(imageName: "deleteProduct")
+    let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

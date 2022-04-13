@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Ioka
 
 internal protocol GetCardTableViewCellDelegate: NSObject {
     func deleteCard(_ view: GetCardTableViewCell, card: SavedCardDTO)
@@ -16,11 +17,11 @@ internal protocol GetCardTableViewCellDelegate: NSObject {
 internal class GetCardTableViewCell: UITableViewCell {
     static let cellId = "GetCardTableViewCell"
     
-    let creditCardImageView = IokaImageView()
-    let cardNumberLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: DemoAppColors.text)
-    let deleteImageView = IokaImageView(imageName: "deleteProduct")
-    let seperatorView: UIView = IokaCustomView(backGroundColor: DemoAppColors.fill4)
-    let deleteCardImageView = IokaImageView(imageName: "deleteProduct")
+    let creditCardImageView = DemoImageView()
+    let cardNumberLabel = DemoLabel(font: typography.body, textColor: colors.text)
+    let deleteImageView = DemoImageView(imageName: "deleteProduct")
+    let seperatorView: UIView = DemoCustomView(backGroundColor: colors.fill4)
+    let deleteCardImageView = DemoImageView(imageName: "deleteProduct")
     var card: SavedCardDTO?
     
     weak var delegate: GetCardTableViewCellDelegate?
@@ -54,7 +55,7 @@ internal class GetCardTableViewCell: UITableViewCell {
     private func setupUI() {
         
         deleteCardImageView.isUserInteractionEnabled = true
-        self.backgroundColor = DemoAppColors.tertiaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8
         [creditCardImageView, cardNumberLabel, seperatorView, deleteCardImageView].forEach{ self.contentView.addSubview($0) }
         
