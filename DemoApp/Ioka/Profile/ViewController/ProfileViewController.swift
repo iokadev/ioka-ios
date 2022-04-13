@@ -15,6 +15,7 @@ internal class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         profileView.delegate = self
+        profileView.update(locale: viewModel.locale)
     }
     
     override func loadView() {
@@ -37,5 +38,19 @@ extension ProfileViewController: ProfileViewDelegate {
             vc.customerAccessToken = customerAccessToken
             self?.navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    func showLanguageSelection(_ profileView: ProfileView) {
+        let controller = UIAlertController(title: "Язык", message: nil, preferredStyle: .actionSheet)
+        Locale.allCases.forEach { locale in
+            controller.addAction(UIAlertAction(title: locale.label, style: .default) { [weak self] _ in
+                self?.viewModel.locale = locale
+                self?.profileView.update(locale: locale)
+            })
+        }
+        
+        controller.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        
+        present(controller, animated: true, completion: nil)
     }
 }

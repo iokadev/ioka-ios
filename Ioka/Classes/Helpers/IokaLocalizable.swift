@@ -7,7 +7,7 @@
 
 import Foundation
 
-public var locale: IokaLocale = Ioka.shared.locale
+internal var locale: IokaLocale!
 
 public enum IokaLocale: String {
   case ru
@@ -16,28 +16,65 @@ public enum IokaLocale: String {
 }
 
 enum IokaLocalizable {
-    static var saveCard = localized("saveCard")
-    static var transactionsProtected = localized("transactionProtected")
-    static var pay = localized("pay")
-    static var enterCardNumber = localized("enterCardNumber")
-    static var cardExpiration = localized("cardExpiration")
-    static var cvv = localized("cvv")
-    static var priceTng = localized("priceTng")
-    static var serverError = localized("serverError")
+    static var saveCard: String {
+        localized("saveCard")
+    }
+    
+    static var transactionsProtected: String {
+        localized("transactionProtected")
+    }
+    static var pay: String {
+        localized("pay")
+    }
+    static var enterCardNumber: String {
+        localized("enterCardNumber")
+    }
+    static var cardExpiration: String {
+        localized("cardExpiration")
+    }
+    static var cvv: String {
+        localized("cvv")
+    }
+    static var priceTng: String {
+        localized("priceTng")
+    }
+    static var serverError: String {
+        localized("serverError")
+    }
     
     
-    static var orderPaid = localized("orderPaid")
-    static var ok = localized("ok")
-    static var paymentFailed = localized("paymentFailed")
-    static var retry = localized("retry")
+    static var orderPaid: String {
+        localized("orderPaid")
+    }
+    static var ok: String {
+        localized("ok")
+    }
+    static var paymentFailed: String {
+        localized("paymentFailed")
+    }
+    static var retry: String {
+        localized("retry")
+    }
     
-    static var paymentConfirmation = localized("paymentConfirmation")
-    static var continueButton = localized("continueButton")
+    static var paymentConfirmation: String {
+        localized("paymentConfirmation")
+    }
+    static var continueButton: String {
+        localized("continueButton")
+    }
     
-    static var save = localized("save")
-    static var orderNumber = localized("orderNumber")
-    static var paymentProcessing = localized("paymentProcessing")
-    static var goPayment = localized("goPayment")
+    static var save: String {
+        localized("save")
+    }
+    static var orderNumber: String {
+        localized("orderNumber")
+    }
+    static var paymentProcessing: String {
+        localized("paymentProcessing")
+    }
+    static var goPayment: String {
+        localized("goPayment")
+    }
     
     private static func localized(_ key: String) -> String {
       switch locale {

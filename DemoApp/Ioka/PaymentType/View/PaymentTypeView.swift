@@ -32,6 +32,8 @@ internal class PaymentTypeView: UIView {
         tv.isScrollEnabled = false
         tv.backgroundColor = colors.tertiaryBackground
         tv.layer.cornerRadius = 8
+        tv.rowHeight = 56
+        
         return tv
     }()
     lazy var bankCardView = BankCardView(delegate: self)

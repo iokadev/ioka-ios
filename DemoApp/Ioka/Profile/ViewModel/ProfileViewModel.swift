@@ -6,9 +6,18 @@
 //
 
 import Foundation
-
+import Ioka
 
 internal class ProfileViewModel {
+    var locale: Locale {
+        get {
+            Locale.current
+        }
+        set {
+            Locale.current = newValue
+            Ioka.shared.updateLocale(newValue.toIokaLocale())
+        }
+    }
     
     func getProfile(completion: @escaping(String) -> Void) {
         
@@ -20,8 +29,8 @@ internal class ProfileViewModel {
                 switch result {
                 case .success(let createOrderResponse):
                     completion(createOrderResponse.customer_access_token)
-                case .failure(let error):
-                    var error = error
+                case .failure:
+                    break
                 }
             }
         }

@@ -60,8 +60,8 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
     func confirmButtonWasPressed(_ orderView: OrderConfirmationView) {
         
         switch paymentTypeState {
-        case .applePay(let title):
-            var title = title
+        case .applePay:
+            break
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
@@ -76,8 +76,8 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
                     
                 }
             }
-        case .cash(let title):
-            var title = title
+        case .cash:
+            break
         case .empty:
            showPaymentTypeViewController(orderView)
         }

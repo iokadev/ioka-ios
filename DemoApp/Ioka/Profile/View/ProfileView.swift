@@ -12,6 +12,7 @@ import UIKit
 
 internal protocol ProfileViewDelegate: NSObject {
     func showSavedCard(_ profileView: ProfileView)
+    func showLanguageSelection(_ profileView: ProfileView)
 }
 
 internal class ProfileView: UIView {
@@ -33,12 +34,21 @@ internal class ProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(locale: Locale) {
+        languageProfileView.update(locale: locale)
+    }
+    
     private func setupActions() {
         self.saveCardProfileView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSaveCardProfileView)))
+        self.languageProfileView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleLanguageProfileView)))
     }
     
     @objc private func handleSaveCardProfileView() {
         delegate?.showSavedCard(self)
+    }
+    
+    @objc private func handleLanguageProfileView() {
+        delegate?.showLanguageSelection(self)
     }
     
     private func configureView() {

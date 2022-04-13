@@ -64,6 +64,7 @@
 		AFC2B4D62806D02800630F70 /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2B4CC2806D02800630F70 /* URLParameterEncoder.swift */; };
 		AFC2B4D72806D02800630F70 /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2B4CD2806D02800630F70 /* JSONParameterEncoder.swift */; };
 		AFC2B4D92806D06B00630F70 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2B4D82806D06B00630F70 /* APIError.swift */; };
+		AFC2B4DD2806DFBC00630F70 /* Locale.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFC2B4DC2806DFBC00630F70 /* Locale.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,6 +131,7 @@
 		AFC2B4CC2806D02800630F70 /* URLParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
 		AFC2B4CD2806D02800630F70 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
 		AFC2B4D82806D06B00630F70 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		AFC2B4DC2806DFBC00630F70 /* Locale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Locale.swift; sourceTree = "<group>"; };
 		C7564E327C85F840A571237A /* Pods-IokaDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IokaDemoApp.release.xcconfig"; path = "Target Support Files/Pods-IokaDemoApp/Pods-IokaDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		E5974F83709F511B171F3DCE /* Pods-Ioka.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ioka.debug.xcconfig"; path = "Target Support Files/Pods-Ioka/Pods-Ioka.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -300,6 +302,7 @@
 		6DB0A27527FBA8A1008A8381 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				AFC2B4DB2806DF9000630F70 /* Localization */,
 				AFC2B48D2806CFC500630F70 /* Network */,
 				AFC2B48A2806CF6000630F70 /* Extensions */,
 				AFC2B4872806CB2F00630F70 /* DesignSystem */,
@@ -519,6 +522,14 @@
 			path = Encoding;
 			sourceTree = "<group>";
 		};
+		AFC2B4DB2806DF9000630F70 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				AFC2B4DC2806DFBC00630F70 /* Locale.swift */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		FD9BED19954F11A3CC74EFF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -691,6 +702,7 @@
 				AFC2B4D42806D02800630F70 /* EndPointType.swift in Sources */,
 				AFC2B4D52806D02800630F70 /* ParameterEncoding.swift in Sources */,
 				6DB0A30927FBA8A1008A8381 /* PaymentTypeViewModel.swift in Sources */,
+				AFC2B4DD2806DFBC00630F70 /* Locale.swift in Sources */,
 				6DB0A30B27FBA8A1008A8381 /* CardPaymentCell.swift in Sources */,
 				6DB0A30027FBA8A1008A8381 /* OrderConfirmationView.swift in Sources */,
 				AFC2B47D2806C72200630F70 /* DemoImageVIew.swift in Sources */,

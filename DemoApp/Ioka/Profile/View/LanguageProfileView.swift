@@ -26,6 +26,10 @@ internal class LanguageProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func update(locale: Locale) {
+        currentLanguageLabel.text = locale.label
+    }
+    
     private func setupUI() {
         self.backgroundColor = colors.tertiaryBackground
         self.layer.cornerRadius = 8

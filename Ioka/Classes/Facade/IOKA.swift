@@ -17,7 +17,6 @@ public class Ioka {
     var setupInput: SetupInput?
     var theme: IokaTheme = .default
     var currentCoordinator: Coordinator?
-    var locale: IokaLocale = .automatic
     
     
     /// Метод для инициализии SDK. Необходимо вызвать до того, как обращаться к любым другим методам этого класса.
@@ -30,7 +29,7 @@ public class Ioka {
     public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme )
         self.theme = theme
-        updateLocale(locale: locale)
+        updateLocale(locale)
     }
     
     /// Метод для запуска сценария оплаты новой картой. Показывает форму для ввода данных карты.
@@ -189,7 +188,7 @@ public class Ioka {
     
     /// Переключает локаль для локализации текстов в ioka SDK. Необходимо вызвать, если пользователь переключил язык
     /// в приложении.
-    public func updateLocale(locale: IokaLocale) {
-        self.locale = locale
+    public func updateLocale(_ localeParam: IokaLocale) {
+        locale = localeParam
     }
 }
