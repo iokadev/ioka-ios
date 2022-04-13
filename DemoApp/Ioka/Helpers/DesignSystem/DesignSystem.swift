@@ -8,5 +8,5 @@
 import Foundation
 import Ioka
 
-internal var typography = Typography.defaultFonts
-internal var colors = Colors.defaultTheme
+internal var typography = Typography.default
+internal var colors = Colors.default

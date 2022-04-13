@@ -9,25 +9,26 @@ import UIKit
 
 
 public struct IokaTheme {
-    public static var `default` = IokaTheme(colors: Colors.defaultTheme)
+    public static var `default` = IokaTheme(colors: Colors.default)
     var colors: Colors
     var typography: Typography
     
     init(primaryColor: UIColor, secondaryColor: UIColor) {
-        self.colors = Colors.defaultTheme
-        self.colors.primary = primaryColor
-        self.colors.secondary = secondaryColor
-        self.typography = Typography.defaultFonts
+        var colors = Colors.default
+        colors.primary = primaryColor
+        colors.secondary = secondaryColor
+        
+        self.init(colors: colors)
     }
     
     init(colors: Colors) {
         self.colors = colors
-        self.typography = Typography.defaultFonts
+        self.typography = Typography.default
     }
     
     init(typography: Typography) {
         self.typography = typography
-        self.colors = Colors.defaultTheme
+        self.colors = Colors.default
     }
     
     init(colors: Colors, typography: Typography) {

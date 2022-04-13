@@ -27,8 +27,9 @@ public class Ioka {
     ///   - locale: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
     ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
     public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
-        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme )
+        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme)
         self.theme = theme
+        applyTheme(theme)
         updateLocale(locale)
     }
     
@@ -190,5 +191,10 @@ public class Ioka {
     /// в приложении.
     public func updateLocale(_ localeParam: IokaLocale) {
         locale = localeParam
+    }
+    
+    private func applyTheme(_ theme: IokaTheme) {
+        colors = theme.colors
+        typography = theme.typography
     }
 }

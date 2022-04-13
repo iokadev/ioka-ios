@@ -7,7 +7,7 @@
 
 import UIKit
 
-internal var colors = Ioka.shared.theme.colors
+internal var colors: Colors!
 
 public struct Colors {
     public var nonadaptableText: UIColor
@@ -26,7 +26,7 @@ public struct Colors {
 }
 
 extension Colors {
-    static public var defaultTheme = Colors(
+    static public var `default` = Colors(
         nonadaptableText: UIColor(named: "nonadaptableText", in: IokaBundle.bundle, compatibleWith: nil)!,
         background: UIColor(named: "Background", in: IokaBundle.bundle, compatibleWith: nil)!,
         text: UIColor(named: "Text", in: IokaBundle.bundle, compatibleWith: nil)!,
