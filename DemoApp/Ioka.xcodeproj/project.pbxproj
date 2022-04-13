@@ -19,7 +19,6 @@
 		6D652FA027FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652F9F27FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift */; };
 		6D652FA227FCE61000E8686B /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652FA127FCE61000E8686B /* OrderRepository.swift */; };
 		6D652FA427FCE6E200E8686B /* OrderDTO+ToOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D652FA327FCE6E200E8686B /* OrderDTO+ToOrder.swift */; };
-		6D67FED2280674E3005C8B57 /* IokaLocale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D67FED1280674E3005C8B57 /* IokaLocale.swift */; };
 		6DB0A13F27FBA42C008A8381 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A13E27FBA42C008A8381 /* AppDelegate.swift */; };
 		6DB0A14127FBA42C008A8381 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB0A14027FBA42C008A8381 /* SceneDelegate.swift */; };
 		6DB0A14627FBA42C008A8381 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DB0A14427FBA42C008A8381 /* Main.storyboard */; };
@@ -164,7 +163,6 @@
 		6D652F9F27FCDF3300E8686B /* SavedCardDTO+ToSavedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SavedCardDTO+ToSavedCard.swift"; sourceTree = "<group>"; };
 		6D652FA127FCE61000E8686B /* OrderRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderRepository.swift; sourceTree = "<group>"; };
 		6D652FA327FCE6E200E8686B /* OrderDTO+ToOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OrderDTO+ToOrder.swift"; sourceTree = "<group>"; };
-		6D67FED1280674E3005C8B57 /* IokaLocale.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IokaLocale.swift; sourceTree = "<group>"; };
 		6DA28DFCE2D62CC0F8BF3C45 /* Pods_Ioka.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ioka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB0A13B27FBA42C008A8381 /* Ioka.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ioka.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB0A13E27FBA42C008A8381 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -341,7 +339,6 @@
 			children = (
 				6D25C2042805986E00734E92 /* Localizable.strings */,
 				6D25C2082805986E00734E92 /* IokaLocalizable.swift */,
-				6D67FED1280674E3005C8B57 /* IokaLocale.swift */,
 			);
 			name = Localization;
 			path = ../../../Resources/Localization;
@@ -1298,7 +1295,6 @@
 				6DB0A38927FBDF5A008A8381 /* PaymentRepository.swift in Sources */,
 				6DB0A35A27FBA8A2008A8381 /* SavedCardsViewModel.swift in Sources */,
 				6DB0A32127FBA8A1008A8381 /* PaymentStatus.swift in Sources */,
-				6D67FED2280674E3005C8B57 /* IokaLocale.swift in Sources */,
 				6DB0A32527FBA8A1008A8381 /* CodableExtensions.swift in Sources */,
 				6DB0A3D627FBF939008A8381 /* PaymentWithSavedCardFlowFactory.swift in Sources */,
 				6DB0A36127FBA8A2008A8381 /* CartViewController.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public var locale: IokaLocale = .automatic
+public var locale: IokaLocale = Ioka.shared.locale
 
 public enum IokaLocale: String {
   case ru
