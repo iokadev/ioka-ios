@@ -127,7 +127,7 @@ internal class PaymentResultView: UIView {
     private func setOrderData(order: Order?) {
         guard let order = order else { return }
         
-        orderPriceLabel.text = String(order.price)
+        orderPriceLabel.text = "\(order.price) ₸"
         let locale = IokaLocalizable.orderNumber
         if let orderNumber = order.externalId {
             orderNumberLabel.text = String(format: locale, orderNumber)
