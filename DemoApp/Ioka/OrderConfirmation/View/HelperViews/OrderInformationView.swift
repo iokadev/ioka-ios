@@ -19,7 +19,7 @@ internal class OrderInformationView: UIView {
     private let orderTimeLabel = DemoLabel(font: typography.body, textColor: colors.text)
     private let orderAdressImageView = DemoImageView(imageName: "orderAdress")
     private let orderTimeImageView = DemoImageView(imageName: "orderTime")
-    private let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
+    private let seperatorView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
     private let chevronRightImageViewAdress = DemoImageView(imageName: "chevronRight")
     private let chevronRightImageViewTime = DemoImageView(imageName: "chevronRight")
     

@@ -25,7 +25,7 @@ internal class ProductCell: UITableViewCell {
     let productImageView = DemoImageView(imageName: "productImage", cornerRadius: 8)
     let productPriceLabel = DemoLabel(font: typography.bodySemibold, textColor: colors.text)
     let deleteImageView = DemoImageView(imageName: "deleteProduct")
-    let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
+    let seperatorView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

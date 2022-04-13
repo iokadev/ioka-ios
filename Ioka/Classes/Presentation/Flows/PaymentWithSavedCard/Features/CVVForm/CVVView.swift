@@ -20,7 +20,7 @@ internal class CVVView: UIView {
     private let savedCardView = IokaCustomView(backGroundColor: colors.background, cornerRadius: 12)
     private let titleLabel = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: typography.title, iokaTextColor: colors.text)
     private let closeButton = IokaButton(imageName: "Close")
-    private let cardInfoView = IokaCustomView(backGroundColor: colors.fill4, cornerRadius: 12)
+    private let cardInfoView = IokaCustomView(backGroundColor: colors.quaternaryBackground, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
     private let cvvImageView = IokaImageView(imageName: "cvvExplained")

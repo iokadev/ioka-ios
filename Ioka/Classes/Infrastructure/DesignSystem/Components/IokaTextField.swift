@@ -35,7 +35,7 @@ internal class IokaTextField: UITextField {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.textColor = colors.text
-        self.backgroundColor = colors.fill4
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
         self.layer.borderColor = colors.background.cgColor

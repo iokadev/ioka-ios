@@ -20,7 +20,7 @@ internal class GetCardTableViewCell: UITableViewCell {
     let creditCardImageView = DemoImageView()
     let cardNumberLabel = DemoLabel(font: typography.body, textColor: colors.text)
     let deleteImageView = DemoImageView(imageName: "deleteProduct")
-    let seperatorView: UIView = DemoCustomView(backGroundColor: colors.fill4)
+    let seperatorView: UIView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
     let deleteCardImageView = DemoImageView(imageName: "deleteProduct")
     var card: SavedCardDTO?
     

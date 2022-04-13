@@ -8,8 +8,21 @@
 import Foundation
 
 
-public enum FlowResult {
+public enum FlowResult: Equatable {
     case succeeded
     case cancelled
     case failed(Error)
+    
+    public static func == (lhs: FlowResult, rhs: FlowResult) -> Bool {
+        switch (lhs, rhs) {
+        case (.succeeded, .succeeded):
+            return true
+        case (.cancelled, .cancelled):
+            return true
+        case (.failed, .failed):
+            return true
+        default:
+            return false
+        }
+    }
 }

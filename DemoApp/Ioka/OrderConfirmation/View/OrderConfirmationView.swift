@@ -30,7 +30,7 @@ internal class OrderConfirmationView: UIView {
     private let orderInformationView = OrderInformationView()
     private let confirmButton = DemoButton(title: "Оформить")
     private let paymentTypeImageView = DemoImageView(imageName: "paymentType")
-    private let seperatorView = DemoCustomView(backGroundColor: colors.fill4)
+    private let seperatorView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

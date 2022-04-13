@@ -65,15 +65,19 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startPaymentWithSavedCardFlow(sourceViewController: self, orderAccessToken: orderAccessToken, card: card) { result in
-                    
+                Ioka.shared.startPaymentWithSavedCardFlow(sourceViewController: self, orderAccessToken: orderAccessToken, card: card) { [weak self] result in
+                    if result == .succeeded {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         case .creditCard( _):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startPaymentFlow(sourceViewController: self, orderAccessToken: orderAccessToken) { result in
-                    
+                Ioka.shared.startPaymentFlow(sourceViewController: self, orderAccessToken: orderAccessToken) { [weak self] result in
+                    if result == .succeeded {
+                        self?.navigationController?.popViewController(animated: true)
+                    }
                 }
             }
         case .cash:
