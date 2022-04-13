@@ -200,7 +200,7 @@ internal class CardFormView: UIView {
         switch cardFormState {
         case .payment:
             guard let price = price else { return }
-            createButton.setTitle("\(IokaLocalizable.pay) \(price)", for: .normal)
+            createButton.setTitle("\(IokaLocalizable.pay) \(price) ₸", for: .normal)
         case .saving:
             createButton.setTitle(IokaLocalizable.save, for: .normal)
         }
