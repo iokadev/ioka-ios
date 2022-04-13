@@ -1,0 +1,29 @@
+{
+  "name": "Ioka",
+  "version": "0.0.1",
+  "summary": "Example of creating own pod.",
+  "homepage": "https://github.com/iokadev/ioka-ios.git",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "karaevablay": "karaevablay@gmail.com"
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "source": {
+    "git": "https://github.com/iokadev/ioka-ios.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "Ioka/Classes/**/*.{swift}",
+  "resource_bundles": {
+    "Ioka": [
+      "Ioka/Resources/**/*.{xcassets, .lproj, .strings}",
+      "Ioka/Localization/**/*.{.lproj, .strings}"
+    ]
+  },
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
+}

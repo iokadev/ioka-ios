@@ -7,30 +7,47 @@
 
 import Foundation
 
+public var locale: IokaLocale = .automatic
+
+public enum IokaLocale: String {
+  case ru
+  case kk
+  case automatic
+}
 
 enum IokaLocalizable {
-    static var saveCard = NSLocalizedString("saveCard", comment: "")
-    static var transactionsProtected = NSLocalizedString("transactionProtected", comment: "")
-    static var pay = NSLocalizedString("pay", comment: "")
-    static var enterCardNumber = NSLocalizedString("enterCardNumber", comment: "")
-    static var cardExpiration = NSLocalizedString("cardExpiration", comment: "")
-    static var cvv = NSLocalizedString("cvv", comment: "")
-    static var priceTng = NSLocalizedString("priceTng", comment: "")
-    static var serverError = NSLocalizedString("serverError", comment: "")
+    static var saveCard = localized("saveCard")
+    static var transactionsProtected = localized("transactionProtected")
+    static var pay = localized("pay")
+    static var enterCardNumber = localized("enterCardNumber")
+    static var cardExpiration = localized("cardExpiration")
+    static var cvv = localized("cvv")
+    static var priceTng = localized("priceTng")
+    static var serverError = localized("serverError")
     
     
-    static var orderPaid = NSLocalizedString("orderPaid", comment: "")
-    static var ok = NSLocalizedString("ok", comment: "")
-    static var paymentFailed = NSLocalizedString("paymentFailed", comment: "")
-    static var retry = NSLocalizedString("retry", comment: "")
+    static var orderPaid = localized("orderPaid")
+    static var ok = localized("ok")
+    static var paymentFailed = localized("paymentFailed")
+    static var retry = localized("retry")
     
-    static var paymentConfirmation = NSLocalizedString("paymentConfirmation", comment: "")
-    static var continueButton = NSLocalizedString("continueButton", comment: "")
+    static var paymentConfirmation = localized("paymentConfirmation")
+    static var continueButton = localized("continueButton")
     
-    static var save = NSLocalizedString("save", comment: "")
-    static var orderNumber = NSLocalizedString("orderNumber", comment: "")
+    static var save = localized("save")
+    static var orderNumber = localized("orderNumber")
+    static var paymentProcessing = localized("paymentProcessing")
+    static var goPayment = localized("goPayment")
     
-    static var paymentProcessing = NSLocalizedString("paymentProcessing", comment: "")
-    static var goPayment = NSLocalizedString("goPayment", comment: "")
+    private static func localized(_ key: String) -> String {
+      switch locale {
+        case .automatic:
+        return NSLocalizedString(key, comment: "")
+        default:
+          let path = Bundle.main.path(forResource: locale.rawValue, ofType: "lproj")!
+        let bundle = Bundle(path: path)!
+        return NSLocalizedString(key, tableName: nil, bundle: bundle, value: "", comment: "")
+      }
+    }
     
 }

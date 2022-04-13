@@ -14,10 +14,12 @@ public class Ioka {
     var setupInput: SetupInput?
     var theme: IokaTheme = .default
     var currentCoordinator: Coordinator?
+    var locale: IokaLocale = .automatic
     
-    public func setup(apiKey: String, theme: IokaTheme = .default) {
+    public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme )
-        self.theme = theme 
+        self.theme = theme
+        updateLocale(locale: locale)
     }
     
     public func startCheckoutFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
@@ -129,5 +131,9 @@ public class Ioka {
         } catch let error {
             completion(error)
         }
+    }
+    
+    public func updateLocale(locale: IokaLocale) {
+        self.locale = locale
     }
 }

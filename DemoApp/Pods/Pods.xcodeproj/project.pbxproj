@@ -1,0 +1,1456 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		04A26EC4AF250CCD1CB2C1B9DCFCB6F6 /* DeleteCardByIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AB1908B5CC97EBEC37275CBC393FD77 /* DeleteCardByIDResponse.swift */; };
+		055024641BBC878C04D0DA08F81770AA /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A8BCC46DF86EC5CC17A3A809E22A7 /* ParameterEncoding.swift */; };
+		0D1DFC358BE53512341B24469A59713A /* EndPointRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A37706650117CF90F67334ABC7FF9DF /* EndPointRouter.swift */; };
+		1269D93157CD12E17DFEC5E34E3F7B1A /* SaveCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48EEE91448CB253ED12B682BA2066685 /* SaveCardViewController.swift */; };
+		12BB4579A63B09B311D026A0B2330DC3 /* SaveCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC83583AB3F5217571BA43DBD66E3DA3 /* SaveCardViewModel.swift */; };
+		1350085F2CB71FA0D96FA3021DDD7089 /* SaveCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF78908A37617A6F48F369DF1A55359 /* SaveCardCoordinator.swift */; };
+		137B165B3CAFA1F7A63A8549E854D4F5 /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B95549131031524ADD601EA548C0AD89 /* EndPointType.swift */; };
+		13CEB27432EF2B970939443CA17A1957 /* GetBrandResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48656F82C34C88B63D4E4DE0B6DF91C7 /* GetBrandResponse.swift */; };
+		14A7A29C6446D6F2A0686231F58E87CA /* PaymentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BA6C50B85FD848BEEB67CBA3BD29966 /* PaymentRepository.swift */; };
+		14D9534ED9523E1F4969C855E807AB03 /* ErrorToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E324A6D882709C41A4AAA103528826 /* ErrorToastView.swift */; };
+		175D67BE8BE1A163C851ECD95FCC3F0C /* Ioka-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B8D943CE1916F2E5B3F4BA0FC3609768 /* Ioka-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FB6D2666140CA7D9F86116F26D5F9CA /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2F1868E1FFDBF6700D216189E88166 /* Order.swift */; };
+		2112F13055076EEBF24E22A40039C8AD /* SetupInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8658D9A83CAF533DFCEA231D5A84C6E6 /* SetupInput.swift */; };
+		23220EFDB2FC6A2ACEC81E4CCEEA9442 /* PaymentResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EAF7B30879A681D9EEDD9E21FD100F /* PaymentResultViewController.swift */; };
+		249B179DC5CFCF53A088A18909374EAA /* Ioka-Ioka in Resources */ = {isa = PBXBuildFile; fileRef = DCEA834BF1165B5A9135AEC48FA7E4CE /* Ioka-Ioka */; };
+		24BF2AA626F64822B361136DBF83F564 /* PaymentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F1BEDCBC32468D1D4D3E9E68AB779ED /* PaymentDTO.swift */; };
+		2583C370E5FD519308F6B85EAE7D10BA /* PaymentDTO+ToPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC6EE86B8A29AED448746D3F91C4A42 /* PaymentDTO+ToPayment.swift */; };
+		27AFB4769B5A8A7C58B2003881FDAEC7 /* IokaAPIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3675DFE07E6697CEA5F80AB074547EA /* IokaAPIProtocol.swift */; };
+		27BC5F32468C8CC5EADDE2FFA17730F0 /* PaymentFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F665B9E9E3C703777DAD2D13BA636A /* PaymentFlowFactory.swift */; };
+		2CF2B1F98A2E8CD6E3EA285323385034 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DCA892C1A177B5F3146997F7DA40D1 /* Typography.swift */; };
+		2F30BFE6A55E9F00E3091D1E0F9F805B /* PaymentWithSavedCardCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7C9E30AAEE78E90C612736DDADEB554 /* PaymentWithSavedCardCoordinator.swift */; };
+		31F589B26691E9735B2A961ABA5F7EFA /* PaymentResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5EAC304C0BDB6797D4EE7F1515F75B /* PaymentResultView.swift */; };
+		323F0DC977F455A0F3A67017CAF39EF2 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655BC82454656EEE8804257DF3E3A998 /* Coordinator.swift */; };
+		369E263538FB6073C2BC7E8E07F34070 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397645F4DA6C612973FC3B3FB45EF348 /* APIKey.swift */; };
+		3A2B5E555BBA3A8FFD20A5E26BFF0BDF /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB2F0099BB9D74D9EDD7FC2C512377D6 /* EmptyResponse.swift */; };
+		3D37F1E078A4EACF647048845412C745 /* ViewControllerProgressWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE7BDAE43F1F6B8401D910873A15CBB /* ViewControllerProgressWrapper.swift */; };
+		406EBEF2F7F88B2CF2A0EF8A38679951 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7D8DFB9AD071110D52797025D41805C /* AccessToken.swift */; };
+		41CE08F518F252BAB765937187F885AC /* IokaCardNumberTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C819F161D8FE795AFB36CB5668485771 /* IokaCardNumberTextField.swift */; };
+		425F6F3566DAB848148E7717844DE937 /* Pods-Ioka-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A030CD0447961F2327A109A4060BE0B3 /* Pods-Ioka-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43E35627673ECCD5BF98602991EE4C07 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDF2D88944045600C1940EC7987D889 /* Colors.swift */; };
+		4A40BD8BD5491F3C3570CDDB96FC61AB /* PaymentMethodsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC7DF8428D54FC557D5DEAE8B81771C7 /* PaymentMethodsViewController.swift */; };
+		4F937EA87251C87BB0AD2EE501F4B843 /* IOKA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9679D94A0BEFF44497583232BF89128B /* IOKA.swift */; };
+		53B051CE495715EEF8844B896E0911D7 /* GetEmitterByBinCodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E119CCB5347221148850559D07E1E2 /* GetEmitterByBinCodeResponse.swift */; };
+		53CD35EECB70296F7F03A46A9EB5678D /* ProgressWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACEC8AF05E353513BD4E7334BEEA422 /* ProgressWrapperView.swift */; };
+		55AFC4E628E05A145C70FFEE7BA200D9 /* 3DSecureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E201EF8635F8995B7C7339EE5E024760 /* 3DSecureViewController.swift */; };
+		5B4D988CDB9B11EFE91B89301461DCEB /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05110BFE84A0327662D55FFF98AA0374 /* NetworkRouter.swift */; };
+		60A68B57A10E6CB3119CED584D4D429D /* PaymentMethodsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18876D632F8C3EA84A4ABEBD695A34D4 /* PaymentMethodsViewModel.swift */; };
+		61E07878479883DA610BB84BAE742759 /* PaymentCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC49065A48893264F4C9DB5ED687AD86 /* PaymentCoordinator.swift */; };
+		61FF12B93A6F95D4420A6E70B9BFCE12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5ECD506BC6435443C71DBC1A5B6443E2 /* Assets.xcassets */; };
+		6814B47179154E9CE2E7A217ABCBA748 /* PaymentMethodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38630C1B526BFB11D2005326156B385 /* PaymentMethodsView.swift */; };
+		6BD8E45D715BC1F06DFEFF57FD54929F /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DC21058DFA15A20F9CD8151F9BFF415 /* JSONParameterEncoder.swift */; };
+		6C28B7C8C57B18D84C6A8B1514277A6C /* IokaStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AA993E6CF63C9FCD8FB9070B679E2 /* IokaStackView.swift */; };
+		6E02782D3D4512AD1543255C5CCC9498 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		76440F3112664319D0CBEE1757A318EF /* PaymentWithSavedCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC23694E4A685173E2C621D31D86E402 /* PaymentWithSavedCardViewModel.swift */; };
+		77CB5573CBEB38FEE43B1A0EE48C8D5D /* ErrorPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7690F5B0B1D14CCC82523DFDE399B78 /* ErrorPopUpView.swift */; };
+		786A4F361D9372E4448BF59D926B6190 /* SavedCardDTO+ToSavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203E70084EBB3A2D9C2112FE287207A5 /* SavedCardDTO+ToSavedCard.swift */; };
+		7E97AECDFEBABE8A8BD23F3B13B7276C /* PaymentFlowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E3451973FBCB882700A7FB616C837A4 /* PaymentFlowInput.swift */; };
+		7F9A212EC69A1ED8BAD20B5931D6DF17 /* IokaLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A463921F4C9643C831F98B106D2820 /* IokaLabel.swift */; };
+		7FBB14F3FF05194361492A4FB51F0BF3 /* OrderRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AFC1B5BEBBB5788AC5A458AC862576 /* OrderRepository.swift */; };
+		81AC31DE48DEAAC5675C345FF467C29F /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 126295032DABD9655D61233549E154EE /* URLParameterEncoder.swift */; };
+		84B0C34041E107B1FDEB82424F082D46 /* IokaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3286773C678BE22B6FCF829ED33E337C /* IokaImageView.swift */; };
+		862E8027A28A4E0B34DD09C8723B3635 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9B4132B13CFC5585372EA9BBE90C7D /* HTTPMethod.swift */; };
+		8829C7B049C8AA2C55238915B70C4C33 /* ActionDTO+ToAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAEC981972516949F53A8C469B8CA0C /* ActionDTO+ToAction.swift */; };
+		89D173F3934F1B6393BA76CE5FA062B6 /* CardParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02AE17289A89451C1D3910B619EDFCDF /* CardParameters.swift */; };
+		8A086C832BEB3D702898CF24CAA377B3 /* IokaCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BCFF78D9211736136FBD01CFF504D2 /* IokaCustomView.swift */; };
+		8A49F2986F6BBF1088BB7C24B02EEAE2 /* PaymentStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9291A4E7C3C148D7B558554C790243 /* PaymentStatus.swift */; };
+		8A8767E2114CDC7506AE3415388FEA72 /* IokaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8ABC17E99EFC3587A627CEA6E58800 /* IokaButton.swift */; };
+		8AB890F7AB1CCFF30FAFAF2C5913207A /* FlowResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730B23A5C0310FE265AEAA74512A4A3B /* FlowResult.swift */; };
+		8CFCFA599935904AF5AC2DF7F9F5B8C7 /* CodableExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205D0F37C47DB9889523800BAAA5C9F2 /* CodableExtensions.swift */; };
+		8E9BA1F5BDBC810ED3F83A3B515337A3 /* PaymentResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3394FA122A7C1AA17287288391FF8EB /* PaymentResultViewModel.swift */; };
+		930BE9C2AB9A220D8FAB8C608EE3C6E5 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FEEDC2314D1790830B84558BC72EEED /* APIError.swift */; };
+		95E07738B25D6EC2F0823D52109B795A /* PaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1819B30D90473FBF0200A7ACDF6543E4 /* PaymentSystem.swift */; };
+		9679BD5969E03E31FA722BEA6D2CDDCB /* IokaImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63964025083CEDE951219D355EC35F4F /* IokaImages.swift */; };
+		9AC785D89FC998EFBBE3A389C5C0B853 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3037F595F5EDDCFD453ED4BC2969F5A1 /* NetworkError.swift */; };
+		A2F7B4B186680D9B2D1D214A0CC3D29B /* IokaLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8AF479E9DD9DDC0B0802160ECF79EDF /* IokaLocalizable.swift */; };
+		A5DD114BD21A699910C3A14CCA26387F /* CVVView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6122D8A4D6835215785D8E38F98191A /* CVVView.swift */; };
+		A75DD03D9685A86F7EDCBDCA6AEDF231 /* DomainError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3A5AECBE1743BE9DB524881EEBA5A3 /* DomainError.swift */; };
+		A8C281F19F98688DE3C3FF843D073C0C /* 3DSecureNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF43AB0299FDF06F617E3E1C934029E1 /* 3DSecureNavigationView.swift */; };
+		AB4E81814876B9D04C199801DA74D765 /* CVVViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB620E6127DF57975D89C6EC2DDB030 /* CVVViewModel.swift */; };
+		B1A910F11256F94D70551716E27550F0 /* SaveCardFlowInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6809A72CA96E3B4FFCD30E33B00A9103 /* SaveCardFlowInput.swift */; };
+		B1AF6BF04701C29AD21D74C85C4B120A /* Ioka-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 458FCBD0D3C43F90CD614EBA82227D51 /* Ioka-dummy.m */; };
+		B1E78EE8B2E9D3A47B4C4AEC3800E212 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		B69168962FDDA1D032ECE8732B7FF955 /* IokaProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69353B23F8E95EB7DFCCAAC564CBD31B /* IokaProgressView.swift */; };
+		B734E95AD460E768D844F0463BDA37BC /* OrderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2514535B41507743246923FEDA2E9936 /* OrderDTO.swift */; };
+		B785949FB5B0F42B8B556EE0D7C86611 /* IOKAConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07916C47F7E9A3C700C4262DCB9BA7F3 /* IOKAConstraints.swift */; };
+		B85EAB3221FCD248888943CF038EB75A /* 3DSecureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EDBAA039D1EE1CD60B39D10466978A /* 3DSecureViewModel.swift */; };
+		BA6FD5783B0F07967CD5695BC25121D4 /* ErrorPopUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFB5006165DC233120DD03700AFFBD86 /* ErrorPopUpViewModel.swift */; };
+		BCA24FA6661AE6187138D2B6867922AD /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD838ED9E8A72F7847B0924A6552BDA /* HTTPTask.swift */; };
+		BF03902301FA5DA0D7616ED7A67152EF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D381DA170D3D61F7EC021E198E32A29 /* Theme.swift */; };
+		BF0A69A5694FDC767B76A20A7243A908 /* IokaApiEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353C8F2566254D9C139C5A54E6719DC /* IokaApiEndpoint.swift */; };
+		C17A3528596A8880632946B8BB2FEBAA /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A0A0DC2107C3503790D9DA920D8969 /* Payment.swift */; };
+		C1BC7AC97AEF272AB7D675A0426B176C /* CVVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9D05F8C7834F52FA9C676ADB4E0BAA0 /* CVVViewController.swift */; };
+		C2552FA1B6771891202AF37BA5D8903B /* SavedCardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315CBA8E4FFB0017C886AC573CC028A7 /* SavedCardRepository.swift */; };
+		C9FE47780844A9BAEFD329C219A879D5 /* FeaturesFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30CDEC5B38C9953623B96E4C58A71B /* FeaturesFactory.swift */; };
+		CA72CBFB688843AB29A0170CD93F867F /* SavedCardDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4187DE2FB0D6057303A0C3F84C24ACE /* SavedCardDTO.swift */; };
+		CB8DEC10D6641EB9E2B8B29C2FC483C1 /* CardFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C808EFA97F6317D320CDEEFD825754C /* CardFormViewModel.swift */; };
+		CCCCEE6A5CE1D022FCC5FE572A86B51F /* IokaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA08E70D46D6CB1807BA6494D4FC216 /* IokaAPI.swift */; };
+		D20C67293F8FB5089A506294FB998DAE /* PaymentWithSavedCardFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFBACEA0B41A2FF663BF2AD17BD1E0BD /* PaymentWithSavedCardFlowFactory.swift */; };
+		D47CDA347E89087EC6DA7ABE73AA6712 /* Pods-Ioka-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D1182AB91390CD4E30BAC9C46D6EBA48 /* Pods-Ioka-dummy.m */; };
+		D5BCF5E68C11BDD30AB0315173658153 /* IokaIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F14CF878372714FEC57FD84FBC55FF /* IokaIcons.swift */; };
+		DA6F021AB362BEF789B6D2A435FADA57 /* IokaTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DBB0153CE0E9AC0EC1BCF6DA7DDD48A /* IokaTextField.swift */; };
+		E0F733C6B7FC8A122C7105B40F42D1AB /* ErrorPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BA38BAD7B451E7A2D52B9819CF74169 /* ErrorPopUpViewController.swift */; };
+		E2E4D659BD3403566A9F2835FFD8E7E4 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1106D35E6524640469E2E23D728CBB9C /* StringExtensions.swift */; };
+		E969B9F42106B3DD52994BDF8D801A99 /* OrderForPaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D555A721E77853A7254332717963ACC8 /* OrderForPaymentViewModel.swift */; };
+		EA0B0140EC9A9F05A046986F54F4395A /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3579094010AD7A640A7FE550F1F00D9D /* HttpResponse.swift */; };
+		EE9DA57161100853D8B69C3BEF032509 /* OrderDTO+ToOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D2A4B0C43CB86A399973163A6BBD93 /* OrderDTO+ToOrder.swift */; };
+		EED29FF97C66BD7810BBD1A3A4B63F07 /* SavedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9ACB9ABFFC74E653D1A070DE370B4AC /* SavedCard.swift */; };
+		EF0A8515AF9090D78AEAE0597538BDBE /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FF87EFD3399B442C730D02FBB72F90 /* Action.swift */; };
+		F57A0DA744250777C01216FE1CCF5C04 /* ProgressViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A61BACF369E88FDCD4EF48C90F4EE4 /* ProgressViewModelProtocol.swift */; };
+		F622EF3F9AC2EA86557B8A4B187EA095 /* Payer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3F7AF03ECF83B5FEE30F9CF8564FAC /* Payer.swift */; };
+		F83705A27FE9B740434DBBC44402A689 /* CardFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09168FE6A8A766C9D62873DB0E25D20A /* CardFormView.swift */; };
+		FFEC524C9C5C07F49E14382C8968EB96 /* SaveCardFlowFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC517268CA5B3B1FDA4FF1622F4DC6B3 /* SaveCardFlowFactory.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5B4E8A4B3064650B3428BD8583BEF2F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6684C323F942F8430E6A2D3AD889D385;
+			remoteInfo = "Ioka-Ioka";
+		};
+		A10CCCF610C14281299484A0B360DE62 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A1A337E2CCC2197B492A2D11BAE3B6B1;
+			remoteInfo = Ioka;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		014047EAB9364A5B4297D23C822AD115 /* Ioka-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Ioka-Info.plist"; sourceTree = "<group>"; };
+		02AE17289A89451C1D3910B619EDFCDF /* CardParameters.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardParameters.swift; sourceTree = "<group>"; };
+		05110BFE84A0327662D55FFF98AA0374 /* NetworkRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		07916C47F7E9A3C700C4262DCB9BA7F3 /* IOKAConstraints.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IOKAConstraints.swift; sourceTree = "<group>"; };
+		07C1ED585A9E4EA54A200787FBAE5C43 /* Ioka.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = Ioka.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		09168FE6A8A766C9D62873DB0E25D20A /* CardFormView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardFormView.swift; sourceTree = "<group>"; };
+		0BA38BAD7B451E7A2D52B9819CF74169 /* ErrorPopUpViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorPopUpViewController.swift; sourceTree = "<group>"; };
+		0DBB0153CE0E9AC0EC1BCF6DA7DDD48A /* IokaTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaTextField.swift; sourceTree = "<group>"; };
+		0EA786C9D1ADE0DF050F85D4354B3DC4 /* Ioka.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Ioka.modulemap; sourceTree = "<group>"; };
+		1106D35E6524640469E2E23D728CBB9C /* StringExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		126295032DABD9655D61233549E154EE /* URLParameterEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		14582C6CFA81C163669FCCD1DF64217E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		1819B30D90473FBF0200A7ACDF6543E4 /* PaymentSystem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentSystem.swift; sourceTree = "<group>"; };
+		18876D632F8C3EA84A4ABEBD695A34D4 /* PaymentMethodsViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentMethodsViewModel.swift; sourceTree = "<group>"; };
+		1C808EFA97F6317D320CDEEFD825754C /* CardFormViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CardFormViewModel.swift; sourceTree = "<group>"; };
+		1DC21058DFA15A20F9CD8151F9BFF415 /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		203E70084EBB3A2D9C2112FE287207A5 /* SavedCardDTO+ToSavedCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "SavedCardDTO+ToSavedCard.swift"; sourceTree = "<group>"; };
+		205D0F37C47DB9889523800BAAA5C9F2 /* CodableExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CodableExtensions.swift; sourceTree = "<group>"; };
+		2514535B41507743246923FEDA2E9936 /* OrderDTO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OrderDTO.swift; sourceTree = "<group>"; };
+		2FAEC981972516949F53A8C469B8CA0C /* ActionDTO+ToAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "ActionDTO+ToAction.swift"; sourceTree = "<group>"; };
+		2FEEDC2314D1790830B84558BC72EEED /* APIError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		3037F595F5EDDCFD453ED4BC2969F5A1 /* NetworkError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		315CBA8E4FFB0017C886AC573CC028A7 /* SavedCardRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SavedCardRepository.swift; sourceTree = "<group>"; };
+		3286773C678BE22B6FCF829ED33E337C /* IokaImageView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaImageView.swift; sourceTree = "<group>"; };
+		3353C8F2566254D9C139C5A54E6719DC /* IokaApiEndpoint.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaApiEndpoint.swift; sourceTree = "<group>"; };
+		3579094010AD7A640A7FE550F1F00D9D /* HttpResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HttpResponse.swift; sourceTree = "<group>"; };
+		35DCA892C1A177B5F3146997F7DA40D1 /* Typography.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		397645F4DA6C612973FC3B3FB45EF348 /* APIKey.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		3F3A5AECBE1743BE9DB524881EEBA5A3 /* DomainError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DomainError.swift; sourceTree = "<group>"; };
+		3F9B4132B13CFC5585372EA9BBE90C7D /* HTTPMethod.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		458FCBD0D3C43F90CD614EBA82227D51 /* Ioka-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Ioka-dummy.m"; sourceTree = "<group>"; };
+		48656F82C34C88B63D4E4DE0B6DF91C7 /* GetBrandResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GetBrandResponse.swift; sourceTree = "<group>"; };
+		48EEE91448CB253ED12B682BA2066685 /* SaveCardViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SaveCardViewController.swift; sourceTree = "<group>"; };
+		4BA6C50B85FD848BEEB67CBA3BD29966 /* PaymentRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentRepository.swift; sourceTree = "<group>"; };
+		4E25B807E468B60725D8D7A26FE5AF1C /* Ioka */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Ioka; path = Ioka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		55EEB8922698AA4FAECF646E5BB626C4 /* Pods-Ioka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Ioka.release.xcconfig"; sourceTree = "<group>"; };
+		56A0A0DC2107C3503790D9DA920D8969 /* Payment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		5D381DA170D3D61F7EC021E198E32A29 /* Theme.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		5ECD506BC6435443C71DBC1A5B6443E2 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Ioka/Resources/Assets.xcassets; sourceTree = "<group>"; };
+		5F70C1CCC2872E307A194194FEED8517 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		60CEC4103D61799FA6DEF89F3DEF422D /* Pods-Ioka.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Ioka.debug.xcconfig"; sourceTree = "<group>"; };
+		6196722722FB9E55F3E2DD0604B5DF57 /* Pods-Ioka.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Ioka.modulemap"; sourceTree = "<group>"; };
+		63964025083CEDE951219D355EC35F4F /* IokaImages.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaImages.swift; sourceTree = "<group>"; };
+		63BCFF78D9211736136FBD01CFF504D2 /* IokaCustomView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaCustomView.swift; sourceTree = "<group>"; };
+		655BC82454656EEE8804257DF3E3A998 /* Coordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		65AFC1B5BEBBB5788AC5A458AC862576 /* OrderRepository.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OrderRepository.swift; sourceTree = "<group>"; };
+		6809A72CA96E3B4FFCD30E33B00A9103 /* SaveCardFlowInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SaveCardFlowInput.swift; sourceTree = "<group>"; };
+		69353B23F8E95EB7DFCCAAC564CBD31B /* IokaProgressView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaProgressView.swift; sourceTree = "<group>"; };
+		6ACEC8AF05E353513BD4E7334BEEA422 /* ProgressWrapperView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProgressWrapperView.swift; sourceTree = "<group>"; };
+		6B9291A4E7C3C148D7B558554C790243 /* PaymentStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentStatus.swift; sourceTree = "<group>"; };
+		6F30CDEC5B38C9953623B96E4C58A71B /* FeaturesFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FeaturesFactory.swift; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		730B23A5C0310FE265AEAA74512A4A3B /* FlowResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FlowResult.swift; sourceTree = "<group>"; };
+		7A37706650117CF90F67334ABC7FF9DF /* EndPointRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EndPointRouter.swift; sourceTree = "<group>"; };
+		7BC6EE86B8A29AED448746D3F91C4A42 /* PaymentDTO+ToPayment.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "PaymentDTO+ToPayment.swift"; sourceTree = "<group>"; };
+		7E10291777012B9BB789168E19A7DA63 /* Pods-Ioka */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-Ioka"; path = Pods_Ioka.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E3451973FBCB882700A7FB616C837A4 /* PaymentFlowInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentFlowInput.swift; sourceTree = "<group>"; };
+		82573462F6F3A8D6F7197AF08CCF8E4E /* Ioka-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Ioka-prefix.pch"; sourceTree = "<group>"; };
+		8658D9A83CAF533DFCEA231D5A84C6E6 /* SetupInput.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SetupInput.swift; sourceTree = "<group>"; };
+		892A8BCC46DF86EC5CC17A3A809E22A7 /* ParameterEncoding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		89E119CCB5347221148850559D07E1E2 /* GetEmitterByBinCodeResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GetEmitterByBinCodeResponse.swift; sourceTree = "<group>"; };
+		8AB1908B5CC97EBEC37275CBC393FD77 /* DeleteCardByIDResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DeleteCardByIDResponse.swift; sourceTree = "<group>"; };
+		8AD838ED9E8A72F7847B0924A6552BDA /* HTTPTask.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		8B2F1868E1FFDBF6700D216189E88166 /* Order.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		8C8ABC17E99EFC3587A627CEA6E58800 /* IokaButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaButton.swift; sourceTree = "<group>"; };
+		8FDF2D88944045600C1940EC7987D889 /* Colors.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		94FF87EFD3399B442C730D02FBB72F90 /* Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		950AA993E6CF63C9FCD8FB9070B679E2 /* IokaStackView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaStackView.swift; sourceTree = "<group>"; };
+		9679D94A0BEFF44497583232BF89128B /* IOKA.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IOKA.swift; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F1BEDCBC32468D1D4D3E9E68AB779ED /* PaymentDTO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentDTO.swift; sourceTree = "<group>"; };
+		A030CD0447961F2327A109A4060BE0B3 /* Pods-Ioka-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Ioka-umbrella.h"; sourceTree = "<group>"; };
+		A5A463921F4C9643C831F98B106D2820 /* IokaLabel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaLabel.swift; sourceTree = "<group>"; };
+		A6F665B9E9E3C703777DAD2D13BA636A /* PaymentFlowFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentFlowFactory.swift; sourceTree = "<group>"; };
+		A93FE2027DAF671A7B302BCBAF3DFFE9 /* Ioka.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Ioka.debug.xcconfig; sourceTree = "<group>"; };
+		AA31FFB30AFE751754917D7A759AE03B /* Pods-Ioka-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Ioka-Info.plist"; sourceTree = "<group>"; };
+		AC517268CA5B3B1FDA4FF1622F4DC6B3 /* SaveCardFlowFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SaveCardFlowFactory.swift; sourceTree = "<group>"; };
+		ADB620E6127DF57975D89C6EC2DDB030 /* CVVViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CVVViewModel.swift; sourceTree = "<group>"; };
+		B5F14CF878372714FEC57FD84FBC55FF /* IokaIcons.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaIcons.swift; sourceTree = "<group>"; };
+		B8D943CE1916F2E5B3F4BA0FC3609768 /* Ioka-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Ioka-umbrella.h"; sourceTree = "<group>"; };
+		B95549131031524ADD601EA548C0AD89 /* EndPointType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		B9ACB9ABFFC74E653D1A070DE370B4AC /* SavedCard.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SavedCard.swift; sourceTree = "<group>"; };
+		BAF78908A37617A6F48F369DF1A55359 /* SaveCardCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SaveCardCoordinator.swift; sourceTree = "<group>"; };
+		BC49065A48893264F4C9DB5ED687AD86 /* PaymentCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentCoordinator.swift; sourceTree = "<group>"; };
+		BFB5006165DC233120DD03700AFFBD86 /* ErrorPopUpViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorPopUpViewModel.swift; sourceTree = "<group>"; };
+		BFBACEA0B41A2FF663BF2AD17BD1E0BD /* PaymentWithSavedCardFlowFactory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardFlowFactory.swift; sourceTree = "<group>"; };
+		C3394FA122A7C1AA17287288391FF8EB /* PaymentResultViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentResultViewModel.swift; sourceTree = "<group>"; };
+		C6122D8A4D6835215785D8E38F98191A /* CVVView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CVVView.swift; sourceTree = "<group>"; };
+		C7690F5B0B1D14CCC82523DFDE399B78 /* ErrorPopUpView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorPopUpView.swift; sourceTree = "<group>"; };
+		C819F161D8FE795AFB36CB5668485771 /* IokaCardNumberTextField.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaCardNumberTextField.swift; sourceTree = "<group>"; };
+		C9D05F8C7834F52FA9C676ADB4E0BAA0 /* CVVViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CVVViewController.swift; sourceTree = "<group>"; };
+		CBB532442CE717236115C10C4D4ADA45 /* Pods-Ioka-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Ioka-frameworks.sh"; sourceTree = "<group>"; };
+		CBC313467B69675CA59287683DF5D8E4 /* Pods-Ioka-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Ioka-acknowledgements.plist"; sourceTree = "<group>"; };
+		CDE7BDAE43F1F6B8401D910873A15CBB /* ViewControllerProgressWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ViewControllerProgressWrapper.swift; sourceTree = "<group>"; };
+		CE3F7AF03ECF83B5FEE30F9CF8564FAC /* Payer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Payer.swift; sourceTree = "<group>"; };
+		D1182AB91390CD4E30BAC9C46D6EBA48 /* Pods-Ioka-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Ioka-dummy.m"; sourceTree = "<group>"; };
+		D555A721E77853A7254332717963ACC8 /* OrderForPaymentViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = OrderForPaymentViewModel.swift; sourceTree = "<group>"; };
+		D7D8DFB9AD071110D52797025D41805C /* AccessToken.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		D8AF479E9DD9DDC0B0802160ECF79EDF /* IokaLocalizable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaLocalizable.swift; sourceTree = "<group>"; };
+		D8EAF7B30879A681D9EEDD9E21FD100F /* PaymentResultViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentResultViewController.swift; sourceTree = "<group>"; };
+		DC23694E4A685173E2C621D31D86E402 /* PaymentWithSavedCardViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardViewModel.swift; sourceTree = "<group>"; };
+		DC7DF8428D54FC557D5DEAE8B81771C7 /* PaymentMethodsViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentMethodsViewController.swift; sourceTree = "<group>"; };
+		DCEA834BF1165B5A9135AEC48FA7E4CE /* Ioka-Ioka */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "Ioka-Ioka"; path = Ioka.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF43AB0299FDF06F617E3E1C934029E1 /* 3DSecureNavigationView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = 3DSecureNavigationView.swift; sourceTree = "<group>"; };
+		E0E324A6D882709C41A4AAA103528826 /* ErrorToastView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ErrorToastView.swift; sourceTree = "<group>"; };
+		E201EF8635F8995B7C7339EE5E024760 /* 3DSecureViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = 3DSecureViewController.swift; sourceTree = "<group>"; };
+		E3675DFE07E6697CEA5F80AB074547EA /* IokaAPIProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaAPIProtocol.swift; sourceTree = "<group>"; };
+		E7C9E30AAEE78E90C612736DDADEB554 /* PaymentWithSavedCardCoordinator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentWithSavedCardCoordinator.swift; sourceTree = "<group>"; };
+		E85200DD532A7970548F401B7DA1FDA2 /* ResourceBundle-Ioka-Ioka-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-Ioka-Ioka-Info.plist"; sourceTree = "<group>"; };
+		EC83583AB3F5217571BA43DBD66E3DA3 /* SaveCardViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SaveCardViewModel.swift; sourceTree = "<group>"; };
+		EDA08E70D46D6CB1807BA6494D4FC216 /* IokaAPI.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = IokaAPI.swift; sourceTree = "<group>"; };
+		F25087DE0488F9BF4534FDCE40FA4B0E /* Pods-Ioka-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Ioka-acknowledgements.markdown"; sourceTree = "<group>"; };
+		F38630C1B526BFB11D2005326156B385 /* PaymentMethodsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentMethodsView.swift; sourceTree = "<group>"; };
+		F3912D29D3E41963A25332D263EB2D8E /* Ioka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Ioka.release.xcconfig; sourceTree = "<group>"; };
+		F4187DE2FB0D6057303A0C3F84C24ACE /* SavedCardDTO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SavedCardDTO.swift; sourceTree = "<group>"; };
+		F5A61BACF369E88FDCD4EF48C90F4EE4 /* ProgressViewModelProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ProgressViewModelProtocol.swift; sourceTree = "<group>"; };
+		F5EDBAA039D1EE1CD60B39D10466978A /* 3DSecureViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = 3DSecureViewModel.swift; sourceTree = "<group>"; };
+		F8D2A4B0C43CB86A399973163A6BBD93 /* OrderDTO+ToOrder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "OrderDTO+ToOrder.swift"; sourceTree = "<group>"; };
+		FB2F0099BB9D74D9EDD7FC2C512377D6 /* EmptyResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
+		FD5EAC304C0BDB6797D4EE7F1515F75B /* PaymentResultView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PaymentResultView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1C8EDF77EB9EC981EE2C5C4009AFBEE1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1E78EE8B2E9D3A47B4C4AEC3800E212 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3D93A046B1E1A58FA9E70E8950578C2B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E02782D3D4512AD1543255C5CCC9498 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C7AA94525C55BFADCC57BC1501F6B349 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03091EC98EE29D5C45775C8E6875851F /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				E0E324A6D882709C41A4AAA103528826 /* ErrorToastView.swift */,
+				8C8ABC17E99EFC3587A627CEA6E58800 /* IokaButton.swift */,
+				C819F161D8FE795AFB36CB5668485771 /* IokaCardNumberTextField.swift */,
+				63BCFF78D9211736136FBD01CFF504D2 /* IokaCustomView.swift */,
+				3286773C678BE22B6FCF829ED33E337C /* IokaImageView.swift */,
+				A5A463921F4C9643C831F98B106D2820 /* IokaLabel.swift */,
+				69353B23F8E95EB7DFCCAAC564CBD31B /* IokaProgressView.swift */,
+				950AA993E6CF63C9FCD8FB9070B679E2 /* IokaStackView.swift */,
+				0DBB0153CE0E9AC0EC1BCF6DA7DDD48A /* IokaTextField.swift */,
+				6ACEC8AF05E353513BD4E7334BEEA422 /* ProgressWrapperView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		06579D5943CDA1831510E1FAC58730A6 /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				1DC21058DFA15A20F9CD8151F9BFF415 /* JSONParameterEncoder.swift */,
+				892A8BCC46DF86EC5CC17A3A809E22A7 /* ParameterEncoding.swift */,
+				126295032DABD9655D61233549E154EE /* URLParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
+		08839C990DE05944D7B1B97C787A4C48 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				91D5FD6FEB33EA229123FDA93A3144E2 /* Entities */,
+			);
+			name = Domain;
+			path = Ioka/Classes/Classes/Domain;
+			sourceTree = "<group>";
+		};
+		0EFFD61CFE9F66D707DF3BA8B04FB2B6 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				2F08721EC09A2A41126EA759D70BD115 /* Coordinator */,
+				EA1FE9B2A231A741376200578C1E4927 /* Features */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		1617E393EF78EB74653F35ECE0076135 /* Ioka */ = {
+			isa = PBXGroup;
+			children = (
+				5ECD506BC6435443C71DBC1A5B6443E2 /* Assets.xcassets */,
+				63395DED9D4D98FF60E1E5F68E642062 /* Data */,
+				08839C990DE05944D7B1B97C787A4C48 /* Domain */,
+				97DAD72A6107700546CE997A97928A62 /* Facade */,
+				E691EF6B3652F2A1BD58C0DF3116D92F /* Helpers */,
+				52377FEA7EACA4A79696855B72469B0A /* Infrastructure */,
+				BCE0150D8D4BAAA230945F77AFCD5278 /* Pod */,
+				82542E58A0E97F97CAE9CB65C5626287 /* Presentation */,
+				D46AB21B60FD93EE45D7F6F637A5590F /* Support Files */,
+			);
+			name = Ioka;
+			path = "/Users/ablaierzhanov/Desktop/ioka-ios";
+			sourceTree = "<absolute>";
+		};
+		183CE78D658ECAE71F68713A35E1211E /* Pods-Ioka */ = {
+			isa = PBXGroup;
+			children = (
+				6196722722FB9E55F3E2DD0604B5DF57 /* Pods-Ioka.modulemap */,
+				F25087DE0488F9BF4534FDCE40FA4B0E /* Pods-Ioka-acknowledgements.markdown */,
+				CBC313467B69675CA59287683DF5D8E4 /* Pods-Ioka-acknowledgements.plist */,
+				D1182AB91390CD4E30BAC9C46D6EBA48 /* Pods-Ioka-dummy.m */,
+				CBB532442CE717236115C10C4D4ADA45 /* Pods-Ioka-frameworks.sh */,
+				AA31FFB30AFE751754917D7A759AE03B /* Pods-Ioka-Info.plist */,
+				A030CD0447961F2327A109A4060BE0B3 /* Pods-Ioka-umbrella.h */,
+				60CEC4103D61799FA6DEF89F3DEF422D /* Pods-Ioka.debug.xcconfig */,
+				55EEB8922698AA4FAECF646E5BB626C4 /* Pods-Ioka.release.xcconfig */,
+			);
+			name = "Pods-Ioka";
+			path = "Target Support Files/Pods-Ioka";
+			sourceTree = "<group>";
+		};
+		24A4D2337A67EA9BEC6BD50BA9991AB3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2FEEDC2314D1790830B84558BC72EEED /* APIError.swift */,
+				02AE17289A89451C1D3910B619EDFCDF /* CardParameters.swift */,
+				8AB1908B5CC97EBEC37275CBC393FD77 /* DeleteCardByIDResponse.swift */,
+				FB2F0099BB9D74D9EDD7FC2C512377D6 /* EmptyResponse.swift */,
+				48656F82C34C88B63D4E4DE0B6DF91C7 /* GetBrandResponse.swift */,
+				89E119CCB5347221148850559D07E1E2 /* GetEmitterByBinCodeResponse.swift */,
+				EDA08E70D46D6CB1807BA6494D4FC216 /* IokaAPI.swift */,
+				3353C8F2566254D9C139C5A54E6719DC /* IokaApiEndpoint.swift */,
+				E3675DFE07E6697CEA5F80AB074547EA /* IokaAPIProtocol.swift */,
+				2514535B41507743246923FEDA2E9936 /* OrderDTO.swift */,
+				CE3F7AF03ECF83B5FEE30F9CF8564FAC /* Payer.swift */,
+				9F1BEDCBC32468D1D4D3E9E68AB779ED /* PaymentDTO.swift */,
+				6B9291A4E7C3C148D7B558554C790243 /* PaymentStatus.swift */,
+				1819B30D90473FBF0200A7ACDF6543E4 /* PaymentSystem.swift */,
+				F4187DE2FB0D6057303A0C3F84C24ACE /* SavedCardDTO.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		2F08721EC09A2A41126EA759D70BD115 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				BC49065A48893264F4C9DB5ED687AD86 /* PaymentCoordinator.swift */,
+				A6F665B9E9E3C703777DAD2D13BA636A /* PaymentFlowFactory.swift */,
+				7E3451973FBCB882700A7FB616C837A4 /* PaymentFlowInput.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		329879667CCA32DF0FA05986D97353BC /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				65AFC1B5BEBBB5788AC5A458AC862576 /* OrderRepository.swift */,
+				4BA6C50B85FD848BEEB67CBA3BD29966 /* PaymentRepository.swift */,
+				315CBA8E4FFB0017C886AC573CC028A7 /* SavedCardRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		3BF550BF98789ED544D69B9DBB23C2CE /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				B95549131031524ADD601EA548C0AD89 /* EndPointType.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		3F273EAA9AD323B7749F39959A828C83 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				63347E5711FF393E18F63385F9E4A9CD /* CVVForm */,
+				F4E9512B519175825D211005A8550F57 /* PaymentWithSavedCard */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		48D402626667B7EC82C70A798F4898CD /* Typography */ = {
+			isa = PBXGroup;
+			children = (
+				35DCA892C1A177B5F3146997F7DA40D1 /* Typography.swift */,
+			);
+			path = Typography;
+			sourceTree = "<group>";
+		};
+		4F4BDE29D547A44E99E3E6D77B53680C /* PaymentWithSavedCard */ = {
+			isa = PBXGroup;
+			children = (
+				D03129FB7AB685554C53A6F5BE2CBE70 /* Coordinator */,
+				3F273EAA9AD323B7749F39959A828C83 /* Features */,
+			);
+			path = PaymentWithSavedCard;
+			sourceTree = "<group>";
+		};
+		52377FEA7EACA4A79696855B72469B0A /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				D27CA905F65971CFCF1286C929B938F4 /* DesignSystem */,
+				DF8C6035F7A0878BE9ACD9DCA1C7FDC8 /* Network */,
+				781131743BA92060065E49A6800F7AB8 /* Utils */,
+			);
+			name = Infrastructure;
+			path = Ioka/Classes/Classes/Infrastructure;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		59909F1EBDC60C4B9F1C8E35FBBCC909 /* 3DSecure */ = {
+			isa = PBXGroup;
+			children = (
+				DF43AB0299FDF06F617E3E1C934029E1 /* 3DSecureNavigationView.swift */,
+				E201EF8635F8995B7C7339EE5E024760 /* 3DSecureViewController.swift */,
+				F5EDBAA039D1EE1CD60B39D10466978A /* 3DSecureViewModel.swift */,
+			);
+			path = 3DSecure;
+			sourceTree = "<group>";
+		};
+		63347E5711FF393E18F63385F9E4A9CD /* CVVForm */ = {
+			isa = PBXGroup;
+			children = (
+				C6122D8A4D6835215785D8E38F98191A /* CVVView.swift */,
+				C9D05F8C7834F52FA9C676ADB4E0BAA0 /* CVVViewController.swift */,
+				ADB620E6127DF57975D89C6EC2DDB030 /* CVVViewModel.swift */,
+			);
+			path = CVVForm;
+			sourceTree = "<group>";
+		};
+		63395DED9D4D98FF60E1E5F68E642062 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				24A4D2337A67EA9BEC6BD50BA9991AB3 /* API */,
+				7D1C9438189855C5D4A3900615CFB2D1 /* Mappers */,
+				329879667CCA32DF0FA05986D97353BC /* Repositories */,
+			);
+			name = Data;
+			path = Ioka/Classes/Classes/Data;
+			sourceTree = "<group>";
+		};
+		691628206AE86D559D36128BB266BA6C /* CardForm */ = {
+			isa = PBXGroup;
+			children = (
+				09168FE6A8A766C9D62873DB0E25D20A /* CardFormView.swift */,
+				1C808EFA97F6317D320CDEEFD825754C /* CardFormViewModel.swift */,
+			);
+			path = CardForm;
+			sourceTree = "<group>";
+		};
+		6B39F7990D1E927E420F99EA8A1B3770 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				205D0F37C47DB9889523800BAAA5C9F2 /* CodableExtensions.swift */,
+				07916C47F7E9A3C700C4262DCB9BA7F3 /* IOKAConstraints.swift */,
+				1106D35E6524640469E2E23D728CBB9C /* StringExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		74916F503A270E88C5144CBDEFC25685 /* Flows */ = {
+			isa = PBXGroup;
+			children = (
+				0EFFD61CFE9F66D707DF3BA8B04FB2B6 /* Payment */,
+				4F4BDE29D547A44E99E3E6D77B53680C /* PaymentWithSavedCard */,
+				EB9A20F12DB99D7A6F2B03A7603F8BE4 /* SaveCard */,
+			);
+			path = Flows;
+			sourceTree = "<group>";
+		};
+		7572ACC97F60E25A45D1A217A5A907C5 /* PaymentMethods */ = {
+			isa = PBXGroup;
+			children = (
+				F38630C1B526BFB11D2005326156B385 /* PaymentMethodsView.swift */,
+				DC7DF8428D54FC557D5DEAE8B81771C7 /* PaymentMethodsViewController.swift */,
+				18876D632F8C3EA84A4ABEBD695A34D4 /* PaymentMethodsViewModel.swift */,
+			);
+			path = PaymentMethods;
+			sourceTree = "<group>";
+		};
+		781131743BA92060065E49A6800F7AB8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6B39F7990D1E927E420F99EA8A1B3770 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		791737E7213565CE503D71C78C8E4C67 /* HTTPResponse */ = {
+			isa = PBXGroup;
+			children = (
+				3579094010AD7A640A7FE550F1F00D9D /* HttpResponse.swift */,
+			);
+			path = HTTPResponse;
+			sourceTree = "<group>";
+		};
+		7C73C4E4B2AE3FEB98AD01E456740F43 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				B5F14CF878372714FEC57FD84FBC55FF /* IokaIcons.swift */,
+				63964025083CEDE951219D355EC35F4F /* IokaImages.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		7D1C9438189855C5D4A3900615CFB2D1 /* Mappers */ = {
+			isa = PBXGroup;
+			children = (
+				2FAEC981972516949F53A8C469B8CA0C /* ActionDTO+ToAction.swift */,
+				F8D2A4B0C43CB86A399973163A6BBD93 /* OrderDTO+ToOrder.swift */,
+				7BC6EE86B8A29AED448746D3F91C4A42 /* PaymentDTO+ToPayment.swift */,
+				203E70084EBB3A2D9C2112FE287207A5 /* SavedCardDTO+ToSavedCard.swift */,
+			);
+			path = Mappers;
+			sourceTree = "<group>";
+		};
+		7E86DB902D792453165FE5A665800951 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				59909F1EBDC60C4B9F1C8E35FBBCC909 /* 3DSecure */,
+				691628206AE86D559D36128BB266BA6C /* CardForm */,
+				D2508EC6B86BF82E27166D1DA1695921 /* OrderForPayment */,
+				9C9D14308F91E9E25B77ABAC0D84FEC9 /* ProgressPresenter */,
+				FE6605BEF4928D2B5B76B069C0D8DE82 /* Result */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		82542E58A0E97F97CAE9CB65C5626287 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				A1BE0BBF4A33577EDDAC8A5C1BC851DE /* Common */,
+				BB9E3223B56F14F3B608E23DD9615BBA /* FeaturesFactory */,
+				74916F503A270E88C5144CBDEFC25685 /* Flows */,
+			);
+			name = Presentation;
+			path = Ioka/Classes/Classes/Presentation;
+			sourceTree = "<group>";
+		};
+		91D5FD6FEB33EA229123FDA93A3144E2 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				D7D8DFB9AD071110D52797025D41805C /* AccessToken.swift */,
+				94FF87EFD3399B442C730D02FBB72F90 /* Action.swift */,
+				397645F4DA6C612973FC3B3FB45EF348 /* APIKey.swift */,
+				3F3A5AECBE1743BE9DB524881EEBA5A3 /* DomainError.swift */,
+				8B2F1868E1FFDBF6700D216189E88166 /* Order.swift */,
+				56A0A0DC2107C3503790D9DA920D8969 /* Payment.swift */,
+				B9ACB9ABFFC74E653D1A070DE370B4AC /* SavedCard.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		97DAD72A6107700546CE997A97928A62 /* Facade */ = {
+			isa = PBXGroup;
+			children = (
+				730B23A5C0310FE265AEAA74512A4A3B /* FlowResult.swift */,
+				9679D94A0BEFF44497583232BF89128B /* IOKA.swift */,
+				8658D9A83CAF533DFCEA231D5A84C6E6 /* SetupInput.swift */,
+			);
+			name = Facade;
+			path = Ioka/Classes/Classes/Facade;
+			sourceTree = "<group>";
+		};
+		9C9D14308F91E9E25B77ABAC0D84FEC9 /* ProgressPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				F5A61BACF369E88FDCD4EF48C90F4EE4 /* ProgressViewModelProtocol.swift */,
+				CDE7BDAE43F1F6B8401D910873A15CBB /* ViewControllerProgressWrapper.swift */,
+			);
+			path = ProgressPresenter;
+			sourceTree = "<group>";
+		};
+		A0673FEDF0424143489DF194B6C732A4 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				48EEE91448CB253ED12B682BA2066685 /* SaveCardViewController.swift */,
+				EC83583AB3F5217571BA43DBD66E3DA3 /* SaveCardViewModel.swift */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		A1BE0BBF4A33577EDDAC8A5C1BC851DE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7E86DB902D792453165FE5A665800951 /* Features */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ABEBB8DF0A3C0BC18998C7C31603CAFC /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				183CE78D658ECAE71F68713A35E1211E /* Pods-Ioka */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		BB9E3223B56F14F3B608E23DD9615BBA /* FeaturesFactory */ = {
+			isa = PBXGroup;
+			children = (
+				6F30CDEC5B38C9953623B96E4C58A71B /* FeaturesFactory.swift */,
+			);
+			path = FeaturesFactory;
+			sourceTree = "<group>";
+		};
+		BCE0150D8D4BAAA230945F77AFCD5278 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				07C1ED585A9E4EA54A200787FBAE5C43 /* Ioka.podspec */,
+				5F70C1CCC2872E307A194194FEED8517 /* LICENSE */,
+				14582C6CFA81C163669FCCD1DF64217E /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		C49EEF3FDBDD353CCCB4A0876677F9AC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4E25B807E468B60725D8D7A26FE5AF1C /* Ioka */,
+				DCEA834BF1165B5A9135AEC48FA7E4CE /* Ioka-Ioka */,
+				7E10291777012B9BB789168E19A7DA63 /* Pods-Ioka */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D8BD21A4784EC1C76A7F3835247D7786 /* Development Pods */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				C49EEF3FDBDD353CCCB4A0876677F9AC /* Products */,
+				ABEBB8DF0A3C0BC18998C7C31603CAFC /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D03129FB7AB685554C53A6F5BE2CBE70 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				E7C9E30AAEE78E90C612736DDADEB554 /* PaymentWithSavedCardCoordinator.swift */,
+				BFBACEA0B41A2FF663BF2AD17BD1E0BD /* PaymentWithSavedCardFlowFactory.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2508EC6B86BF82E27166D1DA1695921 /* OrderForPayment */ = {
+			isa = PBXGroup;
+			children = (
+				D555A721E77853A7254332717963ACC8 /* OrderForPaymentViewModel.swift */,
+			);
+			path = OrderForPayment;
+			sourceTree = "<group>";
+		};
+		D27CA905F65971CFCF1286C929B938F4 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				D4A71F4266F294CDE79849B80DCC1B84 /* Colors */,
+				03091EC98EE29D5C45775C8E6875851F /* Components */,
+				7C73C4E4B2AE3FEB98AD01E456740F43 /* Icons */,
+				F505C4E42860709787CDD6C9F0AC1FBE /* Theme */,
+				48D402626667B7EC82C70A798F4898CD /* Typography */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		D36A364273F90CAF6D7C2E66CAB12FEE /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				655BC82454656EEE8804257DF3E3A998 /* Coordinator.swift */,
+				BAF78908A37617A6F48F369DF1A55359 /* SaveCardCoordinator.swift */,
+				AC517268CA5B3B1FDA4FF1622F4DC6B3 /* SaveCardFlowFactory.swift */,
+				6809A72CA96E3B4FFCD30E33B00A9103 /* SaveCardFlowInput.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		D46AB21B60FD93EE45D7F6F637A5590F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0EA786C9D1ADE0DF050F85D4354B3DC4 /* Ioka.modulemap */,
+				458FCBD0D3C43F90CD614EBA82227D51 /* Ioka-dummy.m */,
+				014047EAB9364A5B4297D23C822AD115 /* Ioka-Info.plist */,
+				82573462F6F3A8D6F7197AF08CCF8E4E /* Ioka-prefix.pch */,
+				B8D943CE1916F2E5B3F4BA0FC3609768 /* Ioka-umbrella.h */,
+				A93FE2027DAF671A7B302BCBAF3DFFE9 /* Ioka.debug.xcconfig */,
+				F3912D29D3E41963A25332D263EB2D8E /* Ioka.release.xcconfig */,
+				E85200DD532A7970548F401B7DA1FDA2 /* ResourceBundle-Ioka-Ioka-Info.plist */,
+			);
+			name = "Support Files";
+			path = "DemoApp/Pods/Target Support Files/Ioka";
+			sourceTree = "<group>";
+		};
+		D4A71F4266F294CDE79849B80DCC1B84 /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				8FDF2D88944045600C1940EC7987D889 /* Colors.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		D8BD21A4784EC1C76A7F3835247D7786 /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1617E393EF78EB74653F35ECE0076135 /* Ioka */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		DF8C6035F7A0878BE9ACD9DCA1C7FDC8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				06579D5943CDA1831510E1FAC58730A6 /* Encoding */,
+				3BF550BF98789ED544D69B9DBB23C2CE /* EndPoint */,
+				791737E7213565CE503D71C78C8E4C67 /* HTTPResponse */,
+				EA0F9FF89DBFCDCDB18D77D7AFA61842 /* Service */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		E691EF6B3652F2A1BD58C0DF3116D92F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D8AF479E9DD9DDC0B0802160ECF79EDF /* IokaLocalizable.swift */,
+			);
+			name = Helpers;
+			path = Ioka/Classes/Classes/Helpers;
+			sourceTree = "<group>";
+		};
+		EA0F9FF89DBFCDCDB18D77D7AFA61842 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				7A37706650117CF90F67334ABC7FF9DF /* EndPointRouter.swift */,
+				3F9B4132B13CFC5585372EA9BBE90C7D /* HTTPMethod.swift */,
+				8AD838ED9E8A72F7847B0924A6552BDA /* HTTPTask.swift */,
+				3037F595F5EDDCFD453ED4BC2969F5A1 /* NetworkError.swift */,
+				05110BFE84A0327662D55FFF98AA0374 /* NetworkRouter.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		EA1FE9B2A231A741376200578C1E4927 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				7572ACC97F60E25A45D1A217A5A907C5 /* PaymentMethods */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		EB9A20F12DB99D7A6F2B03A7603F8BE4 /* SaveCard */ = {
+			isa = PBXGroup;
+			children = (
+				D36A364273F90CAF6D7C2E66CAB12FEE /* Coordinator */,
+				A0673FEDF0424143489DF194B6C732A4 /* Features */,
+			);
+			path = SaveCard;
+			sourceTree = "<group>";
+		};
+		F4E9512B519175825D211005A8550F57 /* PaymentWithSavedCard */ = {
+			isa = PBXGroup;
+			children = (
+				DC23694E4A685173E2C621D31D86E402 /* PaymentWithSavedCardViewModel.swift */,
+			);
+			path = PaymentWithSavedCard;
+			sourceTree = "<group>";
+		};
+		F505C4E42860709787CDD6C9F0AC1FBE /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				5D381DA170D3D61F7EC021E198E32A29 /* Theme.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		FE6605BEF4928D2B5B76B069C0D8DE82 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				C7690F5B0B1D14CCC82523DFDE399B78 /* ErrorPopUpView.swift */,
+				0BA38BAD7B451E7A2D52B9819CF74169 /* ErrorPopUpViewController.swift */,
+				BFB5006165DC233120DD03700AFFBD86 /* ErrorPopUpViewModel.swift */,
+				FD5EAC304C0BDB6797D4EE7F1515F75B /* PaymentResultView.swift */,
+				D8EAF7B30879A681D9EEDD9E21FD100F /* PaymentResultViewController.swift */,
+				C3394FA122A7C1AA17287288391FF8EB /* PaymentResultViewModel.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		4DDB32D44AF09A3D567F73880F2D8C83 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				175D67BE8BE1A163C851ECD95FCC3F0C /* Ioka-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD2229368F7CA230B917F220FCC6FF3D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				425F6F3566DAB848148E7717844DE937 /* Pods-Ioka-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6684C323F942F8430E6A2D3AD889D385 /* Ioka-Ioka */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4060BC08A5E1DE64D496773AA392C640 /* Build configuration list for PBXNativeTarget "Ioka-Ioka" */;
+			buildPhases = (
+				38E6E6313562B8D4ECF3B8AB0EF5F562 /* Sources */,
+				C7AA94525C55BFADCC57BC1501F6B349 /* Frameworks */,
+				0E3377ABD1EC11C539B6FB669580D2AD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Ioka-Ioka";
+			productName = Ioka;
+			productReference = DCEA834BF1165B5A9135AEC48FA7E4CE /* Ioka-Ioka */;
+			productType = "com.apple.product-type.bundle";
+		};
+		A1A337E2CCC2197B492A2D11BAE3B6B1 /* Ioka */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B90E065D54E278AE8E9B9CC29D01529 /* Build configuration list for PBXNativeTarget "Ioka" */;
+			buildPhases = (
+				4DDB32D44AF09A3D567F73880F2D8C83 /* Headers */,
+				662688B584C913442E00D4BA42BF9DF8 /* Sources */,
+				1C8EDF77EB9EC981EE2C5C4009AFBEE1 /* Frameworks */,
+				DE462A961F7CD3D00893123D6E93F504 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7C6CE99DE862E15B6B98216315D4E14C /* PBXTargetDependency */,
+			);
+			name = Ioka;
+			productName = Ioka;
+			productReference = 4E25B807E468B60725D8D7A26FE5AF1C /* Ioka */;
+			productType = "com.apple.product-type.framework";
+		};
+		C68C03EB769F537C8622268611DDD8C1 /* Pods-Ioka */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C3DFD4F7D74E7C917CF510D93BC3B7FE /* Build configuration list for PBXNativeTarget "Pods-Ioka" */;
+			buildPhases = (
+				AD2229368F7CA230B917F220FCC6FF3D /* Headers */,
+				A134757502D515C93971A0CC1691B66C /* Sources */,
+				3D93A046B1E1A58FA9E70E8950578C2B /* Frameworks */,
+				A15744826A259D2C5A259572F8123042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2D8527D13AD4F1F53ADD87BD237166B8 /* PBXTargetDependency */,
+			);
+			name = "Pods-Ioka";
+			productName = Pods_Ioka;
+			productReference = 7E10291777012B9BB789168E19A7DA63 /* Pods-Ioka */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = C49EEF3FDBDD353CCCB4A0876677F9AC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A1A337E2CCC2197B492A2D11BAE3B6B1 /* Ioka */,
+				6684C323F942F8430E6A2D3AD889D385 /* Ioka-Ioka */,
+				C68C03EB769F537C8622268611DDD8C1 /* Pods-Ioka */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0E3377ABD1EC11C539B6FB669580D2AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				61FF12B93A6F95D4420A6E70B9BFCE12 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A15744826A259D2C5A259572F8123042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DE462A961F7CD3D00893123D6E93F504 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				249B179DC5CFCF53A088A18909374EAA /* Ioka-Ioka in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		38E6E6313562B8D4ECF3B8AB0EF5F562 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		662688B584C913442E00D4BA42BF9DF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8C281F19F98688DE3C3FF843D073C0C /* 3DSecureNavigationView.swift in Sources */,
+				55AFC4E628E05A145C70FFEE7BA200D9 /* 3DSecureViewController.swift in Sources */,
+				B85EAB3221FCD248888943CF038EB75A /* 3DSecureViewModel.swift in Sources */,
+				406EBEF2F7F88B2CF2A0EF8A38679951 /* AccessToken.swift in Sources */,
+				EF0A8515AF9090D78AEAE0597538BDBE /* Action.swift in Sources */,
+				8829C7B049C8AA2C55238915B70C4C33 /* ActionDTO+ToAction.swift in Sources */,
+				930BE9C2AB9A220D8FAB8C608EE3C6E5 /* APIError.swift in Sources */,
+				369E263538FB6073C2BC7E8E07F34070 /* APIKey.swift in Sources */,
+				F83705A27FE9B740434DBBC44402A689 /* CardFormView.swift in Sources */,
+				CB8DEC10D6641EB9E2B8B29C2FC483C1 /* CardFormViewModel.swift in Sources */,
+				89D173F3934F1B6393BA76CE5FA062B6 /* CardParameters.swift in Sources */,
+				8CFCFA599935904AF5AC2DF7F9F5B8C7 /* CodableExtensions.swift in Sources */,
+				43E35627673ECCD5BF98602991EE4C07 /* Colors.swift in Sources */,
+				323F0DC977F455A0F3A67017CAF39EF2 /* Coordinator.swift in Sources */,
+				A5DD114BD21A699910C3A14CCA26387F /* CVVView.swift in Sources */,
+				C1BC7AC97AEF272AB7D675A0426B176C /* CVVViewController.swift in Sources */,
+				AB4E81814876B9D04C199801DA74D765 /* CVVViewModel.swift in Sources */,
+				04A26EC4AF250CCD1CB2C1B9DCFCB6F6 /* DeleteCardByIDResponse.swift in Sources */,
+				A75DD03D9685A86F7EDCBDCA6AEDF231 /* DomainError.swift in Sources */,
+				3A2B5E555BBA3A8FFD20A5E26BFF0BDF /* EmptyResponse.swift in Sources */,
+				0D1DFC358BE53512341B24469A59713A /* EndPointRouter.swift in Sources */,
+				137B165B3CAFA1F7A63A8549E854D4F5 /* EndPointType.swift in Sources */,
+				77CB5573CBEB38FEE43B1A0EE48C8D5D /* ErrorPopUpView.swift in Sources */,
+				E0F733C6B7FC8A122C7105B40F42D1AB /* ErrorPopUpViewController.swift in Sources */,
+				BA6FD5783B0F07967CD5695BC25121D4 /* ErrorPopUpViewModel.swift in Sources */,
+				14D9534ED9523E1F4969C855E807AB03 /* ErrorToastView.swift in Sources */,
+				C9FE47780844A9BAEFD329C219A879D5 /* FeaturesFactory.swift in Sources */,
+				8AB890F7AB1CCFF30FAFAF2C5913207A /* FlowResult.swift in Sources */,
+				13CEB27432EF2B970939443CA17A1957 /* GetBrandResponse.swift in Sources */,
+				53B051CE495715EEF8844B896E0911D7 /* GetEmitterByBinCodeResponse.swift in Sources */,
+				862E8027A28A4E0B34DD09C8723B3635 /* HTTPMethod.swift in Sources */,
+				EA0B0140EC9A9F05A046986F54F4395A /* HttpResponse.swift in Sources */,
+				BCA24FA6661AE6187138D2B6867922AD /* HTTPTask.swift in Sources */,
+				4F937EA87251C87BB0AD2EE501F4B843 /* IOKA.swift in Sources */,
+				B1AF6BF04701C29AD21D74C85C4B120A /* Ioka-dummy.m in Sources */,
+				CCCCEE6A5CE1D022FCC5FE572A86B51F /* IokaAPI.swift in Sources */,
+				BF0A69A5694FDC767B76A20A7243A908 /* IokaApiEndpoint.swift in Sources */,
+				27AFB4769B5A8A7C58B2003881FDAEC7 /* IokaAPIProtocol.swift in Sources */,
+				8A8767E2114CDC7506AE3415388FEA72 /* IokaButton.swift in Sources */,
+				41CE08F518F252BAB765937187F885AC /* IokaCardNumberTextField.swift in Sources */,
+				B785949FB5B0F42B8B556EE0D7C86611 /* IOKAConstraints.swift in Sources */,
+				8A086C832BEB3D702898CF24CAA377B3 /* IokaCustomView.swift in Sources */,
+				D5BCF5E68C11BDD30AB0315173658153 /* IokaIcons.swift in Sources */,
+				9679BD5969E03E31FA722BEA6D2CDDCB /* IokaImages.swift in Sources */,
+				84B0C34041E107B1FDEB82424F082D46 /* IokaImageView.swift in Sources */,
+				7F9A212EC69A1ED8BAD20B5931D6DF17 /* IokaLabel.swift in Sources */,
+				A2F7B4B186680D9B2D1D214A0CC3D29B /* IokaLocalizable.swift in Sources */,
+				B69168962FDDA1D032ECE8732B7FF955 /* IokaProgressView.swift in Sources */,
+				6C28B7C8C57B18D84C6A8B1514277A6C /* IokaStackView.swift in Sources */,
+				DA6F021AB362BEF789B6D2A435FADA57 /* IokaTextField.swift in Sources */,
+				6BD8E45D715BC1F06DFEFF57FD54929F /* JSONParameterEncoder.swift in Sources */,
+				9AC785D89FC998EFBBE3A389C5C0B853 /* NetworkError.swift in Sources */,
+				5B4D988CDB9B11EFE91B89301461DCEB /* NetworkRouter.swift in Sources */,
+				1FB6D2666140CA7D9F86116F26D5F9CA /* Order.swift in Sources */,
+				B734E95AD460E768D844F0463BDA37BC /* OrderDTO.swift in Sources */,
+				EE9DA57161100853D8B69C3BEF032509 /* OrderDTO+ToOrder.swift in Sources */,
+				E969B9F42106B3DD52994BDF8D801A99 /* OrderForPaymentViewModel.swift in Sources */,
+				7FBB14F3FF05194361492A4FB51F0BF3 /* OrderRepository.swift in Sources */,
+				055024641BBC878C04D0DA08F81770AA /* ParameterEncoding.swift in Sources */,
+				F622EF3F9AC2EA86557B8A4B187EA095 /* Payer.swift in Sources */,
+				C17A3528596A8880632946B8BB2FEBAA /* Payment.swift in Sources */,
+				61E07878479883DA610BB84BAE742759 /* PaymentCoordinator.swift in Sources */,
+				24BF2AA626F64822B361136DBF83F564 /* PaymentDTO.swift in Sources */,
+				2583C370E5FD519308F6B85EAE7D10BA /* PaymentDTO+ToPayment.swift in Sources */,
+				27BC5F32468C8CC5EADDE2FFA17730F0 /* PaymentFlowFactory.swift in Sources */,
+				7E97AECDFEBABE8A8BD23F3B13B7276C /* PaymentFlowInput.swift in Sources */,
+				6814B47179154E9CE2E7A217ABCBA748 /* PaymentMethodsView.swift in Sources */,
+				4A40BD8BD5491F3C3570CDDB96FC61AB /* PaymentMethodsViewController.swift in Sources */,
+				60A68B57A10E6CB3119CED584D4D429D /* PaymentMethodsViewModel.swift in Sources */,
+				14A7A29C6446D6F2A0686231F58E87CA /* PaymentRepository.swift in Sources */,
+				31F589B26691E9735B2A961ABA5F7EFA /* PaymentResultView.swift in Sources */,
+				23220EFDB2FC6A2ACEC81E4CCEEA9442 /* PaymentResultViewController.swift in Sources */,
+				8E9BA1F5BDBC810ED3F83A3B515337A3 /* PaymentResultViewModel.swift in Sources */,
+				8A49F2986F6BBF1088BB7C24B02EEAE2 /* PaymentStatus.swift in Sources */,
+				95E07738B25D6EC2F0823D52109B795A /* PaymentSystem.swift in Sources */,
+				2F30BFE6A55E9F00E3091D1E0F9F805B /* PaymentWithSavedCardCoordinator.swift in Sources */,
+				D20C67293F8FB5089A506294FB998DAE /* PaymentWithSavedCardFlowFactory.swift in Sources */,
+				76440F3112664319D0CBEE1757A318EF /* PaymentWithSavedCardViewModel.swift in Sources */,
+				F57A0DA744250777C01216FE1CCF5C04 /* ProgressViewModelProtocol.swift in Sources */,
+				53CD35EECB70296F7F03A46A9EB5678D /* ProgressWrapperView.swift in Sources */,
+				1350085F2CB71FA0D96FA3021DDD7089 /* SaveCardCoordinator.swift in Sources */,
+				FFEC524C9C5C07F49E14382C8968EB96 /* SaveCardFlowFactory.swift in Sources */,
+				B1A910F11256F94D70551716E27550F0 /* SaveCardFlowInput.swift in Sources */,
+				1269D93157CD12E17DFEC5E34E3F7B1A /* SaveCardViewController.swift in Sources */,
+				12BB4579A63B09B311D026A0B2330DC3 /* SaveCardViewModel.swift in Sources */,
+				EED29FF97C66BD7810BBD1A3A4B63F07 /* SavedCard.swift in Sources */,
+				CA72CBFB688843AB29A0170CD93F867F /* SavedCardDTO.swift in Sources */,
+				786A4F361D9372E4448BF59D926B6190 /* SavedCardDTO+ToSavedCard.swift in Sources */,
+				C2552FA1B6771891202AF37BA5D8903B /* SavedCardRepository.swift in Sources */,
+				2112F13055076EEBF24E22A40039C8AD /* SetupInput.swift in Sources */,
+				E2E4D659BD3403566A9F2835FFD8E7E4 /* StringExtensions.swift in Sources */,
+				BF03902301FA5DA0D7616ED7A67152EF /* Theme.swift in Sources */,
+				2CF2B1F98A2E8CD6E3EA285323385034 /* Typography.swift in Sources */,
+				81AC31DE48DEAAC5675C345FF467C29F /* URLParameterEncoder.swift in Sources */,
+				3D37F1E078A4EACF647048845412C745 /* ViewControllerProgressWrapper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A134757502D515C93971A0CC1691B66C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D47CDA347E89087EC6DA7ABE73AA6712 /* Pods-Ioka-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2D8527D13AD4F1F53ADD87BD237166B8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Ioka;
+			target = A1A337E2CCC2197B492A2D11BAE3B6B1 /* Ioka */;
+			targetProxy = A10CCCF610C14281299484A0B360DE62 /* PBXContainerItemProxy */;
+		};
+		7C6CE99DE862E15B6B98216315D4E14C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Ioka-Ioka";
+			target = 6684C323F942F8430E6A2D3AD889D385 /* Ioka-Ioka */;
+			targetProxy = 5B4E8A4B3064650B3428BD8583BEF2F2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1AA7C6817689D7EF8E824BF537C7C3DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3912D29D3E41963A25332D263EB2D8E /* Ioka.release.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Ioka";
+				IBSC_MODULE = Ioka;
+				INFOPLIST_FILE = "Target Support Files/Ioka/ResourceBundle-Ioka-Ioka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = Ioka;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
+		239AC6177F60621055E29B5973793F7E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 60CEC4103D61799FA6DEF89F3DEF422D /* Pods-Ioka.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Ioka/Pods-Ioka-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Ioka/Pods-Ioka.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		699FBC5F9C062843191B706A4169FCAB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A93FE2027DAF671A7B302BCBAF3DFFE9 /* Ioka.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Ioka/Ioka-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Ioka/Ioka-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Ioka/Ioka.modulemap";
+				PRODUCT_MODULE_NAME = Ioka;
+				PRODUCT_NAME = Ioka;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		916E5EA0575F533CE99F5C381DFC752A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A93FE2027DAF671A7B302BCBAF3DFFE9 /* Ioka.debug.xcconfig */;
+			buildSettings = {
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/Ioka";
+				IBSC_MODULE = Ioka;
+				INFOPLIST_FILE = "Target Support Files/Ioka/ResourceBundle-Ioka-Ioka-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				PRODUCT_NAME = Ioka;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		B0D9D4A8B40B7F07E58FE4E8038CB09C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3912D29D3E41963A25332D263EB2D8E /* Ioka.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Ioka/Ioka-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Ioka/Ioka-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Ioka/Ioka.modulemap";
+				PRODUCT_MODULE_NAME = Ioka;
+				PRODUCT_NAME = Ioka;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		DA649CCEC78CD5C884410DBCCE2C1D88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 55EEB8922698AA4FAECF646E5BB626C4 /* Pods-Ioka.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-Ioka/Pods-Ioka-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-Ioka/Pods-Ioka.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4060BC08A5E1DE64D496773AA392C640 /* Build configuration list for PBXNativeTarget "Ioka-Ioka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				916E5EA0575F533CE99F5C381DFC752A /* Debug */,
+				1AA7C6817689D7EF8E824BF537C7C3DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9E26EAE2CD392AD762421F663075A1 /* Debug */,
+				63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B90E065D54E278AE8E9B9CC29D01529 /* Build configuration list for PBXNativeTarget "Ioka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				699FBC5F9C062843191B706A4169FCAB /* Debug */,
+				B0D9D4A8B40B7F07E58FE4E8038CB09C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C3DFD4F7D74E7C917CF510D93BC3B7FE /* Build configuration list for PBXNativeTarget "Pods-Ioka" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				239AC6177F60621055E29B5973793F7E /* Debug */,
+				DA649CCEC78CD5C884410DBCCE2C1D88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

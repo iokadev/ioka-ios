@@ -1,0 +1,16 @@
+PODS:
+  - Ioka (0.0.1)
+
+DEPENDENCIES:
+  - Ioka (from `/Users/ablaierzhanov/Desktop/ioka-ios`)
+
+EXTERNAL SOURCES:
+  Ioka:
+    :path: "/Users/ablaierzhanov/Desktop/ioka-ios"
+
+SPEC CHECKSUMS:
+  Ioka: f0c32dd73e68e434db28b39e29af631863e04a6a
+
+PODFILE CHECKSUM: c8a9e41b1487508bfcdd963b1a6e31a300037c56
+
+COCOAPODS: 1.11.2
