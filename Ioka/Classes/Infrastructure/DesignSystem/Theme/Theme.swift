@@ -13,7 +13,7 @@ public struct IokaTheme {
     var colors: Colors
     var typography: Typography
     
-    init(primaryColor: UIColor, secondaryColor: UIColor) {
+    public init(primaryColor: UIColor, secondaryColor: UIColor) {
         var colors = Colors.default
         colors.primary = primaryColor
         colors.secondary = secondaryColor
@@ -21,17 +21,17 @@ public struct IokaTheme {
         self.init(colors: colors)
     }
     
-    init(colors: Colors) {
+    public init(colors: Colors) {
         self.colors = colors
         self.typography = Typography.default
     }
     
-    init(typography: Typography) {
+    public init(typography: Typography) {
         self.typography = typography
         self.colors = Colors.default
     }
     
-    init(colors: Colors, typography: Typography) {
+    public init(colors: Colors, typography: Typography) {
         self.colors = colors
         self.typography = typography
     }
