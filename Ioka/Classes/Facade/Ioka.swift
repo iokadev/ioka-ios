@@ -179,7 +179,7 @@ public class Ioka {
                 case .success:
                     completion(nil)
                 case .failure(let error):
-                    if (error as NSError).code == -1017 {
+                    if (error as NSError).code == CFNetworkErrors.cfurlErrorCannotParseResponse.rawValue {
                         // костыль. есть какая-то проблема с сервером с непустым ответом при статусе 204.
                         completion(nil)
                     } else {
