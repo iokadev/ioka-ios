@@ -85,7 +85,7 @@ internal class PaymentResultView: UIView {
         
         imageView.centerX(in: self, top: self.topAnchor, paddingTop: 180, width: 120, height: 120)
         
-        orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 36)
+        orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 24)
         
         orderNumberLabel.centerX(in: self, top: orderTitleLabel.bottomAnchor, paddingTop: 40)
         
