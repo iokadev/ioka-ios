@@ -12,7 +12,7 @@ extension PaymentDTO {
     }
 }
 
-extension PaymentStatus {
+extension PaymentDTO.Status {
     func toPaymentStatus(error: APIError?, actionDTO: ActionDTO?) throws -> Payment.Status {
         switch self {
         case .PENDING, .CANCELLED:

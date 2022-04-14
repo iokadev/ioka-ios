@@ -8,10 +8,18 @@
 import Foundation
 
 struct PaymentDTO: Decodable {
+    enum Status: String, Codable {
+        case PENDING = "PENDING"
+        case APPROVED = "APPROVED"
+        case CAPTURED = "CAPTURED"
+        case CANCELLED = "CANCELLED"
+        case DECLINED = "DECLINED"
+        case REQUIRES_ACTION = "REQUIRES_ACTION"
+    }
     
     let id: String //-Идентификатор платежа
     let order_id: String //-Идентификатор родительского заказа
-    let status: PaymentStatus //-Статус платежа
+    let status: Status //-Статус платежа
     let created_at: String //-Время создания платежа
     let approved_amount: Int //-Авторизованная сумма
     let captured_amount: Int //-Сумма списания
