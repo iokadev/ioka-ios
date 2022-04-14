@@ -19,25 +19,14 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
     private lazy var loadingIndicator = IokaProgressView()
     private lazy var errorView = ErrorToastView()
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.view.addSubview(navView)
         self.view.addSubview(webView)
         self.view.addSubview(loadingIndicator)
         self.view.addSubview(errorView)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        navView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 100)
-        webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
-        loadingIndicator.center(in: self.view, in: self.view, width: 80, height: 80)
         
-        errorView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
         self.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.isLoading), options: .new, context: nil)
         navView.backgroundColor = theme.colors.background
         self.view.backgroundColor = theme.colors.background
@@ -48,6 +37,12 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = false
         handleViewModelCalllbacks()
+        
+        navView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 100)
+        webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        loadingIndicator.center(in: self.view, in: self.view, width: 80, height: 80)
+        
+        errorView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -84,14 +79,15 @@ extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigatio
         viewModel.delegate?.dismissThreeDSecure()
     }
     
-    func webView(_ webView: WKWebView, didReceiveServerRedirectForProvisionalNavigation navigation: WKNavigation!) {
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard viewModel.isReturnUrl(navigationAction.request.url) else {
+            decisionHandler(.allow)
+            return
+        }
+        
+        decisionHandler(.cancel)
         
         hideWebViewWithLoader()
-        
-        if viewModel.checkReturnUrl(webView.url) {
-            DispatchQueue.main.async {
-                self.viewModel.handleRedirect()
-            }
-        }
+        viewModel.handleRedirect()
     }
 }

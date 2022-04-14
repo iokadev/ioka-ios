@@ -48,12 +48,8 @@ internal class ThreeDSecureViewModel {
         }
     }
     
-    func checkReturnUrl(_ url: URL?) -> Bool {
-        if url == URL(string: "https://ioka.kz/") {
-            return true
-        } else {
-            return false
-        }
+    func isReturnUrl(_ url: URL?) -> Bool {
+        url == URL(string: "https://ioka.kz/")
     }
     
     private func getSavedCard(repository: SavedCardRepository, customerAccessToken: AccessToken, cardId: String) {
