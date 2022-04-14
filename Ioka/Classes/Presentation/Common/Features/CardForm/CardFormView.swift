@@ -129,9 +129,10 @@ internal class CardFormView: UIView {
         
         self.layoutIfNeeded()
         
-        UIView.animate(withDuration: animationDuration) { [weak self] in
-            self?.createButtonBottomConstraint?.constant = -(keyboardEndFrame.height + 20)
-            self?.layoutIfNeeded()
+        createButtonBottomConstraint?.constant = -(keyboardEndFrame.height - safeAreaInsets.bottom + 20)
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.layoutIfNeeded()
         }
     }
     
@@ -140,9 +141,9 @@ internal class CardFormView: UIView {
         
         self.layoutIfNeeded()
         
-        UIView.animate(withDuration: animationDuration) { [weak self] in
-            guard let self = self else { return }
-            self.createButtonBottomConstraint?.constant = -72
+        createButtonBottomConstraint?.constant = -64
+
+        UIView.animate(withDuration: animationDuration) {
             self.layoutIfNeeded()
         }
     }
@@ -171,11 +172,11 @@ internal class CardFormView: UIView {
         
         createButton.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 56)
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.safeAreaBottomAnchor, constant: -72)
+        self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.safeAreaBottomAnchor, constant: -64)
         self.createButtonBottomConstraint?.isActive = true
         
         transactionImageView.setDimensions(width: 24, height: 24)
-        stackViewForTransaction.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 32)
+        stackViewForTransaction.centerX(in: self, bottom: self.safeAreaBottomAnchor, paddingBottom: 24)
 
         self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         
