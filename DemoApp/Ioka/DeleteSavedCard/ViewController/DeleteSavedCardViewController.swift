@@ -42,15 +42,15 @@ extension DeleteSavedCardViewController: DeleteSavedCardViewDelegate {
     }
     
     func deleteSavedCard(_ view: DeleteSavedCardView) {
-        self.dismiss(animated: false, completion: nil)
-        
         Ioka.shared.deleteSavedCard(customerAccessToken: customerAccessToken, cardId: card.id) {[weak self] error in
             guard let self = self else { return }
             
-            if let error = error {
-                self.delegate?.closeDeleteCardViewController(self, card: self.card, error: error)
-            } else {
-                self.delegate?.closeDeleteCardViewController(self, card: self.card, error: nil)
+            self.dismiss(animated: false) {
+                if let error = error {
+                    self.delegate?.closeDeleteCardViewController(self, card: self.card, error: error)
+                } else {
+                    self.delegate?.closeDeleteCardViewController(self, card: self.card, error: nil)
+                }
             }
         }
     }

@@ -22,28 +22,20 @@ internal class SavedCardsViewController: UIViewController {
     let resultView = DemoAppErrorView()
     var heightConstraint: NSLayoutConstraint?
     
-    override func loadView() {
-        super.loadView()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.view.backgroundColor = colors.secondaryBackground
         [closeButton, titleLabel, tableView].forEach {
             self.view.addSubview($0)
         }
         
         tableView.layer.cornerRadius = 12
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+        
         setUpTableView()
         setupActions()
         setupUI()
-        viewModel.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
-            guard let models = result else { return }
-            self?.models.append(contentsOf: models)
-            self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
-            self?.view.layoutIfNeeded()
-            self?.tableView.reloadData()
-        }
+        updateSavedCards()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +72,20 @@ internal class SavedCardsViewController: UIViewController {
         self.heightConstraint = tableView.heightAnchor.constraint(equalToConstant: 56)
         self.heightConstraint?.isActive = true
     }
+    
+    private func updateSavedCards() {
+        viewModel.getCards(customerAccessToken: customerAccessToken) { [weak self] result in
+            guard let models = result else { return }
+            self?.models.append(contentsOf: models)
+            self?.updateTableViewHeight()
+            self?.tableView.reloadData()
+        }
+    }
+    
+    private func updateTableViewHeight() {
+        heightConstraint?.constant = CGFloat(56 * models.count) + 56
+        view.layoutIfNeeded()
+    }
 }
 
 extension SavedCardsViewController: UITableViewDelegate, UITableViewDataSource {
@@ -114,8 +120,10 @@ extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTab
     }
     
     func viewTapped(_ view: AddNewCardTableViewCell) {
-        Ioka.shared.startSaveCardFlow(sourceViewController: self, customerAccessToken: customerAccessToken) { result in
-            
+        Ioka.shared.startSaveCardFlow(sourceViewController: self, customerAccessToken: customerAccessToken) { [weak self] result in
+            if result == .succeeded {
+                self?.updateSavedCards()
+            }
         }
     }
 }
@@ -135,6 +143,7 @@ extension SavedCardsViewController: DeleteSavedCardViewControllerDelegate, DemoA
             resultView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 58, paddingRight: 16)
         case .none:
             self.models.removeAll { $0.id == card.id}
+            updateTableViewHeight()
             self.tableView.reloadData()
         }
        

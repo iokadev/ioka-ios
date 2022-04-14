@@ -176,10 +176,15 @@ public class Ioka {
             let customerAccessToken = try AccessToken(token: customerAccessToken)
             api.deleteCard(customerAccessToken: customerAccessToken, cardId: cardId) { result in
                 switch result {
-                case .success( _):
+                case .success:
                     completion(nil)
                 case .failure(let error):
-                    completion(error)
+                    if (error as NSError).code == -1017 {
+                        // костыль. есть какая-то проблема с сервером с непустым ответом при статусе 204.
+                        completion(nil)
+                    } else {
+                        completion(error)
+                    }
                 }
             }
         } catch let error {

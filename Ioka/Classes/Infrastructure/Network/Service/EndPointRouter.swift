@@ -87,10 +87,8 @@ internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
         switch (data, error) {
         case (.none, .none):
             return .failure(NetworkError.noData)
-        case (_, .some(let error)) where error is URLError:
-            return .failure(NetworkError.urlError(error as! URLError))
         case (_, .some(let error)):
-            return .failure(NetworkError.other(error))
+            return .failure(error)
         case (.some(let data), .none):
             // мы не можем быть уверены, что с сервера всегда будут приходить только те статусы, которые перечислены в енаме HTTPResponseStatus.
             // guard let result = HTTPResponseStatus(rawValue: response.statusCode) else { return }
