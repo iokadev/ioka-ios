@@ -25,8 +25,11 @@ internal class CVVView: UIView {
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
     private let continueButton = IokaButton(iokaButtonState: .enabled, title: IokaLocalizable.continueButton)
     
+    private var yConstraint: NSLayoutConstraint!
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        observeKeyboard()
         setUI()
         setActions()
         cvvTextField.becomeFirstResponder()
@@ -42,7 +45,13 @@ internal class CVVView: UIView {
         self.cardBrandImageView.image = UIImage(named: paymentSystem)
     }
     
+    private func observeKeyboard() {
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDissapear), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     private func setActions() {
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCloseButton)))
         self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         self.continueButton.addTarget(self, action: #selector(handleContinueButton), for: .touchUpInside)
     }
@@ -63,7 +72,10 @@ internal class CVVView: UIView {
         cvvTextField.keyboardType = .numberPad
         cvvTextField.delegate = self
         cvvTextField.isSecureTextEntry = true
-        savedCardView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 280, paddingLeft: 16, paddingRight: 16, height: 224)
+        savedCardView.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 224)
+        
+        yConstraint = savedCardView.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        yConstraint.isActive = true
         
         [titleLabel, closeButton, cardInfoView, continueButton].forEach { savedCardView.addSubview($0) }
         
@@ -82,6 +94,36 @@ internal class CVVView: UIView {
         cardPanMaskedLabel.centerY(in: cardInfoView, left: cardBrandImageView.rightAnchor, paddingLeft: 12)
         
         cvvTextField.centerY(in: cardInfoView, right: cardInfoView.rightAnchor, paddingRight: 16, width: 45)
+    }
+    
+    @objc private func handleKeyboardAppear(notification: Notification) {
+        guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        
+        self.layoutIfNeeded()
+        
+        let distanceFromBottomToSavedCardView = frame.height / 2 - 224 / 2
+        let offsetFromKeyboard = keyboardEndFrame.height - distanceFromBottomToSavedCardView + 10
+        guard offsetFromKeyboard > 0 else {
+            return
+        }
+        
+        yConstraint?.constant = -offsetFromKeyboard
+        
+        UIView.animate(withDuration: animationDuration) {
+            self.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func handleKeyboardDissapear(notification: Notification) {
+        guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
+        
+        self.layoutIfNeeded()
+        
+        yConstraint.constant = 0
+
+        UIView.animate(withDuration: animationDuration) {
+            self.layoutIfNeeded()
+        }
     }
 }
 
