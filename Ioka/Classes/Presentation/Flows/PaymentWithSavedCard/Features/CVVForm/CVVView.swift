@@ -23,7 +23,7 @@ internal class CVVView: UIView {
     private let cardInfoView = IokaCustomView(backGroundColor: colors.quaternaryBackground, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
-    private let cvvImageView = IokaImageView(imageName: "cvvExplained")
+    private let cvvImageView = IokaImageView(imageName: "CVVHint")
     private let continueButton = IokaButton(iokaButtonState: .enabled, title: IokaLocalizable.continueButton)
     
     override init(frame: CGRect) {

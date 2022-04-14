@@ -18,7 +18,7 @@ internal class ErrorToastView: UIView {
     private var onHide: (() -> Void)?
     
     private let errorLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableText, iokaTextAlignemnt: .left)
-    private let closeButton = IokaButton(imageName: "closeError")
+    private let closeButton = IokaButton(imageName: "ErrorClose")
     
     private var hidingTimer: Timer?
     

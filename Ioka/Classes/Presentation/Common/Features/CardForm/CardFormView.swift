@@ -41,7 +41,7 @@ internal class CardFormView: UIView {
     let saveCardToggle = UISwitch()
     let createButton = IokaButton(iokaButtonState: .disabled)
     let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
-    private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: colors.success)
+    private var transactionImageView = IokaImageView(imageName: "Transaction", imageTintColor: colors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForTransaction = IokaStackView(views: [transactionImageView, transactionLabel], viewsDistribution: .equalCentering, viewsAxis: .horizontal, viewsSpacing: 8)
