@@ -19,25 +19,25 @@ internal final class SavedCardRepository {
         api.getCards(customerAccessToken: customerAccessToken, completion: completion)
     }
     
-    func saveCard(customerAccessToken: AccessToken, cardParameters: CardParameters, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+    func saveCard(customerAccessToken: AccessToken, cardParameters: CardParameters, completion: @escaping (Result<CardSaving, Error>) -> Void) {
         api.createBinding(customerAccessToken: customerAccessToken, card: cardParameters) { result in
-            completion(result.toSavedCardsResult())
+            completion(result.toCardSavingResult())
         }
     }
     
-    func getStatus(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+    func getStatus(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<CardSaving, Error>) -> Void) {
         api.getCardByID(customerAccessToken: customerAccessToken, cardId: cardId) { result in
-            completion(result.toSavedCardsResult())
+            completion(result.toCardSavingResult())
         }
     }
 }
 
 extension Result where Success == SavedCardDTO {
-    func toSavedCardsResult() -> Result<SavedCard, Error> {
-        Result<SavedCard, Error> {
+    func toCardSavingResult() -> Result<CardSaving, Error> {
+        Result<CardSaving, Error> {
             switch self {
             case .success(let response):
-                return try response.toSavedCard()
+                return try response.toCardSaving()
             case .failure(let error):
                 throw error
             }

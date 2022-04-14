@@ -1,5 +1,5 @@
 //
-//  SavedCardDTO+toSavedCard.swift
+//  SavedCardDTO+ToCardSaving.swift
 //  Ioka
 //
 //  Created by ablai erzhanov on 06.04.2022.
@@ -9,13 +9,13 @@ import Foundation
 
 
 extension SavedCardDTO {
-    func toSavedCard() throws -> SavedCard {
-        SavedCard(status: try status!.toSavedCardStatus(error: error, actionDTO: action), id: id, paymentSystem: payment_system, emitter: emitter, holder: holder)
+    func toCardSaving() throws -> CardSaving {
+        CardSaving(status: try status!.toCardSavingStatus(error: error, actionDTO: action), id: id)
     }
 }
 
-extension SavedCardStatus {
-    func toSavedCardStatus(error: APIError?, actionDTO: ActionDTO?) throws -> SavedCard.Status {
+extension SavedCardDTO.Status {
+    func toCardSavingStatus(error: APIError?, actionDTO: ActionDTO?) throws -> CardSaving.Status {
         switch self {
         case .PENDING:
             throw DomainError.invalidPaymentStatus

@@ -12,7 +12,7 @@ internal protocol ThreeDSecureNavigationDelegate {
     func dismissThreeDSecure(payment: Payment)
     func dismissThreeDSecure(apiError: APIError)
     func dismissThreeDSecure(error: Error)
-    func dismissThreeDSecure(savedCard: SavedCard)
+    func dismissThreeDSecure(cardSaving: CardSaving)
 }
 
 internal enum ThreeDSecureState {
@@ -56,10 +56,10 @@ internal class ThreeDSecureViewModel {
         repository.getStatus(customerAccessToken: customerAccessToken, cardId: cardId) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let savedCard):
-                switch savedCard.status {
+            case .success(let cardSaving):
+                switch cardSaving.status {
                 case .succeeded:
-                    self.delegate?.dismissThreeDSecure(savedCard: savedCard)
+                    self.delegate?.dismissThreeDSecure(cardSaving: cardSaving)
                 case .declined(let apiError):
                     self.delegate?.dismissThreeDSecure(apiError: apiError)
                 default:

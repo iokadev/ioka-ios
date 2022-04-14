@@ -185,7 +185,7 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
         resultCompletion?(.failed(error))
     }
     
-    func dismissThreeDSecure(savedCard: SavedCard) {
+    func dismissThreeDSecure(cardSaving: CardSaving) {
         self.dismiss3DSecureFlow()
     }
 }

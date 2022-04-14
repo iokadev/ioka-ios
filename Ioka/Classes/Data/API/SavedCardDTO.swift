@@ -7,21 +7,18 @@
 
 import Foundation
 
-internal enum SavedCardStatus: String, Decodable {
-    case PENDING = "PENDING"
-    case APPROVED = "APPROVED"
-    case DECLINED = "DECLINED"
-    case REQUIRES_ACTION = "REQUIRES_ACTION"
-}
-
-
 public struct SavedCardDTO: Decodable {
-    
+    enum Status: String, Decodable {
+        case PENDING = "PENDING"
+        case APPROVED = "APPROVED"
+        case DECLINED = "DECLINED"
+        case REQUIRES_ACTION = "REQUIRES_ACTION"
+    }
     
     
     public let id: String //-Идентификатор платежа
     public let customer_id: String //-Идентификатор родительского заказа
-    var status: SavedCardStatus?
+    var status: Status?
     public let created_at: String //-Время создания платежа
     public let pan_masked: String //-Авторизованная сумма
     public let expiry_date: String //-Сумма списания

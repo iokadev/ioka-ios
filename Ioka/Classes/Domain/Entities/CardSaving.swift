@@ -8,8 +8,7 @@
 import Foundation
 
 
-internal struct SavedCard {
-    
+internal struct CardSaving {
     enum Status {
         case succeeded
         case declined(APIError)
@@ -18,7 +17,4 @@ internal struct SavedCard {
     
     let status: Status
     let id: String
-    var paymentSystem: String?
-    var emitter: String?
-    var holder: String?
 }

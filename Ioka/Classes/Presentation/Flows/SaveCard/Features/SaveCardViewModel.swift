@@ -11,7 +11,7 @@ import UIKit
 internal protocol SaveCardNavigationDelegate: NSObject {
     func dismissSaveCardViewController()
     func dismissSaveCardViewControllerWithSuccess()
-    func show3DSecure(_ action: Action, card: SavedCard)
+    func show3DSecure(_ action: Action, cardSaving: CardSaving)
 }
 
 
@@ -39,12 +39,12 @@ internal class SaveCardViewModel {
         repository.saveCard(customerAccessToken: customerAccessToken, cardParameters: card) {[weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success(let savedCard):
-                switch savedCard.status {
+            case .success(let cardSaving):
+                switch cardSaving.status {
                 case .declined(let apiError):
                     self.errorCompletion?(apiError)
                 case .requiresAction(let action):
-                    self.delegate?.show3DSecure(action, card: savedCard)
+                    self.delegate?.show3DSecure(action, cardSaving: cardSaving)
                 case .succeeded:
                     self.handleSuccess()
                 }

@@ -146,7 +146,7 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
         resultCompletion?(.failed(error))
     }
     
-    func dismissThreeDSecure(savedCard: SavedCard) {
+    func dismissThreeDSecure(cardSaving: CardSaving) {
         dismiss3DSecureFlow()
     }
     

@@ -56,8 +56,8 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
 
 extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigationDelegate {
     
-    func show3DSecure(_ action: Action, card: SavedCard) {
-        self.show3DSecure(url: action.url, cardId: card.id)
+    func show3DSecure(_ action: Action, cardSaving: CardSaving) {
+        self.show3DSecure(url: action.url, cardId: cardSaving.id)
     }
     
     
@@ -91,7 +91,7 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
         resultCompletion?(.failed(error))
     }
     
-    func dismissThreeDSecure(savedCard: SavedCard) {
+    func dismissThreeDSecure(cardSaving: CardSaving) {
         self.dismiss3DSecure()
         saveCardViewController?.viewModel.handleSuccess()
     }
