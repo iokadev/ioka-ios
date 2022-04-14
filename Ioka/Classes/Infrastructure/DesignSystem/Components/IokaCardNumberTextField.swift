@@ -43,7 +43,7 @@ internal class IokaCardNumberTextField: IokaTextField {
     }
     
     func setCardBrandIcon(imageName: String) {
-        guard let image = UIImage(named: imageName) else { return }
+        guard let image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil) else { return }
         cardBrandImageView.image = image
         
         iconContainerView.addSubview(cardBrandImageView)
@@ -51,7 +51,7 @@ internal class IokaCardNumberTextField: IokaTextField {
     }
     
     func setBankEmitterIcon(imageName: String) {
-        guard let image = UIImage(named: imageName) else { return }
+        guard let image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil) else { return }
         bankEmitterImageView.image = image
         iconContainerView.addSubview(bankEmitterImageView)
         self.isBankEmitterSetted = true
