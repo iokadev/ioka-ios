@@ -58,7 +58,6 @@ internal class CardFormView: UIView {
         super.init(frame: frame)
         setupUI()
         setActions()
-        self.errorView.delegate = self
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDissapear), name: UIResponder.keyboardWillHideNotification, object: nil)
         [cardNumberTextField, dateExpirationTextField, cvvTextField].forEach { $0.delegate = self }
@@ -72,6 +71,10 @@ internal class CardFormView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func show(error: Error) {
+        errorView.show(error: error)
     }
     
     deinit {
@@ -157,7 +160,6 @@ internal class CardFormView: UIView {
         
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
         self.addSubview(self.errorView)
-        self.errorView.alpha = 0.0
         
         titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
         
@@ -234,23 +236,5 @@ extension CardFormView: UITextFieldDelegate {
             return newLength <= 4
         }
          return true
-    }
-}
-
-extension CardFormView: ErrorToastViewDelegate {
-    
-    public func showErrorView(error: Error) {
-        DispatchQueue.main.async {
-            self.errorView.error = error
-            UIView.animate(withDuration: 1.0) {
-                self.errorView.alpha = 1.0
-            }
-        }
-    }
-    
-    func closeErrorView(_ view: ErrorToastView) {
-        DispatchQueue.main.async {
-            self.errorView.alpha = 0.0
-        }
     }
 }

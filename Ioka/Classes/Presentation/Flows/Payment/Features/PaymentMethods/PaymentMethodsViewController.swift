@@ -23,7 +23,7 @@ internal class PaymentMethodsViewController: UIViewController {
         
         viewModel.cardPaymentFailure = { [weak self] error in
             if let error = error {
-                self?.contentView.showErrorView(error: error)
+                self?.contentView.show(error: error)
                 self?.handlePayButton(state: .enabled)
                 self?.contentView.createButton.hideLoading(showTitle: true)
             }

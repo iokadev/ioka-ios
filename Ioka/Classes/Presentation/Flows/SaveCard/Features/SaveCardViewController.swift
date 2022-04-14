@@ -52,7 +52,7 @@ internal class SaveCardViewController: UIViewController {
     }
     
     func showError(error: Error) {
-        contentView.showErrorView(error: error)
+        contentView.show(error: error)
         handleSaveButton(state: .enabled)
         contentView.createButton.hideLoading(showTitle: true)
     }

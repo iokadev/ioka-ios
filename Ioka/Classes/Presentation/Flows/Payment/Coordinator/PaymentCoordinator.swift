@@ -116,8 +116,9 @@ extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavi
     
     func dismissProgressWrapper(_ error: Error) {
         self.viewControllerProgressWrapper?.hideProgress()
-        self.viewControllerProgressWrapper?.showError(error: error)
-        resultCompletion?(.failed(error))
+        self.viewControllerProgressWrapper?.showError(error: error) { [weak self] in
+            self?.resultCompletion?(.failed(error))
+        }
     }
     
     func dismissThreeDSecure() {

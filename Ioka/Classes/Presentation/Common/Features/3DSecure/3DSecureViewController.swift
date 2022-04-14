@@ -47,8 +47,6 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
         webView.navigationDelegate = self
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = false
-        errorView.delegate = self
-        errorView.isHidden = true
         handleViewModelCalllbacks()
     }
     
@@ -70,7 +68,7 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
     func handleViewModelCalllbacks() {
         viewModel.showError = { [weak self] error in
             guard let self = self else { return }
-            self.showErrorView(error: error)
+            self.errorView.show(error: error)
             self.loadingIndicator.stopIndicator()
         }
     }
@@ -94,25 +92,6 @@ extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigatio
             DispatchQueue.main.async {
                 self.viewModel.handleRedirect()
             }
-        }
-    }
-}
-
-extension ThreeDSecureViewController: ErrorToastViewDelegate {
-    
-    public func showErrorView(error: Error) {
-        DispatchQueue.main.async {
-            self.loadingIndicator.stopIndicator()
-            self.errorView.error = error
-            UIView.animate(withDuration: 1.0) {
-                self.errorView.alpha = 1.0
-            }
-        }
-    }
-    
-    func closeErrorView(_ view: ErrorToastView) {
-        DispatchQueue.main.async {
-            self.errorView.alpha = 0.0
         }
     }
 }

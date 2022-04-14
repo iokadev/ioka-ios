@@ -33,26 +33,11 @@ internal class ViewControllerProgressWrapper {
         progressView.stop()
     }
     
-    func showError(error: Error) {
-        self.errorView.error = error
-        UIView.transition(with:  self.errorView, duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: { [self] in
-            self.errorView.isHidden = false
-        })
+    func showError(error: Error, onHide: (() -> Void)? = nil) {
+        errorView.show(error: error, onHide: onHide)
     }
-    
-    func hideError() {
-        UIView.transition(with:  self.errorView, duration: 0.4,
-                          options: .transitionCrossDissolve,
-                          animations: { [self] in
-            self.errorView.isHidden = true
-        })
-    }
-    
     
     func setUI() {
-        errorView.isHidden = true
         self.viewController.navigationController?.view.addSubview(errorView)
         self.errorView.anchor(left: self.viewController.navigationController?.view.leftAnchor,
                               bottom: viewController.navigationController?.view.bottomAnchor,
@@ -63,5 +48,10 @@ internal class ViewControllerProgressWrapper {
         
         self.viewController.navigationController?.view.addSubview(progressView)
         progressView.fillView(self.viewController.navigationController?.view)
+    }
+    
+    deinit {
+        errorView.removeFromSuperview()
+        progressView.removeFromSuperview()
     }
 }
