@@ -11,7 +11,7 @@ import Ioka
 
 internal class SavedCardsViewController: UIViewController {
     
-    var models = [SavedCardDTO]()
+    var models = [SavedCard]()
     
     var closeButton = DemoButton(imageName: "chevronLeft", backGroundColor: .clear)
     var titleLabel = DemoLabel(title: "Способ оплаты", font: typography.title, textColor: colors.text, textAlignment: .center)
@@ -110,7 +110,7 @@ extension SavedCardsViewController: UITableViewDelegate, UITableViewDataSource {
 
 
 extension SavedCardsViewController: AddNewCardTablewViewCellDelegate, GetCardTableViewCellDelegate {
-    func deleteCard(_ view: GetCardTableViewCell, card: SavedCardDTO) {
+    func deleteCard(_ view: GetCardTableViewCell, card: SavedCard) {
         let vc = DeleteSavedCardViewController()
         vc.card = card
         vc.delegate = self
@@ -134,7 +134,7 @@ extension SavedCardsViewController: DeleteSavedCardViewControllerDelegate, DemoA
         resultView.removeFromSuperview()
     }
     
-    func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCardDTO, error: Error?) {
+    func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCard, error: Error?) {
         switch error {
         case .some(let error):
             resultView.error = error

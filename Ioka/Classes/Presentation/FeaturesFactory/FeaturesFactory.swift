@@ -37,14 +37,14 @@ internal struct FeaturesFactory {
         return wrapper
     }
     
-    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCardDTO, theme: IokaTheme) -> ViewControllerProgressWrapper{
+    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCard, theme: IokaTheme) -> ViewControllerProgressWrapper{
         let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken, card: card)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         wrapper.theme = theme
         return wrapper
     }
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCardDTO, repository: PaymentRepository, theme: IokaTheme) -> CVVViewController {
+    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCard, repository: PaymentRepository, theme: IokaTheme) -> CVVViewController {
         let viewModel = CVVViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
         let vc = CVVViewController()
         vc.card = card

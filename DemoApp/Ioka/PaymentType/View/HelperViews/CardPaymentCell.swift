@@ -11,7 +11,7 @@ import UIKit
 import Ioka
 
 internal protocol CardPaymentCellDelegate: NSObject {
-    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: SavedCardDTO)
+    func handleViewTap(_ view: CardPaymentCell, isPayWithCashSelected: Bool, cardResponse: SavedCard)
 }
 
 internal class CardPaymentCell: UITableViewCell {
@@ -22,7 +22,7 @@ internal class CardPaymentCell: UITableViewCell {
     let checkImageView = DemoImageView(imageName: "uncheckIcon")
     var isViewSelected: Bool = false
     weak var delegate: CardPaymentCellDelegate?
-    private var cardResponse: SavedCardDTO?
+    private var cardResponse: SavedCard?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,12 +34,11 @@ internal class CardPaymentCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(model: SavedCardDTO, delegate: CardPaymentCellDelegate) {
+    public func configure(model: SavedCard, delegate: CardPaymentCellDelegate) {
         self.delegate = delegate
         self.cardResponse = model
-        self.panMaskedLabel.text = model.pan_masked.trimPanMasked()
-        guard let paymentSystem = model.payment_system else { return }
-        self.cardBrandImageView.image = UIImage(named: paymentSystem)
+        self.panMaskedLabel.text = model.maskedPAN.trimPanMasked()
+        self.cardBrandImageView.image = model.paymentSystemIcon
     }
     
     public func uncheckView() {

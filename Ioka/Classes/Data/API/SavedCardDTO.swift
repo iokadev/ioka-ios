@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SavedCardDTO: Decodable {
+struct SavedCardDTO: Decodable {
     enum Status: String, Decodable {
         case PENDING = "PENDING"
         case APPROVED = "APPROVED"
@@ -15,17 +15,16 @@ public struct SavedCardDTO: Decodable {
         case REQUIRES_ACTION = "REQUIRES_ACTION"
     }
     
-    
-    public let id: String //-Идентификатор платежа
-    public let customer_id: String //-Идентификатор родительского заказа
-    var status: Status?
-    public let created_at: String //-Время создания платежа
-    public let pan_masked: String //-Авторизованная сумма
-    public let expiry_date: String //-Сумма списания
-    public let holder: String? //-Сумма возврата
-    public let payment_system: String? //-Комиссия процессинга
-    public var emitter: String?
-    public var cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
-    var error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
-    var action: ActionDTO?//-Данные для прохождения 3DSecure на стороне Банка
+    let id: String //-Идентификатор платежа
+    let customer_id: String //-Идентификатор родительского заказа
+    let status: Status?
+    let created_at: String //-Время создания платежа
+    let pan_masked: String //-Авторизованная сумма
+    let expiry_date: String //-Сумма списания
+    let holder: String? //-Сумма возврата
+    let payment_system: String? //-Комиссия процессинга
+    let emitter: String?
+    let cvc_required: Bool //-Платежные данные (включают информацию по сохраненной карте или по плательщику)
+    let error: APIError? //-Детальное описание ошибки платежа. Присутствует если status = DECLINED
+    let action: ActionDTO?//-Данные для прохождения 3DSecure на стороне Банка
 }

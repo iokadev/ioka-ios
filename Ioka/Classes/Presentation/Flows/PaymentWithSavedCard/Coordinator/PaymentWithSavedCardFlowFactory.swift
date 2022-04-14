@@ -11,7 +11,7 @@ internal struct PaymentWithSavedCardFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
     let viewController: UIViewController
-    let cardResponse: SavedCardDTO
+    let cardResponse: SavedCard
     let theme: IokaTheme
 }
 

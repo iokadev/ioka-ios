@@ -55,10 +55,9 @@ internal class PaymentView: UIView {
             paymentTypeLabel.text = "Выберите способ оплаты"
             paymentTypeLabel.textColor = colors.grey
         case .savedCard(let card):
-            paymentTypeLabel.text = card.pan_masked.trimPanMasked()
+            paymentTypeLabel.text = card.maskedPAN.trimPanMasked()
             paymentTypeLabel.textColor = colors.text
-            guard let paymentSystem = card.payment_system else { return }
-            paymentTypeImageView.image = UIImage(named: paymentSystem)
+            paymentTypeImageView.image = card.paymentSystemIcon
         case .creditCard(let title):
             paymentTypeLabel.text = title
             paymentTypeLabel.textColor = colors.text

@@ -39,10 +39,9 @@ internal class CVVView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configureView(card: SavedCardDTO) {
-        self.cardPanMaskedLabel.text = card.pan_masked.trimPanMasked()
-        guard let paymentSystem = card.payment_system else { return }
-        self.cardBrandImageView.image = UIImage(named: paymentSystem)
+    public func configureView(card: SavedCard) {
+        self.cardPanMaskedLabel.text = card.maskedPAN.trimPanMasked()
+        self.cardBrandImageView.image = card.paymentSystemIcon
     }
     
     private func observeKeyboard() {

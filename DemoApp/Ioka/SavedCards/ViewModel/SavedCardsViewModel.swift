@@ -9,7 +9,7 @@ import Foundation
 import Ioka
 
 internal class SavedCardsViewModel {
-    func getCards(customerAccessToken: String, completion: @escaping([SavedCardDTO]?) -> Void) {
+    func getCards(customerAccessToken: String, completion: @escaping([SavedCard]?) -> Void) {
         Ioka.shared.getCards(customerAccessToken: customerAccessToken) { result in
             completion(try? result.get())
         }

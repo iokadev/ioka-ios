@@ -17,7 +17,7 @@ internal class PaymentTypeViewController: UIViewController {
     let contentView = PaymentTypeView()
     let viewModel = PaymentTypeViewModel()
     var customerAccessToken: String!
-    var models = [SavedCardDTO]()
+    var models = [SavedCard]()
     weak var delegate: PaymentTypeViewControllerDelegate?
     
     

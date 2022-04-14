@@ -15,8 +15,10 @@ internal final class SavedCardRepository {
         self.api = api
     }
     
-    func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[SavedCardDTO], Error>) -> Void) {
-        api.getCards(customerAccessToken: customerAccessToken, completion: completion)
+    func getSavedCards(customerAccessToken: AccessToken, completion: @escaping (Result<[SavedCard], Error>) -> Void) {
+        api.getCards(customerAccessToken: customerAccessToken) { result in
+            completion(result.map { $0.map { $0.toSavedCard() } } )
+        }
     }
     
     func saveCard(customerAccessToken: AccessToken, cardParameters: CardParameters, completion: @escaping (Result<CardSaving, Error>) -> Void) {

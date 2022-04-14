@@ -9,13 +9,13 @@ import UIKit
 import Ioka
 
 internal protocol DeleteSavedCardViewControllerDelegate: NSObject {
-    func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCardDTO, error: Error?)
+    func closeDeleteCardViewController(_ viewController: UIViewController, card: SavedCard, error: Error?)
 }
 
 internal class DeleteSavedCardViewController: UIViewController {
     
     let deleteView = DeleteSavedCardView()
-    var card: SavedCardDTO!
+    var card: SavedCard!
     var customerAccessToken: String!
     weak var delegate: DeleteSavedCardViewControllerDelegate?
     

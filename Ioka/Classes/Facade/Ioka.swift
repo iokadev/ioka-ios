@@ -79,7 +79,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или любой
     ///   экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта была
     ///   отклонена, .cancelled - если пользователь закрыл экран ввода CVV или экран 3DSecure.
-    public func startPaymentWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCardDTO, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCard, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -143,16 +143,17 @@ public class Ioka {
     /// - Parameters:
     ///   - customerAccessToken: Токен для доступа к пользователю, который приложение получает от своего бэкенда.
     ///   - completion: Замыкание, в которое передаётся результат запроса сохраненных карт.
-    public func getCards(customerAccessToken: String, completion: @escaping(Result<[SavedCardDTO], Error>) -> Void) {
+    public func getCards(customerAccessToken: String, completion: @escaping(Result<[SavedCard], Error>) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failure(DomainError.invalidTokenFormat))
             return
         }
         let api = IokaApi(apiKey: setupInput.apiKey)
+        let repository = SavedCardRepository(api: api)
         
         do {
             let customerAccessToken = try AccessToken(token: customerAccessToken)
-            api.getCards(customerAccessToken: customerAccessToken, completion: completion)
+            repository.getSavedCards(customerAccessToken: customerAccessToken, completion: completion)
         } catch let error {
             completion(.failure(error))
         }

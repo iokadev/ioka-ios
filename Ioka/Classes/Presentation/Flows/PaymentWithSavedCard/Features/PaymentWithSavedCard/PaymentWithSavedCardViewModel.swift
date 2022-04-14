@@ -14,9 +14,9 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     var state: ProgressViewModelState
     var repository: OrderRepository
     var orderAccessToken: AccessToken
-    var card: SavedCardDTO
+    var card: SavedCard
     
-    init(delegate: PaymentWithSavedCardNavigationDelegate, repository: OrderRepository, orderAccessToken: AccessToken, card: SavedCardDTO) {
+    init(delegate: PaymentWithSavedCardNavigationDelegate, repository: OrderRepository, orderAccessToken: AccessToken, card: SavedCard) {
         self.state = .progress
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken
@@ -29,7 +29,7 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let order):
-                if self.card.cvc_required {
+                if self.card.cvvRequired {
                     self.dismissProgressWrapperWithOrder(order, apiError: nil)
                 } else {
                     self.makePayment(order: order)
@@ -67,7 +67,7 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     
     private func dismissProgressWrapperWithOrder(_ order: Order, apiError: APIError?) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.delegate?.dismissProgressWrapper(order, isCVVRequired: self.card.cvc_required, apiError: apiError)
+            self.delegate?.dismissProgressWrapper(order, isCVVRequired: self.card.cvvRequired, apiError: apiError)
         })
     }
     

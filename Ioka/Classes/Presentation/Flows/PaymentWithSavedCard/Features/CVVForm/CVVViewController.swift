@@ -11,7 +11,7 @@ import UIKit
 internal class CVVViewController: UIViewController {
     
     private lazy var contentView = CVVView()
-    var card: SavedCardDTO!
+    var card: SavedCard!
     var viewModel: CVVViewModel!
     
     override func viewDidLoad() {

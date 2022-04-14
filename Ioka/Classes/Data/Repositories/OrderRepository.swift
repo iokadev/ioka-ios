@@ -22,7 +22,7 @@ internal final class OrderRepository {
         }
     }
     
-    func createPayment(orderAccessToken: AccessToken, card: SavedCardDTO, completion: @escaping(Result<Payment, Error>) -> Void) {
+    func createPayment(orderAccessToken: AccessToken, card: SavedCard, completion: @escaping(Result<Payment, Error>) -> Void) {
         let card = CardParameters(cardId: card.id)
         api.createCardPayment(orderAccessToken: orderAccessToken, card: card) { result in
             completion(result.toPaymentResult())
