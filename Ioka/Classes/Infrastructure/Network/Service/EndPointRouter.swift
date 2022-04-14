@@ -37,8 +37,7 @@ internal class EndpointRouter<Endpoint: EndpointType>: NetworkRouter {
     
     private func buildRequest(from route: Endpoint) throws -> URLRequest {
         var request = URLRequest(url: route.baseUrl.appendingPathComponent(route.path),
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: 10.0)
+                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData)
         request.httpMethod = route.httpMethod.rawValue
         
         if route.httpMethod == .post {
