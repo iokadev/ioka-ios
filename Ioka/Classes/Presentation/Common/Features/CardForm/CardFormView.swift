@@ -44,6 +44,7 @@ internal class CardFormView: UIView {
     private var transactionImageView = IokaImageView(imageName: "transactionIcon", imageTintColor: colors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
+    private lazy var stackViewForTransaction = IokaStackView(views: [transactionImageView, transactionLabel], viewsDistribution: .equalCentering, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var errorView = ErrorToastView()
     let feedbackGenerator = UISelectionFeedbackGenerator()
     
@@ -153,7 +154,8 @@ internal class CardFormView: UIView {
     
     private func setupUI() {
         self.backgroundColor = colors.background
-        [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, transactionLabel, transactionImageView].forEach{ self.addSubview($0) }
+        
+        [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
         self.addSubview(self.errorView)
         self.errorView.alpha = 0.0
         
@@ -170,9 +172,9 @@ internal class CardFormView: UIView {
         self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -114)
         self.createButtonBottomConstraint?.isActive = true
         
-        transactionLabel.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
-        
-        transactionImageView.centerY(in: transactionLabel, right: transactionLabel.leftAnchor, paddingRight: 8, width: 24, height: 24)
+        transactionImageView.setDimensions(width: 24, height: 24)
+        stackViewForTransaction.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
+
         self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         
     }
