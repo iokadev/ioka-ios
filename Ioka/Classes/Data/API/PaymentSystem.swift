@@ -23,16 +23,3 @@ public enum PaymentSystem: String, Codable {
     case ELO = "ELO"
     case UNKNOWN = "UNKNOWN"
 }
-
-extension PaymentSystem {
-    public static func icon(for system: String) -> UIImage? {
-        let paymentSystem = PaymentSystem(rawValue: system)
-        
-        switch paymentSystem {
-        case .VISA, .AMERICAN_EXPRESS, .DINER_CLUB, .MAESTRO, .MIR, .UNION_PAY, .MASTERCARD:
-            return UIImage(named: system, in: IokaBundle.bundle, compatibleWith: nil)
-        default :
-            return nil
-        }
-    }
-}
