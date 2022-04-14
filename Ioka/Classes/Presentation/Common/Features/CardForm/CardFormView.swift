@@ -142,7 +142,7 @@ internal class CardFormView: UIView {
         
         UIView.animate(withDuration: animationDuration) { [weak self] in
             guard let self = self else { return }
-            self.createButtonBottomConstraint?.constant = -114
+            self.createButtonBottomConstraint?.constant = -72
             self.layoutIfNeeded()
         }
     }
@@ -171,11 +171,11 @@ internal class CardFormView: UIView {
         
         createButton.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 56)
         createButton.translatesAutoresizingMaskIntoConstraints = false
-        self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -114)
+        self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.safeAreaBottomAnchor, constant: -72)
         self.createButtonBottomConstraint?.isActive = true
         
         transactionImageView.setDimensions(width: 24, height: 24)
-        stackViewForTransaction.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 60)
+        stackViewForTransaction.centerX(in: self, bottom: self.bottomAnchor, paddingBottom: 32)
 
         self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
         

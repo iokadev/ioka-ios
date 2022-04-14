@@ -9,6 +9,15 @@ import UIKit
 
 
 internal extension UIView {
+    
+    var safeAreaTopAnchor: NSLayoutYAxisAnchor {
+        safeAreaLayoutGuide.topAnchor
+    }
+    
+    var safeAreaBottomAnchor: NSLayoutYAxisAnchor {
+        safeAreaLayoutGuide.bottomAnchor
+    }
+    
     func anchor(top: NSLayoutYAxisAnchor? = nil,
                 left: NSLayoutXAxisAnchor? = nil,
                 bottom: NSLayoutYAxisAnchor? = nil,

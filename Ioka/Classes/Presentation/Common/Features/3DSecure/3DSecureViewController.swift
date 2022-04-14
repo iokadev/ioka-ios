@@ -39,10 +39,10 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
         handleViewModelCalllbacks()
         
         navView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 100)
-        webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaBottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         loadingIndicator.center(in: self.view, in: self.view, width: 80, height: 80)
         
-        errorView.anchor(left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 114, paddingRight: 16)
+        errorView.anchor(left: self.view.leftAnchor, bottom: self.view.safeAreaBottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

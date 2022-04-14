@@ -93,7 +93,7 @@ internal class PaymentResultView: UIView {
         
         errorDescriptionLabel.anchor(top: orderTitleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         
-        retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 50, paddingRight: 16, height: 56)
+        retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.safeAreaBottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16, height: 56)
     }
     
     private func setupOrderViewStatus() {
