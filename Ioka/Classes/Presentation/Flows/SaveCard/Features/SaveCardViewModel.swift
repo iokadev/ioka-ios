@@ -10,6 +10,7 @@ import UIKit
 
 internal protocol SaveCardNavigationDelegate: NSObject {
     func dismissSaveCardViewController()
+    func dismissSaveCardViewControllerWithSuccess()
     func show3DSecure(_ action: Action, card: SavedCard)
 }
 
@@ -24,6 +25,7 @@ internal class SaveCardViewModel {
     var successCompletion: (() -> Void)?
     var cardBrandCompletion: ((GetBrandResponse?) -> Void)?
     
+    private var isSucceeded = false
     
     init(delegate: SaveCardNavigationDelegate, repository: SavedCardRepository, customerAccessToken: AccessToken) {
         self.delegate = delegate
@@ -44,12 +46,18 @@ internal class SaveCardViewModel {
                 case .requiresAction(let action):
                     self.delegate?.show3DSecure(action, card: savedCard)
                 case .succeeded:
-                    self.successCompletion?()
+                    self.handleSuccess()
                 }
             case .failure(let error):
                 self.errorCompletion?(error)
             }
         }
+    }
+    
+    func handleSuccess() {
+        isSucceeded = true
+        successCompletion?()
+        dismissWithSuccessAfterDelay()
     }
     
     func getBrand(partialBin: String) {
@@ -83,5 +91,19 @@ internal class SaveCardViewModel {
     
     func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
         return childViewModel.modifyPaymentTextFields(text: text, textFieldType: textFieldType)
+    }
+    
+    func close() {
+        if isSucceeded {
+            delegate?.dismissSaveCardViewControllerWithSuccess()
+        } else {
+            delegate?.dismissSaveCardViewController()
+        }
+    }
+    
+    private func dismissWithSuccessAfterDelay() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.delegate?.dismissSaveCardViewControllerWithSuccess()
+        }
     }
 }

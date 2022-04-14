@@ -53,7 +53,8 @@ internal class SaveCardViewController: UIViewController {
     
     func showError(error: Error) {
         contentView.showErrorView(error: error)
-        handleSaveButton(state: .savingFailure)
+        handleSaveButton(state: .enabled)
+        contentView.createButton.hideLoading(showTitle: true)
     }
     
     func handleSaveButton(state: IokaButtonState) {
@@ -65,7 +66,7 @@ internal class SaveCardViewController: UIViewController {
 extension SaveCardViewController: CardFormViewDelegate {
     
     func closeCardFormView(_ view: CardFormView) {
-        self.viewModel.delegate?.dismissSaveCardViewController()
+        self.viewModel.close()
     }
     
     func getEmitterByBinCode(_ view: CardFormView, with binCode: String) {

@@ -12,7 +12,6 @@ internal enum IokaButtonState {
     case disabled
     case enabled
     case savingSuccess
-    case savingFailure
 }
 
 internal class IokaButton: UIButton {
@@ -45,6 +44,7 @@ internal class IokaButton: UIButton {
     
     public func showSuccess() {
         self.setImage(IokaImages.mark, for: .normal)
+        self.setTitle("", for: .normal)
     }
 
     public func showLoading() {
@@ -90,10 +90,6 @@ internal class IokaButton: UIButton {
             self.hideLoading(showTitle: true)
             self.isUserInteractionEnabled = true
             showSuccess()
-        case .savingFailure:
-            hideLoading(showTitle: true)
-            self.backgroundColor = colors.grey
-            self.isUserInteractionEnabled = false
         }
     }
     
