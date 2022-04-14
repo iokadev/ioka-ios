@@ -23,7 +23,6 @@ internal class CVVView: UIView {
     private let cardInfoView = IokaCustomView(backGroundColor: colors.quaternaryBackground, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
-    private let cvvImageView = IokaImageView(imageName: "CVVHint")
     private let continueButton = IokaButton(iokaButtonState: .enabled, title: IokaLocalizable.continueButton)
     
     override init(frame: CGRect) {
@@ -76,15 +75,13 @@ internal class CVVView: UIView {
         
         continueButton.anchor(top: cardInfoView.bottomAnchor, left: savedCardView.leftAnchor, right: savedCardView.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingRight: 24, height: 56)
         
-        [cardBrandImageView, cardPanMaskedLabel, cvvImageView, cvvTextField].forEach { cardInfoView.addSubview($0) }
+        [cardBrandImageView, cardPanMaskedLabel, cvvTextField].forEach { cardInfoView.addSubview($0) }
         
         cardBrandImageView.centerY(in: cardInfoView, left: cardInfoView.leftAnchor, paddingLeft: 16, width: 24, height: 24)
         
         cardPanMaskedLabel.centerY(in: cardInfoView, left: cardBrandImageView.rightAnchor, paddingLeft: 12)
         
-        cvvImageView.centerY(in: cardInfoView, right: cardInfoView.rightAnchor, paddingRight: 16, width: 24, height: 24)
-        
-        cvvTextField.centerY(in: cardInfoView, right: cvvImageView.leftAnchor, paddingRight: 12)
+        cvvTextField.centerY(in: cardInfoView, right: cardInfoView.rightAnchor, paddingRight: 16, width: 45)
     }
 }
 
