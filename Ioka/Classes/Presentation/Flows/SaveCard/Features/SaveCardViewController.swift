@@ -20,7 +20,6 @@ internal class SaveCardViewController: UIViewController {
     var viewModel: SaveCardViewModel!
     var customerId: String!
     var theme: IokaTheme!
-    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
    
 
     override func viewDidLoad() {
@@ -42,7 +41,7 @@ internal class SaveCardViewController: UIViewController {
         viewModel.successCompletion = { [weak self] in
             guard let self = self else { return }
             self.handleSaveButton(state: .savingSuccess)
-            self.feedbackGenerator.impactOccurred()
+            UINotificationFeedbackGenerator().notificationOccurred(.success)
         }
         
         viewModel.cardBrandCompletion = { [weak self] cardBrand in

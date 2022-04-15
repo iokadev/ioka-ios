@@ -11,9 +11,7 @@ internal class ErrorPopUpViewController: UIViewController {
     
     var viewModel: ErrorPopUpViewModel!
     var theme: IokaTheme!
-    private let contentView = ErrorPopUpView()
-    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
-    
+    private let contentView = ErrorPopUpView()    
     
     override func loadView() {
         self.view = contentView
@@ -22,7 +20,7 @@ internal class ErrorPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
-        feedbackGenerator.impactOccurred()
+        UINotificationFeedbackGenerator().notificationOccurred(.error)
     }
     
     func showError(_ error: Error) {

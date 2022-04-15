@@ -21,7 +21,7 @@ internal class ErrorToastView: UIView {
     private let closeButton = IokaButton(imageName: "ErrorClose")
     
     private var hidingTimer: Timer?
-    
+        
     override init(frame: CGRect) {
         super.init(frame: frame)
         hide()
@@ -36,6 +36,9 @@ internal class ErrorToastView: UIView {
     func show(error: Error, onHide: (() -> Void)? = nil) {
         self.error = error
         self.onHide = onHide
+        
+        UINotificationFeedbackGenerator().notificationOccurred(.error)
+        
         UIView.animate(withDuration: 1.0) {
             self.alpha = 1.0
         } completion: { _ in

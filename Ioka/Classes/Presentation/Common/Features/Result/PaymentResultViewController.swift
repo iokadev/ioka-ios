@@ -16,7 +16,6 @@ internal class PaymentResultViewController: UIViewController {
     
     lazy var contentView = PaymentResultView()
     var viewModel: PaymentResultViewModel!
-    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var error: Error?
     var order: Order?
     var theme: IokaTheme!
@@ -29,13 +28,16 @@ internal class PaymentResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.contentView.delegate = self
-        feedbackGenerator.impactOccurred()
     }
     
     func configure(error: Error? = nil, order: Order? = nil) {
+        let feedbackGenerator = UINotificationFeedbackGenerator()
+        
         if let error = error {
+            feedbackGenerator.notificationOccurred(.error)
             contentView.configureView(error: error, paymentResult: .paymentFailed)
         } else if let order = order {
+            feedbackGenerator.notificationOccurred(.success)
             contentView.configureView(order: order, paymentResult: .paymentSucceed)
         }
     }
