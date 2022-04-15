@@ -79,6 +79,7 @@ internal class IokaTextField: UITextField {
         switch placeHolderType {
         case .cardNumber:
             self.placeholder = IokaLocalizable.enterCardNumber
+            self.textContentType = .creditCardNumber
         case .dateExpiration:
             self.placeholder = IokaLocalizable.cardExpiration
         case .cvv:
