@@ -9,5 +9,5 @@ import UIKit
 
 
 internal protocol Coordinator {
-    var navigationController: UINavigationController { get set }
+    var navigationController: UINavigationController { get }
 }

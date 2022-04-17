@@ -24,11 +24,11 @@ internal class PaymentResultViewModel {
     
     func closePaymentResultViewController() {
         paymentWithSavedCardDelegate?.dismissPaymentResult()
-        paymentMethodsDelegate?.dismissPaymentResult()
+        paymentMethodsDelegate?.dismissPaymentResult(retry: false)
     }
     
     func retryPaymentProcess() {
         paymentWithSavedCardDelegate?.dismissPaymentResult()
-        paymentMethodsDelegate?.dismissPaymentResult()
+        paymentMethodsDelegate?.dismissPaymentResult(retry: true)
     }
 }

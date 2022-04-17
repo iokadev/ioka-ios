@@ -55,7 +55,7 @@ public class Ioka {
             let token = try AccessToken(token: orderAccessToken)
             let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: sourceViewController, theme: theme)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
-            let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, navigationController:  sourceViewController.navigationController ?? UINavigationController())
+            let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             coordinator.start()
             currentCoordinator = coordinator
             coordinator.resultCompletion = { result in

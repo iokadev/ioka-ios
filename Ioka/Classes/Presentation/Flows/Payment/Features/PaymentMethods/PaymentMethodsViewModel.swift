@@ -16,7 +16,7 @@ internal protocol PaymentMethodsNavigationDelegate: NSObject {
     func dismissPaymentMethodsViewController(_ apiError: APIError)
     func dismissProgressWrapper(_ order: Order)
     func dismissProgressWrapper(_ error: Error)
-    func dismissPaymentResult()
+    func dismissPaymentResult(retry: Bool)
 }
 
 
