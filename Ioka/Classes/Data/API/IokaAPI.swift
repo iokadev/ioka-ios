@@ -26,7 +26,7 @@ public class IokaApi: IokaAPIProtocol {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getBrand(partialBin: partialBin)), completion: completion)
     }
     
-    func getEmitterByBinCode(binCode: String, completion: @escaping (Result<GetEmitterByBinCodeResponse, Error>) -> Void) {
+    func getEmitterByBinCode(binCode: String, completion: @escaping (Result<EmitterDTO, Error>) -> Void) {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getEmitterByBinCode(binCode: binCode)), completion: completion)
     }
     
