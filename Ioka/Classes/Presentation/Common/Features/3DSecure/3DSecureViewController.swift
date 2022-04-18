@@ -15,31 +15,28 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
     var url: URL!
     var theme: IokaTheme!
     var webView = WKWebView()
-    var navView = IokaBrowserNavigationView()
     private lazy var loadingIndicator = IokaProgressView()
     private lazy var errorView = ErrorToastView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.addSubview(navView)
+        setupNavigationItem()
+
         self.view.addSubview(webView)
         self.view.addSubview(loadingIndicator)
         self.view.addSubview(errorView)
         
         self.webView.addObserver(self, forKeyPath: #keyPath(WKWebView.isLoading), options: .new, context: nil)
-        navView.backgroundColor = theme.colors.background
         self.view.backgroundColor = theme.colors.background
         loadingIndicator.startIndicator()
-        navView.delegate = self
         webView.scrollView.delegate = self
         webView.navigationDelegate = self
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = false
         handleViewModelCalllbacks()
         
-        navView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingRight: 0, height: 100)
-        webView.anchor(top: navView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaBottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
+        webView.anchor(top: self.view.safeAreaTopAnchor, left: self.view.leftAnchor, bottom: self.view.safeAreaBottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0)
         loadingIndicator.center(in: self.view, in: self.view, width: 80, height: 80)
         
         errorView.anchor(left: self.view.leftAnchor, bottom: self.view.safeAreaBottomAnchor, right: self.view.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16)
@@ -54,6 +51,16 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
                 loadingIndicator.isHidden = true
             }
         }
+    }
+    
+    private func setupNavigationItem() {
+        setupNavigationItem(title: IokaLocalizable.paymentConfirmation,
+                            closeButtonTarget: self,
+                            closeButtonAction: #selector(closeButtonTapped))
+    }
+    
+    @objc private func closeButtonTapped() {
+        viewModel.delegate?.dismissThreeDSecure()
     }
     
     deinit {
@@ -74,10 +81,7 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
     }
 }
 
-extension ThreeDSecureViewController: WKNavigationDelegate, IokaBrowserNavigationViewDelegate  {
-    func closeBrowser() {
-        viewModel.delegate?.dismissThreeDSecure()
-    }
+extension ThreeDSecureViewController: WKNavigationDelegate  {
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard viewModel.isReturnUrl(navigationAction.request.url) else {
