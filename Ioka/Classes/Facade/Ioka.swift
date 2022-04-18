@@ -56,12 +56,14 @@ public class Ioka {
             let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: sourceViewController, theme: theme)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
-            coordinator.start()
+            
             currentCoordinator = coordinator
             coordinator.resultCompletion = { result in
                 completion(result)
                 self.currentCoordinator = nil
             }
+            
+            coordinator.start()
         } catch let error {
             completion(.failed(error))
         }
@@ -92,12 +94,13 @@ public class Ioka {
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
             let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
-            coordinator.start()
             
             coordinator.resultCompletion = { result in
                 completion(result)
                 self.currentCoordinator = nil
             }
+            
+            coordinator.start()
         } catch let error {
             completion(.failed(error))
         }
@@ -127,13 +130,13 @@ public class Ioka {
             let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
             let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
-            coordinator.start()
             
             coordinator.resultCompletion = { result in
                 completion(result)
                 self.currentCoordinator = nil
             }
             
+            coordinator.start()
         } catch let error {
             completion(.failed(error))
         }
