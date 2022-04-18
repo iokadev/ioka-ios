@@ -10,19 +10,24 @@ import WebKit
 
 
 internal class SaveCardCoordinator: NSObject, Coordinator {
-
-    
     let factory: SaveCardFlowFactory
-    var navigationController: UINavigationController
+    let sourceViewController: UIViewController
+
+    lazy var navigationController: UINavigationController = {
+        let controller = IokaNavigationController()
+        controller.modalPresentationStyle = .overFullScreen
+        
+        return controller
+    }()
     
     var saveCardViewController: SaveCardViewController?
     var threeDSecureViewController: ThreeDSecureViewController?
     
     var resultCompletion: ((FlowResult) -> Void)?
     
-    init(factory: SaveCardFlowFactory, navigationController: UINavigationController) {
+    init(factory: SaveCardFlowFactory, sourceViewController: UIViewController) {
         self.factory = factory
-        self.navigationController = navigationController
+        self.sourceViewController = sourceViewController
     }
     
     func start() {
@@ -31,25 +36,19 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
     
     func showSaveCardFlow() {
         let vc = factory.makeSaveCard(delegate: self)
-        vc.modalPresentationStyle = .overFullScreen
         self.saveCardViewController = vc
-        self.navigationController.present(vc, animated: false)
+        self.navigationController.setViewControllers([vc], animated: false)
+        self.sourceViewController.present(self.navigationController, animated: true)
     }
     
     func show3DSecure(url: URL, cardId: String) {
         let vc = factory.make3DSecure(delegate: self, url: url, cardId: cardId)
-        vc.modalPresentationStyle = .overFullScreen
         self.threeDSecureViewController = vc
-        self.saveCardViewController?.present(vc, animated: false)
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
-    func dismiss3DSecure() {
-        self.saveCardViewController?.dismiss(animated: false)
-        
-    }
-    
-    func dismissSaveCard() {
-        self.navigationController.dismiss(animated: false)
+    private func dismissFlow() {
+        sourceViewController.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -57,42 +56,38 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
 extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigationDelegate {
     
     func show3DSecure(_ action: Action, cardSaving: CardSaving) {
-        self.show3DSecure(url: action.url, cardId: cardSaving.id)
+        show3DSecure(url: action.url, cardId: cardSaving.id)
     }
     
-    
     func dismissSaveCardViewController() {
-        self.dismissSaveCard()
+        dismissFlow()
         resultCompletion?(.cancelled)
     }
     
     func dismissSaveCardViewControllerWithSuccess() {
-        self.dismissSaveCard()
+        dismissFlow()
         resultCompletion?(.succeeded)
     }
     
     func dismissThreeDSecure() {
-        self.dismiss3DSecure()
+        dismissFlow()
+        resultCompletion?(.cancelled)
     }
     
-    func dismissThreeDSecure(payment: Payment) {
-        self.dismiss3DSecure()
-    }
+    func dismissThreeDSecure(payment: Payment) {}
     
     func dismissThreeDSecure(apiError: APIError) {
-        self.dismiss3DSecure()
+        navigationController.popViewController(animated: true)
         saveCardViewController?.showError(error: apiError)
-        resultCompletion?(.failed(apiError))
     }
     
     func dismissThreeDSecure(error: Error) {
-        self.dismiss3DSecure()
+        navigationController.popViewController(animated: true)
         saveCardViewController?.showError(error: error)
-        resultCompletion?(.failed(error))
     }
     
     func dismissThreeDSecure(cardSaving: CardSaving) {
-        self.dismiss3DSecure()
+        navigationController.popViewController(animated: true)
         saveCardViewController?.viewModel.handleSuccess()
     }
 }

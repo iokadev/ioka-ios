@@ -125,7 +125,7 @@ public class Ioka {
             let customerAccesstoken = try AccessToken(token: customerAccessToken)
             let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, theme: theme)
             let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
-            let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, navigationController: sourceViewController.navigationController ?? UINavigationController())
+            let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
             coordinator.start()
             
