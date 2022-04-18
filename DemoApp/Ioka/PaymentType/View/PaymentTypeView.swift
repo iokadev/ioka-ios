@@ -54,14 +54,10 @@ internal class PaymentTypeView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func reloadTableView(models: [SavedCard]) {
-        
-        UIView.animate(withDuration: 0.5) { [weak self] in
-                self?.tableView.reloadData()
-                self?.tableView.layoutIfNeeded()
-                self?.heightConstraint?.constant = CGFloat(56 * models.count) + 56
-                self?.updateConstraints()
-        }
+    func reloadTableView(models: [SavedCard]) {
+        tableView.reloadData()
+        heightConstraint?.constant = CGFloat(56 * models.count) + 56
+        tableView.layoutIfNeeded()
     }
     
     private func setupActions() {
@@ -78,7 +74,7 @@ internal class PaymentTypeView: UIView {
         delegate?.closeButtonWasPressed(self)
     }
     
-    public func setupUI(models: [SavedCard]) {
+    func setupUI(models: [SavedCard]) {
         self.backgroundColor = colors.secondaryBackground
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         

@@ -22,17 +22,11 @@ internal class PaymentTypeViewController: UIViewController {
     
     
     override func loadView() {
-        super.loadView()
-        self.view = contentView
+        view = contentView
         contentView.tableView.delegate = self
         contentView.tableView.dataSource = self
         contentView.tableView.register(ApplePayCell.self, forCellReuseIdentifier: ApplePayCell.cellId)
         contentView.tableView.register(CardPaymentCell.self, forCellReuseIdentifier: CardPaymentCell.cellId)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
     }
 
     override func viewDidLoad() {
