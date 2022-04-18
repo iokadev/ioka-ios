@@ -24,9 +24,7 @@ internal class PaymentMethodsViewController: UIViewController {
         
         viewModel.cardPaymentFailure = { [weak self] error in
             if let error = error {
-                self?.contentView.show(error: error)
-                self?.handlePayButton(state: .enabled)
-                self?.contentView.createButton.hideLoading(showTitle: true)
+                self?.showError(error)
             }
         }
     }
@@ -45,6 +43,12 @@ internal class PaymentMethodsViewController: UIViewController {
         self.contentView.endEditing(true)
         self.contentView.createButton.iokaButtonState = state
         self.contentView.createButton.hideLoading(showTitle: true)
+    }
+    
+    func showError(_ error: Error) {
+        contentView.show(error: error)
+        handlePayButton(state: .enabled)
+        contentView.createButton.hideLoading(showTitle: true)
     }
 }
 

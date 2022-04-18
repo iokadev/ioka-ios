@@ -84,8 +84,7 @@ internal class ThreeDSecureViewModel {
                     self.delegate?.threeDSecureDidCancel()
                 }
             case .failure(let error):
-                // TODO: перепровить, может лучше поп делать
-                self.showError?(error)
+                self.delegate?.threeDSecureDidFail(otherError: error)
             }
         }
     }

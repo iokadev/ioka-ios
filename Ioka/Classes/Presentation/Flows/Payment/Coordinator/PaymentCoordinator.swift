@@ -120,7 +120,8 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func threeDSecureDidFail(otherError: Error) {
-        showPaymentResult(.error(otherError))
+        navigationController.popViewController(animated: true)
+        paymentMethodsViewController?.showError(otherError)
     }
     
     func paymentResultDidClose(result: PaymentResult) {
