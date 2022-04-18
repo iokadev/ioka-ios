@@ -8,11 +8,16 @@
 import UIKit
 
 extension UIViewController {
-    func setupNavigationItem(title: String, closeButtonTarget: Any?, closeButtonAction: Selector?) {
+    func setupNavigationItem(title: String?, closeButtonTarget: Any?, closeButtonAction: Selector?) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: IokaImages.close,
                                                            style: .plain,
                                                            target: closeButtonTarget,
                                                            action: closeButtonAction)
+        
+        guard let title = title else {
+            return
+        }
+        
         let titleLabel = UILabel()
         titleLabel.text = title
         titleLabel.font = typography.title

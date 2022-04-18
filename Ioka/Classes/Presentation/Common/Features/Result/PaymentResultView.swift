@@ -15,7 +15,6 @@ internal protocol PaymentResultViewDelegate: NSObject {
 
 internal class PaymentResultView: UIView {
     
-    private let closeButton = IokaButton(imageName: "Close")
     private let imageView = IokaImageView()
     private let orderTitleLabel = IokaLabel(iokaFont: typography.heading)
     let orderNumberLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey)
@@ -61,7 +60,6 @@ internal class PaymentResultView: UIView {
     
     private func setupActions() {
         self.retryOrCloseButton.addTarget(self, action: #selector(handleRetryOrCloseButton), for: .touchUpInside)
-        self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
     }
     
     @objc private func handleRetryOrCloseButton() {
@@ -79,11 +77,10 @@ internal class PaymentResultView: UIView {
    
     private func setupUI() {
         self.backgroundColor = .white
-        [closeButton, imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
+        [imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
         
-        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
         
-        imageView.centerX(in: self, top: self.topAnchor, paddingTop: 180, width: 120, height: 120)
+        imageView.centerX(in: self, top: self.safeAreaTopAnchor, paddingTop: 100, width: 120, height: 120)
         
         orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 24)
         

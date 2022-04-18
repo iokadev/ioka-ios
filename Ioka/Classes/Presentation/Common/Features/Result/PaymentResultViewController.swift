@@ -27,7 +27,17 @@ internal class PaymentResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupNavigationItem()
         self.contentView.delegate = self
+    }
+    
+    private func setupNavigationItem() {
+        setupNavigationItem(title: nil, closeButtonTarget: self, closeButtonAction: #selector(closeButtonTapped))
+    }
+    
+    @objc private func closeButtonTapped() {
+        viewModel.closePaymentResultViewController()
     }
     
     func configure(error: Error? = nil, order: Order? = nil) {
