@@ -7,12 +7,11 @@
 
 import Foundation
 
-internal protocol ThreeDSecureNavigationDelegate {
-    func dismissThreeDSecure()
-    func dismissThreeDSecure(payment: Payment)
-    func dismissThreeDSecure(apiError: APIError)
-    func dismissThreeDSecure(error: Error)
-    func dismissThreeDSecure(cardSaving: CardSaving)
+internal protocol ThreeDSecureNavigationDelegate: AnyObject {
+    func threeDSecureDidSucceed()
+    func threeDSecureDidFail(declinedError: Error)
+    func threeDSecureDidFail(otherError: Error)
+    func threeDSecureDidCancel()
 }
 
 internal enum ThreeDSecureState {
@@ -23,7 +22,7 @@ internal enum ThreeDSecureState {
 
 internal class ThreeDSecureViewModel {
     
-    var delegate: ThreeDSecureNavigationDelegate?
+    weak var delegate: ThreeDSecureNavigationDelegate?
     var state: ThreeDSecureState
     var cardId: String?
     var paymentId: String?
@@ -59,14 +58,14 @@ internal class ThreeDSecureViewModel {
             case .success(let cardSaving):
                 switch cardSaving.status {
                 case .succeeded:
-                    self.delegate?.dismissThreeDSecure(cardSaving: cardSaving)
-                case .declined(let apiError):
-                    self.delegate?.dismissThreeDSecure(apiError: apiError)
+                    self.delegate?.threeDSecureDidSucceed()
+                case .declined(let error):
+                    self.delegate?.threeDSecureDidFail(declinedError: error)
                 default:
-                    self.delegate?.dismissThreeDSecure()
+                    self.delegate?.threeDSecureDidCancel()
                 }
             case .failure(let error):
-                self.delegate?.dismissThreeDSecure(error: error)
+                self.delegate?.threeDSecureDidFail(otherError: error)
             }
         }
     }
@@ -78,13 +77,14 @@ internal class ThreeDSecureViewModel {
             case .success(let payment):
                 switch payment.status {
                 case .succeeded:
-                    self.delegate?.dismissThreeDSecure(payment: payment)
-                case .declined(let apiError):
-                    self.delegate?.dismissThreeDSecure(apiError: apiError)
+                    self.delegate?.threeDSecureDidSucceed()
+                case .declined(let error):
+                    self.delegate?.threeDSecureDidFail(declinedError: error)
                 default:
-                    self.delegate?.dismissThreeDSecure()
+                    self.delegate?.threeDSecureDidCancel()
                 }
             case .failure(let error):
+                // TODO: перепровить, может лучше поп делать
                 self.showError?(error)
             }
         }

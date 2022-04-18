@@ -8,21 +8,17 @@
 import Foundation
 
 
-internal protocol PaymentMethodsNavigationDelegate: NSObject {
-    func dismissPaymentMethodsViewController()
-    func dismissPaymentMethodsViewController(_ payment: Payment)
-    func dismissPaymentMethodsViewController(_ action: Action, payment: Payment)
-    func dismissPaymentMethodsViewController(_ error: Error)
-    func dismissPaymentMethodsViewController(_ apiError: APIError)
-    func dismissProgressWrapper(_ order: Order)
-    func dismissProgressWrapper(_ error: Error)
-    func dismissPaymentResult(retry: Bool)
+internal protocol PaymentMethodsNavigationDelegate: AnyObject {
+    func paymentMethodsDidCancel()
+    func paymentMethodsDidSucceed()
+    func paymentMethodsDidRequire3DSecure(action: Action, payment: Payment)
+    func paymentMethodsDidFail(declineError: Error)
 }
 
 
 internal class PaymentMethodsViewModel {
     
-    var delegate: PaymentMethodsNavigationDelegate?
+    weak var delegate: PaymentMethodsNavigationDelegate?
     let repository: PaymentRepository
     let orderAccessToken: AccessToken
     let order: Order
@@ -46,11 +42,11 @@ internal class PaymentMethodsViewModel {
             case .success(let payment):
                 switch payment.status {
                 case .succeeded:
-                    self.delegate?.dismissPaymentMethodsViewController(payment)
-                case .declined(let apiError):
-                    self.delegate?.dismissPaymentMethodsViewController(apiError)
+                    self.delegate?.paymentMethodsDidSucceed()
+                case .declined(let error):
+                    self.delegate?.paymentMethodsDidFail(declineError: error)
                 case .requiresAction(let action):
-                    self.delegate?.dismissPaymentMethodsViewController(action, payment: payment)
+                    self.delegate?.paymentMethodsDidRequire3DSecure(action: action, payment: payment)
                 }
             case .failure(let error):
                 self.cardPaymentFailure?(error)

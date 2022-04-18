@@ -7,15 +7,19 @@
 
 import Foundation
 
+protocol OrderForPaymentNavigationDelegate: AnyObject {
+    func orderForPaymentDidReceiveOrder(order: Order)
+    func orderForPaymentDidFail(error: Error)
+}
 
  internal class OrderForPaymentViewModel: ProgressViewModelProtocol {
     
-    var delegate: PaymentMethodsNavigationDelegate?
+    weak var delegate: OrderForPaymentNavigationDelegate?
     var state: ProgressViewModelState
     let repository: OrderRepository
     let orderAccessToken: AccessToken
     
-    init(repository: OrderRepository, delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken) {
+    init(repository: OrderRepository, delegate: OrderForPaymentNavigationDelegate, orderAccessToken: AccessToken) {
         self.repository = repository
         self.state = .progress
         self.delegate = delegate
@@ -25,25 +29,21 @@ import Foundation
     func getOrder() {
         repository.getOrder(orderAccessToken: orderAccessToken) { [weak self] result in
             guard let self = self else { return }
-            switch result {
-            case .success(let order):
-                self.dismissProgressWrapperWithOrder(order)
-            case .failure(let error):
-                self.dismissProgressWrapperWithError(error)
+            self.executeAfterDelay {
+                switch result {
+                case .success(let order):
+                    self.delegate?.orderForPaymentDidReceiveOrder(order: order)
+                case .failure(let error):
+                    self.delegate?.orderForPaymentDidFail(error: error)
+                }
             }
         }
     }
-    
-    func dismissProgressWrapperWithError(_ error: Error) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.delegate?.dismissProgressWrapper(error)
-        })
-    }
-    
-    func dismissProgressWrapperWithOrder(_ order: Order) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.delegate?.dismissProgressWrapper(order)
-        })
-    }
-    
+     
+     // в некоторых случаях индикатор прогресса слишком быстро исчезает, поэтому делаем задержку
+     private func executeAfterDelay(_ handler: @escaping () -> Void) {
+         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+             handler()
+         }
+     }
 }

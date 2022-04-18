@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 internal protocol PaymentResultViewDelegate: NSObject {
-    func tryAgain()
-    func closePaymentResult()
+    func retry()
+    func close()
 }
 
 internal class PaymentResultView: UIView {
@@ -24,59 +24,25 @@ internal class PaymentResultView: UIView {
     
     weak var delegate: PaymentResultViewDelegate?
     
-    var paymentResult: PaymentResult? {
-        didSet {
-            setupOrderViewStatus()
-        }
-    }
+    let order: Order
+    let result: PaymentResult
     
-    var error: Error? {
-        didSet {
-            setPaymentData()
-        }
-    }
-    
-    var order: Order? {
-        didSet {
-            setOrderData(order: order)
-        }
-    }
-  
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(order: Order, result: PaymentResult) {
+        self.order = order
+        self.result = result
+        super.init(frame: .zero)
+        
         setupUI()
         setupActions()
+        configure()
     }
-    
+  
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    func configureView(error: Error? = nil, order: Order? = nil, paymentResult: PaymentResult) {
-        self.error = error
-        self.order = order
-        self.paymentResult = paymentResult
-    }
-    
-    private func setupActions() {
-        self.retryOrCloseButton.addTarget(self, action: #selector(handleRetryOrCloseButton), for: .touchUpInside)
-    }
-    
-    @objc private func handleRetryOrCloseButton() {
-        guard let paymentResult = paymentResult else { return }
-
-        switch paymentResult {
-        case .paymentFailed: delegate?.tryAgain()
-        case .paymentSucceed: delegate?.closePaymentResult()
-        }
-    }
-    
-    @objc private func handleCloseButton() {
-        delegate?.closePaymentResult()
-    }
    
     private func setupUI() {
-        self.backgroundColor = .white
+        self.backgroundColor = colors.background
         [imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
         
         
@@ -93,18 +59,40 @@ internal class PaymentResultView: UIView {
         retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.safeAreaBottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16, height: 56)
     }
     
-    private func setupOrderViewStatus() {
+    private func setupActions() {
+        self.retryOrCloseButton.addTarget(self, action: #selector(handleRetryOrCloseButton), for: .touchUpInside)
+    }
+    
+    @objc private func handleRetryOrCloseButton() {
+        switch result {
+        case .success:
+            delegate?.close()
+        case .error:
+            delegate?.retry()
+        }
+    }
+    
+    @objc private func handleCloseButton() {
+        delegate?.close()
+    }
+    
+    private func configure() {
         [orderTitleLabel, orderPriceLabel, orderNumberLabel, errorDescriptionLabel].forEach{ $0.textAlignment = .center }
         
-        guard let orderStatusState = paymentResult else { return }
-        switch orderStatusState {
-        case .paymentSucceed:
+        switch result {
+        case .success:
             orderTitleLabel.text = IokaLocalizable.orderPaid
             orderTitleLabel.textColor = colors.success
+            if let text = orderNumberText() {
+                orderNumberLabel.text = text
+            } else {
+                orderNumberLabel.isHidden = true
+            }
+            
             errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
             imageView.image = IokaImages.checkCircle
-        case .paymentFailed:
+        case .error(let error):
             orderTitleLabel.text = IokaLocalizable.paymentFailed
             orderTitleLabel.textColor = colors.text
             orderPriceLabel.isHidden = true
@@ -112,25 +100,18 @@ internal class PaymentResultView: UIView {
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)
             imageView.image = IokaImages.xCircle
             errorDescriptionLabel.numberOfLines = 0
-        }
-    }
-    
-    private func setPaymentData() {
-        if let error = error {
             errorDescriptionLabel.text = error.localizedDescription
         }
     }
     
-    private func setOrderData(order: Order?) {
-        guard let order = order else { return }
+    private func orderNumberText() -> String? {
+        guard let orderNumber = order.externalId else {
+            return nil
+        }
         
         orderPriceLabel.text = "\(order.price) ₸"
         let locale = IokaLocalizable.orderNumber
-        if let orderNumber = order.externalId {
-            orderNumberLabel.text = String(format: locale, orderNumber)
-        } else {
-            orderNumberLabel.isHidden = true
-        }
         
+        return String(format: locale, orderNumber)
     }
 }

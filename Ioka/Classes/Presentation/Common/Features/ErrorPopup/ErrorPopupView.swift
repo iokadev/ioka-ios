@@ -1,5 +1,5 @@
 //
-//  ErrorPopUpView.swift
+//  ErrorPopupView.swift
 //  IOKA
 //
 //  Created by ablai erzhanov on 04.04.2022.
@@ -7,13 +7,13 @@
 
 import UIKit
 
-internal protocol ErrorPopUpViewDelegate: NSObject {
-    func dismissView(_ view: ErrorPopUpView)
+internal protocol ErrorPopupViewDelegate: NSObject {
+    func close()
 }
 
-internal class ErrorPopUpView: UIView {
+internal class ErrorPopupView: UIView {
     
-    weak var delegate: ErrorPopUpViewDelegate?
+    weak var delegate: ErrorPopupViewDelegate?
     
     private let backgroundView = IokaCustomView(backGroundColor: colors.background, cornerRadius: 12)
     private let errorImageview = IokaImageView(imageName: "XCircle")
@@ -21,19 +21,19 @@ internal class ErrorPopUpView: UIView {
     private let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey, iokaTextAlignemnt: .center)
     private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backGroundColor: colors.secondary)
     
+    let error: Error
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(error: Error) {
+        self.error = error
+        super.init(frame: .zero)
+
         setUI()
         setActions()
+        configure()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func configureView(error: Error) {
-        self.errorDescriptionLabel.text = error.localizedDescription
     }
     
     private func setActions() {
@@ -41,9 +41,8 @@ internal class ErrorPopUpView: UIView {
     }
     
     @objc private func handleTryAgainButton() {
-        delegate?.dismissView(self)
+        delegate?.close()
     }
-    
     
     private func setUI() {
         self.backgroundColor = colors.foreground
@@ -56,6 +55,10 @@ internal class ErrorPopUpView: UIView {
         errorTitleLabel.anchor(top: errorImageview.bottomAnchor, left: backgroundView.leftAnchor, right: backgroundView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingRight: 24)
         errorDescriptionLabel.anchor(top: errorTitleLabel.bottomAnchor, left: backgroundView.leftAnchor, right: backgroundView.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
         tryAgainButton.anchor(top: errorDescriptionLabel.bottomAnchor, left: backgroundView.leftAnchor, bottom: backgroundView.bottomAnchor, right: backgroundView.rightAnchor, paddingTop: 24, paddingLeft: 24, paddingBottom: 24, paddingRight: 24, height: 56)
+    }
+    
+    private func configure() {
+        self.errorDescriptionLabel.text = error.localizedDescription
     }
 }
 

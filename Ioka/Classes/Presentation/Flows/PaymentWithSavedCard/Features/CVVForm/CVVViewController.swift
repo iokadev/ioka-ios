@@ -28,7 +28,7 @@ internal class CVVViewController: UIViewController {
 
 extension CVVViewController: CVVViewDelegate {
     func closeView(_ view: CVVView) {
-        viewModel.delegate?.dismissCVVForm()
+        viewModel.close()
     }
     
     func makePayment(_ view: CVVView) {

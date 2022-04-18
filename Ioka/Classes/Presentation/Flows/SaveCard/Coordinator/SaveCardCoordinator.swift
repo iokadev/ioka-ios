@@ -69,26 +69,24 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
         resultCompletion?(.succeeded)
     }
     
-    func dismissThreeDSecure() {
+    func threeDSecureDidCancel() {
         dismissFlow()
         resultCompletion?(.cancelled)
     }
     
-    func dismissThreeDSecure(payment: Payment) {}
-    
-    func dismissThreeDSecure(apiError: APIError) {
-        navigationController.popViewController(animated: true)
-        saveCardViewController?.showError(error: apiError)
-    }
-    
-    func dismissThreeDSecure(error: Error) {
-        navigationController.popViewController(animated: true)
-        saveCardViewController?.showError(error: error)
-    }
-    
-    func dismissThreeDSecure(cardSaving: CardSaving) {
+    func threeDSecureDidSucceed() {
         navigationController.popViewController(animated: true)
         saveCardViewController?.viewModel.handleSuccess()
+    }
+    
+    func threeDSecureDidFail(declinedError: Error) {
+        navigationController.popViewController(animated: true)
+        saveCardViewController?.showError(error: declinedError)
+    }
+    
+    func threeDSecureDidFail(otherError: Error) {
+        navigationController.popViewController(animated: true)
+        saveCardViewController?.showError(error: otherError)
     }
 }
 

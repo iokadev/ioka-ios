@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-internal protocol SaveCardNavigationDelegate: NSObject {
+internal protocol SaveCardNavigationDelegate: AnyObject {
     func dismissSaveCardViewController()
     func dismissSaveCardViewControllerWithSuccess()
     func show3DSecure(_ action: Action, cardSaving: CardSaving)
@@ -17,7 +17,7 @@ internal protocol SaveCardNavigationDelegate: NSObject {
 
 internal class SaveCardViewModel {
     
-    var delegate: SaveCardNavigationDelegate?
+    weak var delegate: SaveCardNavigationDelegate?
     var childViewModel: CardFormViewModel
     let repository: SavedCardRepository
     let customerAccessToken: AccessToken

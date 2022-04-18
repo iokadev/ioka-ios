@@ -25,7 +25,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     var paymentProgressWrapper: ViewControllerProgressWrapper?
     var cvvViewController: CVVViewController?
     var paymentResultViewController: PaymentResultViewController?
-    var errorPopupViewController: ErrorPopUpViewController?
+    var errorPopupViewController: ErrorPopupViewController?
     var threeDSecureViewController: ThreeDSecureViewController?
     
     var resultCompletion: ((FlowResult) -> Void)?
@@ -45,7 +45,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         self.paymentProgressWrapper?.startProgress()
     }
     
-    func showCVVFlow() {
+    func showCVV() {
         let vc = factory.makeCVVSavedCardPayment(delegate: self)
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
@@ -53,7 +53,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         sourceViewController.present(vc, animated: false)
     }
     
-    func show3DSecureFlow(url: URL, paymentId: String) {
+    func show3DSecure(url: URL, paymentId: String) {
         let vc = factory.make3DSecure(delegate: self, url: url, paymentId: paymentId)
         self.threeDSecureViewController = vc
         
@@ -64,12 +64,12 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         }
     }
     
-    func showResultFlow(hasError: Bool) {
-        hasError ? showErrorPopupFlow() : showPaymentResultFlow()
-    }
-    
-    func showPaymentResultFlow() {
-        let vc = factory.makePaymentResult(delegate: self)
+    func showSuccessPaymentResult() {
+        guard let order = order else {
+            return
+        }
+        
+        let vc = factory.makePaymentResult(delegate: self, order: order, result: .success)
         self.paymentResultViewController = vc
         
         if navigationController.viewControllers.count > 0 {
@@ -80,8 +80,8 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         }
     }
     
-    func showErrorPopupFlow() {
-        let vc = factory.makePaymentResultPopup(delegate: self)
+    func showErrorPopup(error: Error) {
+        let vc = factory.makePaymentResultPopup(delegate: self, error: error)
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
         self.errorPopupViewController = vc
@@ -91,108 +91,101 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         }
     }
     
-    func dismissFlow() {
-        self.sourceViewController.dismiss(animated: true)
+    func dismissFlow(result: FlowResult) {
+        sourceViewController.dismiss(animated: true) {
+            self.resultCompletion?(result)
+        }
+    }
+    
+    func dismissWithErrorInProgressWrapper(_ error: Error) {
+        sourceViewController.dismiss(animated: true) {
+            self.paymentProgressWrapper?.showError(error: error) { [weak self] in
+                self?.resultCompletion?(.failed(error))
+            }
+        }
     }
 }
 
 
-extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegate, ThreeDSecureNavigationDelegate {
-    
-    func showPaymentResult(apiError: APIError) {
-        self.showResultFlow(hasError: true)
-        self.errorPopupViewController?.showError(apiError)
-    }
-    
-    func showPaymentResult(error: Error) {
-        showResultFlow(hasError: true)
-        self.errorPopupViewController?.showError(error)
-        resultCompletion?(.failed(error))
-    }
-    
-    func showPaymentResult() {
-        showResultFlow(hasError: false)
-        self.paymentResultViewController?.configure(order: self.order)
-    }
-    
-    func dismissCVVForm(error: Error) {
-        self.dismissFlow()
-        resultCompletion?(.failed(error))
-    }
-    
-    func showCVVForm() {
-        self.showCVVFlow()
-    }
-    
-    func showThreeDSecure(_ action: Action, payment: Payment) {
-        self.show3DSecureFlow(url: action.url, paymentId: payment.id)
-    }
-    
-    func dismissProgressWrapper(_ error: Error) {
-        self.paymentProgressWrapper?.hideProgress()
-        self.paymentProgressWrapper?.showError(error: error) { [weak self] in
-            self?.resultCompletion?(.failed(error))
-        }
-    }
-    
-    func dismissProgressWrapper(_ order: Order, isCVVRequired: Bool, apiError: APIError?) {
-        self.paymentProgressWrapper?.hideProgress()
-        
+extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegate, CVVNavigationDelegate,
+                                            ThreeDSecureNavigationDelegate, PaymentResultNavigationDelegate,
+                                            ErrorPopupNavigationDelegate {
+    func paymentWithSavedCardDidReceiveOrder(_ order: Order) {
         self.order = order
-        if isCVVRequired {
-            self.showCVVFlow()
-        } else {
-            if let apiError = apiError {
-                showResultFlow(hasError: true)
-                self.errorPopupViewController?.showError(apiError)
-                resultCompletion?(.failed(apiError))
-            } else {
-                showResultFlow(hasError: false)
-                self.paymentResultViewController?.configure(order: self.order)
-            }
-        }
     }
     
-    func dismissCVVForm() {
-        self.dismissFlow()
-        resultCompletion?(.cancelled)
+    func paymentWithSavedCardDidRequireCVV() {
+        paymentProgressWrapper?.hideProgress()
+        showCVV()
     }
     
-    func dismissPaymentResult() {
-        self.dismissFlow()
-        resultCompletion?(.succeeded)
+    func paymentWithSavedCardDidRequireThreeDSecure(action: Action, payment: Payment) {
+        paymentProgressWrapper?.hideProgress()
+        show3DSecure(url: action.url, paymentId: payment.id)
     }
     
-    func dismissThreeDSecure() {
-        self.dismissFlow()
-        resultCompletion?(.cancelled)
+    func paymentWithSavedCardDidSucceed() {
+        paymentProgressWrapper?.hideProgress()
+        showSuccessPaymentResult()
     }
     
-    func dismissErrorPopup() {
-        self.dismissFlow()
-        // TODO: .failed
-        resultCompletion?(.cancelled)
+    func paymentWithSavedCardDidFail(declineError: Error) {
+        paymentProgressWrapper?.hideProgress()
+        showErrorPopup(error: declineError)
     }
     
-    func dismissThreeDSecure(payment: Payment) {
-        self.showResultFlow(hasError: false)
-        // TODO: нет order, надо переделать NavigationDelegate
-        self.paymentResultViewController?.configure(order: self.order)
+    func paymentWithSavedCardDidFail(otherError: Error) {
+        paymentProgressWrapper?.hideProgress()
+        dismissWithErrorInProgressWrapper(otherError)
     }
     
-    func dismissThreeDSecure(apiError: APIError) {
-        self.showResultFlow(hasError: true)
-        self.errorPopupViewController?.showError(apiError)
-        resultCompletion?(.failed(apiError))
+    func cvvDidRequireThreeDSecure(action: Action, payment: Payment) {
+        show3DSecure(url: action.url, paymentId: payment.id)
     }
     
-    func dismissThreeDSecure(error: Error) {
-        self.showResultFlow(hasError: true)
-        self.errorPopupViewController?.showError(error)
-        resultCompletion?(.failed(error))
+    func cvvDidSucceed() {
+        showSuccessPaymentResult()
     }
     
-    func dismissThreeDSecure(cardSaving: CardSaving) {}
+    func cvvDidFail(declineError: Error) {
+        showErrorPopup(error: declineError)
+    }
+    
+    func cvvDidFail(otherError: Error) {
+        dismissWithErrorInProgressWrapper(otherError)
+    }
+    
+    func cvvDidCancel() {
+        dismissFlow(result: .cancelled)
+    }
+    
+    func threeDSecureDidSucceed() {
+        showSuccessPaymentResult()
+    }
+    
+    func threeDSecureDidFail(declinedError: Error) {
+        showErrorPopup(error: declinedError)
+    }
+    
+    func threeDSecureDidFail(otherError: Error) {
+        dismissWithErrorInProgressWrapper(otherError)
+    }
+    
+    func threeDSecureDidCancel() {
+        dismissFlow(result: .cancelled)
+    }
+    
+    func paymentResultDidClose(result: PaymentResult) {
+        dismissFlow(result: .init(paymentResult: result))
+    }
+    
+    func paymentResultDidRetry() {
+        // не вызывается в этом флоу, так как PaymentResult показывается только в случае успешной оплаты
+    }
+    
+    func errorPopupDidClose(error: Error) {
+        dismissFlow(result: .failed(error))
+    }
 }
 
 

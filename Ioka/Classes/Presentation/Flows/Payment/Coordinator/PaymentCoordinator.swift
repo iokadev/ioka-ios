@@ -62,89 +62,72 @@ internal class PaymentCoordinator: NSObject, Coordinator {
         self.navigationController.pushViewController(vc, animated: false)
     }
     
-    private func showPaymentResult() {
-        let vc = factory.makePaymentResult(delegate: self)
+    private func showPaymentResult(_ result: PaymentResult) {
+        guard let order = order else { return }
+
+        let vc = factory.makePaymentResult(delegate: self, order: order, result: result)
         self.paymentResultViewController = vc
         self.navigationController.pushViewController(vc, animated: false)
     }
     
-    private func dismissFlow() {
-        sourceViewController.dismiss(animated: true, completion: nil)
+    private func dismissFlow(result: FlowResult) {
+        sourceViewController.dismiss(animated: true) {
+            self.resultCompletion?(result)
+        }
     }
 }
 
-extension PaymentCoordinator: PaymentMethodsNavigationDelegate, ThreeDSecureNavigationDelegate {
-    func dismissPaymentResult(retry: Bool) {
-        if retry {
-            setPaymentMethodsToNavigationController()
-        } else {
-            dismissFlow()
-            resultCompletion?(.succeeded)
-        }
-    }
-    
-    func dismissPaymentMethodsViewController() {
-        dismissFlow()
-        resultCompletion?(.cancelled)
-    }
-    
-    func dismissPaymentMethodsViewController(_ payment: Payment) {
-        showPaymentResult()
-        paymentResultViewController?.configure(order: self.order)
-    }
-    
-    func dismissPaymentMethodsViewController(_ action: Action, payment: Payment) {
-        show3DSecure(url: action.url, paymentId: payment.id)
-    }
-    
-    func dismissPaymentMethodsViewController(_ error: Error) {
-        showPaymentResult()
-        paymentResultViewController?.configure(error: error)
-        resultCompletion?(.failed(error))
-    }
-    
-    func dismissPaymentMethodsViewController(_ apiError: APIError) {
-        showPaymentResult()
-        paymentResultViewController?.configure(error: apiError)
-        resultCompletion?(.failed(apiError))
-    }
-    
-    func dismissProgressWrapper(_ order: Order) {
-        self.orderForPaymentProgressWrapper?.hideProgress()
+extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsNavigationDelegate, ThreeDSecureNavigationDelegate, PaymentResultNavigationDelegate {
+    func orderForPaymentDidReceiveOrder(order: Order) {
+        orderForPaymentProgressWrapper?.hideProgress()
         self.order = order
         showPaymentMethods()
     }
     
-    func dismissProgressWrapper(_ error: Error) {
-        self.orderForPaymentProgressWrapper?.hideProgress()
-        self.orderForPaymentProgressWrapper?.showError(error: error) { [weak self] in
+    func orderForPaymentDidFail(error: Error) {
+        orderForPaymentProgressWrapper?.hideProgress()
+        orderForPaymentProgressWrapper?.showError(error: error) { [weak self] in
             self?.resultCompletion?(.failed(error))
         }
     }
     
-    func dismissThreeDSecure() {
-        dismissFlow()
-        resultCompletion?(.cancelled)
+    func paymentMethodsDidCancel() {
+        dismissFlow(result: .cancelled)
     }
     
-    func dismissThreeDSecure(payment: Payment) {
-        showPaymentResult()
-        paymentResultViewController?.configure(order: self.order)
+    func paymentMethodsDidSucceed() {
+        showPaymentResult(.success)
     }
     
-    func dismissThreeDSecure(apiError: APIError) {
-        self.showPaymentResult()
-        self.paymentResultViewController?.configure(error: apiError)
-        resultCompletion?(.failed(apiError))
+    func paymentMethodsDidRequire3DSecure(action: Action, payment: Payment) {
+        show3DSecure(url: action.url, paymentId: payment.id)
     }
     
-    func dismissThreeDSecure(error: Error) {
-        self.showPaymentResult()
-        self.paymentResultViewController?.configure(error: error)
-        resultCompletion?(.failed(error))
+    func paymentMethodsDidFail(declineError: Error) {
+        showPaymentResult(.error(declineError))
     }
     
-    func dismissThreeDSecure(cardSaving: CardSaving) {
-        navigationController.popViewController(animated: true)
+    func threeDSecureDidCancel() {
+        dismissFlow(result: .cancelled)
+    }
+    
+    func threeDSecureDidSucceed() {
+        showPaymentResult(.success)
+    }
+    
+    func threeDSecureDidFail(declinedError: Error) {
+        showPaymentResult(.error(declinedError))
+    }
+    
+    func threeDSecureDidFail(otherError: Error) {
+        showPaymentResult(.error(otherError))
+    }
+    
+    func paymentResultDidClose(result: PaymentResult) {
+        dismissFlow(result: .init(paymentResult: result))
+    }
+    
+    func paymentResultDidRetry() {
+        setPaymentMethodsToNavigationController()
     }
 }

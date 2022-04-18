@@ -15,6 +15,6 @@ extension SavedCardDTO {
                   holder: holder,
                   paymentSystem: payment_system,
                   emitter: emitter,
-                  cvvRequired: cvc_required)
+                  cvvIsRequired: cvc_required)
     }
 }

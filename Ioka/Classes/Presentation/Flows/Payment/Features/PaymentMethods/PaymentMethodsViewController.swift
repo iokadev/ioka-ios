@@ -38,7 +38,7 @@ internal class PaymentMethodsViewController: UIViewController {
     }
     
     @objc func closeButtonTapped() {
-        viewModel.delegate?.dismissPaymentMethodsViewController()
+        viewModel.delegate?.paymentMethodsDidCancel()
     }
     
     func handlePayButton(state: IokaButtonState) {
@@ -51,7 +51,7 @@ internal class PaymentMethodsViewController: UIViewController {
 extension PaymentMethodsViewController: CardFormViewDelegate {
     
     func closeCardFormView(_ view: CardFormView) {
-        viewModel.delegate?.dismissPaymentMethodsViewController()
+        // вызывается только при сохранении
     }
     
     func getEmitterByBinCode(_ view: CardFormView, with binCode: String) {

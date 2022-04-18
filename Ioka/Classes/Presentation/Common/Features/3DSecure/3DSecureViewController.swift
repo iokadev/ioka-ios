@@ -60,7 +60,7 @@ internal class ThreeDSecureViewController:  UIViewController, UIScrollViewDelega
     }
     
     @objc private func closeButtonTapped() {
-        viewModel.delegate?.dismissThreeDSecure()
+        viewModel.delegate?.threeDSecureDidCancel()
     }
     
     deinit {

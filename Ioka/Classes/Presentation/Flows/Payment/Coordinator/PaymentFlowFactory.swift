@@ -17,7 +17,7 @@ internal class PaymentFlowFactory {
         self.featuresFactory = featuresFactory
     }
     
-    func makeOrderForPayment(delegate: PaymentMethodsNavigationDelegate) -> ViewControllerProgressWrapper {
+    func makeOrderForPayment(delegate: OrderForPaymentNavigationDelegate) -> ViewControllerProgressWrapper {
         featuresFactory.makeOrderForPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), theme: input.theme)
     }
     
@@ -29,8 +29,8 @@ internal class PaymentFlowFactory {
         featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId, theme: input.theme)
     }
     
-    func makePaymentResult(delegate: PaymentMethodsNavigationDelegate) -> PaymentResultViewController {
-        featuresFactory.makePaymentResult(nil, delegate, theme: input.theme)
+    func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {
+        featuresFactory.makePaymentResult(delegate: delegate, order: order, result: result)
     }
     
     func paymentRepository() -> PaymentRepository {

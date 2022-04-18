@@ -7,29 +7,22 @@
 
 import Foundation
 
-internal protocol PaymentWithSavedCardNavigationDelegate: NSObject {
-    func showCVVForm()
-    func showThreeDSecure(_ action: Action, payment: Payment)
-    func showPaymentResult()
-    func showPaymentResult(apiError: APIError)
-    func showPaymentResult(error: Error)
-    func dismissProgressWrapper(_ error: Error)
-    func dismissProgressWrapper(_ order: Order, isCVVRequired: Bool, apiError: APIError?)
-    func dismissCVVForm()
-    func dismissCVVForm(error: Error)
-    func dismissPaymentResult()
-    func dismissErrorPopup()
+protocol CVVNavigationDelegate: AnyObject {
+    func cvvDidRequireThreeDSecure(action: Action, payment: Payment)
+    func cvvDidSucceed()
+    func cvvDidFail(declineError: Error)
+    func cvvDidFail(otherError: Error)
+    func cvvDidCancel()
 }
-
 
 internal class CVVViewModel {
     
-    var delegate: PaymentWithSavedCardNavigationDelegate?
+    weak var delegate: CVVNavigationDelegate?
     
     let repository: PaymentRepository
     let orderCustomerAccessToken: AccessToken
     
-    init(delegate: PaymentWithSavedCardNavigationDelegate?, repository: PaymentRepository, orderAccessToken: AccessToken) {
+    init(delegate: CVVNavigationDelegate?, repository: PaymentRepository, orderAccessToken: AccessToken) {
         self.delegate = delegate
         self.repository = repository
         self.orderCustomerAccessToken = orderAccessToken
@@ -42,20 +35,20 @@ internal class CVVViewModel {
             case .success(let payment):
                 switch payment.status {
                 case .succeeded:
-                    self.delegate?.dismissCVVForm()
-                    self.delegate?.showPaymentResult()
-                case .declined(let apiError):
-                    self.delegate?.dismissCVVForm()
-                    self.delegate?.showPaymentResult(apiError: apiError)
+                    self.delegate?.cvvDidSucceed()
+                case .declined(let error):
+                    self.delegate?.cvvDidFail(declineError: error)
                 case .requiresAction(let action):
-                    self.delegate?.dismissCVVForm()
-                    self.delegate?.showThreeDSecure(action, payment: payment)
+                    self.delegate?.cvvDidRequireThreeDSecure(action: action, payment: payment)
                 }
             case .failure(let error):
-                self.delegate?.dismissCVVForm()
-                self.delegate?.showPaymentResult(error: error)
+                self.delegate?.cvvDidFail(otherError: error)
             }
         }
+    }
+    
+    func close() {
+        delegate?.cvvDidCancel()
     }
 }
 

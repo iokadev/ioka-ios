@@ -7,28 +7,32 @@
 
 import Foundation
 
+protocol PaymentResultNavigationDelegate: AnyObject {
+    func paymentResultDidClose(result: PaymentResult)
+    func paymentResultDidRetry()
+}
+
+enum PaymentResult {
+    case success
+    case error(Error)
+}
 
 internal class PaymentResultViewModel {
+    let order: Order
+    let result: PaymentResult
+    weak var delegate: PaymentResultNavigationDelegate?
     
-    weak var paymentWithSavedCardDelegate: PaymentWithSavedCardNavigationDelegate?
-    weak var paymentMethodsDelegate: PaymentMethodsNavigationDelegate?
-    
-    init(delegate: PaymentWithSavedCardNavigationDelegate) {
-        self.paymentWithSavedCardDelegate = delegate
+    init(order: Order, result: PaymentResult, delegate: PaymentResultNavigationDelegate) {
+        self.order = order
+        self.result = result
+        self.delegate = delegate
     }
     
-    init(delegate: PaymentMethodsNavigationDelegate) {
-        self.paymentMethodsDelegate = delegate
+    func close() {
+        delegate?.paymentResultDidClose(result: result)
     }
     
-    
-    func closePaymentResultViewController() {
-        paymentWithSavedCardDelegate?.dismissPaymentResult()
-        paymentMethodsDelegate?.dismissPaymentResult(retry: false)
-    }
-    
-    func retryPaymentProcess() {
-        paymentWithSavedCardDelegate?.dismissPaymentResult()
-        paymentMethodsDelegate?.dismissPaymentResult(retry: true)
+    func retry() {
+        delegate?.paymentResultDidRetry()
     }
 }

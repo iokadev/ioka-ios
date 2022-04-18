@@ -7,19 +7,9 @@
 
 import UIKit
 
-internal enum PaymentResult {
-    case paymentSucceed
-    case paymentFailed
-}
-
 internal class PaymentResultViewController: UIViewController {
-    
-    lazy var contentView = PaymentResultView()
+    lazy var contentView = PaymentResultView(order: viewModel.order, result: viewModel.result)
     var viewModel: PaymentResultViewModel!
-    var error: Error?
-    var order: Order?
-    var theme: IokaTheme!
-    var paymentResult: PaymentResult!
     
     override func loadView() {
         self.view = contentView
@@ -37,29 +27,30 @@ internal class PaymentResultViewController: UIViewController {
     }
     
     @objc private func closeButtonTapped() {
-        viewModel.closePaymentResultViewController()
+        viewModel.close()
     }
     
-    func configure(error: Error? = nil, order: Order? = nil) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         let feedbackGenerator = UINotificationFeedbackGenerator()
         
-        if let error = error {
-            feedbackGenerator.notificationOccurred(.error)
-            contentView.configureView(error: error, paymentResult: .paymentFailed)
-        } else if let order = order {
+        switch viewModel.result {
+        case .success:
             feedbackGenerator.notificationOccurred(.success)
-            contentView.configureView(order: order, paymentResult: .paymentSucceed)
+        case .error:
+            feedbackGenerator.notificationOccurred(.error)
         }
     }
 }
 
 extension PaymentResultViewController: PaymentResultViewDelegate {
-    func tryAgain() {
-        viewModel.retryPaymentProcess()
+    func retry() {
+        viewModel.retry()
     }
     
-    func closePaymentResult() {
-        viewModel.closePaymentResultViewController()
+    func close() {
+        viewModel.close()
     }
     
     

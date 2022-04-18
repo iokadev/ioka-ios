@@ -31,20 +31,20 @@ internal class PaymentWithSavedCardFlowFactory {
         featuresFactory.makeSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse, theme: input.theme)
     }
     
-    func makeCVVSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {
-        featuresFactory.makeCVVSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository(), theme: input.theme)
+    func makeCVVSavedCardPayment(delegate: CVVNavigationDelegate) -> CVVViewController {
+        featuresFactory.makeCVVSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository())
     }
     
     func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, paymentId: String) -> ThreeDSecureViewController {
         featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId, theme: input.theme)
     }
     
-    func makePaymentResult(delegate: PaymentWithSavedCardNavigationDelegate) -> PaymentResultViewController {
-        featuresFactory.makePaymentResult(delegate, nil, theme: input.theme)
+    func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {
+        featuresFactory.makePaymentResult(delegate: delegate, order: order, result: result)
     }
     
-    func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate) -> ErrorPopUpViewController {
-        featuresFactory.makePaymentResultPopup(delegate: delegate, theme: input.theme)
+    func makePaymentResultPopup(delegate: ErrorPopupNavigationDelegate, error: Error) -> ErrorPopupViewController {
+        featuresFactory.makePaymentResultPopup(delegate: delegate, error: error)
     }
     
     func paymentRepository() -> PaymentRepository {

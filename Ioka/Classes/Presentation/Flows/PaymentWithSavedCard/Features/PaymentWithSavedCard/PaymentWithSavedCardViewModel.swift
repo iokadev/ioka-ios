@@ -7,10 +7,18 @@
 
 import Foundation
 
+protocol PaymentWithSavedCardNavigationDelegate: AnyObject {
+    func paymentWithSavedCardDidReceiveOrder(_ order: Order)
+    func paymentWithSavedCardDidRequireCVV()
+    func paymentWithSavedCardDidRequireThreeDSecure(action: Action, payment: Payment)
+    func paymentWithSavedCardDidSucceed()
+    func paymentWithSavedCardDidFail(declineError: Error)
+    func paymentWithSavedCardDidFail(otherError: Error)
+}
 
 internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
     
-    var delegate: PaymentWithSavedCardNavigationDelegate?
+    weak var delegate: PaymentWithSavedCardNavigationDelegate?
     var state: ProgressViewModelState
     var repository: OrderRepository
     var orderAccessToken: AccessToken
@@ -29,46 +37,49 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
             guard let self = self else { return }
             switch result {
             case .success(let order):
-                if self.card.cvvRequired {
-                    self.dismissProgressWrapperWithOrder(order, apiError: nil)
+                self.delegate?.paymentWithSavedCardDidReceiveOrder(order)
+                
+                if self.card.cvvIsRequired {
+                    self.executeAfterDelay {
+                        self.delegate?.paymentWithSavedCardDidRequireCVV()
+                    }
                 } else {
                     self.makePayment(order: order)
                 }
             case .failure(let error):
-                self.dismissProgressWrapperWithError(error)
+                self.executeAfterDelay {
+                    self.delegate?.paymentWithSavedCardDidFail(otherError: error)
+                }
             }
         }
     }
     
     func makePayment(order: Order) {
-        repository.createPayment(orderAccessToken: orderAccessToken, card: card) { result in
+        repository.createPayment(orderAccessToken: orderAccessToken, card: card) { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            
             switch result {
             case .success(let payment):
                 switch payment.status {
                 case .succeeded:
-                    self.dismissProgressWrapperWithOrder(order, apiError: nil)
-                case .declined(let apiError):
-                    self.dismissProgressWrapperWithOrder(order, apiError: apiError)
+                    self.delegate?.paymentWithSavedCardDidSucceed()
+                case .declined(let error):
+                    self.delegate?.paymentWithSavedCardDidFail(declineError: error)
                 case .requiresAction(let action):
-                    self.delegate?.showThreeDSecure(action, payment: payment)
+                    self.delegate?.paymentWithSavedCardDidRequireThreeDSecure(action: action, payment: payment)
                 }
             case .failure(let error):
-                self.dismissProgressWrapperWithError(error)
+                self.delegate?.paymentWithSavedCardDidFail(otherError: error)
             }
         }
     }
     
-    private func dismissProgressWrapperWithError(_ error: Error) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.delegate?.dismissProgressWrapper(error)
-        })
+    // в некоторых случаях индикатор прогресса слишком быстро исчезает, поэтому делаем задержку
+    private func executeAfterDelay(_ handler: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            handler()
+        }
     }
-    
-    private func dismissProgressWrapperWithOrder(_ order: Order, apiError: APIError?) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-            self.delegate?.dismissProgressWrapper(order, isCVVRequired: self.card.cvvRequired, apiError: apiError)
-        })
-    }
-    
-    
 }

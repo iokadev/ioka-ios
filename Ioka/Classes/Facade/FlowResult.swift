@@ -25,4 +25,13 @@ public enum FlowResult: Equatable {
             return false
         }
     }
+    
+    init(paymentResult: PaymentResult) {
+        switch paymentResult {
+        case .success:
+            self = .succeeded
+        case .error(let error):
+            self = .failed(error)
+        }
+    }
 }

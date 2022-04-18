@@ -16,7 +16,7 @@ public struct SavedCard {
     let paymentSystem: String?
     let emitter: String?
     
-    let cvvRequired: Bool
+    let cvvIsRequired: Bool
     
     public var paymentSystemIcon: UIImage? {
         guard let paymentSystem = paymentSystem else {
