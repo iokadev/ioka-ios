@@ -50,7 +50,6 @@ internal class PaymentWithSavedCardViewModel: ProgressViewModelProtocol {
                 case .declined(let apiError):
                     self.dismissProgressWrapperWithOrder(order, apiError: apiError)
                 case .requiresAction(let action):
-                    self.dismissProgressWrapperWithOrder(order, apiError: nil)
                     self.delegate?.showThreeDSecure(action, payment: payment)
                 }
             case .failure(let error):

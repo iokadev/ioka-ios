@@ -90,7 +90,7 @@ public class Ioka {
             let token = try AccessToken(token: orderAccessToken)
             let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: sourceViewController, cardResponse: card, theme: theme)
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
-            let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, navigationController: sourceViewController.navigationController ?? UINavigationController())
+            let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
             coordinator.start()
             

@@ -9,7 +9,7 @@ import Foundation
 
 
 extension OrderDTO {
-    func toOrder() throws -> Order {
+    func toOrder() -> Order {
         Order(id: id, externalId: external_id, hasCustomerId: hasCustomerId, price: amount, currency: currency)
     }
 }

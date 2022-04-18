@@ -27,12 +27,12 @@ internal class PaymentWithSavedCardFlowFactory {
     }
     
     
-    func makeOrderForPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse, theme: input.theme)
+    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
+        featuresFactory.makeSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse, theme: input.theme)
     }
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {
-        featuresFactory.makeSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository(), theme: input.theme)
+    func makeCVVSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> CVVViewController {
+        featuresFactory.makeCVVSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository(), theme: input.theme)
     }
     
     func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, paymentId: String) -> ThreeDSecureViewController {

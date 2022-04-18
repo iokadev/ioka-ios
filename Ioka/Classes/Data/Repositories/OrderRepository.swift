@@ -36,7 +36,7 @@ extension Result where Success == OrderDTO {
         Result<Order, Error> {
             switch self {
             case .success(let response):
-                return try response.toOrder()
+                return response.toOrder()
             case .failure(let error):
                 throw error
             }

@@ -8,7 +8,6 @@
 import Foundation
 
 internal protocol PaymentWithSavedCardNavigationDelegate: NSObject {
-    func showProgressWrapper()
     func showCVVForm()
     func showThreeDSecure(_ action: Action, payment: Payment)
     func showPaymentResult()

@@ -37,18 +37,17 @@ internal struct FeaturesFactory {
         return wrapper
     }
     
-    func makeOrderForSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCard, theme: IokaTheme) -> ViewControllerProgressWrapper{
+    func makeSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCard, theme: IokaTheme) -> ViewControllerProgressWrapper{
         let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken, card: card)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
         wrapper.theme = theme
         return wrapper
     }
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCard, repository: PaymentRepository, theme: IokaTheme) -> CVVViewController {
+    func makeCVVSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, card: SavedCard, repository: PaymentRepository, theme: IokaTheme) -> CVVViewController {
         let viewModel = CVVViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
         let vc = CVVViewController()
         vc.card = card
-        vc.modalPresentationStyle = .overFullScreen
         vc.viewModel = viewModel
         return vc
     }
@@ -88,7 +87,6 @@ internal struct FeaturesFactory {
     func makePaymentResultPopup(delegate: PaymentWithSavedCardNavigationDelegate,  theme: IokaTheme) -> ErrorPopUpViewController {
         let viewModel = ErrorPopUpViewModel(delegate: delegate)
         let vc = ErrorPopUpViewController()
-        vc.modalPresentationStyle = .overFullScreen
         vc.viewModel = viewModel
         vc.theme = theme
         return vc
