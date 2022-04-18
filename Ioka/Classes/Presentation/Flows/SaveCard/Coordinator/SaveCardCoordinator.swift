@@ -47,31 +47,25 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
         self.navigationController.pushViewController(vc, animated: true)
     }
     
-    private func dismissFlow() {
-        sourceViewController.dismiss(animated: true, completion: nil)
+    private func dismissFlow(result: FlowResult) {
+        sourceViewController.dismiss(animated: true) {
+            self.resultCompletion?(result)
+        }
     }
 }
 
 
 extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigationDelegate {
+    func saveCardDidCancel() {
+        dismissFlow(result: .cancelled)
+    }
     
-    func show3DSecure(_ action: Action, cardSaving: CardSaving) {
+    func saveCardDidCloseWithSuccess() {
+        dismissFlow(result: .succeeded)
+    }
+    
+    func saveCardDidRequire3DSecure(action: Action, cardSaving: CardSaving) {
         show3DSecure(url: action.url, cardId: cardSaving.id)
-    }
-    
-    func dismissSaveCardViewController() {
-        dismissFlow()
-        resultCompletion?(.cancelled)
-    }
-    
-    func dismissSaveCardViewControllerWithSuccess() {
-        dismissFlow()
-        resultCompletion?(.succeeded)
-    }
-    
-    func threeDSecureDidCancel() {
-        dismissFlow()
-        resultCompletion?(.cancelled)
     }
     
     func threeDSecureDidSucceed() {
@@ -87,6 +81,10 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
     func threeDSecureDidFail(otherError: Error) {
         navigationController.popViewController(animated: true)
         saveCardViewController?.showError(error: otherError)
+    }
+    
+    func threeDSecureDidCancel() {
+        dismissFlow(result: .cancelled)
     }
 }
 

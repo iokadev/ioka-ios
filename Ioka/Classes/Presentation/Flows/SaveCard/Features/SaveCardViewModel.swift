@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 
 internal protocol SaveCardNavigationDelegate: AnyObject {
-    func dismissSaveCardViewController()
-    func dismissSaveCardViewControllerWithSuccess()
-    func show3DSecure(_ action: Action, cardSaving: CardSaving)
+    func saveCardDidCancel()
+    func saveCardDidCloseWithSuccess()
+    func saveCardDidRequire3DSecure(action: Action, cardSaving: CardSaving)
 }
 
 
@@ -44,7 +44,7 @@ internal class SaveCardViewModel {
                 case .declined(let apiError):
                     self.errorCompletion?(apiError)
                 case .requiresAction(let action):
-                    self.delegate?.show3DSecure(action, cardSaving: cardSaving)
+                    self.delegate?.saveCardDidRequire3DSecure(action: action, cardSaving: cardSaving)
                 case .succeeded:
                     self.handleSuccess()
                 }
@@ -95,15 +95,15 @@ internal class SaveCardViewModel {
     
     func close() {
         if isSucceeded {
-            delegate?.dismissSaveCardViewControllerWithSuccess()
+            delegate?.saveCardDidCloseWithSuccess()
         } else {
-            delegate?.dismissSaveCardViewController()
+            delegate?.saveCardDidCancel()
         }
     }
     
     private func dismissWithSuccessAfterDelay() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
-            self?.delegate?.dismissSaveCardViewControllerWithSuccess()
+            self?.delegate?.saveCardDidCloseWithSuccess()
         }
     }
 }
