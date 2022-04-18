@@ -14,41 +14,39 @@ internal protocol ThreeDSecureNavigationDelegate: AnyObject {
     func threeDSecureDidCancel()
 }
 
-internal enum ThreeDSecureState {
-    case saveCard(repository: SavedCardRepository, customerAccessToken: AccessToken)
-    case payment(repository: PaymentRepository, orderAccessToken: AccessToken)
+internal enum ThreeDSecureInput {
+    case saveCard(repository: SavedCardRepository, customerAccessToken: AccessToken, cardId: String)
+    case payment(repository: PaymentRepository, orderAccessToken: AccessToken, paymentId: String)
 }
 
 
 internal class ThreeDSecureViewModel {
     
     weak var delegate: ThreeDSecureNavigationDelegate?
-    var state: ThreeDSecureState
-    var cardId: String?
-    var paymentId: String?
+    let action: Action
+    let input: ThreeDSecureInput
     
-    var showError: ((Error) -> Void)?
-    
-    init(delegate: ThreeDSecureNavigationDelegate, state: ThreeDSecureState, cardId: String?, paymentId: String?) {
+    init(delegate: ThreeDSecureNavigationDelegate, action: Action, input: ThreeDSecureInput) {
         self.delegate = delegate
-        self.state = state
-        self.cardId = cardId
-        self.paymentId = paymentId
+        self.action = action
+        self.input = input
     }
     
     func handleRedirect() {
-        switch state {
-        case .saveCard(let repository, let customerAccessToken):
-            guard let cardId = cardId else { return }
+        switch input {
+        case .saveCard(let repository, let customerAccessToken, let cardId):
             getSavedCard(repository: repository, customerAccessToken: customerAccessToken, cardId: cardId)
-        case .payment(let repository, let orderAccessToken):
-            guard let paymentId = paymentId else { return }
+        case .payment(let repository, let orderAccessToken, let paymentId):
             getPayment(repository: repository, orderAccessToken: orderAccessToken, paymentId: paymentId)
         }
     }
     
     func isReturnUrl(_ url: URL?) -> Bool {
-        url == URL(string: "https://ioka.kz/")
+        url == URL(string: action.returnUrl)
+    }
+    
+    func close() {
+        delegate?.threeDSecureDidCancel()
     }
     
     private func getSavedCard(repository: SavedCardRepository, customerAccessToken: AccessToken, cardId: String) {

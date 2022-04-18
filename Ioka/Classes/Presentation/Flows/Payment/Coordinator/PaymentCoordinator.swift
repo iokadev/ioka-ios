@@ -56,8 +56,8 @@ internal class PaymentCoordinator: NSObject, Coordinator {
         navigationController.setViewControllers([vc], animated: false)
     }
     
-    private func show3DSecure(url: URL, paymentId: String) {
-        let vc = factory.make3DSecure(delegate: self, url: url, paymentId: paymentId)
+    private func show3DSecure(action: Action, paymentId: String) {
+        let vc = factory.make3DSecure(delegate: self, action: action, paymentId: paymentId)
         self.threeDSecureViewController = vc
         self.navigationController.pushViewController(vc, animated: false)
     }
@@ -100,7 +100,7 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func paymentMethodsDidRequire3DSecure(action: Action, payment: Payment) {
-        show3DSecure(url: action.url, paymentId: payment.id)
+        show3DSecure(action: action, paymentId: payment.id)
     }
     
     func paymentMethodsDidFail(declineError: Error) {

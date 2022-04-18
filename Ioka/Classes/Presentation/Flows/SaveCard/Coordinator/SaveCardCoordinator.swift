@@ -41,8 +41,8 @@ internal class SaveCardCoordinator: NSObject, Coordinator {
         self.sourceViewController.present(self.navigationController, animated: true)
     }
     
-    func show3DSecure(url: URL, cardId: String) {
-        let vc = factory.make3DSecure(delegate: self, url: url, cardId: cardId)
+    func show3DSecure(action: Action, cardId: String) {
+        let vc = factory.make3DSecure(delegate: self, action: action, cardId: cardId)
         self.threeDSecureViewController = vc
         self.navigationController.pushViewController(vc, animated: true)
     }
@@ -65,7 +65,7 @@ extension SaveCardCoordinator: SaveCardNavigationDelegate, ThreeDSecureNavigatio
     }
     
     func saveCardDidRequire3DSecure(action: Action, cardSaving: CardSaving) {
-        show3DSecure(url: action.url, cardId: cardSaving.id)
+        show3DSecure(action: action, cardId: cardSaving.id)
     }
     
     func threeDSecureDidSucceed() {

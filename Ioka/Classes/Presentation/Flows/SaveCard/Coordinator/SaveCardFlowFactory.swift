@@ -21,8 +21,11 @@ internal class SaveCardFlowFactory {
         featuresFactory.makeSaveCard(delegate: delegate, customerAccessToken: self.input.customerAccesstoken, repository: savedCardRepository(), theme: input.theme)
     }
     
-    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, cardId: String) -> ThreeDSecureViewController {
-        featuresFactory.make3DSecure(delegate: delegate, state: .saveCard(repository: savedCardRepository(), customerAccessToken: input.customerAccesstoken), url: url, cardId: cardId, paymentId: nil, theme: input.theme)
+    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, cardId: String) -> ThreeDSecureViewController {
+        featuresFactory.make3DSecure(delegate: delegate,
+                                     action: action, input: .saveCard(repository: savedCardRepository(),
+                                                                      customerAccessToken: input.customerAccesstoken,
+                                                                      cardId: cardId))
     }
     
     func savedCardRepository() -> SavedCardRepository {

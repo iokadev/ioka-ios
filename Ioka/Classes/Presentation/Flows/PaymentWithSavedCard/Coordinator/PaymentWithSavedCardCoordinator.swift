@@ -53,11 +53,10 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         sourceViewController.present(vc, animated: false)
     }
     
-    func show3DSecure(url: URL, paymentId: String) {
-        let vc = factory.make3DSecure(delegate: self, url: url, paymentId: paymentId)
+    func show3DSecure(action: Action, paymentId: String) {
+        let vc = factory.make3DSecure(delegate: self, action: action, paymentId: paymentId)
         self.threeDSecureViewController = vc
         
-        paymentProgressWrapper?.hideProgress()
         sourceViewController.dismiss(animated: true) {
             self.navigationController.setViewControllers([vc], animated: false)
             self.sourceViewController.present(self.navigationController, animated: true)
@@ -121,7 +120,7 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     
     func paymentWithSavedCardDidRequireThreeDSecure(action: Action, payment: Payment) {
         paymentProgressWrapper?.hideProgress()
-        show3DSecure(url: action.url, paymentId: payment.id)
+        show3DSecure(action: action, paymentId: payment.id)
     }
     
     func paymentWithSavedCardDidSucceed() {
@@ -140,7 +139,7 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     }
     
     func cvvDidRequireThreeDSecure(action: Action, payment: Payment) {
-        show3DSecure(url: action.url, paymentId: payment.id)
+        show3DSecure(action: action, paymentId: payment.id)
     }
     
     func cvvDidSucceed() {

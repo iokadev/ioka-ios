@@ -25,8 +25,12 @@ internal class PaymentFlowFactory {
         featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository(), theme: input.theme)
     }
     
-    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, url: URL, paymentId: String) -> ThreeDSecureViewController {
-        featuresFactory.make3DSecure(delegate: delegate, state: .payment(repository: paymentRepository(), orderAccessToken: input.orderAccessToken), url: url, cardId: nil, paymentId: paymentId, theme: input.theme)
+    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {
+        featuresFactory.make3DSecure(delegate: delegate,
+                                     action: action,
+                                     input: .payment(repository: paymentRepository(),
+                                                     orderAccessToken: input.orderAccessToken,
+                                                     paymentId: paymentId))
     }
     
     func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {

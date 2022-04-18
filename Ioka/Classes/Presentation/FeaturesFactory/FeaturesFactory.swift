@@ -68,12 +68,11 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, state: ThreeDSecureState, url: URL, cardId: String?, paymentId: String?, theme: IokaTheme) -> ThreeDSecureViewController {
+    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, input: ThreeDSecureInput) -> ThreeDSecureViewController {
         let vc = ThreeDSecureViewController()
-        vc.url = url
-        let viewModel = ThreeDSecureViewModel(delegate: delegate, state: state, cardId: cardId, paymentId: paymentId)
+        let viewModel = ThreeDSecureViewModel(delegate: delegate, action: action, input: input)
         vc.viewModel = viewModel
-        vc.theme = theme
+
         return vc
     }
     
