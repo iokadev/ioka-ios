@@ -38,16 +38,17 @@ internal class ViewControllerProgressWrapper {
     }
     
     func setUI() {
-        self.viewController.navigationController?.view.addSubview(errorView)
-        self.errorView.anchor(left: self.viewController.navigationController?.view.leftAnchor,
-                              bottom: viewController.navigationController?.view.safeAreaBottomAnchor,
-                              right: viewController.navigationController?.view.rightAnchor,
+        let controller = viewController.navigationController ?? viewController
+        controller.view.addSubview(errorView)
+        self.errorView.anchor(left: controller.view.leftAnchor,
+                              bottom: controller.view.safeAreaBottomAnchor,
+                              right: controller.view.rightAnchor,
                               paddingLeft: 16,
                               paddingBottom: 16,
                               paddingRight: 16)
         
-        self.viewController.navigationController?.view.addSubview(progressView)
-        progressView.fillView(self.viewController.navigationController?.view)
+        controller.view.addSubview(progressView)
+        progressView.fillView(controller.view)
     }
     
     deinit {
