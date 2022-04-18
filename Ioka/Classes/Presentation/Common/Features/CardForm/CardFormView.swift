@@ -32,8 +32,6 @@ internal enum TextFieldType {
 
 internal class CardFormView: UIView {
 
-    let titleLabel = IokaLabel(iokaFont: typography.title)
-    let closeButton = IokaButton(imageName: "Close")
     let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
     let cvvTextField = IokaTextField(placeHolderType: .cvv)
@@ -86,16 +84,10 @@ internal class CardFormView: UIView {
         [dateExpirationTextField, cardNumberTextField, cvvTextField].forEach{$0.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)}
         
         createButton.addTarget(self, action: #selector(handleCreateButton), for: .touchUpInside)
-        
-        closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
-        
+                
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
         
         saveCardToggle.addTarget(self, action: #selector(handleSaveCardToggle), for: .allEvents)
-    }
-    
-    @objc private func handleCloseButton() {
-        delegate?.closeCardFormView(self)
     }
     
     @objc private func handleCreateButton() {
@@ -159,14 +151,10 @@ internal class CardFormView: UIView {
     private func setupUI() {
         self.backgroundColor = colors.background
         
-        [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
+        [cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
         self.addSubview(self.errorView)
         
-        titleLabel.centerX(in: self, top: self.safeAreaTopAnchor, paddingTop: 60)
-        
-        closeButton.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
-        
-        cardNumberTextField.anchor(top: titleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 56)
+        cardNumberTextField.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 56)
         
         stackViewForCardInfo.anchor(top: cardNumberTextField.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
         
@@ -187,13 +175,10 @@ internal class CardFormView: UIView {
         
         switch cardFormState {
         case .payment:
-            guard let price = price else { return }
-            let locale = IokaLocalizable.priceTng
-            self.titleLabel.text = String(format: locale, String(price))
             self.addSubview(stackViewForCardSaving)
             stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
         case .saving:
-            self.titleLabel.text = IokaLocalizable.save
+            break
         }
         
         setupCreateButton(price: price)

@@ -25,11 +25,21 @@ internal class SaveCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
+        
+        setupNavigationItem()
         handleBindings()
     }
     
     override func loadView() {
         self.view = contentView
+    }
+    
+    private func setupNavigationItem() {
+        setupNavigationItem(title: IokaLocalizable.save, closeButtonTarget: self, closeButtonAction: #selector(closeButtonTapped))
+    }
+    
+    @objc private func closeButtonTapped() {
+        viewModel.close()
     }
     
     func handleBindings() {
@@ -63,7 +73,6 @@ internal class SaveCardViewController: UIViewController {
 }
 
 extension SaveCardViewController: CardFormViewDelegate {
-    
     func closeCardFormView(_ view: CardFormView) {
         self.viewModel.close()
     }
