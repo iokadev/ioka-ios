@@ -20,6 +20,7 @@ internal class PaymentMethodsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.delegate = self
+        setupNavigationItem()
         
         viewModel.cardPaymentFailure = { [weak self] error in
             if let error = error {
@@ -28,6 +29,16 @@ internal class PaymentMethodsViewController: UIViewController {
                 self?.contentView.createButton.hideLoading(showTitle: true)
             }
         }
+    }
+    
+    private func setupNavigationItem() {
+        setupNavigationItem(title: String(format: IokaLocalizable.priceTng, String(viewModel.order.price)),
+                            closeButtonTarget: self,
+                            closeButtonAction: #selector(closeButtonTapped))
+    }
+    
+    @objc func closeButtonTapped() {
+        viewModel.delegate?.dismissPaymentMethodsViewController()
     }
     
     func handlePayButton(state: IokaButtonState) {

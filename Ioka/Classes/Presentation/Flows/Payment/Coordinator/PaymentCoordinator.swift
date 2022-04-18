@@ -13,10 +13,10 @@ internal class PaymentCoordinator: NSObject, Coordinator {
     let sourceViewController: UIViewController
     
     lazy var navigationController: UINavigationController = {
-        let vc = UINavigationController()
-        vc.modalPresentationStyle = .overFullScreen
+        let controller = IokaNavigationController()
+        controller.modalPresentationStyle = .overFullScreen
         
-        return vc
+        return controller
     }()
     
     private var order: Order?
@@ -69,7 +69,7 @@ internal class PaymentCoordinator: NSObject, Coordinator {
     }
     
     private func dismissFlow() {
-        sourceViewController.dismiss(animated: false)
+        sourceViewController.dismiss(animated: true, completion: nil)
     }
 }
 

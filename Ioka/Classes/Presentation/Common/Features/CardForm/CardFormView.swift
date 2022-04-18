@@ -162,9 +162,9 @@ internal class CardFormView: UIView {
         [titleLabel, closeButton, cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
         self.addSubview(self.errorView)
         
-        titleLabel.centerX(in: self, top: self.topAnchor, paddingTop: 60)
+        titleLabel.centerX(in: self, top: self.safeAreaTopAnchor, paddingTop: 60)
         
-        closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
+        closeButton.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)
         
         cardNumberTextField.anchor(top: titleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 56)
         
