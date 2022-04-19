@@ -26,15 +26,13 @@ internal class PaymentMethodsViewModel {
     var cardPaymentFailure: ((Error?) -> Void)?
     
     
-    init(repository: PaymentRepository, delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order) {
+    init(delegate: PaymentMethodsNavigationDelegate, repository: PaymentRepository, orderAccessToken: AccessToken, order: Order, cardFormViewModel: CardFormViewModel) {
         self.repository = repository
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken
         self.order = order
-        self.childViewModel = CardFormViewModel(api: repository.api)
+        self.childViewModel = cardFormViewModel
     }
-    
-
     
     func createCardPayment(card: CardParameters) {
         repository.createCardPayment(orderAccessToken: orderAccessToken, cardParameters: card) { result in
@@ -58,10 +56,8 @@ internal class PaymentMethodsViewModel {
         childViewModel.checkTextFieldState(text: text, type: type)
     }
     
-    func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {
-        childViewModel.getBrand(partialBin: partialBin) { result in
-            completion(result)
-        }
+    func getBrand(partialBin: String, completion: @escaping(String?) -> Void) {
+        childViewModel.getBrand(partialBin: partialBin, completion: completion)
     }
     
     func getBankEmiiter(binCode: String) {

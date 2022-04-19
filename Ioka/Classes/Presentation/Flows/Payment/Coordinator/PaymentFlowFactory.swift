@@ -18,11 +18,18 @@ internal class PaymentFlowFactory {
     }
     
     func makeOrderForPayment(delegate: OrderForPaymentNavigationDelegate, sourceViewController: UIViewController) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForPayment(viewController: sourceViewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository())
+        featuresFactory.makeOrderForPayment(viewController: sourceViewController,
+                                            delegate: delegate,
+                                            orderAccessToken: input.orderAccessToken,
+                                            repository: orderRepository())
     }
     
     func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, order: Order) -> PaymentMethodsViewController {
-        featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository())
+        featuresFactory.makePaymentMethods(delegate: delegate,
+                                           orderAccessToken: input.orderAccessToken,
+                                           order: order,
+                                           paymentRepository: paymentRepository(),
+                                           cardInfoRepository: cardInfoRepository())
     }
     
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {
@@ -38,11 +45,15 @@ internal class PaymentFlowFactory {
     }
     
     func paymentRepository() -> PaymentRepository {
-        return PaymentRepository(api: api)
+        PaymentRepository(api: api)
     }
     
     func orderRepository() -> OrderRepository {
-        return OrderRepository(api: api)
+        OrderRepository(api: api)
+    }
+    
+    func cardInfoRepository() -> CardInfoRepository {
+        CardInfoRepository(api: api)
     }
     
     private lazy var api: IokaAPIProtocol = {

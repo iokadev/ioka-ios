@@ -27,11 +27,11 @@ internal class SaveCardViewModel {
     
     private var isSucceeded = false
     
-    init(delegate: SaveCardNavigationDelegate, repository: SavedCardRepository, customerAccessToken: AccessToken) {
+    init(delegate: SaveCardNavigationDelegate, repository: SavedCardRepository, customerAccessToken: AccessToken, cardFormViewModel: CardFormViewModel) {
         self.delegate = delegate
         self.repository = repository
         self.customerAccessToken = customerAccessToken
-        self.childViewModel = CardFormViewModel(api: repository.api)
+        self.childViewModel = cardFormViewModel
     }
     
     func saveCard(card: CardParameters) {

@@ -20,7 +20,8 @@ internal class SaveCardFlowFactory {
     func makeSaveCard(delegate: SaveCardNavigationDelegate) -> SaveCardViewController{
         featuresFactory.makeSaveCard(delegate: delegate,
                                      customerAccessToken: self.input.customerAccesstoken,
-                                     repository: savedCardRepository())
+                                     savedCardRepository: savedCardRepository(),
+                                     cardInfoRepository: cardInfoRepository())
     }
     
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, cardId: String) -> ThreeDSecureViewController {
@@ -33,6 +34,10 @@ internal class SaveCardFlowFactory {
     
     func savedCardRepository() -> SavedCardRepository {
         return SavedCardRepository(api: api)
+    }
+    
+    func cardInfoRepository() -> CardInfoRepository {
+        CardInfoRepository(api: api)
     }
     
     private lazy var api: IokaAPIProtocol = {

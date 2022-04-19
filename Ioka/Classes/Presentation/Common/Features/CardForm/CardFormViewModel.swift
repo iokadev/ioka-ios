@@ -9,29 +9,15 @@ import UIKit
 
 
 internal class CardFormViewModel {
+    let repository: CardInfoRepository
     
-    let api: IokaAPIProtocol
-    
-    init(api: IokaAPIProtocol) {
-        self.api = api
+    init(repository: CardInfoRepository) {
+        self.repository = repository
     }
     
-    
-    func getBrand(partialBin: String, completion: @escaping(GetBrandResponse?) -> Void) {
-        
-        api.getBrand(partialBin: partialBin) { result in
-            switch result {
-            case .success(let getBrandResponse):
-                completion(getBrandResponse)
-            case .failure( _):
-                completion(nil)
-            }
-        }
-    }
-    
-    func getBankEmiiter(binCode: String) {
-        api.getEmitterByBinCode(binCode: binCode) { result in
-            var _ = ""
+    func getBrand(partialBin: String, completion: @escaping(String?) -> Void) {
+        repository.getPaymentSystem(partialBin: partialBin) { result in
+            completion(try? result.get())
         }
     }
     

@@ -10,8 +10,13 @@ import UIKit
 
 
 internal struct FeaturesFactory {
-    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository) -> PaymentMethodsViewController {
-        let viewModel = PaymentMethodsViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken, order: order)
+    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, paymentRepository: PaymentRepository, cardInfoRepository: CardInfoRepository) -> PaymentMethodsViewController {
+        let cardFormViewModel = CardFormViewModel(repository: cardInfoRepository)
+        let viewModel = PaymentMethodsViewModel(delegate: delegate,
+                                                repository: paymentRepository,
+                                                orderAccessToken: orderAccessToken,
+                                                order: order,
+                                                cardFormViewModel: cardFormViewModel)
         let vc = PaymentMethodsViewController()
         vc.viewModel = viewModel
 
@@ -48,8 +53,13 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository) -> SaveCardViewController {
-        let viewModel = SaveCardViewModel(delegate: delegate, repository: repository, customerAccessToken: customerAccessToken)
+    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, savedCardRepository: SavedCardRepository, cardInfoRepository: CardInfoRepository) -> SaveCardViewController {
+        let cardFormViewModel = CardFormViewModel(repository: cardInfoRepository)
+
+        let viewModel = SaveCardViewModel(delegate: delegate,
+                                          repository: savedCardRepository,
+                                          customerAccessToken: customerAccessToken,
+                                          cardFormViewModel: cardFormViewModel)
         let vc = SaveCardViewController()
         vc.viewModel = viewModel
 

@@ -111,9 +111,7 @@ extension PaymentMethodsViewController: CardFormViewDelegate {
     func getBrand(_ view: CardFormView, with partialBin: String) {
         viewModel.getBrand(partialBin: partialBin) { result in
             if let result = result {
-                DispatchQueue.main.async {
-                    self.contentView.cardNumberTextField.setCardBrandIcon(imageName: result.brand.rawValue)
-                }
+                self.contentView.cardNumberTextField.setCardBrandIcon(imageName: result)
             }
         }
     }
