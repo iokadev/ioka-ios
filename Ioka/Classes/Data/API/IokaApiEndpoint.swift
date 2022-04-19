@@ -61,40 +61,64 @@ internal struct IokaApiEndpoint: EndpointType {
         case .getBrand(let partialBin):
             self.path = "brands"
             self.httpMethod = .get
-            self.task = .requestParameters(bodyParameters: nil, urlParameters: ["partial_bin": partialBin])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: ["partial_bin": partialBin],
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key])
         case .getEmitterByBinCode(let binCode):
             self.path = "bins/\(binCode)"
             self.httpMethod = .get
-            self.task = .request
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key])
         case .createCardPayment(let orderAccessToken, let card):
             self.path = "orders/\(orderAccessToken.id)/payments/card"
             self.httpMethod = .post
-            self.task = .requestParametersAndHeaders(bodyParameters: card.dictionary, urlParameters: nil, additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key, AuthenticationKeys.orderAccessToken: orderAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: card.dictionary,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.orderAccessToken: orderAccessToken.token])
         case .getPaymentByID(let orderAccessToken, let paymentId):
             self.path = "orders/\(orderAccessToken.id)/payments/\(paymentId)"
             self.httpMethod = .get
-            self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key, AuthenticationKeys.orderAccessToken: orderAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.orderAccessToken: orderAccessToken.token])
         case .getCards(let customerAccessToken):
             self.path = "customers/\(customerAccessToken.id)/cards"
             self.httpMethod = .get
-            self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key, AuthenticationKeys.customerAccessToken: customerAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.customerAccessToken: customerAccessToken.token])
         case .createBinding(let customerAccessToken, let card):
             self.path = "customers/\(customerAccessToken.id)/bindings"
             self.httpMethod = .post
-            self.task = .requestParametersAndHeaders(bodyParameters: card.dictionary, urlParameters: nil, additionalHeaders: [AuthenticationKeys.customerAccessToken: customerAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: card.dictionary,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.customerAccessToken: customerAccessToken.token])
         case .getCardByID(let customerAccessToken, let cardId):
             self.path = "customers/\(customerAccessToken.id)/cards/\(cardId)"
             self.httpMethod = .get
-            self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.customerAccessToken: customerAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.customerAccessToken: customerAccessToken.token])
         case .deleteCardByID(let customerAccessToken, let cardId):
             self.path = "customers/\(customerAccessToken.id)/cards/\(cardId)"
             self.httpMethod = .delete
-            self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key, AuthenticationKeys.customerAccessToken: customerAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.customerAccessToken: customerAccessToken.token])
         case .getOrderByID(let orderAccessToken):
             self.path = "orders/\(orderAccessToken.id)"
             self.httpMethod = .get
-            self.task = .requestParametersAndHeaders(bodyParameters: nil, urlParameters: nil, additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key, AuthenticationKeys.orderAccessToken: orderAccessToken.token])
+            self.task = .requestParametersAndHeaders(bodyParameters: nil,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
+                                                                         AuthenticationKeys.orderAccessToken: orderAccessToken.token])
         }
     }
-    
 }
