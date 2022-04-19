@@ -44,22 +44,28 @@ internal class PaymentCoordinator: NSObject, Coordinator {
     }
     
     private func showPaymentMethods() {
-        setPaymentMethodsToNavigationController()
+        setPaymentMethodsToNavigationController(animated: false)
         sourceViewController.present(navigationController, animated: true)
     }
     
-    private func setPaymentMethodsToNavigationController() {
+    private func setPaymentMethodsToNavigationController(animated: Bool) {
         guard let order = order else { return }
         let vc = factory.makePaymentMethods(delegate: self, order: order)
         self.paymentMethodsViewController = vc
         
-        navigationController.setViewControllers([vc], animated: false)
+        if animated {
+            let controllers = navigationController.viewControllers.last.map { [vc, $0] } ?? [vc]
+            navigationController.setViewControllers(controllers, animated: false)
+            navigationController.popToRootViewController(animated: true)
+        } else {
+            navigationController.setViewControllers([vc], animated: false)
+        }
     }
     
     private func showThreeDSecure(action: Action, paymentId: String) {
         let vc = factory.makeThreeDSecure(delegate: self, action: action, paymentId: paymentId)
         self.threeDSecureViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
     private func showPaymentResult(_ result: PaymentResult) {
@@ -67,7 +73,7 @@ internal class PaymentCoordinator: NSObject, Coordinator {
 
         let vc = factory.makePaymentResult(delegate: self, order: order, result: result)
         self.paymentResultViewController = vc
-        self.navigationController.pushViewController(vc, animated: false)
+        self.navigationController.pushViewController(vc, animated: true)
     }
     
     private func dismissFlow(result: FlowResult) {
@@ -129,6 +135,6 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func paymentResultDidRetry() {
-        setPaymentMethodsToNavigationController()
+        setPaymentMethodsToNavigationController(animated: true)
     }
 }
