@@ -71,7 +71,7 @@ internal class CardPaymentCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = .clear
         self.layer.cornerRadius = 8
         cardBrandImageView.contentMode = .scaleAspectFit
         [cardBrandImageView, panMaskedLabel, checkImageView].forEach{ self.contentView.addSubview($0) }

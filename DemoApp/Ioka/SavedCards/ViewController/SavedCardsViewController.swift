@@ -30,6 +30,7 @@ internal class SavedCardsViewController: UIViewController {
             self.view.addSubview($0)
         }
         
+        tableView.backgroundColor = colors.quaternaryBackground
         tableView.layer.cornerRadius = 12
         
         setUpTableView()

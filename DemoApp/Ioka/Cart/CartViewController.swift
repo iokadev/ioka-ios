@@ -55,8 +55,6 @@ internal class CartViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     private func setUI() {
-        self.navigationController?.navigationBar.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.961, alpha: 1)
-        
         [tableView, goConfitmationButton].forEach { self.view.addSubview($0) }
         
         tableView.fillView(self.view)
@@ -68,8 +66,9 @@ internal class CartViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.cellId, for: indexPath) as? ProductCell else { return UITableViewCell() }
+        cell.backgroundColor = .clear
         cell.configure(model: models[indexPath.row])
-        cell.backgroundColor = UIColor(red: 0.941, green: 0.941, blue: 0.961, alpha: 1)
+
         return cell
     }
     

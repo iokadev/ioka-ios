@@ -43,8 +43,8 @@ internal class AddNewCardTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
-        self.layer.cornerRadius = 8
+        self.backgroundColor = .clear
+
         addCardImageView.contentMode = .scaleAspectFit
         [addCardImageView, addCardLabel, showAddCardimageView].forEach{ self.contentView.addSubview($0) }
         

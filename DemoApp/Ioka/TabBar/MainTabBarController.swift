@@ -11,7 +11,7 @@ internal class MainTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        UITabBar.appearance().backgroundColor = .white
+        UITabBar.appearance().backgroundColor = colors.quaternaryBackground
 
         viewControllers = [
             createNavigationControllers(for: CartViewController(), title: "Корзина", image: DemoImages.bin),

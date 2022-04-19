@@ -30,7 +30,7 @@ internal class PaymentTypeView: UIView {
     let tableView: UITableView = {
         let tv = UITableView()
         tv.isScrollEnabled = false
-        tv.backgroundColor = colors.tertiaryBackground
+        tv.backgroundColor = colors.quaternaryBackground
         tv.layer.cornerRadius = 8
         tv.rowHeight = 56
         

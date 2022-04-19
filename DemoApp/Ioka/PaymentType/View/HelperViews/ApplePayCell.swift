@@ -62,7 +62,7 @@ internal class ApplePayCell: UITableViewCell {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = .clear
         self.layer.cornerRadius = 8
         applePayImageView.contentMode = .scaleAspectFit
         [applePayImageView, applePayLabel, checkImageView].forEach{ self.contentView.addSubview($0) }

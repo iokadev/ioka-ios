@@ -64,7 +64,7 @@ internal class PayWithCashView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [payWithCashImageView, payWithCashlabel, checkImageView].forEach{ self.addSubview($0) }
         

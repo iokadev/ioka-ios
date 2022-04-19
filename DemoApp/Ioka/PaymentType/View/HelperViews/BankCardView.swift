@@ -63,7 +63,7 @@ internal class BankCardView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, checkImageView].forEach{ self.addSubview($0) }
         

@@ -13,8 +13,8 @@ internal class ProductCell: UITableViewCell {
     
     let backView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white
         view.layer.cornerRadius = 8
+        view.backgroundColor = colors.quaternaryBackground
         return view
     }()
     
