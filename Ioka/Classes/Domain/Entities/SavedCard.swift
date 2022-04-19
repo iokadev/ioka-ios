@@ -18,6 +18,7 @@ public struct SavedCard {
     
     let cvvIsRequired: Bool
     
+    /// Иконка платёжной системы карты (Visa, Mastercard или др.). Рекомендуемый размер UIImageView - 24x24.
     public var paymentSystemIcon: UIImage? {
         guard let paymentSystem = paymentSystem else {
             return nil
@@ -26,6 +27,7 @@ public struct SavedCard {
         return UIImage(named: paymentSystem, in: IokaBundle.bundle, compatibleWith: nil)
     }
     
+    /// Иконка банка-эмитента карты. Рекомендуемый размер UIImageView - 24x24.
     public var emitterIcon: UIImage? {
         guard let emitter = emitter else {
             return nil
