@@ -14,6 +14,10 @@ internal class CVVViewController: UIViewController {
     var card: SavedCard!
     var viewModel: CVVViewModel!
     
+    override func loadView() {
+        self.view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,8 +25,10 @@ internal class CVVViewController: UIViewController {
         contentView.configureView(card: card)
     }
     
-    override func loadView() {
-        self.view = contentView
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        contentView.cvvTextField.becomeFirstResponder()
     }
 }
 

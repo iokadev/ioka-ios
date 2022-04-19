@@ -16,7 +16,7 @@ internal class CVVView: UIView {
     
     weak var delegate: CVVViewDelegate?
     
-    public let cvvTextField = UITextField()
+    let cvvTextField = UITextField()
     private let savedCardView = IokaCustomView(backGroundColor: colors.background, cornerRadius: 12)
     private let titleLabel = IokaLabel(title: IokaLocalizable.paymentConfirmation, iokaFont: typography.title, iokaTextColor: colors.text)
     private let closeButton = IokaButton(imageName: "Close", tintColor: colors.text)
@@ -32,7 +32,6 @@ internal class CVVView: UIView {
         observeKeyboard()
         setUI()
         setActions()
-        cvvTextField.becomeFirstResponder()
     }
     
     required init?(coder: NSCoder) {
@@ -97,14 +96,14 @@ internal class CVVView: UIView {
     
     @objc private func handleKeyboardAppear(notification: Notification) {
         guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        
-        self.layoutIfNeeded()
-        
+                
         let distanceFromBottomToSavedCardView = frame.height / 2 - 224 / 2
         let offsetFromKeyboard = keyboardEndFrame.height - distanceFromBottomToSavedCardView + 10
         guard offsetFromKeyboard > 0 else {
             return
         }
+        
+        self.layoutIfNeeded()
         
         yConstraint?.constant = -offsetFromKeyboard
         
