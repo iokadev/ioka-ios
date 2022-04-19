@@ -14,7 +14,6 @@ internal class ViewControllerProgressWrapper {
     var viewModel: ProgressViewModelProtocol
     private lazy var progressView = ProgressWrapperView(state: .order)
     private lazy var errorView = ErrorToastView()
-    var theme: IokaTheme!
     
     init(viewController: UIViewController, viewModel: ProgressViewModelProtocol) {
         self.viewController = viewController

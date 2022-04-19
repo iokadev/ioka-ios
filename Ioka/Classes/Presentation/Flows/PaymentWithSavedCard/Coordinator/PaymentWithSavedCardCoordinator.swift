@@ -40,7 +40,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
     }
     
     func showPaymentProgressWrapper() {
-        let wrapper = factory.makeSavedCardPayment(delegate: self)
+        let wrapper = factory.makeSavedCardPayment(delegate: self, sourceViewController: sourceViewController)
         self.paymentProgressWrapper = wrapper
         self.paymentProgressWrapper?.startProgress()
     }

@@ -10,37 +10,25 @@ import UIKit
 
 
 internal struct FeaturesFactory {
-    
-    let setupInput: SetupInput
-    private lazy var api: IokaAPIProtocol = {
-        IokaApi(apiKey: setupInput.apiKey)
-    }()
-    
-    init(setupInput: SetupInput) {
-        self.setupInput = setupInput
-    }
-    
-    // MARK: - Features
-    
-    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository, theme: IokaTheme) -> PaymentMethodsViewController {
+    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, repository: PaymentRepository) -> PaymentMethodsViewController {
         let viewModel = PaymentMethodsViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken, order: order)
         let vc = PaymentMethodsViewController()
         vc.viewModel = viewModel
-        vc.theme = theme
+
         return vc
     }
     
-    func makeOrderForPayment(viewController: UIViewController, delegate: OrderForPaymentNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, theme: IokaTheme) -> ViewControllerProgressWrapper{
+    func makeOrderForPayment(viewController: UIViewController, delegate: OrderForPaymentNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository) -> ViewControllerProgressWrapper{
         let viewModel = OrderForPaymentViewModel(repository: repository, delegate: delegate, orderAccessToken: orderAccessToken)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
-        wrapper.theme = theme
+        
         return wrapper
     }
     
-    func makeSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCard, theme: IokaTheme) -> ViewControllerProgressWrapper{
+    func makeSavedCardPayment(viewController: UIViewController,delegate: PaymentWithSavedCardNavigationDelegate, orderAccessToken: AccessToken, repository: OrderRepository, card: SavedCard) -> ViewControllerProgressWrapper{
         let viewModel = PaymentWithSavedCardViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken, card: card)
         let wrapper = ViewControllerProgressWrapper(viewController: viewController, viewModel: viewModel)
-        wrapper.theme = theme
+
         return wrapper
     }
     
@@ -60,11 +48,11 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository, theme: IokaTheme) -> SaveCardViewController {
+    func makeSaveCard(delegate: SaveCardNavigationDelegate, customerAccessToken: AccessToken, repository: SavedCardRepository) -> SaveCardViewController {
         let viewModel = SaveCardViewModel(delegate: delegate, repository: repository, customerAccessToken: customerAccessToken)
         let vc = SaveCardViewController()
         vc.viewModel = viewModel
-        vc.theme = theme
+
         return vc
     }
     

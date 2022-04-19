@@ -10,5 +10,4 @@ import Foundation
 internal struct SaveCardFlowInput {
     let setupInput: SetupInput
     let customerAccesstoken: AccessToken
-    var theme: IokaTheme
 }

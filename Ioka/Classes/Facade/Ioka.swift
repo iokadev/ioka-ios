@@ -27,7 +27,7 @@ public class Ioka {
     ///   - locale: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
     ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
     public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
-        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey), theme: theme)
+        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey))
         self.theme = theme
         applyTheme(theme)
         updateLocale(locale)
@@ -49,12 +49,11 @@ public class Ioka {
             completion(.failed(DomainError.invalidTokenFormat))
             return
         }
-        let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: sourceViewController, theme: theme)
-            let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: featuresFactory)
+            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token)
+            let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             
             currentCoordinator = coordinator
@@ -86,12 +85,11 @@ public class Ioka {
             completion(.failed(DomainError.invalidTokenFormat))
             return
         }
-        let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, viewController: sourceViewController, cardResponse: card, theme: theme)
-            let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: featuresFactory)
+            let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, card: card)
+            let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
             
@@ -121,13 +119,11 @@ public class Ioka {
             completion(.failed(DomainError.invalidTokenFormat))
             return
         }
-
-        let featuresFactory = FeaturesFactory(setupInput: setupInput)
         
         do {
             let customerAccesstoken = try AccessToken(token: customerAccessToken)
-            let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken, theme: theme)
-            let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: featuresFactory)
+            let saveCardFlowInput = SaveCardFlowInput(setupInput: setupInput, customerAccesstoken: customerAccesstoken)
+            let saveCardFlowFactory = SaveCardFlowFactory(input: saveCardFlowInput, featuresFactory: FeaturesFactory())
             let coordinator = SaveCardCoordinator(factory: saveCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator
             

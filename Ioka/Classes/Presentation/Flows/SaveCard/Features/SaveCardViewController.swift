@@ -19,7 +19,6 @@ internal class SaveCardViewController: UIViewController {
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!
-    var theme: IokaTheme!
    
 
     override func viewDidLoad() {

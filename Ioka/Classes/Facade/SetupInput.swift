@@ -10,5 +10,4 @@ import Foundation
 
 internal struct SetupInput {
     let apiKey: APIKey
-    let theme: IokaTheme
 }

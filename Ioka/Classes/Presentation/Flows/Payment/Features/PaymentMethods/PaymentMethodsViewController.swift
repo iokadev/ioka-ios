@@ -11,7 +11,6 @@ internal class PaymentMethodsViewController: UIViewController {
     
     private lazy var contentView = CardFormView(state: .payment(order: viewModel.order))
     var viewModel: PaymentMethodsViewModel!
-    var theme: IokaTheme!
     
     override func loadView() {
         self.view = contentView

@@ -10,9 +10,7 @@ import UIKit
 internal struct PaymentWithSavedCardFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
-    let viewController: UIViewController
-    let cardResponse: SavedCard
-    let theme: IokaTheme
+    let card: SavedCard
 }
 
 
@@ -27,12 +25,12 @@ internal class PaymentWithSavedCardFlowFactory {
     }
     
     
-    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeSavedCardPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.cardResponse, theme: input.theme)
+    func makeSavedCardPayment(delegate: PaymentWithSavedCardNavigationDelegate, sourceViewController: UIViewController) -> ViewControllerProgressWrapper {
+        featuresFactory.makeSavedCardPayment(viewController: sourceViewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), card: input.card)
     }
     
     func makeCVVSavedCardPayment(delegate: CVVNavigationDelegate) -> CVVViewController {
-        featuresFactory.makeCVVSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.cardResponse, repository: paymentRepository())
+        featuresFactory.makeCVVSavedCardPayment(delegate: delegate, orderAccessToken: input.orderAccessToken, card: input.card, repository: paymentRepository())
     }
     
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {
@@ -52,11 +50,11 @@ internal class PaymentWithSavedCardFlowFactory {
     }
     
     func paymentRepository() -> PaymentRepository {
-        return PaymentRepository(api: api)
+        PaymentRepository(api: api)
     }
     
     func orderRepository() -> OrderRepository {
-        return OrderRepository(api: api)
+        OrderRepository(api: api)
     }
     
     private lazy var api: IokaAPIProtocol = {

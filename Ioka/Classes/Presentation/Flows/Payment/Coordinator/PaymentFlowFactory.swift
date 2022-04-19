@@ -17,12 +17,12 @@ internal class PaymentFlowFactory {
         self.featuresFactory = featuresFactory
     }
     
-    func makeOrderForPayment(delegate: OrderForPaymentNavigationDelegate) -> ViewControllerProgressWrapper {
-        featuresFactory.makeOrderForPayment(viewController: input.viewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository(), theme: input.theme)
+    func makeOrderForPayment(delegate: OrderForPaymentNavigationDelegate, sourceViewController: UIViewController) -> ViewControllerProgressWrapper {
+        featuresFactory.makeOrderForPayment(viewController: sourceViewController, delegate: delegate, orderAccessToken: input.orderAccessToken, repository: orderRepository())
     }
     
     func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, order: Order) -> PaymentMethodsViewController {
-        featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository(), theme: input.theme)
+        featuresFactory.makePaymentMethods(delegate: delegate, orderAccessToken: input.orderAccessToken, order: order, repository: paymentRepository())
     }
     
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {

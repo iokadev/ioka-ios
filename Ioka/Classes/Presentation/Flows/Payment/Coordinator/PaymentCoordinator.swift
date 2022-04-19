@@ -38,7 +38,7 @@ internal class PaymentCoordinator: NSObject, Coordinator {
     }
     
     private func showOrderForPayment() {
-        let wrapper = factory.makeOrderForPayment(delegate: self)
+        let wrapper = factory.makeOrderForPayment(delegate: self, sourceViewController: sourceViewController)
         self.orderForPaymentProgressWrapper = wrapper
         self.orderForPaymentProgressWrapper?.startProgress()
     }
