@@ -14,7 +14,7 @@ internal class LanguageProfileView: UIView {
     
     let languageImageView = DemoImageView(imageName: "Language")
     let languageLabel = DemoLabel(title: "Язык", font: typography.body, textColor: colors.text)
-    let currentLanguageLabel = DemoLabel(title: "Русский", font: typography.body, textColor: colors.grey)
+    let currentLanguageLabel = DemoLabel(title: "Русский", font: typography.body, textColor: colors.nonadaptableGrey)
     let chevronRightImageView = DemoImageView(imageName: "chevronRight")
     
     override init(frame: CGRect) {
@@ -31,7 +31,7 @@ internal class LanguageProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [languageImageView, languageLabel, currentLanguageLabel, chevronRightImageView].forEach{ self.addSubview($0) }
         

@@ -19,9 +19,7 @@ internal class ProfileViewController: UIViewController {
     }
     
     override func loadView() {
-        super.loadView()
-        self.view.addSubview(profileView)
-        profileView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        view = profileView
     }
     
     override func viewWillAppear(_ animated: Bool) {

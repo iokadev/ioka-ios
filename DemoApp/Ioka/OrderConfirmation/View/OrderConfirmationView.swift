@@ -24,13 +24,13 @@ internal class OrderConfirmationView: UIView {
     weak var delegate: OrderConfirmationViewDelegate?
     
     public lazy var paymentView = PaymentView(delegate: self)
-    private let orderTitleLabel = DemoLabel(font: typography.subtitle, textColor: colors.grey, textAlignment: .center)
+    private let orderTitleLabel = DemoLabel(font: typography.subtitle, textColor: colors.nonadaptableGrey, textAlignment: .center)
     private let orderImageView = DemoImageView(imageName: "productImage", cornerRadius: 8)
     private let orderPriceLabel = DemoLabel(font: typography.heading, textColor: colors.text, textAlignment: .center)
     private let orderInformationView = OrderInformationView()
     private let confirmButton = DemoButton(title: "Оформить")
     private let paymentTypeImageView = DemoImageView(imageName: "paymentType")
-    private let seperatorView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
+    private let seperatorView = DemoCustomView(backGroundColor: colors.secondaryBackground)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

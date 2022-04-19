@@ -21,7 +21,7 @@ internal class PaymentView: UIView {
     }
     
     public weak var delegate: PaymentViewDelegate?
-    private let paymentTypeLabel = DemoLabel(title: "Выберите способ оплаты", font: typography.body, textColor: colors.grey)
+    private let paymentTypeLabel = DemoLabel(title: "Выберите способ оплаты", font: typography.body, textColor: colors.nonadaptableGrey)
     private let paymentTypeImageView = DemoImageView(imageName: "paymentType")
     private let chevronRightImageView = DemoImageView(imageName: "chevronRight")
     
@@ -53,7 +53,7 @@ internal class PaymentView: UIView {
         switch paymentState {
         case .empty:
             paymentTypeLabel.text = "Выберите способ оплаты"
-            paymentTypeLabel.textColor = colors.grey
+            paymentTypeLabel.textColor = colors.nonadaptableGrey
         case .savedCard(let card):
             paymentTypeLabel.text = card.maskedPAN.trimPanMasked()
             paymentTypeLabel.textColor = colors.text
@@ -71,7 +71,7 @@ internal class PaymentView: UIView {
     }
   
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         
         [paymentTypeLabel, paymentTypeImageView, chevronRightImageView].forEach{ self.addSubview($0) }

@@ -25,7 +25,7 @@ internal class SaveCardProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [creditCardImageView, saveCardlabel, chevronRightImageView].forEach{ self.addSubview($0) }
 

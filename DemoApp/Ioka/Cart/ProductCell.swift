@@ -20,7 +20,7 @@ internal class ProductCell: UITableViewCell {
     
     static let cellId = "ProductCell"
     
-    let productNumber = DemoLabel(font: typography.subtitleSmall, textColor: colors.grey)
+    let productNumber = DemoLabel(font: typography.subtitleSmall, textColor: colors.nonadaptableGrey)
     let productTitle = DemoLabel(font: typography.body, textColor: colors.text)
     let productImageView = DemoImageView(imageName: "productImage", cornerRadius: 8)
     let productPriceLabel = DemoLabel(font: typography.bodySemibold, textColor: colors.text)

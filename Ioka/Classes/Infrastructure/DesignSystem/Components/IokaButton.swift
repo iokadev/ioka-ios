@@ -85,7 +85,7 @@ internal class IokaButton: UIButton {
 
         switch state {
         case .disabled:
-            self.backgroundColor = colors.grey
+            self.backgroundColor = colors.nonadaptableGrey
             self.isUserInteractionEnabled = false
         case .enabled:
             self.backgroundColor = colors.primary

@@ -16,13 +16,12 @@ public struct Colors {
     public var success: UIColor
     public var text: UIColor
     public var nonadaptableText: UIColor
-    public var divider: UIColor
     public var background: UIColor
     public var secondaryBackground: UIColor
     public var tertiaryBackground: UIColor
     public var quaternaryBackground: UIColor
     public var foreground: UIColor
-    public var grey: UIColor
+    public var nonadaptableGrey: UIColor
 }
 
 extension Colors {
@@ -33,13 +32,12 @@ extension Colors {
         success: UIColor(named: "Success", in: IokaBundle.bundle, compatibleWith: nil)!,
         text: UIColor(named: "Text", in: IokaBundle.bundle, compatibleWith: nil)!,
         nonadaptableText: UIColor(named: "NonadaptableText", in: IokaBundle.bundle, compatibleWith: nil)!,
-        divider: UIColor(named: "Divider", in: IokaBundle.bundle, compatibleWith: nil)!,
         background: UIColor(named: "Background", in: IokaBundle.bundle, compatibleWith: nil)!,
         secondaryBackground: UIColor(named: "SecondaryBackground", in: IokaBundle.bundle, compatibleWith: nil)!,
         tertiaryBackground: UIColor(named: "TertiaryBackground", in: IokaBundle.bundle, compatibleWith: nil)!,
         quaternaryBackground: UIColor(named: "QuaternaryBackground", in: IokaBundle.bundle, compatibleWith: nil)!,
         foreground: UIColor(named: "Foreground", in: IokaBundle.bundle, compatibleWith: nil)!,
-        grey: UIColor(named: "Grey", in: IokaBundle.bundle, compatibleWith: nil)!)
+        nonadaptableGrey: UIColor(named: "NonadaptableGrey", in: IokaBundle.bundle, compatibleWith: nil)!)
 }
 
 

@@ -19,7 +19,7 @@ internal class OrderInformationView: UIView {
     private let orderTimeLabel = DemoLabel(font: typography.body, textColor: colors.text)
     private let orderAdressImageView = DemoImageView(imageName: "orderAdress")
     private let orderTimeImageView = DemoImageView(imageName: "orderTime")
-    private let seperatorView = DemoCustomView(backGroundColor: colors.quaternaryBackground)
+    private let seperatorView = DemoCustomView(backGroundColor: colors.secondaryBackground)
     private let chevronRightImageViewAdress = DemoImageView(imageName: "chevronRight")
     private let chevronRightImageViewTime = DemoImageView(imageName: "chevronRight")
     
@@ -39,7 +39,7 @@ internal class OrderInformationView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [orderAdressLabel, orderTimeLabel, orderAdressImageView, orderTimeImageView, seperatorView, chevronRightImageViewAdress, chevronRightImageViewTime].forEach{ self.addSubview($0) }
         

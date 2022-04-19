@@ -26,7 +26,7 @@ internal class ThemeProfileView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = colors.tertiaryBackground
+        self.backgroundColor = colors.quaternaryBackground
         self.layer.cornerRadius = 8
         [themeImageView, languageLabel, themeToggle].forEach{ self.addSubview($0) }
         

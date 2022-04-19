@@ -18,7 +18,7 @@ internal class ErrorPopupView: UIView {
     private let backgroundView = IokaCustomView(backGroundColor: colors.background, cornerRadius: 12)
     private let errorImageview = IokaImageView(imageName: "XCircle")
     private let errorTitleLabel = IokaLabel(title: IokaLocalizable.paymentFailed, iokaFont: typography.title, iokaTextColor: colors.text, iokaTextAlignemnt: .center)
-    private let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.grey, iokaTextAlignemnt: .center)
+    private let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey, iokaTextAlignemnt: .center)
     private let tryAgainButton = IokaButton(title: IokaLocalizable.retry, backgroundColor: colors.secondary)
     
     let error: Error

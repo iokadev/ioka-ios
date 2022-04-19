@@ -36,7 +36,13 @@ internal class CardFormView: UIView {
     let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
     let cvvTextField = IokaTextField(placeHolderType: .cvv)
     let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
-    let saveCardToggle = UISwitch()
+    let saveCardToggle: UISwitch = {
+        let toggle = UISwitch()
+        toggle.onTintColor = colors.primary
+        
+        return toggle
+    }()
+    
     let createButton = IokaButton(iokaButtonState: .disabled)
     let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
     private var transactionImageView = IokaImageView(imageName: "Transaction", imageTintColor: colors.success)
