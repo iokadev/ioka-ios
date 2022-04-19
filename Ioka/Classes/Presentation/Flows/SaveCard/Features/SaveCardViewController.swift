@@ -7,12 +7,6 @@
 
 import UIKit
 
-internal enum SaveCardStatus {
-    case savingSucceed
-    case savingFailed
-}
-
-
 internal class SaveCardViewController: UIViewController {
     
     var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
