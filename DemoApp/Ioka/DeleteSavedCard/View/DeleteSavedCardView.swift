@@ -67,8 +67,9 @@ internal class DeleteSavedCardView: UIView {
         deleteCardButton.layer.cornerRadius = 12
         deleteCardButton.layer.masksToBounds = true
         deleteCardButton.backgroundColor = colors.error
+        deleteCardButton.setTitleColor(colors.nonadaptableText, for: .normal)
         cancelButton.backgroundColor = .clear
-        cancelButton.setTitleColor(.black, for: .normal)
+        cancelButton.setTitleColor(colors.text, for: .normal)
         
         deleteCardImageView.centerX(in: backGroundView, top: backGroundView.topAnchor, paddingTop: 40, width: 56, height: 56)
         title.anchor(left: backGroundView.leftAnchor, right: backGroundView.rightAnchor, paddingLeft: 24, paddingRight: 24)
