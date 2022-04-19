@@ -15,7 +15,7 @@ internal enum SaveCardStatus {
 
 internal class SaveCardViewController: UIViewController {
     
-    public var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
+    var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
     private lazy var contentView = CardFormView(state: .saving)
     var viewModel: SaveCardViewModel!
     var customerId: String!

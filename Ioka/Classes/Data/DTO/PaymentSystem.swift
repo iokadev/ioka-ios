@@ -8,7 +8,7 @@
 import UIKit
 
 
-public enum PaymentSystem: String, Codable {
+enum PaymentSystem: String, Codable {
     case VISA =  "VISA"
     case AMERICAN_EXPRESS = "AMERICAN_EXPRESS"
     case MASTERCARD = "MASTERCARD"

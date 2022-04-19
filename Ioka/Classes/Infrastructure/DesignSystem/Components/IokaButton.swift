@@ -42,12 +42,12 @@ internal class IokaButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func showSuccess() {
+    func showSuccess() {
         self.setImage(IokaImages.mark, for: .normal)
         self.setTitle("", for: .normal)
     }
 
-    public func showLoading() {
+    func showLoading() {
         self.title = self.titleLabel?.text
         self.setTitle("", for: .normal)
         let activityIndicator = self.createActivityIndicator()
@@ -55,7 +55,7 @@ internal class IokaButton: UIButton {
         self.showSpinning(activityIndicator)
     }
 
-    public func hideLoading(showTitle: Bool) {
+    func hideLoading(showTitle: Bool) {
         self.activityIndicator.stopAnimating()
         switch showTitle {
         case true:
