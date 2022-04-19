@@ -11,7 +11,7 @@ import Foundation
 internal protocol PaymentMethodsNavigationDelegate: AnyObject {
     func paymentMethodsDidCancel()
     func paymentMethodsDidSucceed()
-    func paymentMethodsDidRequire3DSecure(action: Action, payment: Payment)
+    func paymentMethodsDidRequireThreeDSecure(action: Action, payment: Payment)
     func paymentMethodsDidFail(declineError: Error)
 }
 
@@ -46,7 +46,7 @@ internal class PaymentMethodsViewModel {
                 case .declined(let error):
                     self.delegate?.paymentMethodsDidFail(declineError: error)
                 case .requiresAction(let action):
-                    self.delegate?.paymentMethodsDidRequire3DSecure(action: action, payment: payment)
+                    self.delegate?.paymentMethodsDidRequireThreeDSecure(action: action, payment: payment)
                 }
             case .failure(let error):
                 self.cardPaymentFailure?(error)

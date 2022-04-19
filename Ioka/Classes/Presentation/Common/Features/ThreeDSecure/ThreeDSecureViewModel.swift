@@ -1,5 +1,5 @@
 //
-//  3DSecureViewModel.swift
+//  ThreeDSecureViewModel.swift
 //  Ioka
 //
 //  Created by ablai erzhanov on 06.04.2022.

@@ -11,7 +11,7 @@ import UIKit
 internal protocol SaveCardNavigationDelegate: AnyObject {
     func saveCardDidCancel()
     func saveCardDidCloseWithSuccess()
-    func saveCardDidRequire3DSecure(action: Action, cardSaving: CardSaving)
+    func saveCardDidRequireThreeDSecure(action: Action, cardSaving: CardSaving)
 }
 
 
@@ -44,7 +44,7 @@ internal class SaveCardViewModel {
                 case .declined(let apiError):
                     self.errorCompletion?(apiError)
                 case .requiresAction(let action):
-                    self.delegate?.saveCardDidRequire3DSecure(action: action, cardSaving: cardSaving)
+                    self.delegate?.saveCardDidRequireThreeDSecure(action: action, cardSaving: cardSaving)
                 case .succeeded:
                     self.handleSuccess()
                 }

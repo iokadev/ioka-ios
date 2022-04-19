@@ -68,7 +68,7 @@ internal struct FeaturesFactory {
         return vc
     }
     
-    func make3DSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, input: ThreeDSecureInput) -> ThreeDSecureViewController {
+    func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, input: ThreeDSecureInput) -> ThreeDSecureViewController {
         let vc = ThreeDSecureViewController()
         let viewModel = ThreeDSecureViewModel(delegate: delegate, action: action, input: input)
         vc.viewModel = viewModel
