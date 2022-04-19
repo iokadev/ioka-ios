@@ -21,8 +21,8 @@ internal class IokaCardNumberTextField: IokaTextField {
         return view
     }()
    
-    let cardBrandImageView = IokaImageView(frame: CGRect(x: -52, y: 20, width: 24, height: 16))
-    let bankEmitterImageView = IokaImageView(frame: CGRect(x: -80, y: 20, width: 24, height: 16))
+    let cardBrandImageView = IokaImageView(frame: CGRect(x: -52, y: 16, width: 24, height: 24))
+    let bankEmitterImageView = IokaImageView(frame: CGRect(x: -80, y: 16, width: 24, height: 24))
     var isCardBrandSetted: Bool = false
     var isBankEmitterSetted: Bool = false
 
