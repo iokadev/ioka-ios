@@ -7,6 +7,9 @@
 
 import UIKit
 
+enum ValidationState {
+    case invalid, valid
+}
 
 internal class CardFormViewModel {
     let repository: CardInfoRepository
@@ -15,48 +18,25 @@ internal class CardFormViewModel {
         self.repository = repository
     }
     
-    func getBrand(partialBin: String, completion: @escaping(String?) -> Void) {
-        repository.getPaymentSystem(partialBin: partialBin) { result in
+    func getPaymentSystem(partialBin: String, completion: @escaping(String?) -> Void) {
+        repository.getPaymentSystem(partialBin: partialBin.trimCardNumberText()) { result in
             completion(try? result.get())
         }
     }
     
-    func checkPayButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String, completion: @escaping(IokaButtonState) -> Void) {
+    func checkPayButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String) -> IokaButtonState {
+        guard checkCardNumber(cardNumberText) == .valid,
+              checkCardExpiration(dateExpirationText) == .valid,
+              checkCVV(cvvText) == .valid else {
+                  return .disabled
+              }
         
-        guard checkCardNumber(cardNumberText.trimCardNumberText()) == IokaTextFieldState.correctInputData else
-        {
-            completion(.disabled)
-            return
-        }
-        
-        guard checkCardExpiration(dateExpirationText.trimDateExpirationText()) == IokaTextFieldState.correctInputData else
-        {
-            completion(.disabled)
-            return
-        }
-        
-        guard checkCVV(cvvText) == IokaTextFieldState.correctInputData else
-        {
-            completion(.disabled)
-            return
-        }
-        
-        completion(.enabled)
+        return .enabled
     }
     
-    func checkTextFieldState(text: String, type: TextFieldType) -> IokaTextFieldState {
-        switch type {
-        case .cardNumber:
-            return checkCardNumber(text.trimCardNumberText())
-        case .cvv:
-            return checkCVV(text)
-        case .dateExpiration:
-            return checkCardExpiration(text.trimDateExpirationText())
-        }
-    }
-    
-    
-    func checkCardExpiration(_ dateExpiration: String) -> IokaTextFieldState {
+    func checkCardExpiration(_ dateExpiration: String) -> ValidationState {
+        let expiration = dateExpiration.trimDateExpirationText()
+        
         let formatter = DateFormatter()
         formatter.dateFormat = "yy-MM-dd HH:mm:ss 'UTC'"
         
@@ -65,41 +45,31 @@ internal class CardFormViewModel {
         formatter.dateFormat = "MM"
         let month = Int(formatter.string(from: Date()))!
         
-        let cardDate = Array(dateExpiration)
-        guard cardDate.count == 4 else { return IokaTextFieldState.wrongInputData }
-        guard let cardMonth = Int("\(cardDate[0])\(cardDate[1])") else { return IokaTextFieldState.wrongInputData }
-        guard let cardYear = Int("\(cardDate[2])\(cardDate[3])") else { return IokaTextFieldState.wrongInputData }
+        let cardDate = Array(expiration)
+        guard cardDate.count == 4 else { return .invalid }
+        guard let cardMonth = Int("\(cardDate[0])\(cardDate[1])") else { return .invalid }
+        guard let cardYear = Int("\(cardDate[2])\(cardDate[3])") else { return .invalid }
         
         if cardMonth > 12 || year > cardYear || cardYear == year && month > cardMonth {
-            return IokaTextFieldState.wrongInputData
+            return .invalid
         } else {
-            return IokaTextFieldState.correctInputData
+            return .valid
         }
     }
     
-    func checkCardNumber(_ cardNumber: String) -> IokaTextFieldState {
-        cardNumber.count >= 15 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+    func checkCardNumber(_ cardNumber: String) -> ValidationState {
+        let number = cardNumber.trimCardNumberText()
+        return number.count >= 15 ? .valid : .invalid
     }
     
-    func checkCVV(_ cvv: String) -> IokaTextFieldState {
-        cvv.count == 3 ? IokaTextFieldState.correctInputData : IokaTextFieldState.wrongInputData
+    func checkCVV(_ cvv: String) -> ValidationState {
+        cvv.count == 3 ? .valid : .invalid
     }
     
-    func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
-        
-        switch textFieldType {
-        case .cardNumber:
-            return transformCardNumber(trimmedString: text.trimCardNumberText())
-        case .cvv:
-            return text
-        case .dateExpiration:
-            return transformExpirationDate(trimmedString: text.trimDateExpirationText())
-        }
-    }
-    
-    private func transformCardNumber(trimmedString: String) -> String {
+    func transformCardNumber(_ cardNumber: String) -> String {
+        let number = cardNumber.trimCardNumberText()
         var text = ""
-        let arrOfCharacters = Array(trimmedString)
+        let arrOfCharacters = Array(number)
         if(arrOfCharacters.count > 0) {
             for i in 0...arrOfCharacters.count-1 {
                 text.append(arrOfCharacters[i])
@@ -111,9 +81,11 @@ internal class CardFormViewModel {
         return text
     }
     
-    private func transformExpirationDate(trimmedString: String) -> String {
+    func transformExpirationDate(_ expirationDate: String) -> String {
+        let expiration = expirationDate.trimDateExpirationText()
+        
         var text = ""
-        let arrOfCharacters = Array(trimmedString)
+        let arrOfCharacters = Array(expiration)
         if(arrOfCharacters.count > 0) {
             for i in 0...arrOfCharacters.count-1 {
                 text.append(arrOfCharacters[i])
@@ -122,6 +94,7 @@ internal class CardFormViewModel {
                 }
             }
         }
+        
         return text
     }
 }

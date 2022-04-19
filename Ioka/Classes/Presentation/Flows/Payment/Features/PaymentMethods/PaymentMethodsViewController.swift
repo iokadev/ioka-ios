@@ -9,7 +9,8 @@ import UIKit
 
 internal class PaymentMethodsViewController: UIViewController {
     
-    private lazy var contentView = CardFormView(state: .payment(order: viewModel.order))
+    private lazy var contentView = CardFormView(state: .payment(order: viewModel.order),
+                                                viewModel: viewModel.cardFormViewModel)
     var viewModel: PaymentMethodsViewModel!
     
     override func loadView() {
@@ -52,68 +53,8 @@ internal class PaymentMethodsViewController: UIViewController {
 }
 
 extension PaymentMethodsViewController: CardFormViewDelegate {
-    
     func closeCardFormView(_ view: CardFormView) {
         // вызывается только при сохранении
-    }
-    
-    func getEmitterByBinCode(_ view: CardFormView, with binCode: String) {
-        viewModel.getBankEmiiter(binCode: binCode)
-    }
-    
-    func modifyPaymentTextFields(_ view: CardFormView, text: String, textField: UITextField) -> String {
-        switch textField {
-        case view.cardNumberTextField:
-            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .cardNumber)
-        case view.dateExpirationTextField:
-            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .dateExpiration)
-        case view.cvvTextField:
-            return viewModel.modifyPaymentTextFields(text: text, textFieldType: .cvv)
-        default:
-            return text
-        }
-    }
-    
-    func checkTextFieldState(_ view: CardFormView, textField: UITextField) {
-        guard let textField = textField as? IokaTextField else { return }
-        switch textField {
-        case view.cardNumberTextField:
-            guard let text = textField.text else { return }
-            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .cardNumber)
-        case view.dateExpirationTextField:
-            guard let text = textField.text else { return }
-            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .dateExpiration)
-        case view.cvvTextField:
-            guard let text = textField.text else { return }
-            textField.iokaTextFieldState = viewModel.checkTextFieldState(text: text, type: .cvv)
-        default:
-            textField.iokaTextFieldState = .nonActive
-        }
-    }
-    
-    func checkCreateButtonState(_ view: CardFormView) {
-        
-        guard let cardNumberText = view.cardNumberTextField.text else { view.createButton.iokaButtonState = .disabled
-            return
-        }
-        guard let dateExpirationText = view.dateExpirationTextField.text else { view.createButton.iokaButtonState = .disabled
-            return
-        }
-        guard let cvvText = view.cvvTextField.text else { view.createButton.iokaButtonState = .disabled
-            return
-        }
-        
-        viewModel.checkCreateButtonState(cardNumberText: cardNumberText, dateExpirationText: dateExpirationText, cvvText: cvvText) { state in
-            view.createButton.iokaButtonState = state
-        }
-    }
-    
-    func getBrand(_ view: CardFormView, with partialBin: String) {
-        viewModel.getBrand(partialBin: partialBin) { result in
-            if let result = result {
-                self.contentView.cardNumberTextField.setCardBrandIcon(imageName: result)
-            }
-        }
     }
     
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {

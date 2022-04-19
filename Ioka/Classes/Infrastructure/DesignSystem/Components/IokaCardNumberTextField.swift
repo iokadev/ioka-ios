@@ -8,11 +8,7 @@
 import Foundation
 import UIKit
 
-
-
 internal class IokaCardNumberTextField: IokaTextField {
-    
-    
     let iconContainerView: UIView = {
         let view = UIView()
         view.frame =  CGRect(x: 0, y: 0, width: 0, height: 56)
@@ -25,10 +21,9 @@ internal class IokaCardNumberTextField: IokaTextField {
     let bankEmitterImageView = IokaImageView(frame: CGRect(x: -80, y: 16, width: 24, height: 24))
     var isCardBrandSetted: Bool = false
     var isBankEmitterSetted: Bool = false
-
    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(inputType: .cardNumber)
         setUI()
     }
     

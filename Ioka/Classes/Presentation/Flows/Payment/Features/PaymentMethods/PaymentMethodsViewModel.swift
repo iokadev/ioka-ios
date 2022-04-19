@@ -22,7 +22,7 @@ internal class PaymentMethodsViewModel {
     let repository: PaymentRepository
     let orderAccessToken: AccessToken
     let order: Order
-    var childViewModel: CardFormViewModel
+    var cardFormViewModel: CardFormViewModel
     var cardPaymentFailure: ((Error?) -> Void)?
     
     
@@ -31,7 +31,7 @@ internal class PaymentMethodsViewModel {
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken
         self.order = order
-        self.childViewModel = cardFormViewModel
+        self.cardFormViewModel = cardFormViewModel
     }
     
     func createCardPayment(card: CardParameters) {
@@ -50,30 +50,6 @@ internal class PaymentMethodsViewModel {
                 self.cardPaymentFailure?(error)
             }
         }
-    }
-    
-    func checkTextFieldState(text: String, type: TextFieldType) -> IokaTextFieldState {
-        childViewModel.checkTextFieldState(text: text, type: type)
-    }
-    
-    func getBrand(partialBin: String, completion: @escaping(String?) -> Void) {
-        childViewModel.getBrand(partialBin: partialBin, completion: completion)
-    }
-    
-    func getBankEmiiter(binCode: String) {
-        
-    }
-    
-    func checkCreateButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String, completion: @escaping(IokaButtonState) -> Void) {
-        
-        childViewModel.checkPayButtonState(cardNumberText: cardNumberText, dateExpirationText: dateExpirationText, cvvText: cvvText) { [weak self] buttonState in
-            guard let _ = self else { return }
-            completion(buttonState)
-        }
-    }
-    
-    func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
-        return childViewModel.modifyPaymentTextFields(text: text, textFieldType: textFieldType)
     }
 }
 

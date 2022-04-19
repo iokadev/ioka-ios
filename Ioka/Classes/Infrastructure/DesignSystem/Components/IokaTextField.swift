@@ -8,48 +8,40 @@
 import Foundation
 import UIKit
 
-internal enum IokaTextFieldState {
-    case startTyping
-    case wrongInputData
-    case correctInputData
-    case nonActive
-}
-
-internal enum TextFieldPlaceHolders: String {
-    case cardNumber
-    case dateExpiration
-    case cvv
-}
-
-
 internal class IokaTextField: UITextField {
+    internal enum State {
+        case active
+        case inactive
+        case invalid
+    }
+    
+    internal enum InputType: String {
+        case cardNumber
+        case dateExpiration
+        case cvv
+    }
     
     private var textPadding = UIEdgeInsets(top: 18, left: 16, bottom: 18, right: -240)
-    var placeHolderType: TextFieldPlaceHolders?
-    var iokaTextFieldState = IokaTextFieldState.nonActive {
+    
+    let inputType: InputType
+    var iokaState = IokaTextField.State.inactive {
         didSet {
-            checkInputData()
+            updateBorderColor()
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(inputType: InputType) {
+        self.inputType = inputType
+        
+        super.init(frame: .zero)
+        
         self.textColor = colors.text
         self.backgroundColor = colors.secondaryBackground
         self.layer.cornerRadius = 12
         self.layer.borderWidth = 1
-        self.layer.borderColor = colors.background.cgColor
-
-    }
-    
-    convenience init(placeHolderType: TextFieldPlaceHolders) {
-        self.init(frame: CGRect())
-        self.placeHolderType = placeHolderType
-        setTextField()
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+        
+        updateBorderColor()
+        setupTextField()
     }
     
     required init?(coder: NSCoder) {
@@ -71,12 +63,10 @@ internal class IokaTextField: UITextField {
         return rect.inset(by: textPadding)
     }
     
-    func setTextField() {
-        
-        guard let placeHolderType = placeHolderType else { return }
+    func setupTextField() {
         self.keyboardType = .numberPad
         
-        switch placeHolderType {
+        switch inputType {
         case .cardNumber:
             self.placeholder = IokaLocalizable.enterCardNumber
             self.textContentType = .creditCardNumber
@@ -88,16 +78,14 @@ internal class IokaTextField: UITextField {
         }
     }
     
-    func checkInputData() {
-        switch iokaTextFieldState {
-        case .startTyping:
+    func updateBorderColor() {
+        switch iokaState {
+        case .active:
             self.layer.borderColor = colors.primary.cgColor
-        case .wrongInputData:
+        case .inactive:
+            self.layer.borderColor = colors.background.cgColor
+        case .invalid:
             self.layer.borderColor = colors.error.cgColor
-        case .nonActive:
-            self.layer.borderColor = colors.background.cgColor
-        case .correctInputData:
-            self.layer.borderColor = colors.background.cgColor
         }
     }
 }

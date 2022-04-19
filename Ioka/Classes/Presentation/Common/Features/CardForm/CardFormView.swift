@@ -9,13 +9,8 @@ import UIKit
 
 
 internal protocol CardFormViewDelegate: NSObject {
-    func getBrand(_ view: CardFormView, with partialBin: String)
-    func getEmitterByBinCode(_ view: CardFormView, with binCode: String)
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool)
-    func checkCreateButtonState(_ view: CardFormView)
     func closeCardFormView(_ view: CardFormView)
-    func modifyPaymentTextFields(_ view: CardFormView, text : String, textField: UITextField) -> String
-    func checkTextFieldState(_ view: CardFormView, textField: UITextField)
 }
 
 enum CardFormState {
@@ -23,18 +18,11 @@ enum CardFormState {
     case saving
 }
 
-internal enum TextFieldType {
-    case cardNumber
-    case cvv
-    case dateExpiration
-}
-
-
 internal class CardFormView: UIView {
 
-    let cardNumberTextField = IokaCardNumberTextField(placeHolderType: .cardNumber)
-    let dateExpirationTextField = IokaTextField(placeHolderType: .dateExpiration)
-    let cvvTextField = IokaTextField(placeHolderType: .cvv)
+    let cardNumberTextField = IokaCardNumberTextField()
+    let dateExpirationTextField = IokaTextField(inputType: .dateExpiration)
+    let cvvTextField = IokaTextField(inputType: .cvv)
     let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
     let saveCardToggle: UISwitch = {
         let toggle = UISwitch()
@@ -55,10 +43,13 @@ internal class CardFormView: UIView {
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
     let cardFormState: CardFormState
+    let viewModel: CardFormViewModel
+    
     var createButtonBottomConstraint: NSLayoutConstraint?
     
-    init(state: CardFormState) {
+    init(state: CardFormState, viewModel: CardFormViewModel) {
         self.cardFormState = state
+        self.viewModel = viewModel
         
         super.init(frame: .zero)
         
@@ -107,17 +98,43 @@ internal class CardFormView: UIView {
             delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp, save: saveCardToggle.isOn)
             self.endEditing(true)
         default:
-            delegate?.checkCreateButtonState(self)
+            break
         }
     }
     
     @objc func didChangeText(textField: UITextField) {
-        let text = delegate?.modifyPaymentTextFields(self, text: textField.text!, textField: textField)
+        let (text, validationState): (String, ValidationState) = {
+            let text = textField.text ?? ""
+            switch textField {
+            case cardNumberTextField:
+                return (viewModel.transformCardNumber(text), viewModel.checkCardNumber(text))
+            case dateExpirationTextField:
+                return (viewModel.transformExpirationDate(text), viewModel.checkCardExpiration(text))
+            case cvvTextField:
+                return (text, viewModel.checkCVV(text))
+            default:
+                return (text, .valid)
+            }
+        }()
+        
         textField.text = text
-        delegate?.checkCreateButtonState(self)
-        delegate?.checkTextFieldState(self, textField: textField)
-        guard !cardNumberTextField.isCardBrandSetted else { return }
-        delegate?.getBrand(self, with:   cardNumberTextField.text?.trimCardNumberText() ?? "")
+        (textField as? IokaTextField)?.iokaState = validationState == .invalid ? .invalid : .active
+        
+        createButton.iokaButtonState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
+                                                                     dateExpirationText: dateExpirationTextField.text ?? "",
+                                                                     cvvText: cvvTextField.text ?? "")
+
+        guard textField === cardNumberTextField,
+              text.count > 0,
+              !cardNumberTextField.isCardBrandSetted else {
+                  return
+              }
+        
+        viewModel.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
+            if let paymentSystem = paymentSystem {
+                self?.cardNumberTextField.setCardBrandIcon(imageName: paymentSystem)
+            }
+        }
     }
     
     @objc private func handleKeyboardAppear(notification: Notification) {
@@ -202,11 +219,18 @@ internal class CardFormView: UIView {
 extension CardFormView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         guard let textField = textField as? IokaTextField else { return }
-        textField.iokaTextFieldState = .startTyping
+        
+        if textField.iokaState == .inactive {
+            textField.iokaState = .active
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.checkCreateButtonState(self)
+        guard let textField = textField as? IokaTextField else { return }
+        
+        if textField.iokaState == .active {
+            textField.iokaState = .inactive
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

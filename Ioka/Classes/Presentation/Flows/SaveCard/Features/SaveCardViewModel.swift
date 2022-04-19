@@ -18,7 +18,7 @@ internal protocol SaveCardNavigationDelegate: AnyObject {
 internal class SaveCardViewModel {
     
     weak var delegate: SaveCardNavigationDelegate?
-    var childViewModel: CardFormViewModel
+    var cardFormViewModel: CardFormViewModel
     let repository: SavedCardRepository
     let customerAccessToken: AccessToken
     var errorCompletion: ((Error) -> Void)?
@@ -31,7 +31,7 @@ internal class SaveCardViewModel {
         self.delegate = delegate
         self.repository = repository
         self.customerAccessToken = customerAccessToken
-        self.childViewModel = cardFormViewModel
+        self.cardFormViewModel = cardFormViewModel
     }
     
     func saveCard(card: CardParameters) {
@@ -58,39 +58,6 @@ internal class SaveCardViewModel {
         isSucceeded = true
         successCompletion?()
         dismissWithSuccessAfterDelay()
-    }
-    
-    func getBrand(partialBin: String) {
-        
-        repository.api.getBrand(partialBin: partialBin) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let brand):
-                self.cardBrandCompletion?(brand)
-            case .failure( _):
-                self.cardBrandCompletion?(nil)
-            }
-        }
-    }
-    
-    func getBankEmiiter(binCode: String) {
-        
-    }
-    
-    func checkCreateButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String, completion: @escaping(IokaButtonState) -> Void) {
-        
-        childViewModel.checkPayButtonState(cardNumberText: cardNumberText, dateExpirationText: dateExpirationText, cvvText: cvvText) { [weak self] buttonState in
-            guard let _ = self else { return }
-            completion(buttonState)
-        }
-    }
-    
-    func checkTextFieldState(text: String, type: TextFieldType) -> IokaTextFieldState {
-        childViewModel.checkTextFieldState(text: text, type: type)
-    }
-    
-    func modifyPaymentTextFields(text : String, textFieldType: TextFieldType) -> String {
-        return childViewModel.modifyPaymentTextFields(text: text, textFieldType: textFieldType)
     }
     
     func close() {
