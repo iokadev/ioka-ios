@@ -24,7 +24,7 @@ internal class ErrorToastView: UIView {
         
     override init(frame: CGRect) {
         super.init(frame: frame)
-        hide()
+        alpha = 0
         setUI()
         setActions()
     }
@@ -49,16 +49,23 @@ internal class ErrorToastView: UIView {
                 self.hidingTimer?.invalidate()
                 self.hidingTimer = nil
                 
-                UIView.animate(withDuration: 1.0) {
-                    self.hide()
-                }
+                self.hide(animate: true)
             }
         }
     }
     
-    func hide() {
-        self.onHide?()
-        self.alpha = 0.0
+    func hide(animate: Bool) {
+        if animate {
+            UIView.animate(withDuration: 1.0) {
+                self.alpha = 0.0
+            } completion: { _ in
+                // TODO: может стоит вызывать flowCompletion сразу при показе тоста, тогда здесь нужен будет костыль для удержания self
+                self.onHide?()
+            }
+        } else {
+            self.alpha = 0.0
+            self.onHide?()
+        }
     }
     
     private func configureErrorView(error: Error?) {
@@ -70,7 +77,7 @@ internal class ErrorToastView: UIView {
     }
     
     @objc private func handleCloseButton() {
-        hide()
+        hide(animate: false)
     }
     
     private func setUI() {
