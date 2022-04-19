@@ -11,7 +11,7 @@ import UIKit
 internal protocol CardFormViewDelegate: NSObject {
     func getBrand(_ view: CardFormView, with partialBin: String)
     func getEmitterByBinCode(_ view: CardFormView, with binCode: String)
-    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String)
+    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool)
     func checkCreateButtonState(_ view: CardFormView)
     func closeCardFormView(_ view: CardFormView)
     func modifyPaymentTextFields(_ view: CardFormView, text : String, textField: UITextField) -> String
@@ -100,7 +100,7 @@ internal class CardFormView: UIView {
             guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
             guard let cvc = cvvTextField.text else { return }
             guard let exp = dateExpirationTextField.text else { return }
-            delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp)
+            delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp, save: saveCardToggle.isOn)
             self.endEditing(true)
         default:
             delegate?.checkCreateButtonState(self)

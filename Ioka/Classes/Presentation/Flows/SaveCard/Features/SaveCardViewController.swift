@@ -133,7 +133,7 @@ extension SaveCardViewController: CardFormViewDelegate {
         viewModel.getBrand(partialBin: partialBin)
     }
     
-    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
+    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {
         let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
         
         viewModel.saveCard(card: card)

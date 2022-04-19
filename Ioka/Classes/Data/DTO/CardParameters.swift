@@ -18,10 +18,11 @@ internal struct CardParameters: Codable {
     var phone: String?
     var card_id: String?
     
-    init(pan: String, exp: String, cvc: String) {
+    init(pan: String, exp: String, cvc: String, save: Bool? = nil) {
         self.pan = pan
         self.exp = exp
         self.cvc = cvc
+        self.save = save
     }
     
     init(cardId: String, cvc: String? = nil) {

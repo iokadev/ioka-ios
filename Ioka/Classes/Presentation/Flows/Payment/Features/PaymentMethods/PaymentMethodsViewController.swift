@@ -119,8 +119,8 @@ extension PaymentMethodsViewController: CardFormViewDelegate {
         }
     }
     
-    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String) {
-        let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
+    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {
+        let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc, save: save)
         viewModel.createCardPayment(card: card)
     }
 }
