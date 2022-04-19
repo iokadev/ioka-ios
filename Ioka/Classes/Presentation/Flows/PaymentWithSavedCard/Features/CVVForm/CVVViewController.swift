@@ -11,7 +11,6 @@ import UIKit
 internal class CVVViewController: UIViewController {
     
     private lazy var contentView = CVVView()
-    var card: SavedCard!
     var viewModel: CVVViewModel!
     
     override func loadView() {
@@ -22,7 +21,7 @@ internal class CVVViewController: UIViewController {
         super.viewDidLoad()
 
         contentView.delegate = self
-        contentView.configureView(card: card)
+        contentView.configureView(card: viewModel.card)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,7 +38,7 @@ extension CVVViewController: CVVViewDelegate {
     
     func makePayment(_ view: CVVView) {
         guard let text = view.cvvTextField.text else { return }
-        let card = CardParameters(cardId: card.id, cvc: text)
+        let card = CardParameters(cardId: viewModel.card.id, cvc: text)
         viewModel.createPayment(cardParameters: card)
     }
 }

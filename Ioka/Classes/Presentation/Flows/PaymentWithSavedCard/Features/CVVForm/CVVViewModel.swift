@@ -19,11 +19,13 @@ internal class CVVViewModel {
     
     weak var delegate: CVVNavigationDelegate?
     
+    let card: SavedCard
     let repository: PaymentRepository
     let orderCustomerAccessToken: AccessToken
     
-    init(delegate: CVVNavigationDelegate?, repository: PaymentRepository, orderAccessToken: AccessToken) {
+    init(delegate: CVVNavigationDelegate?, card: SavedCard, repository: PaymentRepository, orderAccessToken: AccessToken) {
         self.delegate = delegate
+        self.card = card
         self.repository = repository
         self.orderCustomerAccessToken = orderAccessToken
     }

@@ -33,10 +33,10 @@ internal struct FeaturesFactory {
     }
     
     func makeCVVSavedCardPayment(delegate: CVVNavigationDelegate, orderAccessToken: AccessToken, card: SavedCard, repository: PaymentRepository) -> CVVViewController {
-        let viewModel = CVVViewModel(delegate: delegate, repository: repository, orderAccessToken: orderAccessToken)
+        let viewModel = CVVViewModel(delegate: delegate, card: card, repository: repository, orderAccessToken: orderAccessToken)
         let vc = CVVViewController()
-        vc.card = card
         vc.viewModel = viewModel
+        
         return vc
     }
     
