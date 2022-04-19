@@ -16,7 +16,7 @@ internal enum ProgressWrapperViewState {
 internal class ProgressWrapperView: UIView {
     
     private let progressView = IokaProgressView()
-    private let titleLabel = IokaLabel(iokaFont: typography.title, iokaTextColor: colors.background, iokaTextAlignemnt: .center)
+    private let titleLabel = IokaLabel(iokaFont: typography.title, iokaTextColor: .white, iokaTextAlignemnt: .center)
     
     
     override init(frame: CGRect) {
