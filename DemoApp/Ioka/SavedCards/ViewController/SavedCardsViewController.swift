@@ -25,7 +25,7 @@ internal class SavedCardsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = colors.secondaryBackground
+        self.view.backgroundColor = colors.tertiaryBackground
         [closeButton, titleLabel, tableView].forEach {
             self.view.addSubview($0)
         }

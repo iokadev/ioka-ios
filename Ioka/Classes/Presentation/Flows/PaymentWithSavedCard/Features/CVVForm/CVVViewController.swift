@@ -16,7 +16,7 @@ internal class CVVViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = colors.foreground
+
         contentView.delegate = self
         contentView.configureView(card: card)
     }

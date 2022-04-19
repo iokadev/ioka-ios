@@ -75,7 +75,7 @@ internal class PaymentTypeView: UIView {
     }
     
     func setupUI(models: [SavedCard]) {
-        self.backgroundColor = colors.secondaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         [tableView, bankCardView, payWithCashView, closeButton, titleLabel, saveButton].forEach{ self.addSubview($0) }
         
         closeButton.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 16, width: 24, height: 24)

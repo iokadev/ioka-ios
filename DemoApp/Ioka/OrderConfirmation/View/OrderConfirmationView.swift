@@ -60,7 +60,7 @@ internal class OrderConfirmationView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = colors.secondaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         [orderTitleLabel, orderImageView, orderPriceLabel, orderInformationView, paymentView, confirmButton].forEach{ self.addSubview($0) }
         
         

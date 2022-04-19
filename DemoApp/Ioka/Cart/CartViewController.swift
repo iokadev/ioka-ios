@@ -16,7 +16,7 @@ internal class CartViewController: UIViewController, UITableViewDataSource, UITa
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
-        tableView.backgroundColor = colors.secondaryBackground
+        tableView.backgroundColor = .clear
         return tableView
     }()
     
@@ -55,6 +55,7 @@ internal class CartViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     private func setUI() {
+        view.backgroundColor = colors.tertiaryBackground
         [tableView, goConfitmationButton].forEach { self.view.addSubview($0) }
         
         tableView.fillView(self.view)

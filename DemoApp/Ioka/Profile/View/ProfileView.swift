@@ -57,7 +57,7 @@ internal class ProfileView: UIView {
     
     private func setupUI() {
 
-        self.backgroundColor = colors.secondaryBackground
+        self.backgroundColor = colors.tertiaryBackground
         [navigationTitleLabel, saveCardProfileView, languageProfileView, themeProfileView].forEach{ self.addSubview($0) }
         
         navigationTitleLabel.anchor(top: self.topAnchor, left: self.leftAnchor, paddingTop: 60, paddingLeft: 18)
