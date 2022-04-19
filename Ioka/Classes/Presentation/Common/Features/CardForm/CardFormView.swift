@@ -19,7 +19,7 @@ internal protocol CardFormViewDelegate: NSObject {
 }
 
 enum CardFormState {
-    case payment
+    case payment(order: Order)
     case saving
 }
 
@@ -48,23 +48,21 @@ internal class CardFormView: UIView {
     
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
-    var cardFormState: CardFormState?
+    let cardFormState: CardFormState
     var createButtonBottomConstraint: NSLayoutConstraint?
     
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(state: CardFormState) {
+        self.cardFormState = state
+        
+        super.init(frame: .zero)
+        
         setupUI()
         setActions()
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDissapear), name: UIResponder.keyboardWillHideNotification, object: nil)
         [cardNumberTextField, dateExpirationTextField, cvvTextField].forEach { $0.delegate = self }
-    }
-    
-    convenience init(state: CardFormState, price: Int? = nil) {
-        self.init()
-        self.cardFormState = state
-        setupSaveCardUI(price: price)
+
+        setupSaveCardUI()
     }
     
     required init?(coder: NSCoder) {
@@ -170,27 +168,24 @@ internal class CardFormView: UIView {
         
     }
     
-    private func setupSaveCardUI(price: Int?) {
-        guard let cardFormState = cardFormState else { return }
-        
+    private func setupSaveCardUI() {
         switch cardFormState {
-        case .payment:
-            self.addSubview(stackViewForCardSaving)
-            stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
+        case .payment(let order):
+            if order.hasCustomerId {
+                self.addSubview(stackViewForCardSaving)
+                stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
+            }
         case .saving:
             break
         }
         
-        setupCreateButton(price: price)
+        setupCreateButton()
     }
     
-    private func setupCreateButton(price: Int?) {
-        guard let cardFormState = cardFormState else { return }
-        
+    private func setupCreateButton() {
         switch cardFormState {
-        case .payment:
-            guard let price = price else { return }
-            createButton.setTitle("\(IokaLocalizable.pay) \(price) ₸", for: .normal)
+        case .payment(let order):
+            createButton.setTitle("\(IokaLocalizable.pay) \(order.price) ₸", for: .normal)
         case .saving:
             createButton.setTitle(IokaLocalizable.save, for: .normal)
         }

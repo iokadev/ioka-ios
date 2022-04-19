@@ -9,7 +9,7 @@ import UIKit
 
 internal class PaymentMethodsViewController: UIViewController {
     
-    private lazy var contentView = CardFormView(state: .payment, price: viewModel.order.price)
+    private lazy var contentView = CardFormView(state: .payment(order: viewModel.order))
     var viewModel: PaymentMethodsViewModel!
     var theme: IokaTheme!
     
