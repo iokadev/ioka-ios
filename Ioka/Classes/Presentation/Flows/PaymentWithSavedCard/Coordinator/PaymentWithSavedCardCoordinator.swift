@@ -50,17 +50,14 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         vc.modalPresentationStyle = .overFullScreen
         vc.modalTransitionStyle = .crossDissolve
         self.cvvViewController = vc
-        sourceViewController.present(vc, animated: false)
+        presentModally(vc)
     }
     
     func showThreeDSecure(action: Action, paymentId: String) {
         let vc = factory.makeThreeDSecure(delegate: self, action: action, paymentId: paymentId)
         self.threeDSecureViewController = vc
         
-        sourceViewController.dismiss(animated: true) {
-            self.navigationController.setViewControllers([vc], animated: false)
-            self.sourceViewController.present(self.navigationController, animated: true)
-        }
+        showInNavigationController(vc)
     }
     
     func showSuccessPaymentResult() {
@@ -71,12 +68,7 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         let vc = factory.makePaymentResult(delegate: self, order: order, result: .success)
         self.paymentResultViewController = vc
         
-        if navigationController.viewControllers.count > 0 {
-            navigationController.pushViewController(vc, animated: true)
-        } else {
-            navigationController.setViewControllers([vc], animated: false)
-            sourceViewController.present(navigationController, animated: true)
-        }
+        showInNavigationController(vc)
     }
     
     func showErrorPopup(error: Error) {
@@ -85,23 +77,41 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         vc.modalTransitionStyle = .crossDissolve
         self.errorPopupViewController = vc
         
-        sourceViewController.dismiss(animated: true) {
-            self.sourceViewController.present(vc, animated: false)
-        }
+        presentModally(vc)
     }
     
     func dismissFlow(result: FlowResult) {
-        sourceViewController.dismiss(animated: true) {
+        sourceViewController.dismiss(animated: navigationControllerIsPresented()) {
             self.resultCompletion?(result)
         }
     }
     
     func dismissWithErrorInProgressWrapper(_ error: Error) {
-        sourceViewController.dismiss(animated: true) {
+        sourceViewController.dismiss(animated: navigationControllerIsPresented()) {
             self.paymentProgressWrapper?.showError(error: error) { [weak self] in
                 self?.resultCompletion?(.failed(error))
             }
         }
+    }
+    
+    private func presentModally(_ controller: UIViewController) {
+        sourceViewController.dismiss(animated: navigationControllerIsPresented()) {
+            self.sourceViewController.present(controller, animated: true)
+        }
+    }
+    
+    private func showInNavigationController(_ controller: UIViewController) {
+        if navigationControllerIsPresented() {
+            navigationController.pushViewController(controller, animated: true)
+        } else {
+            navigationController.setViewControllers([controller], animated: false)
+            sourceViewController.dismiss(animated: false)
+            sourceViewController.present(navigationController, animated: true)
+        }
+    }
+    
+    private func navigationControllerIsPresented() -> Bool {
+        navigationController.presentingViewController != nil
     }
 }
 

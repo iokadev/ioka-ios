@@ -83,6 +83,8 @@ internal class PaymentResultView: UIView {
         case .success:
             orderTitleLabel.text = IokaLocalizable.orderPaid
             orderTitleLabel.textColor = colors.success
+            orderPriceLabel.text = "\(order.price) ₸"
+
             if let text = orderNumberText() {
                 orderNumberLabel.text = text
             } else {
@@ -109,7 +111,6 @@ internal class PaymentResultView: UIView {
             return nil
         }
         
-        orderPriceLabel.text = "\(order.price) ₸"
         let locale = IokaLocalizable.orderNumber
         
         return String(format: locale, orderNumber)

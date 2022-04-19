@@ -25,16 +25,16 @@ internal class IokaButton: UIButton {
     var imageName: String?
     let activityIndicator = UIActivityIndicatorView()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    convenience init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil, backGroundColor: UIColor? = nil) {
-        self.init(frame: CGRect())
+    init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
         self.title = title
         self.imageName = imageName
-        self.backgroundColor = backGroundColor
         self.iokaButtonState = iokaButtonState
+        
+        super.init(frame: .zero)
+
+        self.tintColor = tintColor
+        self.backgroundColor = backgroundColor
+
         setupButton()
     }
     
@@ -71,7 +71,12 @@ internal class IokaButton: UIButton {
         self.layer.cornerRadius = 12
         handlePayButtonState(state: iokaButtonState)
         if let imageName = imageName {
-            self.setImage(UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil), for: .normal)
+            var image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil)
+            if tintColor != nil {
+                image = image?.withRenderingMode(.alwaysTemplate)
+            }
+            
+            self.setImage(image, for: .normal)
         }
     }
     

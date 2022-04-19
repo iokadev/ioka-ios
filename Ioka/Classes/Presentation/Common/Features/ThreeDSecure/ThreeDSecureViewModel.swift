@@ -42,7 +42,7 @@ internal class ThreeDSecureViewModel {
     }
     
     func isReturnUrl(_ url: URL?) -> Bool {
-        url == URL(string: action.returnUrl)
+        url?.absoluteString.hasPrefix(action.returnUrl) ?? false
     }
     
     func close() {
