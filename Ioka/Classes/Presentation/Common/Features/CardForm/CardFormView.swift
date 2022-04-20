@@ -123,21 +123,32 @@ internal class CardFormView: UIView {
     }
     
     @objc func didChangeText(textField: UITextField) {
+        let oldText = textField.text ?? ""
+
         let (text, validationState): (String, ValidationState) = {
-            let text = textField.text ?? ""
             switch textField {
             case cardNumberTextField:
-                return (viewModel.transformCardNumber(text), viewModel.checkCardNumber(text))
+                return (viewModel.transformCardNumber(oldText), viewModel.checkCardNumber(oldText))
             case dateExpirationTextField:
-                return (viewModel.transformExpirationDate(text), viewModel.checkCardExpiration(text))
+                return (viewModel.transformExpirationDate(oldText), viewModel.checkCardExpiration(oldText))
             case cvvTextField:
-                return (text, viewModel.checkCVV(text))
+                return (oldText, viewModel.checkCVV(oldText))
             default:
-                return (text, .valid)
+                return (oldText, .valid)
             }
         }()
         
-        textField.text = text
+        if text != oldText, let selection = textField.selectedTextRange {
+            let diff = oldText.count - text.count
+            let cursorPosition = textField.offset(from: textField.beginningOfDocument, to: selection.start) - diff
+            
+            textField.text = text
+            
+            if let newPosition = textField.position(from: textField.beginningOfDocument, offset: cursorPosition) {
+                textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+            }
+        }
+
         (textField as? IokaTextField)?.iokaState = validationState == .invalid ? .invalid : .active
         
         createButton.iokaState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
