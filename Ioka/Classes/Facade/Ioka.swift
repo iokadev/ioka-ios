@@ -15,7 +15,6 @@ public class Ioka {
     /// Синглтон
     static public let shared = Ioka()
     var setupInput: SetupInput?
-    var theme: IokaTheme = .default
     var currentCoordinator: Coordinator?
     
     
@@ -28,7 +27,6 @@ public class Ioka {
     ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
     public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey))
-        self.theme = theme
         applyTheme(theme)
         updateLocale(locale)
     }
