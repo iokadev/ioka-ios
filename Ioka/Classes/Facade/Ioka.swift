@@ -43,7 +43,7 @@ public class Ioka {
     ///   - orderAccessToken: Токен для доступа к заказу, который приложение получает от своего бэкенда.
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
-    ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure.
+    ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
     public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
@@ -79,7 +79,7 @@ public class Ioka {
     ///   - orderAccessToken: Токен для доступа к заказу, который приложение получает от своего бэкенда.
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или любой
     ///   экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта была
-    ///   отклонена, .cancelled - если пользователь закрыл экран ввода CVV или экран 3DSecure.
+    ///   отклонена, .cancelled - если пользователь закрыл экран ввода CVV или экран 3DSecure. Выполняется в главном потоке.
     public func startPaymentWithSavedCardFlow(sourceViewController: UIViewController, orderAccessToken: String, card: SavedCard, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
@@ -113,7 +113,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран сохранения. Принимает
     ///   значение FlowResult: .succeeded - если оплата прошла успешно, .cancelled - если пользователь закрыл экран
     ///   сохранения или экран 3DSecure, .failed в данном случае не приходит, так как при ошибке пользователь всегда
-    ///   остаётся на экране сохранения.
+    ///   остаётся на экране сохранения. Выполняется в главном потоке.
     public func startSaveCardFlow(sourceViewController: UIViewController, customerAccessToken: String, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
@@ -141,7 +141,7 @@ public class Ioka {
     /// Метод для получения сохраненных карт пользователя
     /// - Parameters:
     ///   - customerAccessToken: Токен для доступа к пользователю, который приложение получает от своего бэкенда.
-    ///   - completion: Замыкание, в которое передаётся результат запроса сохраненных карт.
+    ///   - completion: Замыкание, в которое передаётся результат запроса сохраненных карт. Выполняется в главном потоке.
     public func getCards(customerAccessToken: String, completion: @escaping(Result<[SavedCard], Error>) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failure(DomainError.invalidTokenFormat))
@@ -163,7 +163,7 @@ public class Ioka {
     ///   - customerAccessToken: Токен для доступа к пользователю, который приложение получает от своего бэкенда.
     ///   - cardId: id карты, которую нужно удалить.
     ///   - completion: Замыкание, в которое передаётся результат удаления карты. nil - если карта удалена успешно,
-    ///   error - если произошла ошибка.
+    ///   error - если произошла ошибка. Выполняется в главном потоке.
     public func deleteSavedCard(customerAccessToken: String, cardId: String, completion: @escaping(Error?) -> Void) {
         
         guard let setupInput = setupInput else {
