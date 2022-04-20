@@ -59,7 +59,6 @@ internal class ErrorToastView: UIView {
             UIView.animate(withDuration: 1.0) {
                 self.alpha = 0.0
             } completion: { _ in
-                // TODO: может стоит вызывать flowCompletion сразу при показе тоста, тогда здесь нужен будет костыль для удержания self
                 self.onHide?()
             }
         } else {
