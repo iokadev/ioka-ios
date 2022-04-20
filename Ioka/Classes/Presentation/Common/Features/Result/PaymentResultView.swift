@@ -20,7 +20,7 @@ internal class PaymentResultView: UIView {
     let orderNumberLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey)
     let orderPriceLabel = IokaLabel(iokaFont: typography.heading2, iokaTextColor: colors.text)
     let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey)
-    private let retryOrCloseButton = IokaButton(iokaButtonState: .enabled)
+    private let retryOrCloseButton = IokaButton(state: .enabled)
     
     weak var delegate: PaymentResultViewDelegate?
     

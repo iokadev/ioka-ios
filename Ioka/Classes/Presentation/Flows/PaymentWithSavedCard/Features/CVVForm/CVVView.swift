@@ -23,15 +23,15 @@ internal class CVVView: UIView {
     private let cardInfoView = IokaCustomView(backGroundColor: colors.secondaryBackground, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
-    private let continueButton = IokaButton(iokaButtonState: .enabled, title: IokaLocalizable.continueButton)
+    private let continueButton = IokaButton(state: .enabled, title: IokaLocalizable.continueButton)
     
     private var yConstraint: NSLayoutConstraint!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         observeKeyboard()
-        setUI()
         setActions()
+        setUI()
     }
     
     required init?(coder: NSCoder) {
@@ -49,23 +49,30 @@ internal class CVVView: UIView {
     }
     
     private func setActions() {
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCloseButton)))
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleCloseButton))
+        gestureRecognizer.delegate = self
+        self.addGestureRecognizer(gestureRecognizer)
         self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         self.continueButton.addTarget(self, action: #selector(handleContinueButton), for: .touchUpInside)
     }
     
     @objc private func handleCloseButton() {
+        self.endEditing(true)
         delegate?.closeView(self)
     }
     
     @objc private func handleContinueButton() {
-        self.continueButton.showLoading()
+        self.endEditing(true)
+        continueButton.iokaState = .loading
+        cvvTextField.isUserInteractionEnabled = false
+        
         delegate?.makePayment(self)
     }
     
     private func setUI() {
         self.backgroundColor = colors.foreground
         self.addSubview(savedCardView)
+        
         cvvTextField.placeholder = "CVV"
         cvvTextField.keyboardType = .numberPad
         cvvTextField.delegate = self
@@ -133,6 +140,12 @@ extension CVVView: UITextFieldDelegate {
             return newLength <= 4
         }
          return true
+    }
+}
+
+extension CVVView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view == gestureRecognizer.view
     }
 }
 

@@ -23,8 +23,6 @@ internal class PaymentMethodsViewModel {
     let orderAccessToken: AccessToken
     let order: Order
     var cardFormViewModel: CardFormViewModel
-    var cardPaymentFailure: ((Error?) -> Void)?
-    
     
     init(delegate: PaymentMethodsNavigationDelegate, repository: PaymentRepository, orderAccessToken: AccessToken, order: Order, cardFormViewModel: CardFormViewModel) {
         self.repository = repository
@@ -34,7 +32,7 @@ internal class PaymentMethodsViewModel {
         self.cardFormViewModel = cardFormViewModel
     }
     
-    func createCardPayment(card: CardParameters) {
+    func createCardPayment(card: CardParameters, completion: @escaping (Error?) -> Void) {
         repository.createCardPayment(orderAccessToken: orderAccessToken, cardParameters: card) { result in
             switch result {
             case .success(let payment):
@@ -46,8 +44,10 @@ internal class PaymentMethodsViewModel {
                 case .requiresAction(let action):
                     self.delegate?.paymentMethodsDidRequireThreeDSecure(action: action, payment: payment)
                 }
+                
+                completion(nil)
             case .failure(let error):
-                self.cardPaymentFailure?(error)
+                completion(error)
             }
         }
     }

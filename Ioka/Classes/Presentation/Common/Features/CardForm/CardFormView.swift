@@ -19,33 +19,32 @@ enum CardFormState {
 }
 
 internal class CardFormView: UIView {
-
-    let cardNumberTextField = IokaCardNumberTextField()
-    let dateExpirationTextField = IokaTextField(inputType: .dateExpiration)
-    let cvvTextField = IokaTextField(inputType: .cvv)
-    let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
-    let saveCardToggle: UISwitch = {
+    private let cardNumberTextField = IokaCardNumberTextField()
+    private let dateExpirationTextField = IokaTextField(inputType: .dateExpiration)
+    private let cvvTextField = IokaTextField(inputType: .cvv)
+    private let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
+    private let saveCardToggle: UISwitch = {
         let toggle = UISwitch()
         toggle.onTintColor = colors.primary
         
         return toggle
     }()
     
-    let createButton = IokaButton(iokaButtonState: .disabled)
-    let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
+    private let createButton = IokaButton(state: .disabled)
+    private let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
     private var transactionImageView = IokaImageView(imageName: "Transaction", imageTintColor: colors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var stackViewForTransaction = IokaStackView(views: [transactionImageView, transactionLabel], viewsDistribution: .equalCentering, viewsAxis: .horizontal, viewsSpacing: 8)
     private lazy var errorView = ErrorToastView()
-    let feedbackGenerator = UISelectionFeedbackGenerator()
+    private let feedbackGenerator = UISelectionFeedbackGenerator()
     
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
     let cardFormState: CardFormState
     let viewModel: CardFormViewModel
     
-    var createButtonBottomConstraint: NSLayoutConstraint?
+    private var createButtonBottomConstraint: NSLayoutConstraint?
     
     init(state: CardFormState, viewModel: CardFormViewModel) {
         self.cardFormState = state
@@ -70,6 +69,28 @@ internal class CardFormView: UIView {
         errorView.show(error: error)
     }
     
+    func startLoading() {
+        createButton.iokaState = .loading
+        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
+            $0.isUserInteractionEnabled = false
+        }
+    }
+    
+    func stopLoading() {
+        createButton.iokaState = .enabled
+        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
+            $0.isUserInteractionEnabled = true
+        }
+    }
+    
+    func showSavingSuccess() {
+        UINotificationFeedbackGenerator().notificationOccurred(.success)
+        createButton.iokaState = .success
+        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
+            $0.isUserInteractionEnabled = false
+        }
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -86,17 +107,16 @@ internal class CardFormView: UIView {
     }
     
     @objc private func handleCreateButton() {
-        createButton.showLoading()
+        self.endEditing(true)
         
-        switch createButton.iokaButtonState {
-        case .savingSuccess:
+        switch createButton.iokaState {
+        case .success:
             delegate?.closeCardFormView(self)
         case .enabled:
-            guard let cardNumber = cardNumberTextField.text?.trimCardNumberText() else { return }
-            guard let cvc = cvvTextField.text else { return }
-            guard let exp = dateExpirationTextField.text else { return }
+            guard let cardNumber = cardNumberTextField.text?.trimCardNumberText(),
+                  let cvc = cvvTextField.text,
+                  let exp = dateExpirationTextField.text else { return }
             delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp, save: saveCardToggle.isOn)
-            self.endEditing(true)
         default:
             break
         }
@@ -120,9 +140,9 @@ internal class CardFormView: UIView {
         textField.text = text
         (textField as? IokaTextField)?.iokaState = validationState == .invalid ? .invalid : .active
         
-        createButton.iokaButtonState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
-                                                                     dateExpirationText: dateExpirationTextField.text ?? "",
-                                                                     cvvText: cvvTextField.text ?? "")
+        createButton.iokaState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
+                                                               dateExpirationText: dateExpirationTextField.text ?? "",
+                                                               cvvText: cvvTextField.text ?? "")
 
         guard textField === cardNumberTextField,
               text.count > 0,
@@ -208,9 +228,9 @@ internal class CardFormView: UIView {
     private func setupCreateButton() {
         switch cardFormState {
         case .payment(let order):
-            createButton.setTitle("\(IokaLocalizable.pay) \(order.price) ₸", for: .normal)
+            createButton.title = "\(IokaLocalizable.pay) \(order.price) ₸"
         case .saving:
-            createButton.setTitle(IokaLocalizable.save, for: .normal)
+            createButton.title = IokaLocalizable.save
         }
 
     }

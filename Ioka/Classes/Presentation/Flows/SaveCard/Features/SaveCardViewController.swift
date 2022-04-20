@@ -21,11 +21,20 @@ internal class SaveCardViewController: UIViewController {
         contentView.delegate = self
         
         setupNavigationItem()
-        handleBindings()
     }
     
     override func loadView() {
         self.view = contentView
+    }
+    
+    func showSuccess() {
+        contentView.showSavingSuccess()
+        viewModel.handleSuccess()
+    }
+    
+    func show(error: Error) {
+        contentView.stopLoading()
+        contentView.show(error: error)
     }
     
     private func setupNavigationItem() {
@@ -34,35 +43,6 @@ internal class SaveCardViewController: UIViewController {
     
     @objc private func closeButtonTapped() {
         viewModel.close()
-    }
-    
-    func handleBindings() {
-        viewModel.errorCompletion = { [weak self] error in
-            guard let self = self else { return }
-            self.showError(error: error)
-        }
-        
-        viewModel.successCompletion = { [weak self] in
-            guard let self = self else { return }
-            self.handleSaveButton(state: .savingSuccess)
-            UINotificationFeedbackGenerator().notificationOccurred(.success)
-        }
-        
-        viewModel.cardBrandCompletion = { [weak self] cardBrand in
-            guard let self = self, let cardBrand = cardBrand else { return }
-            self.contentView.cardNumberTextField.setCardBrandIcon(imageName: cardBrand.brand.rawValue)
-        }
-    }
-    
-    func showError(error: Error) {
-        contentView.show(error: error)
-        handleSaveButton(state: .enabled)
-        contentView.createButton.hideLoading(showTitle: true)
-    }
-    
-    func handleSaveButton(state: IokaButtonState) {
-        self.contentView.endEditing(true)
-        self.contentView.createButton.iokaButtonState = state
     }
 }
 
@@ -73,6 +53,17 @@ extension SaveCardViewController: CardFormViewDelegate {
     
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {
         let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
-        viewModel.saveCard(card: card)
+        
+        contentView.startLoading()
+        viewModel.saveCard(card: card) { [weak self] result in
+            switch result {
+            case .none:
+                self?.contentView.stopLoading()
+            case .success:
+                self?.showSuccess()
+            case .failure(let error):
+                self?.show(error: error)
+            }
+        }
     }
 }

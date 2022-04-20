@@ -8,27 +8,39 @@
 import Foundation
 import UIKit
 
-internal enum IokaButtonState {
-    case disabled
-    case enabled
-    case savingSuccess
-}
-
 internal class IokaButton: UIButton {
+    enum State {
+        case disabled
+        case enabled
+        case loading
+        case success
+    }
     
-    var iokaButtonState: IokaButtonState? {
+    var iokaState: State? {
         didSet {
-            handlePayButtonState(state: iokaButtonState)
+            handlePayButtonState(state: iokaState)
         }
     }
-    var title: String?
-    var imageName: String?
-    let activityIndicator = UIActivityIndicatorView()
     
-    init(iokaButtonState: IokaButtonState? = nil, title: String? = nil, imageName: String? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
+    var title: String? {
+        didSet {
+            self.setTitle(title, for: .normal)
+        }
+    }
+    
+    var imageName: String?
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = .lightGray
+        
+        return activityIndicator
+    }()
+    
+    init(state: State? = nil, title: String? = nil, imageName: String? = nil, tintColor: UIColor? = nil, backgroundColor: UIColor? = nil) {
         self.title = title
         self.imageName = imageName
-        self.iokaButtonState = iokaButtonState
+        self.iokaState = state
         
         super.init(frame: .zero)
 
@@ -42,34 +54,10 @@ internal class IokaButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func showSuccess() {
-        self.setImage(IokaImages.mark, for: .normal)
-        self.setTitle("", for: .normal)
-    }
-
-    func showLoading() {
-        self.title = self.titleLabel?.text
-        self.setTitle("", for: .normal)
-        let activityIndicator = self.createActivityIndicator()
-        
-        self.showSpinning(activityIndicator)
-    }
-
-    func hideLoading(showTitle: Bool) {
-        self.activityIndicator.stopAnimating()
-        switch showTitle {
-        case true:
-            self.setTitle(self.title, for: .normal)
-        case false:
-            self.setTitle("", for: .normal)
-        }
-    }
-
-    
     private func setupButton() {
         self.setTitle(title, for: .normal)
         self.layer.cornerRadius = 12
-        handlePayButtonState(state: iokaButtonState)
+        handlePayButtonState(state: iokaState)
         if let imageName = imageName {
             var image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil)
             if tintColor != nil {
@@ -80,35 +68,44 @@ internal class IokaButton: UIButton {
         }
     }
     
-    private func handlePayButtonState(state: IokaButtonState?) {
+    private func handlePayButtonState(state: State?) {
         guard let state = state else { return }
+
+        self.hideActivityIndicator()
 
         switch state {
         case .disabled:
             self.backgroundColor = colors.nonadaptableGrey
             self.isUserInteractionEnabled = false
+            self.setTitle(title, for: .normal)
         case .enabled:
             self.backgroundColor = colors.primary
             self.isUserInteractionEnabled = true
-        case .savingSuccess:
+            self.setTitle(title, for: .normal)
+        case .loading:
+            self.backgroundColor = colors.primary
+            self.isUserInteractionEnabled = false
+            self.title = self.titleLabel?.text
+            self.setTitle("", for: .normal)
+            self.showActivityIndicator()
+        case .success:
             self.backgroundColor = colors.success
-            self.hideLoading(showTitle: true)
             self.isUserInteractionEnabled = true
-            showSuccess()
+            self.setImage(IokaImages.mark, for: .normal)
+            self.setTitle("", for: .normal)
         }
     }
-    
-    private func createActivityIndicator() -> UIActivityIndicatorView {
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = .lightGray
-        return activityIndicator
-    }
 
-    private func showSpinning(_ activityIndicator: UIActivityIndicatorView) {
+    private func showActivityIndicator() {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(activityIndicator)
         centerActivityIndicatorInButton(activityIndicator)
         activityIndicator.startAnimating()
+    }
+    
+    private func hideActivityIndicator() {
+        activityIndicator.removeFromSuperview()
+        activityIndicator.stopAnimating()
     }
     
     private func centerActivityIndicatorInButton(_ activityIndicator: UIActivityIndicatorView) {

@@ -24,7 +24,7 @@ internal class CardFormViewModel {
         }
     }
     
-    func checkPayButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String) -> IokaButtonState {
+    func checkPayButtonState(cardNumberText: String, dateExpirationText: String, cvvText: String) -> IokaButton.State {
         guard checkCardNumber(cardNumberText) == .valid,
               checkCardExpiration(dateExpirationText) == .valid,
               checkCVV(cvvText) == .valid else {

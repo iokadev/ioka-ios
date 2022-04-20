@@ -21,12 +21,6 @@ internal class PaymentMethodsViewController: UIViewController {
         super.viewDidLoad()
         contentView.delegate = self
         setupNavigationItem()
-        
-        viewModel.cardPaymentFailure = { [weak self] error in
-            if let error = error {
-                self?.showError(error)
-            }
-        }
     }
     
     private func setupNavigationItem() {
@@ -39,16 +33,8 @@ internal class PaymentMethodsViewController: UIViewController {
         viewModel.delegate?.paymentMethodsDidCancel()
     }
     
-    func handlePayButton(state: IokaButtonState) {
-        self.contentView.endEditing(true)
-        self.contentView.createButton.iokaButtonState = state
-        self.contentView.createButton.hideLoading(showTitle: true)
-    }
-    
-    func showError(_ error: Error) {
+    func show(error: Error) {
         contentView.show(error: error)
-        handlePayButton(state: .enabled)
-        contentView.createButton.hideLoading(showTitle: true)
     }
 }
 
@@ -59,6 +45,14 @@ extension PaymentMethodsViewController: CardFormViewDelegate {
     
     func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {
         let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc, save: save)
-        viewModel.createCardPayment(card: card)
+        
+        contentView.startLoading()
+        viewModel.createCardPayment(card: card) { [weak self] error in
+            self?.contentView.stopLoading()
+            
+            if let error = error {
+                self?.show(error: error)
+            }
+        }
     }
 }

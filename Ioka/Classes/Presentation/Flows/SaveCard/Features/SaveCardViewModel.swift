@@ -16,14 +16,10 @@ internal protocol SaveCardNavigationDelegate: AnyObject {
 
 
 internal class SaveCardViewModel {
-    
     weak var delegate: SaveCardNavigationDelegate?
     var cardFormViewModel: CardFormViewModel
     let repository: SavedCardRepository
     let customerAccessToken: AccessToken
-    var errorCompletion: ((Error) -> Void)?
-    var successCompletion: (() -> Void)?
-    var cardBrandCompletion: ((GetBrandResponse?) -> Void)?
     
     private var isSucceeded = false
     
@@ -34,29 +30,29 @@ internal class SaveCardViewModel {
         self.cardFormViewModel = cardFormViewModel
     }
     
-    func saveCard(card: CardParameters) {
-        
-        repository.saveCard(customerAccessToken: customerAccessToken, cardParameters: card) {[weak self] result in
+    func saveCard(card: CardParameters, completion: @escaping (Result<Void, Error>?) -> Void) {
+        repository.saveCard(customerAccessToken: customerAccessToken, cardParameters: card) { [weak self] result in
             guard let self = self else { return }
+            
             switch result {
             case .success(let cardSaving):
                 switch cardSaving.status {
-                case .declined(let apiError):
-                    self.errorCompletion?(apiError)
+                case .declined(let error):
+                    completion(.failure(error))
                 case .requiresAction(let action):
                     self.delegate?.saveCardDidRequireThreeDSecure(action: action, cardSaving: cardSaving)
+                    completion(nil)
                 case .succeeded:
-                    self.handleSuccess()
+                    completion(.success(()))
                 }
             case .failure(let error):
-                self.errorCompletion?(error)
+                completion(.failure(error))
             }
         }
     }
     
     func handleSuccess() {
         isSucceeded = true
-        successCompletion?()
         dismissWithSuccessAfterDelay()
     }
     
