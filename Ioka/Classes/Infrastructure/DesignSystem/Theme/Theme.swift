@@ -28,7 +28,7 @@ public struct IokaTheme {
     
     /// Кастомизация цветов. Шрифты в этом случае не кастомизируются - используется Typography.default.
     /// - Parameter colors: Можно скопировать Colors.default и изменить только нужные цвета либо создать
-    /// объект Colors, передав все цвета
+    /// объект Colors, задав все цвета
     public init(colors: Colors) {
         self.colors = colors
         self.typography = Typography.default
@@ -36,7 +36,7 @@ public struct IokaTheme {
     
     /// Кастомизация шрифтов. Цвета в этом случае не кастомизируются - используется Colors.default.
     /// - Parameter typography: Можно скопировать Typography.default и изменить только нужные шрифты либо создать
-    /// объект Typography, передав все шрифты
+    /// объект Typography, задав все шрифты
     public init(typography: Typography) {
         self.typography = typography
         self.colors = Colors.default
@@ -45,9 +45,9 @@ public struct IokaTheme {
     /// Кастомизация цветов и шрифтов
     /// - Parameters:
     ///   - colors: Можно скопировать Colors.default и изменить только нужные цвета либо создать
-    /// объект Colors, передав все цвета
+    /// объект Colors, задав все цвета
     ///   - typography: Можно скопировать Typography.default и изменить только нужные шрифты либо создать
-    /// объект Typography, передав все шрифты
+    /// объект Typography, задав все шрифты
     public init(colors: Colors, typography: Typography) {
         self.colors = colors
         self.typography = typography
