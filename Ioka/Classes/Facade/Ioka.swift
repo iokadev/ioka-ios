@@ -22,10 +22,10 @@ public class Ioka {
     ///
     /// - Parameters:
     ///   - apiKey: Публичный API-ключ, полученные при регистрации в качестве клиента Ioka
-    ///   - theme: Конфигурирует внешний вид экранов Ioka SDK. По умолчанию - объект IokaTheme.default.
+    ///   - theme: Конфигурирует внешний вид экранов Ioka SDK. По умолчанию - объект Theme.default.
     ///   - locale: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
     ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
-    public func setup(apiKey: String, theme: IokaTheme = .default, locale: IokaLocale = .automatic) {
+    public func setup(apiKey: String, theme: Theme = .default, locale: IokaLocale = .automatic) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey))
         applyTheme(theme)
         updateLocale(locale)
@@ -196,7 +196,7 @@ public class Ioka {
         locale = localeParam
     }
     
-    private func applyTheme(_ theme: IokaTheme) {
+    private func applyTheme(_ theme: Theme) {
         colors = theme.colors
         typography = theme.typography
     }

@@ -1,5 +1,5 @@
 //
-//  IokaTheme.swift
+//  Theme.swift
 //  IOKA
 //
 //  Created by ablai erzhanov on 25.03.2022.
@@ -8,8 +8,8 @@
 import UIKit
 
 /// Сущность для кастомизации интерфейса ioka SDK
-public struct IokaTheme {
-    public static var `default` = IokaTheme(colors: Colors.default)
+public struct Theme {
+    public static var `default` = Theme(colors: Colors.default)
     var colors: Colors
     var typography: Typography
     
