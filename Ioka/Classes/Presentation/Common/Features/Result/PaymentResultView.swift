@@ -14,12 +14,32 @@ internal protocol PaymentResultViewDelegate: NSObject {
 }
 
 internal class PaymentResultView: UIView {
+    private lazy var stackView: UIStackView = {
+        let arrangedSubviews: [UIView] = {
+            if case .success = result {
+                return [imageView,
+                        orderTitleLabel,
+                        orderNumberLabel,
+                        orderPriceLabel]
+            } else {
+                return [imageView,
+                        orderTitleLabel,
+                        errorDescriptionLabel]
+            }
+        }()
+        let stackView = UIStackView(arrangedSubviews: arrangedSubviews)
+        stackView.axis = .vertical
+        stackView.alignment = .center
+        stackView.distribution = .fill
+        
+        return stackView
+    }()
     
     private let imageView = IokaImageView()
-    private let orderTitleLabel = IokaLabel(iokaFont: typography.heading)
-    let orderNumberLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey)
-    let orderPriceLabel = IokaLabel(iokaFont: typography.heading2, iokaTextColor: colors.text)
-    let errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey)
+    private let orderTitleLabel = IokaLabel(iokaFont: typography.heading, iokaTextAlignemnt: .center)
+    private lazy var orderNumberLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey, iokaTextAlignemnt: .center)
+    private lazy var orderPriceLabel = IokaLabel(iokaFont: typography.heading2, iokaTextColor: colors.text, iokaTextAlignemnt: .center)
+    private lazy var errorDescriptionLabel = IokaLabel(iokaFont: typography.subtitle, iokaTextColor: colors.nonadaptableGrey, iokaTextAlignemnt: .center)
     private let retryOrCloseButton = IokaButton(state: .enabled)
     
     weak var delegate: PaymentResultViewDelegate?
@@ -43,18 +63,21 @@ internal class PaymentResultView: UIView {
    
     private func setupUI() {
         self.backgroundColor = colors.background
-        [imageView, orderTitleLabel, orderNumberLabel, orderPriceLabel, errorDescriptionLabel, retryOrCloseButton].forEach{ self.addSubview($0) }
         
+        stackView.setCustomSpacing(24, after: imageView)
         
-        imageView.centerX(in: self, top: self.safeAreaTopAnchor, paddingTop: 100, width: 120, height: 120)
+        if case .success = result {
+            stackView.setCustomSpacing(40, after: orderTitleLabel)
+        } else {
+            stackView.setCustomSpacing(8, after: orderTitleLabel)
+        }
         
-        orderTitleLabel.centerX(in: self, top: imageView.bottomAnchor, paddingTop: 24)
+        stackView.setCustomSpacing(4, after: orderNumberLabel)
+
+        [stackView, retryOrCloseButton].forEach { self.addSubview($0) }
         
-        orderNumberLabel.centerX(in: self, top: orderTitleLabel.bottomAnchor, paddingTop: 40)
-        
-        orderPriceLabel.centerX(in: self, top: orderNumberLabel.bottomAnchor, paddingTop: 4)
-        
-        errorDescriptionLabel.anchor(top: orderTitleLabel.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 24, paddingRight: 24)
+        stackView.anchor(top: safeAreaTopAnchor, left: leftAnchor, right: rightAnchor, paddingTop: 100, paddingLeft: 24, paddingRight: 24)
+        imageView.setDimensions(width: 120, height: 120)
         
         retryOrCloseButton.anchor(left: self.leftAnchor, bottom: self.safeAreaBottomAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 16, paddingRight: 16, height: 56)
     }
@@ -77,8 +100,6 @@ internal class PaymentResultView: UIView {
     }
     
     private func configure() {
-        [orderTitleLabel, orderPriceLabel, orderNumberLabel, errorDescriptionLabel].forEach{ $0.textAlignment = .center }
-        
         switch result {
         case .success:
             orderTitleLabel.text = IokaLocalizable.orderPaid
@@ -91,14 +112,11 @@ internal class PaymentResultView: UIView {
                 orderNumberLabel.isHidden = true
             }
             
-            errorDescriptionLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.ok, for: .normal)
             imageView.image = IokaImages.checkCircle
         case .error(let error):
             orderTitleLabel.text = IokaLocalizable.paymentFailed
             orderTitleLabel.textColor = colors.text
-            orderPriceLabel.isHidden = true
-            orderNumberLabel.isHidden = true
             retryOrCloseButton.setTitle(IokaLocalizable.retry, for: .normal)
             imageView.image = IokaImages.xCircle
             errorDescriptionLabel.numberOfLines = 0
