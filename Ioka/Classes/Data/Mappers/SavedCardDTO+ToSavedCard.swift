@@ -12,7 +12,6 @@ extension SavedCardDTO {
         SavedCard(id: id,
                   maskedPAN: pan_masked,
                   expirationDate: expiry_date,
-                  holder: holder,
                   paymentSystem: payment_system,
                   emitter: emitter,
                   cvvIsRequired: cvc_required)

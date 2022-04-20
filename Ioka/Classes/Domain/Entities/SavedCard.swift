@@ -7,11 +7,14 @@
 
 import Foundation
 
+/// Сохраненная карта пользователя
 public struct SavedCard {
+    /// id сохраненной карты. Используется для удаления карты и для оплаты.
     public let id: String
+    /// Маскированный PAN карты в формате "555555******5599"
     public let maskedPAN: String
+    /// Срок действия карты в формате "12/24"
     public let expirationDate: String
-    public let holder: String?
     
     let paymentSystem: String?
     let emitter: String?

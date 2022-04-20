@@ -7,10 +7,13 @@
 
 import Foundation
 
-
+/// Результат пользовательского сценария
 public enum FlowResult: Equatable {
+    /// Сценарий завершился успешно
     case succeeded
+    /// Пользователь закрыл сценарий до завершения
     case cancelled
+    /// Сценарий завершился неуспешно
     case failed(Error)
     
     public static func == (lhs: FlowResult, rhs: FlowResult) -> Bool {

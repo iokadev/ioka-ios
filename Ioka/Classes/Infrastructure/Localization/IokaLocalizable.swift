@@ -9,10 +9,14 @@ import Foundation
 
 internal var locale: IokaLocale!
 
+/// Локаль для локализации текстов в ioka SDK.
 public enum IokaLocale: String {
-  case ru
-  case kk
-  case automatic
+    /// :nodoc
+    case ru
+    /// :nodoc
+    case kk
+    /// Используется системный язык
+    case automatic
 }
 
 enum IokaLocalizable {
