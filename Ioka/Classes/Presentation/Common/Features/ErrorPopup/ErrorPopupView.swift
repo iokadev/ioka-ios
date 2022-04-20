@@ -47,7 +47,7 @@ internal class ErrorPopupView: UIView {
     private func setUI() {
         self.backgroundColor = colors.foreground
         self.addSubview(backgroundView)
-        backgroundView.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 282, paddingLeft: 40, paddingRight: 40)
+        backgroundView.centerY(in: self, left: self.leftAnchor, paddingLeft: 40, right: self.rightAnchor, paddingRight: 40)
         
         [errorImageview, errorTitleLabel, errorDescriptionLabel, tryAgainButton].forEach { backgroundView.addSubview($0) }
         
