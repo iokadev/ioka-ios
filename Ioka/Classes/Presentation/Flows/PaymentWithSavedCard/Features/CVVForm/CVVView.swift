@@ -38,9 +38,14 @@ internal class CVVView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configureView(card: SavedCard) {
-        self.cardPanMaskedLabel.text = card.maskedPAN.trimPanMasked()
-        self.cardBrandImageView.image = card.paymentSystemIcon
+    func configureView(card: SavedCard) {
+        cardPanMaskedLabel.text = card.maskedPAN.trimPanMasked()
+        
+        if let icon = card.paymentSystemIcon {
+            cardBrandImageView.image = icon
+        } else {
+            cardBrandImageView.isHidden = true
+        }
     }
     
     private func observeKeyboard() {
@@ -92,13 +97,21 @@ internal class CVVView: UIView {
         
         continueButton.anchor(top: cardInfoView.bottomAnchor, left: savedCardView.leftAnchor, right: savedCardView.rightAnchor, paddingTop: 16, paddingLeft: 24, paddingRight: 24, height: 56)
         
-        [cardBrandImageView, cardPanMaskedLabel, cvvTextField].forEach { cardInfoView.addSubview($0) }
+        cardBrandImageView.setDimensions(width: 24, height: 24)
+        cvvTextField.setDimensions(width: 45)
         
-        cardBrandImageView.centerY(in: cardInfoView, left: cardInfoView.leftAnchor, paddingLeft: 16, width: 24, height: 24)
+        let stackView = IokaStackView(views: [cardBrandImageView, cardPanMaskedLabel, cvvTextField],
+                                      viewsDistribution: .fill,
+                                      viewsAxis: .horizontal,
+                                      viewsSpacing: 12)
         
-        cardPanMaskedLabel.centerY(in: cardInfoView, left: cardBrandImageView.rightAnchor, paddingLeft: 12)
+        cardInfoView.addSubview(stackView)
         
-        cvvTextField.centerY(in: cardInfoView, right: cardInfoView.rightAnchor, paddingRight: 16, width: 45)
+        stackView.centerY(in: cardInfoView,
+                          left: cardInfoView.leftAnchor,
+                          paddingLeft: 16,
+                          right: cardInfoView.rightAnchor,
+                          paddingRight: 16)
     }
     
     @objc private func handleKeyboardAppear(notification: Notification) {
