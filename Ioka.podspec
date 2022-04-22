@@ -12,6 +12,7 @@ Pod::Spec.new do |s|
   s.resource_bundles = {
     'Ioka' => ['Ioka/Resources/**/*.{xcassets,lproj}']
   }
+  s.dependency 'CreditCardValidator'
 
   s.swift_version= '5.0'
   
