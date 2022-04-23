@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CreditCardValidator
 
 enum ValidationState {
     case invalid, valid
@@ -14,13 +15,50 @@ enum ValidationState {
 internal class CardFormViewModel {
     let repository: CardInfoRepository
     
+    var isEmitterSetted: Bool = false
+    
     init(repository: CardInfoRepository) {
         self.repository = repository
     }
     
     func getPaymentSystem(partialBin: String, completion: @escaping(String?) -> Void) {
-        repository.getPaymentSystem(partialBin: partialBin.trimCardNumberText()) { result in
-            completion(try? result.get())
+        
+        if let type = CreditCardValidator(partialBin).type {
+            switch type {
+            case .amex:
+                completion(PaymentSystem.AMERICAN_EXPRESS.rawValue)
+            case .visa:
+                completion(PaymentSystem.VISA.rawValue)
+            case .masterCard:
+                completion(PaymentSystem.MASTERCARD.rawValue)
+            case .maestro:
+                completion(PaymentSystem.MAESTRO.rawValue)
+            case .dinersClub:
+                completion(PaymentSystem.DINER_CLUB.rawValue)
+            case .jcb:
+                completion(PaymentSystem.JCB.rawValue)
+            case .discover:
+                completion(PaymentSystem.DISCOVERY.rawValue)
+            case .unionPay:
+                completion(PaymentSystem.UNION_PAY.rawValue)
+            case .mir:
+                completion(PaymentSystem.MIR.rawValue)
+            }
+        } else {
+            repository.getPaymentSystem(partialBin: partialBin.trimCardNumberText()) { result in
+                completion(try? result.get())
+            }
+        }
+    }
+    
+    func getEmitterByBinCode(binCode: String, completion: @escaping(EmitterDTO?) -> Void) {
+        if binCode.count >= 6 {
+            guard isEmitterSetted == false else { return }
+            repository.getEmitter(bin: binCode.trimEmitterBinCode()) { result in
+                completion(try? result.get())
+            }
+        } else {
+            isEmitterSetted = false
         }
     }
     
@@ -58,8 +96,12 @@ internal class CardFormViewModel {
     }
     
     func checkCardNumber(_ cardNumber: String) -> ValidationState {
-        let number = cardNumber.trimCardNumberText()
-        return number.count >= 15 ? .valid : .invalid
+        if CreditCardValidator(cardNumber).isValid {
+            return .valid
+        } else {
+            let number = cardNumber.trimCardNumberText()
+            return number.count >= 15 ? .valid : .invalid
+        }
     }
     
     func checkCVV(_ cvv: String) -> ValidationState {

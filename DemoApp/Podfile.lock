@@ -1,6 +1,7 @@
 PODS:
   - CreditCardValidator (0.5.3)
-  - Ioka (0.0.1)
+  - Ioka (0.0.1):
+    - CreditCardValidator
 
 DEPENDENCIES:
   - CreditCardValidator (~> 0.5.3)
@@ -16,7 +17,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CreditCardValidator: 8306e89b1092e03a146c1bd40943cff09e816772
-  Ioka: 72b360a2761db0f634eec3293fe233244860ad43
+  Ioka: 27b136badc8a81bc93a3c3110b18d1454df2efad
 
 PODFILE CHECKSUM: 8aff6c4e0f8668259131f66d7aaf5311fb1ee1e0
 

@@ -124,7 +124,7 @@ internal class CardFormView: UIView {
     
     @objc func didChangeText(textField: UITextField) {
         let oldText = textField.text ?? ""
-
+        
         let (text, validationState): (String, ValidationState) = {
             switch textField {
             case cardNumberTextField:
@@ -148,22 +148,29 @@ internal class CardFormView: UIView {
                 textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
             }
         }
-
+        
         (textField as? IokaTextField)?.iokaState = validationState == .invalid ? .invalid : .active
         
         createButton.iokaState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
                                                                dateExpirationText: dateExpirationTextField.text ?? "",
                                                                cvvText: cvvTextField.text ?? "")
-
+        
         guard textField === cardNumberTextField,
               text.count > 0,
               !cardNumberTextField.isCardBrandSetted else {
-                  return
-              }
+            return
+        }
         
         viewModel.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
             if let paymentSystem = paymentSystem {
                 self?.cardNumberTextField.setCardBrandIcon(imageName: paymentSystem)
+            }
+        }
+        
+        viewModel.getEmitterByBinCode(binCode: text) { [weak self] bankEmitter in
+            if let bankEmitter = bankEmitter {
+                self?.viewModel.isEmitterSetted = true
+                self?.cardNumberTextField.setBankEmitterIcon(imageName: bankEmitter.emitter_code)
             }
         }
     }
