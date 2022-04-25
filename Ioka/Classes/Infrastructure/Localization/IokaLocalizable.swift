@@ -30,6 +30,9 @@ enum IokaLocalizable {
     static var pay: String {
         localized("pay")
     }
+    static var cvvExplained: String {
+        localized("cvvExplained")
+    }
     static var enterCardNumber: String {
         localized("enterCardNumber")
     }

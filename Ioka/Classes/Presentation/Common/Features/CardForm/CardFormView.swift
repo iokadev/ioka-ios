@@ -21,8 +21,9 @@ enum CardFormState {
 internal class CardFormView: UIView {
     private let cardNumberTextField = IokaCardNumberTextField()
     private let dateExpirationTextField = IokaTextField(inputType: .dateExpiration)
-    private let cvvTextField = IokaTextField(inputType: .cvv)
+    private let cvvTextField = IokaCVVTextFIeld()
     private let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
+    private let tipView = TooltipView()
     private let saveCardToggle: UISwitch = {
         let toggle = UISwitch()
         toggle.onTintColor = colors.primary
@@ -104,6 +105,16 @@ internal class CardFormView: UIView {
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
         
         saveCardToggle.addTarget(self, action: #selector(handleSaveCardToggle), for: .allEvents)
+        cvvTextField.iconContainerView
+            .addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltip)))
+    }
+    
+    @objc private func handleCVVTooltip() {
+        showTooltip()
+    }
+    
+    private func showTooltip() {
+        tipView.performShow()
     }
     
     @objc private func handleCreateButton() {
@@ -201,6 +212,9 @@ internal class CardFormView: UIView {
     
     @objc private func handleViewTap() {
         self.endEditing(true)
+        if self.subviews.contains(tipView) {
+            tipView.performDismiss()
+        }
     }
     
     @objc private func handleSaveCardToggle() {
@@ -226,6 +240,11 @@ internal class CardFormView: UIView {
         stackViewForTransaction.centerX(in: self, bottom: self.safeAreaBottomAnchor, paddingBottom: 24)
 
         self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
+        
+        let tipWidth: CGFloat = 168
+        
+        self.addSubview(tipView)
+        tipView.anchor(bottom: cvvTextField.cvvTooltipImageView.topAnchor, right: self.rightAnchor, paddingBottom: 0, paddingRight: 16, width: tipWidth)
         
     }
     

@@ -24,6 +24,8 @@ internal class CVVView: UIView {
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
     private let continueButton = IokaButton(state: .enabled, title: IokaLocalizable.continueButton)
+    private let cvvTooltipImageView = IokaImageView(imageName: "CVVHint", imageTintColor: colors.nonadaptableGrey)
+    private let tipView = TooltipView()
     
     private var yConstraint: NSLayoutConstraint!
     
@@ -59,6 +61,9 @@ internal class CVVView: UIView {
         self.addGestureRecognizer(gestureRecognizer)
         self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         self.continueButton.addTarget(self, action: #selector(handleContinueButton), for: .touchUpInside)
+        cvvTooltipImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltipShow)))
+        savedCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltipHide)))
+        cvvTooltipImageView.isUserInteractionEnabled = true
     }
     
     @objc private func handleCloseButton() {
@@ -72,6 +77,22 @@ internal class CVVView: UIView {
         cvvTextField.isUserInteractionEnabled = false
         
         delegate?.makePayment(self)
+    }
+    
+    @objc private func handleCVVTooltipShow() {
+        showTooltip()
+    }
+    
+    @objc private func handleCVVTooltipHide() {
+        hideTooltip()
+    }
+    
+    private func showTooltip() {
+        tipView.performShow()
+    }
+    
+    private func hideTooltip() {
+        tipView.performDismiss()
     }
     
     private func setUI() {
@@ -99,8 +120,14 @@ internal class CVVView: UIView {
         
         cardBrandImageView.setDimensions(width: 24, height: 24)
         cvvTextField.setDimensions(width: 45)
+        cvvTooltipImageView.setDimensions(width: 24, height: 24)
         
-        let stackView = IokaStackView(views: [cardBrandImageView, cardPanMaskedLabel, cvvTextField],
+        let cvvStackView = IokaStackView(views: [cvvTextField, cvvTooltipImageView],
+                                         viewsDistribution: .fillProportionally,
+                                      viewsAxis: .horizontal,
+                                      viewsSpacing: 12)
+        
+        let stackView = IokaStackView(views: [cardBrandImageView, cardPanMaskedLabel, cvvStackView],
                                       viewsDistribution: .fill,
                                       viewsAxis: .horizontal,
                                       viewsSpacing: 12)
@@ -112,6 +139,11 @@ internal class CVVView: UIView {
                           paddingLeft: 16,
                           right: cardInfoView.rightAnchor,
                           paddingRight: 16)
+        
+        let tipWidth: CGFloat = 168
+        
+        self.addSubview(tipView)
+        tipView.anchor(bottom: cvvTooltipImageView.topAnchor, right: self.cardInfoView.rightAnchor, width: tipWidth)
     }
     
     @objc private func handleKeyboardAppear(notification: Notification) {
