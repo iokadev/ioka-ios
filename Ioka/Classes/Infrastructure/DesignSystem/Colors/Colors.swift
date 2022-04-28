@@ -31,7 +31,7 @@ extension Colors {
         error: UIColor(named: "Error", in: IokaBundle.bundle, compatibleWith: nil)!,
         success: UIColor(named: "Success", in: IokaBundle.bundle, compatibleWith: nil)!,
         text: UIColor(named: "Text", in: IokaBundle.bundle, compatibleWith: nil)!,
-        nonadaptableText: UIColor(named: "nonadaptableText", in: IokaBundle.bundle, compatibleWith: nil)!,
+        nonadaptableText: UIColor(named: "NonadaptableText", in: IokaBundle.bundle, compatibleWith: nil)!,
         background: UIColor(named: "Background", in: IokaBundle.bundle, compatibleWith: nil)!,
         secondaryBackground: UIColor(named: "SecondaryBackground", in: IokaBundle.bundle, compatibleWith: nil)!,
         tertiaryBackground: UIColor(named: "TertiaryBackground", in: IokaBundle.bundle, compatibleWith: nil)!,
