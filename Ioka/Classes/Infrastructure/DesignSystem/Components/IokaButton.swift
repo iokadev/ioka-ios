@@ -65,6 +65,7 @@ internal class IokaButton: UIButton {
             }
             
             self.setImage(image, for: .normal)
+            self.tintColor = tintColor
         }
     }
     

@@ -82,6 +82,21 @@ enum IokaLocalizable {
     static var goPayment: String {
         localized("goPayment")
     }
+    static var everythingRight: String {
+        localized("everythingRight")
+    }
+    static var checkCardNymber: String {
+        localized("checkCardNymber")
+    }
+    static var scanAgain: String {
+        localized("scanAgain")
+    }
+    static var cardScanExplained: String {
+        localized("cardScanExplained")
+    }
+    static var cardScan: String {
+        localized("cardScan")
+    }
     
     private static func localized(_ key: String) -> String {
       switch locale {
