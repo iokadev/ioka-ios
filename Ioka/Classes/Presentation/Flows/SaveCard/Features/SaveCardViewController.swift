@@ -10,8 +10,7 @@ import UIKit
 internal class SaveCardViewController: UIViewController {
 
     var onButtonPressed: ((PaymentResult, Error?, PaymentDTO?) -> Void)?
-    private lazy var contentView = CardFormView(state: .saving,
-                                                viewModel: viewModel.cardFormViewModel)
+    private lazy var contentView = SaveCardView(viewModel: viewModel.cardFormViewModel)
     var viewModel: SaveCardViewModel!
     var customerId: String!
 
@@ -46,22 +45,9 @@ internal class SaveCardViewController: UIViewController {
     }
 }
 
-extension SaveCardViewController: CardFormViewDelegate {
-    func showCardScanner(_ view: CardFormView) {
-        if #available(iOS 13.0, *) {
-            let scannerView = CardScanner.getScanner { [weak self] number in
-                self?.contentView.cardNumberTextField.text = number
-                self?.contentView.didChangeText(textField: self?.contentView.cardNumberTextField ?? UITextField())
-            }
-            self.navigationController?.present(scannerView, animated: false)
-        }
-    }
+extension SaveCardViewController: SaveCardViewDelegate {
 
-    func closeCardFormView(_ view: CardFormView) {
-        self.viewModel.close()
-    }
-
-    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool) {
+    func saveCardView(saveCard saveCardView: SaveCardView, cardNumber: String, cvc: String, exp: String, save: Bool) {
         let card = CardParameters(pan: cardNumber, exp: exp, cvc: cvc)
 
         contentView.startLoading()
@@ -75,5 +61,19 @@ extension SaveCardViewController: CardFormViewDelegate {
                 self?.show(error: error)
             }
         }
+    }
+
+    func saveCardView(showCardScanner saveCardView: SaveCardView) {
+        if #available(iOS 13.0, *) {
+            let scannerView = CardScanner.getScanner { [weak self] number in
+                self?.contentView.cardFormView.cardNumberTextField.text = number
+                self?.contentView.cardFormView.didChangeText(textField: self?.contentView.cardFormView.cardNumberTextField ?? UITextField())
+            }
+            self.navigationController?.present(scannerView, animated: false)
+        }
+    }
+
+    func saveCardView(closeSaveCardView saveCardView: SaveCardView) {
+        self.viewModel.close()
     }
 }

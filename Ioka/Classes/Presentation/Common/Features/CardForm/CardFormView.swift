@@ -9,120 +9,60 @@ import UIKit
 
 
 internal protocol CardFormViewDelegate: NSObject {
-    func createPaymentOrSaveCard(_ view: CardFormView, cardNumber: String, cvc: String, exp: String, save: Bool)
-    func closeCardFormView(_ view: CardFormView)
     func showCardScanner(_ view: CardFormView)
-}
-
-enum CardFormState {
-    case payment(order: Order)
-    case saving
+    func cardFormView(textFieldDidChange cardFormView: CardFormView)
 }
 
 internal class CardFormView: UIView {
     let cardNumberTextField = IokaCardNumberTextField()
     let dateExpirationTextField = IokaTextField(inputType: .dateExpiration)
-    private let cvvTextField = IokaCVVTextFIeld()
-    private let saveCardLabel = IokaLabel(title: IokaLocalizable.saveCard, iokaFont: typography.subtitle)
+    let cvvTextField = IokaCVVTextFIeld()
     private let tipView = TooltipView()
-    private let saveCardToggle: UISwitch = {
-        let toggle = UISwitch()
-        toggle.onTintColor = colors.primary
-
-        return toggle
-    }()
-
-    private let createButton = IokaButton(state: .disabled)
-    private let transactionLabel = IokaLabel(title: IokaLocalizable.transactionsProtected, iokaFont: typography.subtitle, iokaTextColor: colors.success)
-    private var transactionImageView = IokaImageView(imageName: "Transaction", imageTintColor: colors.success)
     private lazy var stackViewForCardInfo = IokaStackView(views: [dateExpirationTextField, cvvTextField], viewsDistribution: .fillEqually, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var stackViewForCardSaving = IokaStackView(views: [saveCardLabel, saveCardToggle], viewsDistribution: .fill, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var stackViewForTransaction = IokaStackView(views: [transactionImageView, transactionLabel], viewsDistribution: .equalCentering, viewsAxis: .horizontal, viewsSpacing: 8)
-    private lazy var errorView = ErrorToastView()
-    private let feedbackGenerator = UISelectionFeedbackGenerator()
 
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
-    let cardFormState: CardFormState
-    let viewModel: CardFormViewModel
+    var viewModel: CardFormViewModel?
 
-    private var createButtonBottomConstraint: NSLayoutConstraint?
-
-    init(state: CardFormState, viewModel: CardFormViewModel) {
-        self.cardFormState = state
-        self.viewModel = viewModel
-
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isUserInteractionEnabled = true
+        self.cardNumberTextField.isUserInteractionEnabled = true
         self.cardNumberTextField.scannerDelegate = self
         setupUI()
         setActions()
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardAppear), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardDissapear), name: UIResponder.keyboardWillHideNotification, object: nil)
         [cardNumberTextField, dateExpirationTextField, cvvTextField].forEach { $0.delegate = self }
+    }
 
-        setupSaveCardUI()
+    convenience init(viewModel: CardFormViewModel) {
+        self.init(frame: CGRect())
+        self.viewModel = viewModel
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func show(error: Error) {
-        errorView.show(error: error)
-    }
-
-    func startLoading() {
-        createButton.iokaState = .loading
-        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
-            $0.isUserInteractionEnabled = false
-        }
-    }
-
-    func stopLoading() {
-        createButton.iokaState = .enabled
-        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
-            $0.isUserInteractionEnabled = true
-        }
-    }
-
-    func showSavingSuccess() {
-        UINotificationFeedbackGenerator().notificationOccurred(.success)
-        createButton.iokaState = .success
-        [cardNumberTextField, dateExpirationTextField, cvvTextField, saveCardToggle].forEach {
-            $0.isUserInteractionEnabled = false
-        }
-    }
-
     func getEmitterByBinCode(text: String) {
-        viewModel.getEmitterByBinCode(binCode: text) { [weak self] bankEmitter in
+        viewModel?.getEmitterByBinCode(binCode: text) { [weak self] bankEmitter in
             if let bankEmitter = bankEmitter {
-                self?.viewModel.isEmitterSetted = true
+                self?.viewModel?.isEmitterSetted = true
                 self?.cardNumberTextField.setBankEmitterIcon(imageName: bankEmitter.emitter_code)
             }
         }
     }
 
     func getPaymentSystem(text: String) {
-        viewModel.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
+        viewModel?.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
             if let paymentSystem = paymentSystem {
                 self?.cardNumberTextField.setCardBrandIcon(imageName: paymentSystem)
             }
         }
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
     private func setActions() {
         [dateExpirationTextField, cardNumberTextField, cvvTextField].forEach{$0.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)}
 
-        createButton.addTarget(self, action: #selector(handleCreateButton), for: .touchUpInside)
-
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
-
-        saveCardToggle.addTarget(self, action: #selector(handleSaveCardToggle), for: .allEvents)
         cvvTextField.iconContainerView
             .addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltip)))
     }
@@ -135,23 +75,11 @@ internal class CardFormView: UIView {
         tipView.performShow()
     }
 
-    @objc private func handleCreateButton() {
-        self.endEditing(true)
-
-        switch createButton.iokaState {
-        case .success:
-            delegate?.closeCardFormView(self)
-        case .enabled:
-            guard let cardNumber = cardNumberTextField.text?.trimCardNumberText(),
-                  let cvc = cvvTextField.text,
-                  let exp = dateExpirationTextField.text else { return }
-            delegate?.createPaymentOrSaveCard(self, cardNumber: cardNumber, cvc: cvc, exp: exp, save: saveCardToggle.isOn)
-        default:
-            break
-        }
-    }
-
     @objc func didChangeText(textField: UITextField) {
+        guard let viewModel = viewModel else {
+            return
+        }
+
         let oldText = textField.text ?? ""
 
         let (text, validationState): (String, ValidationState) = {
@@ -180,9 +108,7 @@ internal class CardFormView: UIView {
 
         (textField as? IokaTextField)?.iokaState = validationState == .invalid ? .invalid : .active
 
-        createButton.iokaState = viewModel.checkPayButtonState(cardNumberText: cardNumberTextField.text ?? "",
-                                                               dateExpirationText: dateExpirationTextField.text ?? "",
-                                                               cvvText: cvvTextField.text ?? "")
+        delegate?.cardFormView(textFieldDidChange: self)
 
         guard textField === cardNumberTextField,
               text.count > 0,
@@ -195,94 +121,31 @@ internal class CardFormView: UIView {
        getEmitterByBinCode(text: text)
     }
 
-    @objc private func handleKeyboardAppear(notification: Notification) {
-        guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double, let keyboardEndFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-
-        self.layoutIfNeeded()
-
-        createButtonBottomConstraint?.constant = -(keyboardEndFrame.height - safeAreaInsets.bottom + 20)
-
-        UIView.animate(withDuration: animationDuration) {
-            self.layoutIfNeeded()
-        }
-    }
-
-    @objc private func handleKeyboardDissapear(notification: Notification) {
-        guard let userInfo = notification.userInfo, let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
-
-        self.layoutIfNeeded()
-
-        createButtonBottomConstraint?.constant = -64
-
-        UIView.animate(withDuration: animationDuration) {
-            self.layoutIfNeeded()
-        }
-    }
-
-    @objc private func handleViewTap() {
+    func handleViewTap() {
         self.endEditing(true)
         if self.subviews.contains(tipView) {
             tipView.performDismiss()
         }
     }
 
-    @objc private func handleSaveCardToggle() {
-        feedbackGenerator.selectionChanged()
-    }
-
     private func setupUI() {
-        self.backgroundColor = colors.background
 
-        [cardNumberTextField, stackViewForCardInfo, createButton, stackViewForTransaction].forEach{ self.addSubview($0) }
-        self.addSubview(self.errorView)
+        [cardNumberTextField, stackViewForCardInfo].forEach{ self.addSubview($0) }
 
-        cardNumberTextField.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 56)
+        cardNumberTextField.anchor(top: self.topAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 0, paddingLeft: 16, paddingRight: 16, height: 56)
+        self.bringSubviewToFront(cardNumberTextField)
 
         stackViewForCardInfo.anchor(top: cardNumberTextField.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 56)
-
-        createButton.anchor(left: self.leftAnchor, right: self.rightAnchor, paddingLeft: 16, paddingRight: 16, height: 56)
-        createButton.translatesAutoresizingMaskIntoConstraints = false
-        self.createButtonBottomConstraint = createButton.bottomAnchor.constraint(equalTo: self.safeAreaBottomAnchor, constant: -64)
-        self.createButtonBottomConstraint?.isActive = true
-
-        transactionImageView.setDimensions(width: 24, height: 24)
-        stackViewForTransaction.centerX(in: self, bottom: self.safeAreaBottomAnchor, paddingBottom: 24)
-
-        self.errorView.anchor(left: self.leftAnchor, bottom: self.createButton.topAnchor, right: self.rightAnchor, paddingLeft: 16, paddingBottom: 8, paddingRight: 16)
 
         let tipWidth: CGFloat = 168
 
         self.addSubview(tipView)
         tipView.anchor(bottom: cvvTextField.cvvTooltipImageView.topAnchor, right: self.rightAnchor, paddingBottom: 0, paddingRight: 16, width: tipWidth)
-
-    }
-
-    private func setupSaveCardUI() {
-        switch cardFormState {
-        case .payment(let order):
-            if order.hasCustomerId {
-                self.addSubview(stackViewForCardSaving)
-                stackViewForCardSaving.anchor(top: stackViewForCardInfo.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor, paddingTop: 8, paddingLeft: 16, paddingRight: 16, height: 40)
-            }
-        case .saving:
-            break
-        }
-
-        setupCreateButton()
-    }
-
-    private func setupCreateButton() {
-        switch cardFormState {
-        case .payment(let order):
-            createButton.title = "\(IokaLocalizable.pay) \(order.price) ₸"
-        case .saving:
-            createButton.title = IokaLocalizable.save
-        }
-
     }
 }
 
-extension CardFormView: UITextFieldDelegate, IokaCardNumberTextFieldDelegate {
+extension CardFormView: UITextFieldDelegate,
+                            IokaCardNumberTextFieldDelegate {
     func scannerDidPressed(_ textField: IokaCardNumberTextField) {
         delegate?.showCardScanner(self)
     }

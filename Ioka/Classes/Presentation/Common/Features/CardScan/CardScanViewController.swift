@@ -68,7 +68,6 @@ internal class CardScanner: UIViewController {
         super.viewDidLoad()
         setupCaptureSession()
         captureSession.startRunning()
-        title = "Salam"
 
         let buttomItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(scanCompleted))
         buttomItem.tintColor = .white
