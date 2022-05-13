@@ -10,7 +10,7 @@ import UIKit
 internal class PaymentMethodsViewController: UIViewController {
 
     var viewModel: PaymentMethodsViewModel!
-    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel, hasApplePay: true)
+    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel, hasApplePay: viewModel.applePayData == nil ? false : true)
 
     override func loadView() {
         self.view = contentView
