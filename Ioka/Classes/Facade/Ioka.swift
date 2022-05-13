@@ -223,20 +223,9 @@ public class Ioka {
             repository.getOrder(orderAccessToken: orderAccessToken) { result in
                 switch result {
                 case .success(let order):
-                    let paymentSummaryItems = applePayData?.summaryItems ?? [PKPaymentSummaryItem(label: applePayConfiguration.merchantName, amount: NSDecimalNumber(value: order.amount / 100), type: .final)]
-
-                    let currencyCode = order.currency
-                    let supportedNetworks = self.getSupportedNetworks()
-                    let capability: PKMerchantCapability = .capability3DS
-
-                    let request = PKPaymentRequest()
-                    request.paymentSummaryItems = paymentSummaryItems
-                    request.currencyCode = currencyCode
-                    request.supportedNetworks = supportedNetworks
-                    request.merchantCapabilities = capability
-
+                    let request = self.craeteApplePayRequest(order: order, applePayConfiguration: applePayConfiguration, applePayData: applePayData)
                     let viewModel = ApplePayViewModel()
-                    let vc = ApplePayViewController()
+                    guard let vc = ApplePayViewController(paymentRequest: request) else { return }
                     vc.viewModel = viewModel
                     
 
@@ -257,6 +246,23 @@ public class Ioka {
 
     public func applePayIsAvailable() -> Bool {
         PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: getSupportedNetworks())
+    }
+
+    internal func craeteApplePayRequest(order: Order, applePayConfiguration: ApplePayConfiguration, applePayData: ApplePayData?) -> PKPaymentRequest {
+
+        let paymentSummaryItems = applePayData?.summaryItems ?? [PKPaymentSummaryItem(label: applePayConfiguration.merchantName, amount: NSDecimalNumber(value: order.amount / 100), type: .final)]
+
+        let currencyCode = order.currency
+        let supportedNetworks = self.getSupportedNetworks()
+        let capability: PKMerchantCapability = .capability3DS
+
+        let request = PKPaymentRequest()
+        request.paymentSummaryItems = paymentSummaryItems
+        request.currencyCode = currencyCode
+        request.supportedNetworks = supportedNetworks
+        request.merchantCapabilities = capability
+
+        return request
     }
     
     private func applyTheme(_ theme: Theme) {

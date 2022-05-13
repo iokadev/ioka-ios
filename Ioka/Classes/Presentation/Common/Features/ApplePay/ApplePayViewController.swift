@@ -18,6 +18,7 @@ internal class ApplePayViewController: PKPaymentAuthorizationViewController, PKP
     }
 
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        self.dismiss(animated: true)
     }
 
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
