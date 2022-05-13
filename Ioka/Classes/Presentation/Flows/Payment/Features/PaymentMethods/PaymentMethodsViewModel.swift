@@ -23,13 +23,15 @@ internal class PaymentMethodsViewModel {
     let orderAccessToken: AccessToken
     let order: Order
     var cardFormViewModel: CardFormViewModel
+    var applePayData: ApplePayData?
     
-    init(delegate: PaymentMethodsNavigationDelegate, repository: PaymentRepository, orderAccessToken: AccessToken, order: Order, cardFormViewModel: CardFormViewModel) {
+    init(delegate: PaymentMethodsNavigationDelegate, repository: PaymentRepository, orderAccessToken: AccessToken, order: Order, cardFormViewModel: CardFormViewModel, applePayData: ApplePayData?) {
         self.repository = repository
         self.delegate = delegate
         self.orderAccessToken = orderAccessToken
         self.order = order
         self.cardFormViewModel = cardFormViewModel
+        self.applePayData = applePayData
     }
     
     func createCardPayment(card: CardParameters, completion: @escaping (Error?) -> Void) {
@@ -48,6 +50,20 @@ internal class PaymentMethodsViewModel {
                 completion(nil)
             case .failure(let error):
                 completion(error)
+            }
+        }
+    }
+
+    func createApplePayPayment() {
+        Ioka.shared.applePayPaymentRequest(orderAccessToken: orderAccessToken.token, applePayData: applePayData) { result in
+            switch result {
+            case .success(let status):
+//                switch status {
+//                case .
+//                }
+                self.delegate?.paymentMethodsDidSucceed()
+            case .failure(let error):
+                self.delegate?.paymentMethodsDidFail(declineError: error)
             }
         }
     }

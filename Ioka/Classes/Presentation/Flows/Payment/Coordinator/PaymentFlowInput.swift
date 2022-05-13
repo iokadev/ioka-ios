@@ -12,4 +12,5 @@ import UIKit
 internal struct PaymentFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
+    var applePayData: ApplePayData?
 }

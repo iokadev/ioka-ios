@@ -10,6 +10,6 @@ import Foundation
 
 extension OrderDTO {
     func toOrder() -> Order {
-        Order(id: id, externalId: external_id, hasCustomerId: hasCustomerId, price: amount, currency: currency)
+        Order(id: id, externalId: external_id, hasCustomerId: hasCustomerId, price: amount, currency: currency, amount: amount)
     }
 }

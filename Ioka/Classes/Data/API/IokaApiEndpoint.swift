@@ -23,6 +23,7 @@ internal enum IokaApiEndpointType {
     case getCardByID(customerAccessToken: AccessToken, cardId: String)
     case deleteCardByID(customerAccessToken: AccessToken, cardId: String)
     case getOrderByID(orderAccessToken: AccessToken)
+    case createPaymentToken
 }
 
 internal enum NetworkEnvironment {
@@ -119,6 +120,11 @@ internal struct IokaApiEndpoint: EndpointType {
                                                      urlParameters: nil,
                                                      additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
                                                                          AuthenticationKeys.orderAccessToken: orderAccessToken.token])
+        case .createPaymentToken:
+            print("Hello")
+            self.path = ""
+            self.httpMethod = .post
+            self.task = .request
         }
     }
 }

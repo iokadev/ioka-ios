@@ -10,13 +10,14 @@ import UIKit
 
 
 internal struct FeaturesFactory {
-    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, paymentRepository: PaymentRepository, cardInfoRepository: CardInfoRepository) -> PaymentMethodsViewController {
+    func makePaymentMethods(delegate: PaymentMethodsNavigationDelegate, orderAccessToken: AccessToken, order: Order, paymentRepository: PaymentRepository, cardInfoRepository: CardInfoRepository, applePayData: ApplePayData? = nil) -> PaymentMethodsViewController {
         let cardFormViewModel = CardFormViewModel(repository: cardInfoRepository)
         let viewModel = PaymentMethodsViewModel(delegate: delegate,
                                                 repository: paymentRepository,
                                                 orderAccessToken: orderAccessToken,
                                                 order: order,
-                                                cardFormViewModel: cardFormViewModel)
+                                                cardFormViewModel: cardFormViewModel,
+                                                applePayData: applePayData)
         let vc = PaymentMethodsViewController()
         vc.viewModel = viewModel
 
@@ -79,6 +80,13 @@ internal struct FeaturesFactory {
         let vc = ErrorPopupViewController()
         vc.viewModel = viewModel
 
+        return vc
+    }
+
+    func makeApplePay() -> ApplePayViewController {
+        let viewModel = ApplePayViewModel()
+        let vc = ApplePayViewController()
+        vc.viewModel = viewModel
         return vc
     }
 }

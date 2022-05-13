@@ -15,4 +15,5 @@ internal struct Order {
     var hasCustomerId: Bool
     var price: Int
     var currency: String
+    var amount: Int
 }

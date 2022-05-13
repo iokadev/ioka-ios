@@ -9,8 +9,8 @@ import UIKit
 
 internal class PaymentMethodsViewController: UIViewController {
 
-    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel)
     var viewModel: PaymentMethodsViewModel!
+    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel, hasApplePay: true)
 
     override func loadView() {
         self.view = contentView
@@ -63,5 +63,9 @@ extension PaymentMethodsViewController:  PaymentMethodsViewDelegate {
 
     func paymentMethodsView(closePaymentMethodsView paymentMethodsView: PaymentMethodsView) {
         // вызывается только при сохранении
+    }
+
+    func paymentMethodsView(applePayButtonDidPressed paymentMethodsView: PaymentMethodsView) {
+        print("Hello")
     }
 }

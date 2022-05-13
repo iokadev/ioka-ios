@@ -29,7 +29,8 @@ internal class PaymentFlowFactory {
                                            orderAccessToken: input.orderAccessToken,
                                            order: order,
                                            paymentRepository: paymentRepository(),
-                                           cardInfoRepository: cardInfoRepository())
+                                           cardInfoRepository: cardInfoRepository(),
+                                           applePayData: input.applePayData)
     }
     
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {
@@ -42,6 +43,10 @@ internal class PaymentFlowFactory {
     
     func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {
         featuresFactory.makePaymentResult(delegate: delegate, order: order, result: result)
+    }
+
+    func makeApplePay() -> ApplePayViewController{
+        featuresFactory.makeApplePay()
     }
     
     func paymentRepository() -> PaymentRepository {

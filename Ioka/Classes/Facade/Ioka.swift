@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import PassKit
 
 
 /// Класс-фасад Ioka SDK. Реализован как синглтон.
@@ -16,6 +17,7 @@ public class Ioka {
     static public let shared = Ioka()
     var setupInput: SetupInput?
     var currentCoordinator: Coordinator?
+    var applePayConfiguration: ApplePayConfiguration?
     
     
     /// Метод для инициализии SDK. Необходимо вызвать до того, как обращаться к любым другим методам этого класса.
@@ -30,6 +32,21 @@ public class Ioka {
         applyTheme(theme)
         updateLocale(locale)
     }
+
+    /// Метод для инициализии SDK. Необходимо вызвать до того, как обращаться к любым другим методам этого класса.
+    ///
+    /// - Parameters:
+    ///   - apiKey: Публичный API-ключ, полученные при регистрации в качестве клиента Ioka
+    ///   - theme: Конфигурирует внешний вид экранов Ioka SDK. По умолчанию - объект Theme.default.
+    ///   - locale: Конфигурация  для функционала ApplePay.
+    ///   - applePayConfiguration: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
+    ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
+    public func setup(apiKey: String, theme: Theme = .default, locale: IokaLocale = .automatic, applePayConfiguration: ApplePayConfiguration) {
+        self.setupInput = SetupInput(apiKey: APIKey(key: apiKey))
+        applyTheme(theme)
+        updateLocale(locale)
+        self.applePayConfiguration = applePayConfiguration
+    }
     
     /// Метод для запуска сценария оплаты новой картой. Показывает форму для ввода данных карты.
     /// При необходимости проводит проверку 3DSecure. Отображает результат оплаты пользователю.
@@ -42,7 +59,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
     ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
-    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayData: ApplePayData? = nil, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -50,7 +67,7 @@ public class Ioka {
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token)
+            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: applePayData)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             
@@ -189,15 +206,69 @@ public class Ioka {
             completion(error)
         }
     }
+
+    public func applePayPaymentRequest(orderAccessToken: String, applePayData: ApplePayData? = nil, completion: @escaping(Result<FlowResult, Error>) -> Void) {
+        guard applePayIsAvailable() else { return }
+        guard let applePayConfiguration = applePayConfiguration else { return }
+
+        guard let setupInput = setupInput else {
+            completion(.failure(DomainError.invalidTokenFormat))
+            return
+        }
+        let api = IokaApi(apiKey: setupInput.apiKey)
+        let repository = OrderRepository(api: api)
+
+        do {
+            let orderAccessToken = try AccessToken(token: orderAccessToken)
+            repository.getOrder(orderAccessToken: orderAccessToken) { result in
+                switch result {
+                case .success(let order):
+                    let paymentSummaryItems = applePayData?.summaryItems ?? [PKPaymentSummaryItem(label: applePayConfiguration.merchantName, amount: NSDecimalNumber(value: order.amount / 100), type: .final)]
+
+                    let currencyCode = order.currency
+                    let supportedNetworks = self.getSupportedNetworks()
+                    let capability: PKMerchantCapability = .capability3DS
+
+                    let request = PKPaymentRequest()
+                    request.paymentSummaryItems = paymentSummaryItems
+                    request.currencyCode = currencyCode
+                    request.supportedNetworks = supportedNetworks
+                    request.merchantCapabilities = capability
+
+                    let viewModel = ApplePayViewModel()
+                    let vc = ApplePayViewController()
+                    vc.viewModel = viewModel
+                    
+
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
     
     /// Переключает локаль для локализации текстов в ioka SDK. Необходимо вызвать, если пользователь переключил язык
     /// в приложении.
     public func updateLocale(_ localeParam: IokaLocale) {
         locale = localeParam
     }
+
+    public func applePayIsAvailable() -> Bool {
+        PKPaymentAuthorizationViewController.canMakePayments(usingNetworks: getSupportedNetworks())
+    }
     
     private func applyTheme(_ theme: Theme) {
         colors = theme.colors
         typography = theme.typography
+    }
+
+    private func getSupportedNetworks() -> [PKPaymentNetwork] {
+        if #available(iOS 14.5, *) {
+            return [.discover, .amex, .visa, .masterCard, .mir, .chinaUnionPay]
+        } else {
+            return [.discover, .amex, .visa, .masterCard, .chinaUnionPay]
+        }
     }
 }

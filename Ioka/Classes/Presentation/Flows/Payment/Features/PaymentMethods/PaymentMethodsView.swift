@@ -6,11 +6,13 @@
 //
 
 import UIKit
+import PassKit
 
 protocol PaymentMethodsViewDelegate: NSObject {
     func paymentMethodsView(createPayment paymentMethodsView: PaymentMethodsView, cardNumber: String, cvc: String, exp: String, save: Bool)
     func paymentMethodsView(showCardScanner paymentMethodsView: PaymentMethodsView)
     func paymentMethodsView(closePaymentMethodsView paymentMethodsView: PaymentMethodsView)
+    func paymentMethodsView(applePayButtonDidPressed paymentMethodsView: PaymentMethodsView)
 }
 
 
@@ -37,10 +39,17 @@ class PaymentMethodsView: UIView {
     private let feedbackGenerator = UISelectionFeedbackGenerator()
 
     private var createButtonBottomConstraint: NSLayoutConstraint?
+    private var hasApplePay: Bool
+    private var applePayButton = PKPaymentButton(paymentButtonType: .plain, paymentButtonStyle: .black)
+    private var payCardLabel = IokaLabel(title: IokaLocalizable.orPayCard, iokaFont: typography.subtitleSmall, iokaTextColor: colors.nonadaptableGrey, iokaTextAlignemnt: .center)
+    private var seperatorViewLeft = IokaCustomView(backGroundColor: colors.nonadaptableGrey, cornerRadius: 0)
+    private var seperatorViewRight = IokaCustomView(backGroundColor: colors.nonadaptableGrey, cornerRadius: 0)
 
-    init(order: Order, viewModel: CardFormViewModel) {
+
+    init(order: Order, viewModel: CardFormViewModel, hasApplePay: Bool) {
         self.order = order
         self.viewModel = viewModel
+        self.hasApplePay = hasApplePay
         super.init(frame: .zero)
         cardFormView.delegate = self
         setUI()
@@ -87,6 +96,7 @@ class PaymentMethodsView: UIView {
         createButton.addTarget(self, action: #selector(handleCreateButton), for: .touchUpInside)
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleViewTap)))
         saveCardToggle.addTarget(self, action: #selector(handleSaveCardToggle), for: .allEvents)
+        applePayButton.addTarget(self, action: #selector(handleAplePayButton), for: .touchUpInside)
     }
 
     @objc private func handleKeyboardAppear(notification: Notification) {
@@ -122,6 +132,10 @@ class PaymentMethodsView: UIView {
         delegate?.paymentMethodsView(createPayment: self, cardNumber: cardNumber, cvc: cvc, exp: exp, save: saveCardToggle.isOn)
     }
 
+    @objc private func handleAplePayButton() {
+        self.delegate?.paymentMethodsView(applePayButtonDidPressed: self)
+    }
+
     @objc private func handleViewTap() {
         cardFormView.handleViewTap()
     }
@@ -134,7 +148,16 @@ class PaymentMethodsView: UIView {
         self.backgroundColor = colors.background
         [cardFormView, createButton, stackViewForTransaction, errorView].forEach { self.addSubview($0) }
 
-        cardFormView.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, right: self.rightAnchor,paddingTop: 32, paddingLeft: 0, paddingRight: 0, height: 120)
+        if hasApplePay {
+            [applePayButton, payCardLabel, seperatorViewLeft, seperatorViewRight].forEach { self.addSubview($0) }
+            applePayButton.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, right: self.rightAnchor,paddingTop: 32, paddingLeft: 16, paddingRight: 16, height: 50)
+            payCardLabel.centerX(in: self, top: applePayButton.bottomAnchor, paddingTop: 24)
+            seperatorViewLeft.centerY(in: payCardLabel, left: self.leftAnchor, paddingLeft: 16, right: payCardLabel.leftAnchor, paddingRight: 8, height: 1)
+            seperatorViewRight.centerY(in: payCardLabel, left: payCardLabel.rightAnchor, paddingLeft: 8, right: self.rightAnchor, paddingRight: 16, height: 1)
+            cardFormView.anchor(top: applePayButton.bottomAnchor, left: self.leftAnchor, right: self.rightAnchor,paddingTop: 64, paddingLeft: 0, paddingRight: 0, height: 120)
+        } else {
+            cardFormView.anchor(top: self.safeAreaTopAnchor, left: self.leftAnchor, right: self.rightAnchor,paddingTop: 32, paddingLeft: 0, paddingRight: 0, height: 120)
+        }
 
         if order.hasCustomerId {
             self.addSubview(stackViewForCardSaving)

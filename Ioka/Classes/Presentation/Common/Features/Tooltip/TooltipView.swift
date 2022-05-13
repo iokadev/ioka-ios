@@ -19,7 +19,6 @@ internal class TooltipView: UIView {
         super.init(frame: frame)
         setUI()
         self.alpha = 0.0
-        titleLabel.adjustsFontForContentSizeCategory = true
     }
     
 
