@@ -8,6 +8,10 @@
 import Foundation
 import PassKit
 
+public enum ApplePayState {
+    case disable
+    case enable(applePayData: ApplePayData? = nil)
+}
 
 public struct ApplePayConfiguration {
     let merchantName: String //(для отображения в сумме заказа)

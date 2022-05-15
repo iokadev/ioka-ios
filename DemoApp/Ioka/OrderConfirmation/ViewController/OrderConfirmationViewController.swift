@@ -74,7 +74,7 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         case .creditCard( _):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
-                Ioka.shared.startPaymentFlow(sourceViewController: self, orderAccessToken: orderAccessToken) { [weak self] result in
+                Ioka.shared.startPaymentFlow(sourceViewController: self, orderAccessToken: orderAccessToken, applePay: .disable) { [weak self] result in
                     if result == .succeeded {
                         self?.navigationController?.popViewController(animated: true)
                     }

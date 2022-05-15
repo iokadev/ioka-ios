@@ -59,7 +59,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
     ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
-    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayData: ApplePayData? = nil, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePay: ApplePayState, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -67,7 +67,13 @@ public class Ioka {
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: applePayData)
+            var input: PaymentFlowInput
+            switch applePay {
+            case .disable:
+                input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: nil)
+            case .enable(let applePayData):
+                input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: applePayData)
+            }
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             

@@ -58,9 +58,7 @@ internal class PaymentMethodsViewModel {
         Ioka.shared.applePayPaymentRequest(orderAccessToken: orderAccessToken.token, applePayData: applePayData) { result in
             switch result {
             case .success(let status):
-//                switch status {
-//                case .
-//                }
+                print(status)
                 self.delegate?.paymentMethodsDidSucceed()
             case .failure(let error):
                 self.delegate?.paymentMethodsDidFail(declineError: error)
