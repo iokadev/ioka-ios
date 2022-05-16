@@ -54,9 +54,7 @@ public class IokaApi: IokaAPIProtocol {
         endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .getOrderByID(orderAccessToken: orderAccessToken)), completion: completion)
     }
 
-    func createPaymentToken() {
-//        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createPaymentToken)) { result in
-//            print("Helloo")
-//        }
+    func createPaymentToken(orderAccessToken: AccessToken, createPaymentTokenParameters: CreatePaymentTokenParameters, completion: @escaping (Result<PaymentDTO, Error>) -> Void) {
+        endpointRouter.request(IokaApiEndpoint(apiKey: apiKey, endpoint: .createPaymentToken(orderAccessToken: orderAccessToken, createPaymentTokenParameters: createPaymentTokenParameters)), completion: completion)
     }
 }

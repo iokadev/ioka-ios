@@ -23,7 +23,7 @@ internal enum IokaApiEndpointType {
     case getCardByID(customerAccessToken: AccessToken, cardId: String)
     case deleteCardByID(customerAccessToken: AccessToken, cardId: String)
     case getOrderByID(orderAccessToken: AccessToken)
-    case createPaymentToken
+    case createPaymentToken(orderAccessToken: AccessToken, createPaymentTokenParameters: CreatePaymentTokenParameters)
 }
 
 internal enum NetworkEnvironment {
@@ -120,11 +120,12 @@ internal struct IokaApiEndpoint: EndpointType {
                                                      urlParameters: nil,
                                                      additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key,
                                                                          AuthenticationKeys.orderAccessToken: orderAccessToken.token])
-        case .createPaymentToken:
-            print("Hello")
-            self.path = ""
+        case .createPaymentToken(let orderAccessToken, let createPaymentTokenParameters):
+            self.path = "orders/\(orderAccessToken.id)/payments/tool"
             self.httpMethod = .post
-            self.task = .request
+            self.task = .requestParametersAndHeaders(bodyParameters: createPaymentTokenParameters.dictionary,
+                                                     urlParameters: nil,
+                                                     additionalHeaders: [AuthenticationKeys.apiKey: apiKey.key])
         }
     }
 }
