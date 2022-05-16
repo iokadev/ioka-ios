@@ -9,19 +9,31 @@ import Foundation
 
 
 struct CreatePaymentTokenParameters: Codable {
-    var tool_type: String
+    var tool_type: String = "APPLE_PAY"
     var apple_pay: ApplePayParameters
-    var amount: Int
-    var payer: ApplePayPayerParameters?
 }
 
 struct ApplePayParameters: Codable {
-    var token: String
-    var card_network: String
-    var card_type: String
+    var paymentData: ApplePayPaymentData
+    var paymentMethod: ApplePayPaymentMethod
+    var transactionIdentifier: String
 }
 
-struct ApplePayPayerParameters: Codable {
-    var email: String?
-    var phone: String?
+struct ApplePayPaymentData: Codable {
+    var data: String
+    var header: PaymentDataHeader
+    var signature: String
+    var version: String
+}
+
+struct PaymentDataHeader: Codable {
+    var ephemeralPublicKey: String
+    var publicKeyHash: String
+    var transactionId: String
+}
+
+struct ApplePayPaymentMethod: Codable {
+    var displayName: String
+    var network: String
+    var type: String
 }
