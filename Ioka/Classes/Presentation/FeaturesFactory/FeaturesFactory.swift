@@ -5,7 +5,7 @@
 //  Created by ablai erzhanov on 05.04.2022.
 //
 
-import Foundation
+import PassKit
 import UIKit
 
 
@@ -83,9 +83,9 @@ internal struct FeaturesFactory {
         return vc
     }
 
-    func makeApplePay() -> ApplePayViewController {
-        let viewModel = ApplePayViewModel()
-        let vc = ApplePayViewController()
+    func makeApplePay(repository: ApplePayRepository, orderAccessToken: AccessToken, applePayParameters: ApplePayParameters) -> ApplePayViewController {
+        let viewModel = ApplePayViewModel(repository: repository, orderAccessToken: orderAccessToken, applePayParameters: applePayParameters)
+        let vc = ApplePayViewController(request: PKPaymentRequest(), viewModel: viewModel, sourceViewController: UIViewController())
         vc.viewModel = viewModel
         return vc
     }

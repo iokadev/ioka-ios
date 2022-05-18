@@ -55,7 +55,7 @@ internal class PaymentMethodsViewModel {
     }
 
     func createApplePayPayment() {
-        Ioka.shared.applePayPaymentRequest(orderAccessToken: orderAccessToken.token, applePayData: applePayData) { result in
+        Ioka.shared.applePayPaymentRequest(sourceViewController: UIViewController(), orderAccessToken: orderAccessToken.token, applePayData: applePayData) { result in
             switch result {
             case .success(let status):
                 print(status)

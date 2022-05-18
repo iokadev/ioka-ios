@@ -8,21 +8,35 @@
 import UIKit
 import PassKit
 
-internal class ApplePayViewController: PKPaymentAuthorizationViewController, PKPaymentAuthorizationViewControllerDelegate {
+internal class ApplePayViewController: NSObject, PKPaymentAuthorizationViewControllerDelegate {
 
     var viewModel: ApplePayViewModel!
+    var request: PKPaymentRequest!
+    var applePayVC: PKPaymentAuthorizationViewController?
+    var sourceVC: UIViewController!
+    var resultHandler: ((Result<PaymentDTO, Error>) -> Void)?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.delegate = self
+    init(request: PKPaymentRequest, viewModel: ApplePayViewModel, sourceViewController: UIViewController) {
+        super.init()
+        self.request = request
+        self.viewModel = viewModel
+        self.sourceVC = sourceViewController
+        self.applePayVC = PKPaymentAuthorizationViewController(paymentRequest: request)
+        applePayVC?.delegate = self
+        sourceViewController.present(applePayVC!, animated: false)
+    }
+
+    func start() {
+//        sourceVC.navigationController?.present(applePayVC!, animated: false)
+//        sourceVC.present(applePayVC!, animated: false)
     }
 
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        self.dismiss(animated: true)
+        applePayVC?.dismiss(animated: true)
     }
 
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
-        viewModel.createPaymentToken()
+        viewModel.createPaymentToken(completion: resultHandler!)
     }
 
     

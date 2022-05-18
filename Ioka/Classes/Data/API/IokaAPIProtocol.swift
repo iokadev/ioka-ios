@@ -16,4 +16,5 @@ internal protocol IokaAPIProtocol {
     func getCardByID(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCardDTO, Error>) -> Void)
     func getPaymentByID(orderAccessToken: AccessToken, paymentId: String, completion: @escaping (Result<PaymentDTO, Error>) -> Void)
     func getOrderByID(orderAccessToken: AccessToken, completion: @escaping (Result<OrderDTO, Error>) -> Void)
+    func createPaymentToken(orderAccessToken: AccessToken, createPaymentTokenParameters: CreatePaymentTokenParameters, completion: @escaping (Result<PaymentDTO, Error>) -> Void)
 }

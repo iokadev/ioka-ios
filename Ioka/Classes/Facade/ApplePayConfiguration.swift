@@ -17,9 +17,15 @@ public struct ApplePayConfiguration {
     let merchantName: String //(для отображения в сумме заказа)
     let merchantIdentifier: String
     let countryCode: String
+
+    public init(merchantName: String, merchantIdentifier: String, countryCode: String) {
+        self.merchantName = merchantName
+        self.merchantIdentifier = merchantIdentifier
+        self.countryCode = countryCode
+    }
 }
 
 
 public struct ApplePayData {
-    var summaryItems: [PKPaymentSummaryItem]
+    public var summaryItems: [PKPaymentSummaryItem]
 }

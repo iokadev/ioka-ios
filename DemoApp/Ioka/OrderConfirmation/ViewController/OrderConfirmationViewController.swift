@@ -7,6 +7,7 @@
 
 import UIKit
 import Ioka
+import AVFoundation
 
 internal class OrderConfirmationViewController: UIViewController {
     
@@ -61,7 +62,12 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         
         switch paymentTypeState {
         case .applePay:
-            break
+            guard let order = order else { return }
+            viewModel.createOrder(order: order) { orderAccessToken in
+                Ioka.shared.applePayPaymentRequest(sourceViewController: self, orderAccessToken: orderAccessToken, applePayData: nil) { [weak self] result in
+                    print("DEBUG: Result is \(result)")
+                }
+            }
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in
