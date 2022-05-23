@@ -17,17 +17,7 @@ internal struct OrderDTO: Codable {
     let currency: String
     let capture_method: String
     var external_id: String? //
-    var description: String? //
-    var extra_info: String? //
-    var attempts: Int? //-
-    var due_date: String? //-
-    var customer_id: String?//-
-    var card_id: String? //
-    var back_url: String? //-
-    var success_url: String? //-
-    var failure_url: String?//-
-    var template: String? //-
-    var checkout_url: String?//-
+    var customer_id: String?//
     
     var hasCustomerId: Bool {
         if customer_id == nil {

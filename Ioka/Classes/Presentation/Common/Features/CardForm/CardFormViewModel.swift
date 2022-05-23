@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import CreditCardValidator
 
 enum ValidationState {
     case invalid, valid
@@ -14,7 +13,8 @@ enum ValidationState {
 
 internal class CardFormViewModel {
     let repository: CardInfoRepository
-    
+
+    var creditCardType: CreditCardType?
     var isEmitterSetted: Bool = false
     
     init(repository: CardInfoRepository) {
@@ -22,32 +22,29 @@ internal class CardFormViewModel {
     }
     
     func getPaymentSystem(partialBin: String, completion: @escaping(String?) -> Void) {
-        
-        if let type = CreditCardValidator(partialBin).type {
-            switch type {
-            case .amex:
-                completion(PaymentSystem.AMERICAN_EXPRESS.rawValue)
-            case .visa:
-                completion(PaymentSystem.VISA.rawValue)
-            case .masterCard:
-                completion(PaymentSystem.MASTERCARD.rawValue)
-            case .maestro:
-                completion(PaymentSystem.MAESTRO.rawValue)
-            case .dinersClub:
-                completion(PaymentSystem.DINER_CLUB.rawValue)
-            case .jcb:
-                completion(PaymentSystem.JCB.rawValue)
-            case .discover:
-                completion(PaymentSystem.DISCOVERY.rawValue)
-            case .unionPay:
-                completion(PaymentSystem.UNION_PAY.rawValue)
-            case .mir:
-                completion(PaymentSystem.MIR.rawValue)
-            }
-        } else {
-            repository.getPaymentSystem(partialBin: partialBin.trimCardNumberText()) { result in
-                completion(try? result.get())
-            }
+        let cardType = CreditCardValidatorr.detectType(partialBin: partialBin)
+        self.creditCardType = cardType
+        switch cardType {
+        case .amex:
+            completion(PaymentSystem.AMERICAN_EXPRESS.rawValue)
+        case .visa:
+            completion(PaymentSystem.VISA.rawValue)
+        case .masterCard:
+            completion(PaymentSystem.MASTERCARD.rawValue)
+        case .maestro:
+            completion(PaymentSystem.MAESTRO.rawValue)
+        case .dinersClub:
+            completion(PaymentSystem.DINER_CLUB.rawValue)
+        case .jcb:
+            completion(PaymentSystem.JCB.rawValue)
+        case .discover:
+            completion(PaymentSystem.DISCOVERY.rawValue)
+        case .unionPay:
+            completion(PaymentSystem.UNION_PAY.rawValue)
+        case .mir:
+            completion(PaymentSystem.MIR.rawValue)
+        case .none:
+            completion(nil)
         }
     }
     
@@ -96,8 +93,8 @@ internal class CardFormViewModel {
     }
     
     func checkCardNumber(_ cardNumber: String) -> ValidationState {
-        if CreditCardValidator(cardNumber).isValid {
-            return .valid
+        if let creditCardType = creditCardType {
+            return CreditCardValidatorr(cardNumber).isValid(for: creditCardType) ? .valid : .invalid
         } else {
             let number = cardNumber.trimCardNumberText()
             return number.count >= 15 ? .valid : .invalid
@@ -105,11 +102,12 @@ internal class CardFormViewModel {
     }
     
     func checkCVV(_ cvv: String) -> ValidationState {
-        cvv.count == 3 ? .valid : .invalid
+        cvv.count >= 3 && cvv.count <= 4  ? .valid : .invalid
     }
     
     func transformCardNumber(_ cardNumber: String) -> String {
         let number = cardNumber.trimCardNumberText()
+        guard !hasSpecialCharacters(cardNumber: number) else { return "" }
         var text = ""
         let arrOfCharacters = Array(number)
         if(arrOfCharacters.count > 0) {
@@ -122,10 +120,21 @@ internal class CardFormViewModel {
         }
         return text
     }
+
+    func hasSpecialCharacters(cardNumber: String) -> Bool {
+        do {
+            let regex = try NSRegularExpression(pattern: ".*[^0-9].*", options: .caseInsensitive)
+            if let _ = regex.firstMatch(in: cardNumber, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, cardNumber.count)) {
+                return true
+            }
+        } catch {
+            return false
+        }
+        return false
+    }
     
     func transformExpirationDate(_ expirationDate: String) -> String {
         let expiration = expirationDate.trimDateExpirationText()
-        
         var text = ""
         let arrOfCharacters = Array(expiration)
         if(arrOfCharacters.count > 0) {
@@ -136,7 +145,6 @@ internal class CardFormViewModel {
                 }
             }
         }
-        
         return text
     }
 }

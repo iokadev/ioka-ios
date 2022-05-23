@@ -23,12 +23,10 @@ internal class ApplePayViewController: NSObject, PKPaymentAuthorizationViewContr
         self.sourceVC = sourceViewController
         self.applePayVC = PKPaymentAuthorizationViewController(paymentRequest: request)
         applePayVC?.delegate = self
-        sourceViewController.present(applePayVC!, animated: false)
     }
 
     func start() {
-//        sourceVC.navigationController?.present(applePayVC!, animated: false)
-//        sourceVC.present(applePayVC!, animated: false)
+        sourceVC.present(applePayVC!, animated: false)
     }
 
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
@@ -38,9 +36,4 @@ internal class ApplePayViewController: NSObject, PKPaymentAuthorizationViewContr
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
         viewModel.createPaymentToken(completion: resultHandler!)
     }
-
-    
-
-
-
 }

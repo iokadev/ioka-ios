@@ -44,10 +44,6 @@ internal class PaymentFlowFactory {
     func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {
         featuresFactory.makePaymentResult(delegate: delegate, order: order, result: result)
     }
-
-    func makeApplePay(repository: ApplePayRepository, applePayParameters: ApplePayParameters) -> ApplePayViewController {
-        featuresFactory.makeApplePay(repository: repository, orderAccessToken: input.orderAccessToken, applePayParameters: applePayParameters)
-    }
     
     func paymentRepository() -> PaymentRepository {
         PaymentRepository(api: api)

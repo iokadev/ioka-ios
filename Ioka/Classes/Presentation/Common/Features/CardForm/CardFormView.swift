@@ -56,6 +56,8 @@ internal class CardFormView: UIView {
         viewModel?.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
             if let paymentSystem = paymentSystem {
                 self?.cardNumberTextField.setCardBrandIcon(imageName: paymentSystem)
+            } else {
+                self?.cardNumberTextField.removeCardBrandIcon()
             }
         }
     }
@@ -112,12 +114,15 @@ internal class CardFormView: UIView {
 
         guard textField === cardNumberTextField,
               text.count > 0,
-              !cardNumberTextField.isCardBrandSetted else {
+              cardNumberTextField.isCardBrandSetted == false else {
+            if text.count == 0 {
+                cardNumberTextField.removeCardBrandIcon()
+                cardNumberTextField.removeBankEmitterIcon()
+            }
             return
         }
 
        getPaymentSystem(text: text)
-
        getEmitterByBinCode(text: text)
     }
 

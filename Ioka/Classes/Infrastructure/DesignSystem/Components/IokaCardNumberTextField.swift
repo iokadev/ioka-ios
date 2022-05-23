@@ -74,11 +74,21 @@ internal class IokaCardNumberTextField: IokaTextField {
         self.isCardBrandSetted = true
     }
 
+    func removeCardBrandIcon() {
+        cardBrandImageView.removeFromSuperview()
+        self.isCardBrandSetted = false
+    }
+
     func setBankEmitterIcon(imageName: String) {
         guard let image = UIImage(named: imageName, in: IokaBundle.bundle, compatibleWith: nil) else { return }
         bankEmitterImageView.image = image
         self.addSubview(bankEmitterImageView)
         bankEmitterImageView.centerY(in: self, right: cardBrandImageView.leftAnchor, paddingRight: 4, width: 24, height: 24)
         self.isBankEmitterSetted = true
+    }
+
+    func removeBankEmitterIcon() {
+        bankEmitterImageView.removeFromSuperview()
+        self.isBankEmitterSetted = false
     }
 }

@@ -53,17 +53,4 @@ internal class PaymentMethodsViewModel {
             }
         }
     }
-
-    func createApplePayPayment() {
-        Ioka.shared.applePayPaymentRequest(sourceViewController: UIViewController(), orderAccessToken: orderAccessToken.token, applePayData: applePayData) { result in
-            switch result {
-            case .success(let status):
-                print(status)
-                self.delegate?.paymentMethodsDidSucceed()
-            case .failure(let error):
-                self.delegate?.paymentMethodsDidFail(declineError: error)
-            }
-        }
-    }
 }
-

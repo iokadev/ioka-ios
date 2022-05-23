@@ -23,7 +23,7 @@ internal class CVVView: UIView {
     private let cardInfoView = IokaCustomView(backGroundColor: colors.secondaryBackground, cornerRadius: 12)
     private let cardBrandImageView = IokaImageView()
     private let cardPanMaskedLabel = IokaLabel(iokaFont: typography.body, iokaTextColor: colors.text)
-    private let continueButton = IokaButton(state: .enabled, title: IokaLocalizable.continueButton)
+    private let continueButton = IokaButton(state: .disabled, title: IokaLocalizable.continueButton)
     private let cvvTooltipImageView = IokaImageView(imageName: "CVVHint", imageTintColor: colors.nonadaptableGrey)
     private let tipView = TooltipView()
     
@@ -61,9 +61,36 @@ internal class CVVView: UIView {
         self.addGestureRecognizer(gestureRecognizer)
         self.closeButton.addTarget(self, action: #selector(handleCloseButton), for: .touchUpInside)
         self.continueButton.addTarget(self, action: #selector(handleContinueButton), for: .touchUpInside)
+        cvvTextField.addTarget(self, action: #selector(didChangeText(textField:)), for: .editingChanged)
         cvvTooltipImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltipShow)))
         savedCardView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleCVVTooltipHide)))
         cvvTooltipImageView.isUserInteractionEnabled = true
+    }
+
+    @objc func didChangeText(textField: UITextField) {
+        let oldText = textField.text ?? ""
+
+        let (text, _): (String, ValidationState) = {
+            switch textField {
+            case cvvTextField:
+                return (oldText, checkCVV(oldText))
+            default:
+                return (oldText, .valid)
+            }
+        }()
+
+        self.continueButton.iokaState = checkContinueButtonState(cvvText: text)
+
+        if text != oldText, let selection = textField.selectedTextRange {
+            let diff = oldText.count - text.count
+            let cursorPosition = textField.offset(from: textField.beginningOfDocument, to: selection.start) - diff
+
+            textField.text = text
+
+            if let newPosition = textField.position(from: textField.beginningOfDocument, offset: cursorPosition) {
+                textField.selectedTextRange = textField.textRange(from: newPosition, to: newPosition)
+            }
+        }
     }
     
     @objc private func handleCloseButton() {
@@ -85,6 +112,18 @@ internal class CVVView: UIView {
     
     @objc private func handleCVVTooltipHide() {
         hideTooltip()
+    }
+
+    private func checkCVV(_ cvv: String) -> ValidationState {
+        cvv.count >= 3 && cvv.count <= 4  ? .valid : .invalid
+    }
+
+    private func checkContinueButtonState(cvvText: String) -> IokaButton.State {
+        guard checkCVV(cvvText) == .valid else {
+                  return .disabled
+              }
+
+        return .enabled
     }
     
     private func showTooltip() {
