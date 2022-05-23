@@ -76,7 +76,6 @@ class PaymentMethodsView: UIView {
         [cardFormView.cardNumberTextField, cardFormView.dateExpirationTextField, cardFormView.cvvTextField].forEach {
             $0.isUserInteractionEnabled = false
         }
-        saveCardToggle
     }
 
     func stopLoading() {
@@ -84,7 +83,6 @@ class PaymentMethodsView: UIView {
         [cardFormView.cardNumberTextField, cardFormView.dateExpirationTextField, cardFormView.cvvTextField].forEach {
             $0.isUserInteractionEnabled = true
         }
-        saveCardToggle
     }
     
     deinit {
