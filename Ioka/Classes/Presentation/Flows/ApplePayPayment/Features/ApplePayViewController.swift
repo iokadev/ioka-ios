@@ -13,27 +13,21 @@ internal class ApplePayViewController: NSObject, PKPaymentAuthorizationViewContr
     var viewModel: ApplePayViewModel!
     var request: PKPaymentRequest!
     var applePayVC: PKPaymentAuthorizationViewController?
-    var sourceVC: UIViewController!
-    var resultHandler: ((Result<PaymentDTO, Error>) -> Void)?
 
-    init(request: PKPaymentRequest, viewModel: ApplePayViewModel, sourceViewController: UIViewController) {
+    init(request: PKPaymentRequest, viewModel: ApplePayViewModel) {
         super.init()
         self.request = request
         self.viewModel = viewModel
-        self.sourceVC = sourceViewController
         self.applePayVC = PKPaymentAuthorizationViewController(paymentRequest: request)
         applePayVC?.delegate = self
     }
 
-    func start() {
-        sourceVC.present(applePayVC!, animated: false)
-    }
-
+    
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        applePayVC?.dismiss(animated: true)
+        viewModel.dismissApplePay()
     }
 
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
-        viewModel.createPaymentToken(completion: resultHandler!)
+        viewModel.createPaymentToken()
     }
 }

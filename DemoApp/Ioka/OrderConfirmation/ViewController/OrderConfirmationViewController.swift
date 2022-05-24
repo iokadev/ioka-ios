@@ -62,7 +62,13 @@ extension OrderConfirmationViewController: OrderConfirmationViewDelegate {
         
         switch paymentTypeState {
         case .applePay:
-            guard let _ = order else { return }
+            guard let order = order else { return }
+            viewModel.createOrder(order: order) { orderAccessToken in
+                Ioka.shared.startApplePayFlow(sourceViewController: self, orderAccessToken: orderAccessToken) { result in
+                    print("DEBUG: Result is \(result)")
+                }
+            }
+
         case .savedCard(let card):
             guard let order = order else { return }
             viewModel.createOrder(order: order) { orderAccessToken in

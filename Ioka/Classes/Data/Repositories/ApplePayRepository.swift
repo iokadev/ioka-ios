@@ -14,7 +14,9 @@ final class ApplePayRepository {
         self.api = api
     }
 
-    func createToolPayment(orderAccessToken: AccessToken, createPaymentTokenParameters: CreatePaymentTokenParameters, completion: @escaping(Result<PaymentDTO, Error>) -> Void) {
-        api.createPaymentToken(orderAccessToken: orderAccessToken, createPaymentTokenParameters: createPaymentTokenParameters, completion: completion)
+    func createToolPayment(orderAccessToken: AccessToken, createPaymentTokenParameters: CreatePaymentTokenParameters, completion: @escaping(Result<Payment, Error>) -> Void) {
+        api.createPaymentToken(orderAccessToken: orderAccessToken, createPaymentTokenParameters: createPaymentTokenParameters) { result in
+            completion(result.toPaymentResult())
+        }
     }
 }

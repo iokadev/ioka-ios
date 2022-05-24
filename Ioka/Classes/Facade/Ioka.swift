@@ -38,9 +38,10 @@ public class Ioka {
     /// - Parameters:
     ///   - apiKey: Публичный API-ключ, полученные при регистрации в качестве клиента Ioka
     ///   - theme: Конфигурирует внешний вид экранов Ioka SDK. По умолчанию - объект Theme.default.
-    ///   - locale: Конфигурация  для функционала ApplePay.
-    ///   - applePayConfiguration: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
-    ///   Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
+    ///   - locale: Конфигурирует локализацию текстов в Ioka SDK. По умолчанию - .automatic.
+    ///  Передавать другое значение нужно в том случае, если язык в вашем приложении выбирается вручную.
+    ///   - applePayConfiguration: Конфигурация  для функционала ApplePay.
+
     public func setup(apiKey: String, theme: Theme = .default, locale: IokaLocale = .automatic, applePayConfiguration: ApplePayConfiguration) {
         self.setupInput = SetupInput(apiKey: APIKey(key: apiKey))
         applyTheme(theme)
@@ -155,6 +156,48 @@ public class Ioka {
             }
             
             coordinator.start()
+        } catch let error {
+            completion(.failed(error))
+        }
+    }
+
+    public func startApplePayFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayData: ApplePayData? = nil, completion: @escaping(FlowResult) -> Void) {
+        let applePayService = ApplePayService()
+        guard applePayService.applePayIsAvailable() else { return }
+        guard let applePayConfiguration = applePayConfiguration else { return }
+        guard let setupInput = setupInput else {
+            completion(.failed(DomainError.invalidTokenFormat))
+            return
+        }
+
+        let api = IokaApi(apiKey: setupInput.apiKey)
+        let repository = OrderRepository(api: api)
+
+        do {
+            let token = try AccessToken(token: orderAccessToken)
+
+            repository.getOrder(orderAccessToken: token) { result in
+                switch result {
+                case .success(let order):
+                    let request = applePayService.createApplePayRequest(order: order, applePayConfiguration: applePayConfiguration, applePayData: applePayData)
+                    let input = ApplePayFlowInput(setupInput: setupInput, orderAccessToken: token, request: request)
+                    let featuresFactory = FeaturesFactory()
+                    let applePayFlowFactory = ApplePayFlowFactory(input: input, featuresFactory: featuresFactory)
+                    let coordinator = ApplePayCoordinator(factory: applePayFlowFactory, sourceViewController: sourceViewController)
+                    coordinator.order = order
+
+                    self.currentCoordinator = coordinator
+                    coordinator.resultCompletion = { result in
+                        completion(result)
+                        self.currentCoordinator = nil
+                    }
+
+                    coordinator.start()
+
+                case .failure(let error):
+                    completion(.failed(error))
+                }
+            }
         } catch let error {
             completion(.failed(error))
         }

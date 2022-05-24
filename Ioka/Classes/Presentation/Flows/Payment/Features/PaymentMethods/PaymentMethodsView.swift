@@ -79,10 +79,9 @@ class PaymentMethodsView: UIView {
     }
 
     func stopLoading() {
-        //        createButton.iokaState = .enabled
-        [cardFormView.cardNumberTextField, cardFormView.dateExpirationTextField, cardFormView.cvvTextField].forEach {
-            $0.isUserInteractionEnabled = true
-        }
+        [cardFormView.cardNumberTextField,
+         cardFormView.dateExpirationTextField,
+         cardFormView.cvvTextField].forEach { $0.isUserInteractionEnabled = true }
     }
     
     deinit {

@@ -82,4 +82,11 @@ internal struct FeaturesFactory {
 
         return vc
     }
+
+    func makeApplePay(applePayRepository: ApplePayRepository, orderAccessToken: AccessToken, request: PKPaymentRequest, delegate: ApplePayNavigationDelegate) -> ApplePayViewController {
+        let viewModel = ApplePayViewModel(repository: applePayRepository, orderAccessToken: orderAccessToken, delegate: delegate)
+        let vc = ApplePayViewController(request: request, viewModel: viewModel)
+
+        return vc
+    }
 }
