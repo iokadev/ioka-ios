@@ -9,7 +9,7 @@ import Foundation
 import PassKit
 
 
-class ApplePayService {
+struct ApplePayService {
 
     func createApplePayRequest(order: Order, applePayConfiguration: ApplePayConfiguration, applePayData: ApplePayData?) -> PKPaymentRequest {
 
@@ -20,6 +20,7 @@ class ApplePayService {
         let capability: PKMerchantCapability = .capability3DS
 
         let request = PKPaymentRequest()
+        request.merchantIdentifier = applePayConfiguration.merchantIdentifier
         request.paymentSummaryItems = paymentSummaryItems
         request.currencyCode = currencyCode
         request.supportedNetworks = supportedNetworks

@@ -23,34 +23,28 @@ internal class ApplePayViewModel {
     let repository: ApplePayRepository
     let orderAccessToken: AccessToken
 
-    weak var delegate: ApplePayNavigationDelegate?
-
-    init(repository: ApplePayRepository, orderAccessToken: AccessToken, delegate: ApplePayNavigationDelegate) {
+    init(repository: ApplePayRepository, orderAccessToken: AccessToken) {
         self.repository = repository
         self.orderAccessToken = orderAccessToken
-        self.delegate = delegate
     }
 
-    func dismissApplePay() {
-        delegate?.applePayDismiss()
-    }
 
-    func createPaymentToken() {
-        let createPaymentTokenParameters = CreatePaymentTokenParameters(apple_pay: ApplePayParameters.defaultValue)
-        repository.createToolPayment(orderAccessToken: orderAccessToken, createPaymentTokenParameters: createPaymentTokenParameters) { [weak self] result in
-            guard let self = self else { return }
+    func createPaymentToken(transactionId: String,paymentData: ApplePayPaymentData, paymentMethod: ApplePayPaymentMethod, completion: @escaping(ApplePayTokenResult) -> Void) {
+        let createPaymentTokenParameters = CreatePaymentTokenParameters(apple_pay: ApplePayParameters(paymentData: paymentData, paymentMethod: paymentMethod, transactionIdentifier: transactionId))
+
+        repository.createToolPayment(orderAccessToken: orderAccessToken, createPaymentTokenParameters: createPaymentTokenParameters) {  result in
             switch result {
             case .success(let payment):
                 switch payment.status {
                 case .succeeded:
-                    self.delegate?.applePayDidSucceed()
+                    completion(.succeed)
                 case .declined(let apiError):
-                    self.delegate?.applePayDidFail(declineError: apiError)
+                    completion(.applePayDidFail(declineError: apiError))
                 case .requiresAction(let action):
-                    self.delegate?.applePayRequiresAction(action: action, payment: payment)
+                    completion(.requiresAction(action: action, payment: payment))
                 }
             case .failure(let error):
-                self.delegate?.errorForResult(error: error)
+                completion(.failure(error: error))
             }
         }
     }

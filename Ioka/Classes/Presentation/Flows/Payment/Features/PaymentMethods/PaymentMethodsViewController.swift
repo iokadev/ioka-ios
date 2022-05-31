@@ -10,7 +10,7 @@ import UIKit
 internal class PaymentMethodsViewController: UIViewController {
 
     var viewModel: PaymentMethodsViewModel!
-    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel, hasApplePay: viewModel.applePayData == nil ? false : true)
+    private lazy var contentView = PaymentMethodsView(order: viewModel.order, viewModel: viewModel.cardFormViewModel, hasApplePay: viewModel.hasApplePay)
 
     override func loadView() {
         self.view = contentView
@@ -23,7 +23,7 @@ internal class PaymentMethodsViewController: UIViewController {
     }
 
     private func setupNavigationItem() {
-        setupNavigationItem(title: String(format: IokaLocalizable.priceTng, String(viewModel.order.price)),
+        setupNavigationItem(title: String(format: IokaLocalizable.priceTng, String(viewModel.order.price / 100)),
                             closeButtonTarget: self,
                             closeButtonAction: #selector(closeButtonTapped))
     }
@@ -66,6 +66,13 @@ extension PaymentMethodsViewController:  PaymentMethodsViewDelegate {
     }
 
     func paymentMethodsView(applePayButtonDidPressed paymentMethodsView: PaymentMethodsView) {
-        print("Hello")
+        Ioka.shared.startApplePayFlowFromSDK(sourceViewController: self, orderAccessToken: viewModel.orderAccessToken, order: viewModel.order, applePayData: viewModel.applePayData) { [weak self] applePayTokenResult in
+            guard let self = self else { return }
+            self.viewModel.handleApplePayResult(result: applePayTokenResult) { error in
+                if let error = error {
+                    self.show(error: error)
+                }
+            }
+        }
     }
 }

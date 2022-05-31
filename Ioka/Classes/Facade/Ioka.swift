@@ -61,7 +61,7 @@ public class Ioka {
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
     ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
-    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePay: ApplePayState = .disable, completion: @escaping(FlowResult) -> Void) {
+    public func startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayState: ApplePayState = .disable, completion: @escaping(FlowResult) -> Void) {
         guard let setupInput = setupInput else {
             completion(.failed(DomainError.invalidTokenFormat))
             return
@@ -69,13 +69,7 @@ public class Ioka {
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            var input: PaymentFlowInput
-            switch applePay {
-            case .disable:
-                input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: nil)
-            case .enable(let applePayData):
-                input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayData: applePayData)
-            }
+            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayState: applePayState)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             
@@ -161,6 +155,16 @@ public class Ioka {
         }
     }
 
+    /// Метод для запуска сценария оплатой ApplePay.. При необходимости проводит
+    /// проверку 3DSecure. Отображает результат сохранения пользователю.
+    /// - Parameters:
+    ///   - sourceViewController: Объект UIViewController для экрана, с которого пользователь запускает сохранение карты.
+    ///   С него происходит переход на экраны Ioka SDK.
+    ///   - orderAccessToken: Токен для доступа к заказу, который приложение получает от своего бэкенда.
+    ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран сохранения. Принимает
+    ///   значение FlowResult: .succeeded - если оплата прошла успешно, .cancelled - если пользователь закрыл экран
+    ///   сохранения или экран 3DSecure, .failed в данном случае не приходит, так как при ошибке пользователь всегда
+    ///   остаётся на экране сохранения. Выполняется в главном потоке.
     public func startApplePayFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayData: ApplePayData? = nil, completion: @escaping(FlowResult) -> Void) {
         let applePayService = ApplePayService()
         guard applePayService.applePayIsAvailable() else { return }
@@ -176,24 +180,15 @@ public class Ioka {
         do {
             let token = try AccessToken(token: orderAccessToken)
 
-            repository.getOrder(orderAccessToken: token) { result in
+            repository.getOrder(orderAccessToken: token) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let order):
                     let request = applePayService.createApplePayRequest(order: order, applePayConfiguration: applePayConfiguration, applePayData: applePayData)
-                    let input = ApplePayFlowInput(setupInput: setupInput, orderAccessToken: token, request: request)
-                    let featuresFactory = FeaturesFactory()
-                    let applePayFlowFactory = ApplePayFlowFactory(input: input, featuresFactory: featuresFactory)
-                    let coordinator = ApplePayCoordinator(factory: applePayFlowFactory, sourceViewController: sourceViewController)
-                    coordinator.order = order
-
-                    self.currentCoordinator = coordinator
-                    coordinator.resultCompletion = { result in
-                        completion(result)
-                        self.currentCoordinator = nil
+                    let viewModel = ApplePayViewModel(repository: ApplePayRepository(api: api), orderAccessToken: token)
+                    ApplePayViewController.getApplePay(request: request, viewModel: viewModel, sourceViewController: sourceViewController) { applePayTokenResult in
+                        self.showApplePayResult(result: applePayTokenResult, orderAccessToken: token, setupInput: setupInput, sourceViewController: sourceViewController, order: order, completion: completion)
                     }
-
-                    coordinator.start()
-
                 case .failure(let error):
                     completion(.failed(error))
                 }
@@ -266,5 +261,35 @@ public class Ioka {
     private func applyTheme(_ theme: Theme) {
         colors = theme.colors
         typography = theme.typography
+    }
+
+    func startApplePayFlowFromSDK(sourceViewController: UIViewController, orderAccessToken: AccessToken, order: Order, applePayData: ApplePayData? = nil, completion: @escaping(ApplePayTokenResult) -> Void) {
+        let applePayService = ApplePayService()
+        guard applePayService.applePayIsAvailable() else { return }
+        guard let applePayConfiguration = applePayConfiguration else { return }
+        guard let setupInput = setupInput else {
+            completion(.failure(error: DomainError.invalidTokenFormat))
+            return
+        }
+        let api = IokaApi(apiKey: setupInput.apiKey)
+        let request = applePayService.createApplePayRequest(order: order, applePayConfiguration: applePayConfiguration, applePayData: applePayData)
+        let viewModel = ApplePayViewModel(repository: ApplePayRepository(api: api), orderAccessToken: orderAccessToken)
+        ApplePayViewController.getApplePay(request: request, viewModel: viewModel, sourceViewController: sourceViewController, resultsHandler: completion)
+    }
+
+    private func showApplePayResult(result: ApplePayTokenResult, orderAccessToken: AccessToken, setupInput: SetupInput, sourceViewController: UIViewController, order: Order, completion: @escaping(FlowResult) -> Void) {
+        let input = ApplePayFlowInput(setupInput: setupInput, orderAccessToken: orderAccessToken)
+        let featuresFactory = FeaturesFactory()
+        let applePayFlowFactory = ApplePayResultFlowFactory(input: input, featuresFactory: featuresFactory)
+        let coordinator = ApplePayResultCoordinator(factory: applePayFlowFactory, sourceViewController: sourceViewController)
+        coordinator.order = order
+        currentCoordinator = coordinator
+
+        coordinator.resultCompletion = { result in
+            completion(result)
+            self.currentCoordinator = nil
+        }
+
+        coordinator.start(applePayTokenResult: result)
     }
 }

@@ -188,7 +188,7 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
         dismissFlow(result: .init(paymentResult: result))
     }
     
-    func paymentResultDidRetry() {
+    func paymentResultDidRetry(result: PaymentResult) {
         // не вызывается в этом флоу, так как PaymentResult показывается только в случае успешной оплаты
     }
     

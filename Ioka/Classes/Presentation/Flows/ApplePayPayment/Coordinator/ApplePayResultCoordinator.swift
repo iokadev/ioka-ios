@@ -9,8 +9,8 @@ import UIKit
 import PassKit
 
 
-internal class ApplePayCoordinator: NSObject, Coordinator {
-    let factory: ApplePayFlowFactory
+internal class ApplePayResultCoordinator: NSObject, Coordinator {
+    let factory: ApplePayResultFlowFactory
     let sourceViewController: UIViewController
 
     lazy var navigationController: UINavigationController = {
@@ -22,31 +22,37 @@ internal class ApplePayCoordinator: NSObject, Coordinator {
 
     var order: Order?
 
-    var applePayViewController: PKPaymentAuthorizationViewController?
     var paymentResultViewController: PaymentResultViewController?
     var threeDSecureViewController: ThreeDSecureViewController?
 
     var resultCompletion: ((FlowResult) -> Void)?
 
-    init(factory: ApplePayFlowFactory, sourceViewController: UIViewController) {
+    init(factory: ApplePayResultFlowFactory, sourceViewController: UIViewController) {
         self.factory = factory
         self.sourceViewController = sourceViewController
     }
 
-    func start() {
-        showApplePay()
+    func start(applePayTokenResult: ApplePayTokenResult) {
+        showApplePayResult(applePayTokenResult: applePayTokenResult)
     }
 
-    private func showApplePay() {
+    private func showApplePayResult(applePayTokenResult: ApplePayTokenResult) {
         sourceViewController.present(navigationController, animated: true)
-        setPaymentMethodsToNavigationController(animated: false)
+        setPaymentMethodsToNavigationController(applePayTokenResult: applePayTokenResult, animated: false)
     }
 
-    private func setPaymentMethodsToNavigationController(animated: Bool) {
-        guard let vc = factory.makeApplePay(delegate: self).applePayVC else { return }
-        self.applePayViewController = vc
+    private func setPaymentMethodsToNavigationController(applePayTokenResult: ApplePayTokenResult, animated: Bool) {
 
-        navigationController.present(vc, animated: animated)
+        switch applePayTokenResult {
+        case .succeed:
+            showPaymentResult(.success)
+        case .failure(let error):
+            dismissFlow(result: .failed(error))
+        case .applePayDidFail(let declineError):
+            showPaymentResult(.error(declineError))
+        case .requiresAction(let action, let payment):
+            showThreeDSecure(action: action, paymentId: payment.id)
+        }
     }
 
     private func showThreeDSecure(action: Action, paymentId: String) {
@@ -70,27 +76,7 @@ internal class ApplePayCoordinator: NSObject, Coordinator {
     }
 }
 
-extension ApplePayCoordinator: ApplePayNavigationDelegate, ThreeDSecureNavigationDelegate, PaymentResultNavigationDelegate {
-
-    func applePayDidCancel() {
-        dismissFlow(result: .cancelled)
-    }
-
-    func applePayDidSucceed() {
-        showPaymentResult(.success)
-    }
-
-    func applePayRequiresAction(action: Action, payment: Payment) {
-        showThreeDSecure(action: action, paymentId: payment.id)
-    }
-
-    func applePayDidFail(declineError: Error) {
-        showPaymentResult(.error(declineError))
-    }
-
-    func applePayDismiss() {
-        applePayViewController?.dismiss(animated: false)
-    }
+extension ApplePayResultCoordinator: ThreeDSecureNavigationDelegate, PaymentResultNavigationDelegate {
 
     func errorForResult(error: Error) {
         dismissFlow(result: .failed(error))
@@ -115,7 +101,7 @@ extension ApplePayCoordinator: ApplePayNavigationDelegate, ThreeDSecureNavigatio
         dismissFlow(result: .init(paymentResult: result))
     }
 
-    func paymentResultDidRetry() {
-        setPaymentMethodsToNavigationController(animated: true)
+    func paymentResultDidRetry(result: PaymentResult) {
+        dismissFlow(result: .init(paymentResult: result))
     }
 }

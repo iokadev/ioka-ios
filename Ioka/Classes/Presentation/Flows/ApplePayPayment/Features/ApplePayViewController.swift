@@ -8,26 +8,77 @@
 import UIKit
 import PassKit
 
-internal class ApplePayViewController: NSObject, PKPaymentAuthorizationViewControllerDelegate {
+internal class ApplePayViewController: UIViewController {
 
     var viewModel: ApplePayViewModel!
+    var sourceViewController: UIViewController!
+    private var resultsHandler: (_ applePayTokenResult: ApplePayTokenResult) -> Void?
     var request: PKPaymentRequest!
-    var applePayVC: PKPaymentAuthorizationViewController?
 
-    init(request: PKPaymentRequest, viewModel: ApplePayViewModel) {
-        super.init()
-        self.request = request
-        self.viewModel = viewModel
-        self.applePayVC = PKPaymentAuthorizationViewController(paymentRequest: request)
-        applePayVC?.delegate = self
+    // MARK: - Initializers
+    init(resultsHandler: @escaping (_ applePayTokenResult: ApplePayTokenResult) -> Void) {
+        self.resultsHandler = resultsHandler
+        super.init(nibName: nil, bundle: nil)
     }
 
-    
+    public class func getApplePay(request: PKPaymentRequest, viewModel: ApplePayViewModel, sourceViewController: UIViewController, resultsHandler: @escaping (_ applePayTokenResult: ApplePayTokenResult) -> Void) {
+        let applePayVC = ApplePayViewController(resultsHandler: resultsHandler)
+        applePayVC.viewModel = viewModel
+        applePayVC.request = request
+        applePayVC.sourceViewController = sourceViewController
+        applePayVC.modalPresentationStyle = .overFullScreen
+        guard let vc = PKPaymentAuthorizationViewController(paymentRequest: request) else { return }
+        vc.delegate = applePayVC
+
+        sourceViewController.navigationController?.present(applePayVC, animated: false)
+        applePayVC.present(vc, animated: false)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.backgroundColor = .clear
+    }
+}
+
+extension ApplePayViewController: PKPaymentAuthorizationViewControllerDelegate {
+
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        viewModel.dismissApplePay()
+        self.dismiss(animated: false)
+        sourceViewController.dismiss(animated: false)
     }
+
+
 
     func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, completion: @escaping (PKPaymentAuthorizationStatus) -> Void) {
-        viewModel.createPaymentToken()
+
+        do {
+            let data = payment.token.paymentData
+            let paymentData = try ApplePayPaymentData(paymentData: data)
+
+            guard let displayName = payment.token.paymentMethod.displayName, let network = payment.token.paymentMethod.network else { return }
+
+            let paymentMethod = ApplePayPaymentMethod(displayName: displayName, network: network.rawValue, pkPaymentMethodType: payment.token.paymentMethod.type)
+            let transactionId = payment.token.transactionIdentifier
+
+            viewModel.createPaymentToken(transactionId: transactionId, paymentData: paymentData, paymentMethod: paymentMethod) { result in
+                switch result {
+                case .succeed:
+                    completion(.success)
+                case .failure( _):
+                    completion(.failure)
+                case .applePayDidFail( _):
+                    completion(.failure)
+                case .requiresAction( _,  _):
+                    completion(.success)
+                }
+                self.resultsHandler(result)
+            }
+        } catch  {
+            completion(.failure)
+        }
     }
 }

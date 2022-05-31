@@ -12,5 +12,4 @@ import PassKit
 struct ApplePayFlowInput {
     let setupInput: SetupInput
     var orderAccessToken: AccessToken
-    var request: PKPaymentRequest
 }

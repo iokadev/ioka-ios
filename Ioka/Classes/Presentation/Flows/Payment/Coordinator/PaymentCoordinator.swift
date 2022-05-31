@@ -134,7 +134,7 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
         dismissFlow(result: .init(paymentResult: result))
     }
     
-    func paymentResultDidRetry() {
+    func paymentResultDidRetry(result: PaymentResult) {
         setPaymentMethodsToNavigationController(animated: true)
     }
 }

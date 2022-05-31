@@ -7,7 +7,7 @@
 
 import Foundation
 
-internal class ApplePayFlowFactory {
+internal class ApplePayResultFlowFactory {
     let input: ApplePayFlowInput
     let featuresFactory: FeaturesFactory
 
@@ -15,10 +15,6 @@ internal class ApplePayFlowFactory {
     init(input: ApplePayFlowInput, featuresFactory: FeaturesFactory) {
         self.input = input
         self.featuresFactory = featuresFactory
-    }
-
-    func makeApplePay(delegate: ApplePayNavigationDelegate) -> ApplePayViewController {
-        featuresFactory.makeApplePay(applePayRepository: applePayRepository(), orderAccessToken: input.orderAccessToken, request: input.request, delegate: delegate)
     }
 
     func makeThreeDSecure(delegate: ThreeDSecureNavigationDelegate, action: Action, paymentId: String) -> ThreeDSecureViewController {
@@ -31,10 +27,6 @@ internal class ApplePayFlowFactory {
 
     func makePaymentResult(delegate: PaymentResultNavigationDelegate, order: Order, result: PaymentResult) -> PaymentResultViewController {
         featuresFactory.makePaymentResult(delegate: delegate, order: order, result: result)
-    }
-
-    func applePayRepository() -> ApplePayRepository {
-        ApplePayRepository(api: api)
     }
 
     func paymentRepository() -> PaymentRepository {

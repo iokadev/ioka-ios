@@ -9,7 +9,7 @@ import Foundation
 
 protocol PaymentResultNavigationDelegate: AnyObject {
     func paymentResultDidClose(result: PaymentResult)
-    func paymentResultDidRetry()
+    func paymentResultDidRetry(result: PaymentResult)
 }
 
 enum PaymentResult {
@@ -33,6 +33,6 @@ internal class PaymentResultViewModel {
     }
     
     func retry() {
-        delegate?.paymentResultDidRetry()
+        delegate?.paymentResultDidRetry(result: result)
     }
 }
