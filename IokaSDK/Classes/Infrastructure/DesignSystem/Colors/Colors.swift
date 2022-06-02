@@ -46,7 +46,7 @@ final class IokaBundle {
         let myBundle = Bundle(for: IokaBundle.self)
 
         guard let resourceBundleURL = myBundle.url(
-            forResource: "Ioka", withExtension: "bundle")
+            forResource: "IokaSDK", withExtension: "bundle")
             else { fatalError("Ioka.bundle not found") }
 
         guard let resourceBundle = Bundle(url: resourceBundleURL)
