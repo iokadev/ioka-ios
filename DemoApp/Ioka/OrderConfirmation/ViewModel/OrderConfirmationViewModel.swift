@@ -12,7 +12,8 @@ internal class OrderConfirmationViewModel {
     
     
     func createOrder(order: OrderModel, completion: @escaping(String) -> Void) {
-        DemoAppApi.shared.createOrder(price: order.orderPrice) { [weak self] result in
+        let priceInTyin = String(order.priceInt * 100)
+        DemoAppApi.shared.createOrder(price: priceInTyin) { [weak self] result in
             guard let _ = self else { return }
             
             switch result {

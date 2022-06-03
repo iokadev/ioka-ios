@@ -23,7 +23,7 @@ internal class PaymentMethodsViewController: UIViewController {
     }
 
     private func setupNavigationItem() {
-        setupNavigationItem(title: String(format: IokaLocalizable.priceTng, String(viewModel.order.price / 100)),
+        setupNavigationItem(title: String(format: IokaLocalizable.priceTng, String(viewModel.order.price)),
                             closeButtonTarget: self,
                             closeButtonAction: #selector(closeButtonTapped))
     }

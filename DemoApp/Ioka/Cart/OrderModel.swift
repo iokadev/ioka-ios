@@ -15,6 +15,10 @@ internal struct OrderModel: Codable {
     let orderImageUrl: String?
     let orderAdress: String?
     let orderTime: String?
+
+    var priceInt: Int {
+        return Int(orderPrice) ?? 148000
+    }
 }
 
 extension OrderModel {
