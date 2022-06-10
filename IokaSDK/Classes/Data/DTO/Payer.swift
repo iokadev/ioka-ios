@@ -9,8 +9,8 @@ import Foundation
 
 
 internal struct Payer: Codable {
-    let pan_masked: String
-    let expiry_date: String
+    let pan_masked: String?
+    let expiry_date: String?
     var holder: String?
     var payment_system: PaymentSystem?
     var emitter: String?

@@ -47,7 +47,6 @@ internal class ApplePayViewController: UIViewController {
 extension ApplePayViewController: PKPaymentAuthorizationViewControllerDelegate {
 
     func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        self.dismiss(animated: false)
         sourceViewController.dismiss(animated: false)
     }
 
@@ -64,21 +63,29 @@ extension ApplePayViewController: PKPaymentAuthorizationViewControllerDelegate {
             let paymentMethod = ApplePayPaymentMethod(displayName: displayName, network: network.rawValue, pkPaymentMethodType: payment.token.paymentMethod.type)
             let transactionId = payment.token.transactionIdentifier
 
-            viewModel.createPaymentToken(transactionId: transactionId, paymentData: paymentData, paymentMethod: paymentMethod) { result in
-                switch result {
-                case .succeed:
-                    completion(.success)
-                case .failure( _):
-                    completion(.failure)
-                case .applePayDidFail( _):
-                    completion(.failure)
-                case .requiresAction( _,  _):
-                    completion(.success)
+            viewModel.createPaymentToken(transactionId: transactionId, paymentData: paymentData, paymentMethod: paymentMethod) { [weak self] result in
+                guard let self = self else { return }
+                self.handlePKPaymentAuthorizationStatus(result: result, completion: completion)
+                self.sourceViewController.dismiss(animated: false) {
+                    self.resultsHandler(result)
                 }
-                self.resultsHandler(result)
             }
         } catch  {
             completion(.failure)
+            sourceViewController.dismiss(animated: false)
+        }
+    }
+
+    func handlePKPaymentAuthorizationStatus(result: ApplePayTokenResult, completion: @escaping (PKPaymentAuthorizationStatus) -> Void ) {
+        switch result {
+        case .succeed:
+            completion(.success)
+        case .failure( _):
+            completion(.failure)
+        case .applePayDidFail( _):
+            completion(.failure)
+        case .requiresAction( _,  _):
+            completion(.success)
         }
     }
 }

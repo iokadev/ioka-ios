@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Override point for customization after application launch.
-        Ioka.shared.setup(apiKey: "shp_GA9Y41H1EJ_test_public_60e22bb99d75650ad1d3e54064461152cb9a954d43ea4629d6931703d5ef87f8", locale: Locale.current.toIokaLocale(), applePayConfiguration: ApplePayConfiguration(merchantName: "Ioka", merchantIdentifier: "merchant.kz.ioka", countryCode: "KZ"))
+        Ioka.shared.setup(apiKey: "shp_3QMBG27PK2_live_public_84bc91a9abd7abf43750cdc50e3d0ccb6a0b42ec2c7c8898c504b83708446015", locale: Locale.current.toIokaLocale(), applePayConfiguration: ApplePayConfiguration(merchantName: "Ioka", merchantIdentifier: "merchant.kz.ioka.aselya", countryCode: "KZ"))
         return true
     }
 }

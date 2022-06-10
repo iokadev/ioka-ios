@@ -71,6 +71,7 @@
 		633392D149B8770AB48629D1 /* Pods-Ioka.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ioka.release.xcconfig"; path = "Target Support Files/Pods-Ioka/Pods-Ioka.release.xcconfig"; sourceTree = "<group>"; };
 		6D25C1FE28052E5300734E92 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
 		6D25C1FF28052E5300734E92 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		6D4A9ADD2850BDA000E082C5 /* IokaDemoAppDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IokaDemoAppDebug.entitlements; sourceTree = "<group>"; };
 		6D7CEE6828336B7900AD4FBD /* IokaDemoApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IokaDemoApp.entitlements; sourceTree = "<group>"; };
 		6DB0A13B27FBA42C008A8381 /* IokaDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IokaDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DB0A13E27FBA42C008A8381 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -163,6 +164,7 @@
 		6DB0A13227FBA42C008A8381 = {
 			isa = PBXGroup;
 			children = (
+				6D4A9ADD2850BDA000E082C5 /* IokaDemoAppDebug.entitlements */,
 				6D7CEE6828336B7900AD4FBD /* IokaDemoApp.entitlements */,
 				6DB0A13D27FBA42C008A8381 /* Ioka */,
 				6DB0A13C27FBA42C008A8381 /* Products */,
@@ -863,7 +865,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
-				CODE_SIGN_ENTITLEMENTS = IokaDemoApp.entitlements;
+				CODE_SIGN_ENTITLEMENTS = IokaDemoAppDebug.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
