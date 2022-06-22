@@ -23,6 +23,7 @@ internal class CardFormView: UIView {
     weak var delegate: CardFormViewDelegate?
     var isCardBrendSetted: Bool = false
     var viewModel: CardFormViewModel?
+    var paymentSystem: PaymentSystem?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -55,6 +56,7 @@ internal class CardFormView: UIView {
     func getPaymentSystem(text: String) {
         viewModel?.getPaymentSystem(partialBin: text) { [weak self] paymentSystem in
             if let paymentSystem = paymentSystem {
+                self?.paymentSystem = PaymentSystem(rawValue: paymentSystem)
                 self?.cardNumberTextField.setCardBrandIcon(imageName: paymentSystem)
             } else {
                 self?.cardNumberTextField.removeCardBrandIcon()
@@ -174,7 +176,7 @@ extension CardFormView: UITextFieldDelegate,
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
          let newLength = (textField.text ?? "").count + string.count - range.length
          if textField == cardNumberTextField {
-             return newLength <= 23
+             return CreditCardValidatorr.getPaymentSystemLength(newLength: newLength, paymentSystem: paymentSystem)
          }
 
         if textField == dateExpirationTextField {

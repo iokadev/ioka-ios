@@ -119,6 +119,17 @@ public struct CreditCardValidatorr {
         }
     }
 
+    static func getPaymentSystemLength(newLength: Int, paymentSystem: PaymentSystem?) -> Bool {
+        switch paymentSystem {
+        case .AMERICAN_EXPRESS:
+            return newLength <= 18
+        case .DINER_CLUB, .MAESTRO, .JCB, .DISCOVERY, .UNION_PAY, .MIR:
+            return newLength <= 23
+        default :
+            return newLength <= 19
+        }
+    }
+
     /// Validate string for credit card type
     /// - Parameters:
     ///   - string: card number string
