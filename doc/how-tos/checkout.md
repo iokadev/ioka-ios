@@ -59,18 +59,6 @@ let orderAccessToken = myBackEnd.createOrderAccessToken()
 `order_access_token` и `sourceViewController`:
 
 ```Swift
-    /// Метод для запуска сценария оплаты новой картой. Показывает форму для ввода данных карты.
-    /// При необходимости проводит проверку 3DSecure. Отображает результат оплаты пользователю.
-    /// - Parameters:
-    ///   - sourceViewController: Объект UIViewController для экрана, с которого пользователь запускает оплату.
-    ///   Перед открытием формы для ввода данных карты Ioka SDK получает объект Order из Ioka API. Во время этого запроса
-    ///   поверх sourceViewController показывается индикатор загрузки и могут отображаться ошибки. Также с него происходит
-    ///   переход на экраны Ioka SDK.
-    ///   - orderAccessToken: Токен для доступа к заказу, который приложение получает от своего бэкенда.
-    ///   - applePay: Конфигурация для показа либо скрытия кнопки оплаты при помощи ApplePay .
-    ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
-    ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
-    ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
     Ioka.shared.startPaymentFlow(sourceViewController: sourceViewController, orderAccessToken: orderAccessToken, applePayState: .disable) { result in
         print(result)
     }
