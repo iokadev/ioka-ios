@@ -6,6 +6,7 @@
 - [Привязка карт](./how-tos/save-and-delete-cards.md)
 - [Локализация](./how-tos/localization.md)
 - [Кастомизация](./how-tos/customize.md)
+- [ApplePay](./how-tos/applepay.md)
 
 ### Документация элементов SDK
 
