@@ -56,7 +56,7 @@ let orderAccessToken = myBackEnd.createOrderAccessToken()
 
 После создания заказа на сервере необходимо вызвать метод 
 `Ioka.shared.startPaymentFlow()`, передав туда
-`order_access_token`:
+`order_access_token` и `sourceViewController`:
 
 ```Swift
     /// Метод для запуска сценария оплаты новой картой. Показывает форму для ввода данных карты.
@@ -71,7 +71,9 @@ let orderAccessToken = myBackEnd.createOrderAccessToken()
     ///   - completion: Замыкание, которое вызывается после того, как пользователь закрывает экран результата оплаты или
     ///   любой экран до него. Принимает значение FlowResult: .succeeded - если оплата прошла успешно, .failed - если карта
     ///   была отклонена, .cancelled - если пользователь закрыл экран оплаты или экран 3DSecure. Выполняется в главном потоке.
-    startPaymentFlow(sourceViewController: UIViewController, orderAccessToken: String, applePayState: ApplePayState = .disable, completion: @escaping(FlowResult) -> Void)
+    Ioka.shared.startPaymentFlow(sourceViewController: sourceViewController, orderAccessToken: orderAccessToken, applePayState: .disable) { result in
+        print(result)
+    }
 ```
 
 ### 3.1. Обработка результата
@@ -117,7 +119,7 @@ let orderAccessToken = myBackEnd.createOrderAccessToken()
 `Ioka.shared.getCards()`, передав в него `customer_access_token`:
 
 ```Swift
-Ioka.getCards(customerAccessToken: customerAccessToken) { cards in
+Ioka.shared.getCards(customerAccessToken: customerAccessToken) { cards in
    print(cards)
 }
 ```
