@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name                  = "Ioka"
-  s.version               = "0.0.1"
+  s.version               = "1.0.1"
   s.summary               = "Example of creating own pod."
   s.homepage              = "https://github.com/iokadev/ioka-ios.git"
   s.license               = { :type => 'MIT', :file => 'LICENSE' }
