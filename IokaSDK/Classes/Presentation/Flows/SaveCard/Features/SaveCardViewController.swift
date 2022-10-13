@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 internal class SaveCardViewController: UIViewController {
 
@@ -64,6 +65,23 @@ extension SaveCardViewController: SaveCardViewDelegate {
     }
 
     func saveCardView(showCardScanner saveCardView: SaveCardView) {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] response in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if response {
+                    self.showScanner()
+                } else {
+                    self.alertCameraAccessNeeded()
+                }
+            }
+        }
+    }
+
+    func saveCardView(closeSaveCardView saveCardView: SaveCardView) {
+        self.viewModel.close()
+    }
+
+    private func showScanner() {
         if #available(iOS 13.0, *) {
             let scannerView = CardScanner.getScanner { [weak self] number in
                 self?.contentView.cardFormView.cardNumberTextField.text = number
@@ -73,7 +91,20 @@ extension SaveCardViewController: SaveCardViewDelegate {
         }
     }
 
-    func saveCardView(closeSaveCardView saveCardView: SaveCardView) {
-        self.viewModel.close()
+    private func alertCameraAccessNeeded() {
+        let settingsAppURL = URL(string: UIApplication.openSettingsURLString)!
+
+        let alert = UIAlertController(
+            title: IokaLocalizable.permissionCameraTitle,
+            message: IokaLocalizable.permissionCameraMessage,
+            preferredStyle: UIAlertController.Style.alert
+        )
+
+        alert.addAction(UIAlertAction(title: IokaLocalizable.permissionCameraCancel, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: IokaLocalizable.permissionCameraAllow, style: .cancel, handler: { (alert) -> Void in
+            UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
+        }))
+
+        self.navigationController?.present(alert, animated: true, completion: nil)
     }
 }

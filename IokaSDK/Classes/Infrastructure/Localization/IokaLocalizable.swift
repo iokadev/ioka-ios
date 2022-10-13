@@ -48,7 +48,19 @@ enum IokaLocalizable {
     static var serverError: String {
         localized("serverError")
     }
-    
+
+    static var permissionCameraTitle: String {
+        localized("PermissionCameraTitle")
+    }
+    static var permissionCameraMessage: String {
+        localized("PermissionCameraMessage")
+    }
+    static var permissionCameraCancel: String {
+        localized("PermissionCameraCancel")
+    }
+    static var permissionCameraAllow: String {
+        localized("PermissionCameraAllow")
+    }
     
     static var orderPaid: String {
         localized("orderPaid")

@@ -19,6 +19,12 @@
 "cvvExplained" = "3 цифры на обороте карты";
 "newCard" = "Новая карта";
 
+"PermissionCameraTitle" = "Нужен доступ к камере";
+"PermissionCameraMessage" = "Требуется доступ к камере, чтобы сделать сканирование доступным";
+"PermissionCameraCancel" = "Отмена";
+"PermissionCameraAllow" = "Разрешить камеру";
+
+
 "cardScan" = "Сканирование карты";
 "cardScanExplained" = "Поместите карту в рамку,она считается автоматически";
 "scanAgain" = "Отсканировать еще раз";

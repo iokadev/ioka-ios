@@ -13,6 +13,12 @@
 "enterCardNumber" = "Карта нөмірін енгізіңіз";
 "cardExpiration" = "АА/ЖЖ";
 
+"PermissionCameraTitle" = "Камераға қол жеткізу қажет";
+"PermissionCameraMessage" = "Сканерлеуді қолжетімді ету үшін камераға рұқсат ету қажет";
+"PermissionCameraCancel" = "Болдырмау";
+"PermissionCameraAllow" = "Камераға рұқсат беру";
+
+
 "priceTng" = "Төленетін %@ ₸";
 "orPayCard" = "Немесе картамен төлеңіз";
 "serverError"= "Сервер тарапындағы қате. Кейінірек қайталап көріңіз";

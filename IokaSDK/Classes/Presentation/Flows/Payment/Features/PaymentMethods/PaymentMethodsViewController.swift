@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 internal class PaymentMethodsViewController: UIViewController {
 
@@ -52,12 +53,15 @@ extension PaymentMethodsViewController:  PaymentMethodsViewDelegate {
     }
 
     func paymentMethodsView(showCardScanner paymentMethodsView: PaymentMethodsView) {
-        if #available(iOS 13.0, *) {
-            let scannerView = CardScanner.getScanner { [weak self] number in
-                self?.contentView.cardFormView.cardNumberTextField.text = number
-                self?.contentView.cardFormView.didChangeText(textField: self?.contentView.cardFormView.cardNumberTextField ?? UITextField())
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self] response in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if response {
+                    self.showScanner()
+                } else {
+                    self.alertCameraAccessNeeded()
+                }
             }
-            self.navigationController?.present(scannerView, animated: false)
         }
     }
 
@@ -74,5 +78,32 @@ extension PaymentMethodsViewController:  PaymentMethodsViewDelegate {
                 }
             }
         }
+    }
+
+    private func showScanner() {
+        if #available(iOS 13.0, *) {
+            let scannerView = CardScanner.getScanner { [weak self] number in
+                self?.contentView.cardFormView.cardNumberTextField.text = number
+                self?.contentView.cardFormView.didChangeText(textField: self?.contentView.cardFormView.cardNumberTextField ?? UITextField())
+            }
+            self.navigationController?.present(scannerView, animated: false)
+        }
+    }
+
+    private func alertCameraAccessNeeded() {
+        let settingsAppURL = URL(string: UIApplication.openSettingsURLString)!
+
+        let alert = UIAlertController(
+            title: IokaLocalizable.permissionCameraTitle,
+            message: IokaLocalizable.permissionCameraMessage,
+            preferredStyle: UIAlertController.Style.alert
+        )
+
+        alert.addAction(UIAlertAction(title: IokaLocalizable.permissionCameraCancel, style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: IokaLocalizable.permissionCameraAllow, style: .cancel, handler: { (alert) -> Void in
+            UIApplication.shared.open(settingsAppURL, options: [:], completionHandler: nil)
+        }))
+
+        self.navigationController?.present(alert, animated: true, completion: nil)
     }
 }
