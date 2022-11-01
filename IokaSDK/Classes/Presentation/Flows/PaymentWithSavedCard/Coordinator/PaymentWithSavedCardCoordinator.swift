@@ -79,6 +79,20 @@ internal class PaymentWithSavedCardCoordinator: NSObject, Coordinator {
         
         presentModally(vc)
     }
+
+    private func handleResultScreenState(result: PaymentResult) {
+        switch factory.input.showResultScreen {
+        case true:
+            switch result {
+            case .success:
+                showSuccessPaymentResult()
+            case .error(let error):
+                showErrorPopup(error: error)
+            }
+        case false:
+            dismissFlow(result: .init(paymentResult: result))
+        }
+    }
     
     func dismissFlow(result: FlowResult) {
         sourceViewController.dismiss(animated: navigationControllerIsPresented()) {
@@ -135,12 +149,12 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     
     func paymentWithSavedCardDidSucceed() {
         paymentProgressWrapper?.hideProgress()
-        showSuccessPaymentResult()
+        handleResultScreenState(result: .success)
     }
     
     func paymentWithSavedCardDidFail(declineError: Error) {
         paymentProgressWrapper?.hideProgress()
-        showErrorPopup(error: declineError)
+        handleResultScreenState(result: .error(declineError))
     }
     
     func paymentWithSavedCardDidFail(otherError: Error) {
@@ -153,11 +167,11 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     }
     
     func cvvDidSucceed() {
-        showSuccessPaymentResult()
+        handleResultScreenState(result: .success)
     }
     
     func cvvDidFail(declineError: Error) {
-        showErrorPopup(error: declineError)
+        handleResultScreenState(result: .error(declineError))
     }
     
     func cvvDidFail(otherError: Error) {
@@ -169,11 +183,11 @@ extension PaymentWithSavedCardCoordinator: PaymentWithSavedCardNavigationDelegat
     }
     
     func threeDSecureDidSucceed() {
-        showSuccessPaymentResult()
+        handleResultScreenState(result: .success)
     }
     
     func threeDSecureDidFail(declinedError: Error) {
-        showErrorPopup(error: declinedError)
+        handleResultScreenState(result: .error(declinedError))
     }
     
     func threeDSecureDidFail(otherError: Error) {

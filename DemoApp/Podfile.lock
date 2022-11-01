@@ -1,5 +1,5 @@
 PODS:
-  - Ioka (1.0.3)
+  - Ioka (1.0.4)
 
 DEPENDENCIES:
   - Ioka (from `..`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ".."
 
 SPEC CHECKSUMS:
-  Ioka: 61ec7b9d4785d3a57d91174c1794b28809166400
+  Ioka: 88f2a32b6610e48adbe7f4027db8a978e8c40890
 
 PODFILE CHECKSUM: f0107ed726362b0a38c9599bb80ec5069fac0699
 

@@ -75,6 +75,15 @@ internal class PaymentCoordinator: NSObject, Coordinator {
         self.paymentResultViewController = vc
         self.navigationController.pushViewController(vc, animated: true)
     }
+
+    private func handleResultScreen(_ result: PaymentResult) {
+        switch factory.input.showResultScreen {
+        case true:
+            showPaymentResult(result)
+        case false:
+            dismissFlow(result: .init(paymentResult: result))
+        }
+    }
     
     private func dismissFlow(result: FlowResult) {
         sourceViewController.dismiss(animated: true) {
@@ -102,7 +111,7 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func paymentMethodsDidSucceed() {
-        showPaymentResult(.success)
+        handleResultScreen(.success)
     }
     
     func paymentMethodsDidRequireThreeDSecure(action: Action, payment: Payment) {
@@ -110,7 +119,7 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func paymentMethodsDidFail(declineError: Error) {
-        showPaymentResult(.error(declineError))
+        handleResultScreen(.error(declineError))
     }
     
     func threeDSecureDidCancel() {
@@ -118,11 +127,11 @@ extension PaymentCoordinator: OrderForPaymentNavigationDelegate, PaymentMethodsN
     }
     
     func threeDSecureDidSucceed() {
-        showPaymentResult(.success)
+        handleResultScreen(.success)
     }
     
     func threeDSecureDidFail(declinedError: Error) {
-        showPaymentResult(.error(declinedError))
+        handleResultScreen(.error(declinedError))
     }
     
     func threeDSecureDidFail(otherError: Error) {

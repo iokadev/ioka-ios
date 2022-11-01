@@ -15,11 +15,14 @@ import PassKit
 public class Ioka {
     /// Синглтон
     static public let shared = Ioka()
+    /// Параметр используется для определения показа результата платежа
+    public var showResultScreen: Bool = true
     var setupInput: SetupInput?
     var currentCoordinator: Coordinator?
     var applePayConfiguration: ApplePayConfiguration?
-    
-    
+
+    private init() {}
+
     /// Метод для инициализии SDK. Необходимо вызвать до того, как обращаться к любым другим методам этого класса.
     ///
     /// - Parameters:
@@ -69,7 +72,7 @@ public class Ioka {
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayState: applePayState)
+            let input = PaymentFlowInput(setupInput: setupInput, orderAccessToken: token, applePayState: applePayState, showResultScreen: showResultScreen)
             let paymentMethodsFlowFactory = PaymentFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentCoordinator(factory: paymentMethodsFlowFactory, sourceViewController: sourceViewController)
             
@@ -105,7 +108,7 @@ public class Ioka {
         
         do {
             let token = try AccessToken(token: orderAccessToken)
-            let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, card: card)
+            let input = PaymentWithSavedCardFlowInput(setupInput: setupInput, orderAccessToken: token, card: card, showResultScreen: showResultScreen)
             let paymentWithSavedCardFlowFactory = PaymentWithSavedCardFlowFactory(input: input, featuresFactory: FeaturesFactory())
             let coordinator = PaymentWithSavedCardCoordinator(factory: paymentWithSavedCardFlowFactory, sourceViewController: sourceViewController)
             currentCoordinator = coordinator

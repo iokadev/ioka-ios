@@ -13,4 +13,5 @@ internal struct PaymentFlowInput {
     let setupInput: SetupInput
     let orderAccessToken: AccessToken
     var applePayState: ApplePayState
+    var showResultScreen: Bool
 }

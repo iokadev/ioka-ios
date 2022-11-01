@@ -7,12 +7,6 @@
 
 import UIKit
 
-internal struct PaymentWithSavedCardFlowInput {
-    let setupInput: SetupInput
-    let orderAccessToken: AccessToken
-    let card: SavedCard
-}
-
 
 internal class PaymentWithSavedCardFlowFactory {
     let input: PaymentWithSavedCardFlowInput
