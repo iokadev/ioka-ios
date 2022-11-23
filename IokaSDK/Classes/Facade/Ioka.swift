@@ -254,6 +254,28 @@ public class Ioka {
             completion(error)
         }
     }
+
+    /// Метод для получения сохраненной карты пользователя по card_id
+    /// - Parameters:
+    ///   - customerAccessToken: Токен для доступа к пользователю, который приложение получает от своего бэкенда.
+    ///   - cardId: id карты, которую нужно  получить.
+    ///   - completion: Замыкание, в которое передаётся результат получения карты. savedCard - если карта получена успешно,
+    ///   error - если произошла ошибка. Выполняется в главном потоке.
+    public func getSavedCardById(customerAccessToken: String, cardId: String, completion: @escaping(Result<SavedCard, Error>) -> Void) {
+        guard let setupInput = setupInput else {
+            completion(.failure(DomainError.invalidTokenFormat))
+            return
+        }
+        let api = IokaApi(apiKey: setupInput.apiKey)
+        let repository = SavedCardRepository(api: api)
+
+        do {
+            let customerAccessToken = try AccessToken(token: customerAccessToken)
+            repository.getSavedCardById(customerAccessToken: customerAccessToken, cardId: cardId, completion: completion)
+        } catch let error {
+            completion(.failure(error))
+        }
+    }
     
     /// Переключает локаль для локализации текстов в ioka SDK. Необходимо вызвать, если пользователь переключил язык
     /// в приложении.

@@ -32,6 +32,12 @@ internal final class SavedCardRepository {
             completion(result.toCardSavingResult())
         }
     }
+
+    func getSavedCardById(customerAccessToken: AccessToken, cardId: String, completion: @escaping (Result<SavedCard, Error>) -> Void) {
+        api.getCardByID(customerAccessToken: customerAccessToken, cardId: cardId) { result in
+            completion(result.toSavedCard())
+        }
+    }
 }
 
 extension Result where Success == SavedCardDTO {
@@ -40,6 +46,17 @@ extension Result where Success == SavedCardDTO {
             switch self {
             case .success(let response):
                 return try response.toCardSaving()
+            case .failure(let error):
+                throw error
+            }
+        }
+    }
+
+    func toSavedCard() -> Result<SavedCard, Error> {
+        Result<SavedCard, Error> {
+            switch self {
+            case .success(let response):
+                return response.toSavedCard()
             case .failure(let error):
                 throw error
             }
