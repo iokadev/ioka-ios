@@ -56,7 +56,7 @@ Ioka.shared.startPaymentFlow(sourceViewController: UIViewController, orderAccess
 - [x] Автоматическая кастомизация
 - [x] Apple Pay
 - [x] Локализация
-- [x] Документация (в разработке)
+- [x] Документация
 - [ ] Тестирование и мокинг (в разработке)
 
 ## Документация
