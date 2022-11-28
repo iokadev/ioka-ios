@@ -1,12 +1,4 @@
-//
-//  SavedCard.swift
-//  Ioka
-//
-//  Created by ablai erzhanov on 06.04.2022.
-//
-
 import Foundation
-
 
 internal struct CardSaving {
     enum Status {

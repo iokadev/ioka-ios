@@ -1,10 +1,3 @@
-//
-//  SavedCard.swift
-//  Ioka
-//
-//  Created by Тимур Табынбаев on 14.04.2022.
-//
-
 import Foundation
 
 /// Сохраненная карта пользователя
@@ -18,7 +11,6 @@ public struct SavedCard {
     
     let paymentSystem: String?
     let emitter: String?
-    
     let cvvIsRequired: Bool
     
     /// Иконка платёжной системы карты (Visa, Mastercard или др.). Рекомендуемый размер UIImageView - 24x24.

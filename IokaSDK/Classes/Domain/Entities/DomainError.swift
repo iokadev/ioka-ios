@@ -1,7 +1,3 @@
-//
-//  DomainError.swift
-//  IOKA
-
 import Foundation
 
 internal enum DomainError: LocalizedError {

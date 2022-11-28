@@ -276,6 +276,18 @@ public class Ioka {
             completion(.failure(error))
         }
     }
+
+    /// Метод для создания экземпляра SavedCard
+    /// - Parameters:
+    ///   - id: id сохраненной карты. Используется для удаления карты и для оплаты.
+    ///   - maskedPan: Маскированный PAN карты в формате "555555******5599".
+    ///   - expirationDate: Срок действия карты в формате "12/24".
+    ///   - paymentSystem: Опциональный параметр, указывается платежная система карты.
+    ///   - emitter: Опциональный параметр, банк эммитет выпустивший карту.
+    ///   - cvvRequired: Требования 3D-secure.
+    public func createSavedCardInstance(id: String, maskedPan: String, expirationDate: String, paymentSystem: String?, emitter: String?, cvvRequired: Bool) -> SavedCard {
+        SavedCard(id: id, maskedPAN: maskedPan, expirationDate: expirationDate, paymentSystem: paymentSystem, emitter: emitter, cvvIsRequired: cvvRequired)
+    }
     
     /// Переключает локаль для локализации текстов в ioka SDK. Необходимо вызвать, если пользователь переключил язык
     /// в приложении.
