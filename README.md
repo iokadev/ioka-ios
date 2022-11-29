@@ -13,7 +13,7 @@ iOS SDK для [ioka](https://ioka.kz).
 
 ## Cocoapods
 ```yaml
-pod 'Ioka' '~> 1.0.6'
+pod 'Ioka' '~> 1.0.7'
 ```
 
 ## Использование
