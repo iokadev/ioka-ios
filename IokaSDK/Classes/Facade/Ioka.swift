@@ -285,7 +285,7 @@ public class Ioka {
     ///   - paymentSystem: Опциональный параметр, указывается платежная система карты.
     ///   - emitter: Опциональный параметр, банк эммитет выпустивший карту.
     ///   - cvvRequired: Требования 3D-secure.
-    public func createSavedCardInstance(id: String, maskedPan: String, expirationDate: String, paymentSystem: String?, emitter: String?, cvvRequired: Bool) -> SavedCard {
+    public func createSavedCardInstance(id: String, maskedPan: String, expirationDate: String?, paymentSystem: String?, emitter: String?, cvvRequired: Bool) -> SavedCard {
         SavedCard(id: id, maskedPAN: maskedPan, expirationDate: expirationDate, paymentSystem: paymentSystem, emitter: emitter, cvvIsRequired: cvvRequired)
     }
     

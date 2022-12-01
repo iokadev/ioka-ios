@@ -7,7 +7,7 @@ public struct SavedCard {
     /// Маскированный PAN карты в формате "555555******5599"
     public let maskedPAN: String
     /// Срок действия карты в формате "12/24"
-    public let expirationDate: String
+    public let expirationDate: String?
     
     let paymentSystem: String?
     let emitter: String?
